@@ -16,4 +16,9 @@ class SignUp extends CI_Controller
     {
         $this->load->view('v_signup.php');
     }
+
+    function subscribe()
+    {
+        $this->load->view('v_subscribe.php');
+    }
 }
