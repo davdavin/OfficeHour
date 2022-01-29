@@ -26,7 +26,7 @@
                         <form method="POST" class="register-form" id="register-form" action="">
                             <div class="form-group">
                                 <label for="kode"><i class="zmdi zmdi-local-store material-icons-name"> </i> </label>
-                                <input type="text" name="kode" id="kode" placeholder="Kode Perusahaan" required />
+                                <input type="text" name="kode" id="kode" placeholder="ID Perusahaan" required />
                             </div>
                             <div class="form-group">
                                 <label for="nama"><i class="zmdi zmdi-account material-icons-name"></i></label>
