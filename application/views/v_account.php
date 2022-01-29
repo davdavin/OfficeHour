@@ -151,7 +151,7 @@
 
                 <h1 class="profile-username text-center">Nama</h1>
 
-                <h4 class="text-muted text-center">Employee</h4>
+                <h4 class="text-muted text-center">Pegawai</h4>
 
                 <div class="row">
                   <div class="col-sm-6">

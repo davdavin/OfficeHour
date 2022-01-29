@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SignUp - Karyawan</title>
+    <title>Subscribe</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -25,32 +25,32 @@
                         <h2 class="form-title">Sign up</h2>
                         <form method="POST" class="register-form" id="register-form" action="">
                             <div class="form-group">
-                                <label for="kode"><i class="zmdi zmdi-local-store material-icons-name"> </i> </label>
-                                <input type="text" name="kode" id="kode" placeholder="ID Perusahaan" required />
-                            </div>
-                            <div class="form-group">
                                 <label for="nama"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="nama" id="name" placeholder="Nama" required />
                             </div>
                             <div class="form-group">
-                                <label for="alamat"><i class="zmdi zmdi-home"></i></label>
-                                <input type="text" name="alamat" id="alamat" placeholder="Alamat Lengkap" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Email" required />
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="name" placeholder="Username" required />
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" id="pass" placeholder="Password" required />
                             </div>
                             <div class="form-group">
-                                <label for="posisi"><i class="zmdi zmdi-view-agenda"></i></label>
-                                <input type="text" name="posisi" id="posisi" placeholder="Posisi anda" required />
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Email" required />
                             </div>
                             <div class="form-group">
-                                <label for="foto"><i class="zmdi zmdi-image"></i></label>
-                                <input type="file" name="foto" id="foto" required />
+                                <label for="jumlah"><i class="zmdi zmdi-email"></i></label>
+                                <input type="number" name="jumlah" id="jumlah" placeholder="Jumlah Karyawan" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="paket"><i class="zmdi zmdi-email"></i></label>
+                                <input type="text" name="paket" id="paket" placeholder="paket" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="harga"><i class="zmdi zmdi-email"></i></label>
+                                <input type="number" name="harga" id="harga" placeholder="harga" readonly />
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />

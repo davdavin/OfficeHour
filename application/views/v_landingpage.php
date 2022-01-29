@@ -13,24 +13,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/responsive.css">
 
-    <style>
-        @media (max-width: 992px) {
-            .posisi {
-                margin-left: 250px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .posisi {
-                margin-left: 20px;
-            }
-        }
-
-        .posisi {
-            align-items: center;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -192,7 +174,7 @@
             <div class="row download-title justify-content-center">
                 <h2>Pantau projectmu dengan bergabung bersama kami</h2>
                 <div class="download-btns">
-                    <a href="#"><i class="fab fa-apple"></i> Subscribe</a>
+                    <a href="<?php echo base_url() . 'SignUp/subscribe' ?>">Subscribe</a>
                 </div>
             </div>
 
