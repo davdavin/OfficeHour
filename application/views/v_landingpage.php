@@ -12,15 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/responsive.css">
-
-    <style>
-        #pricing .pricing-table .table-content p {
-            list-style: none;
-            text-align: center;
-            padding-bottom: 1rem;
-            font-weight: 600;
-        }
-    </style>
 </head>
 
 <body>
@@ -73,7 +64,6 @@
                         di dalam project.</p>
                     <div class="hero-buttons">
                         <a href="<?php echo base_url() . 'Login' ?>" class="btn btn-outline-primary btn-white">Log In</a>
-                        <a href="<?php echo base_url() . 'SignUp' ?>" class="btn btn-outline-primary btn-white">Sign Up</a>
                     </div>
                 </div>
                 <div class="col-md-6">
