@@ -136,7 +136,7 @@
                             baik laptop, handphone atau tablet.</p>
                     </div>
                     <div class="feature-block mt-5">
-                        <img src="<?php echo base_url(); ?>assets/landingpage/img/featureicon2.png" alt="">
+                        <img src="<?php echo base_url(); ?>assets/landingpage/img/time.png" alt="">
                         <h3 class="text-center">Time Tracker</h3>
                         <p>Membantu Perusahaan dalam memantau project yang sedang dikerjakan. </p>
                     </div>
