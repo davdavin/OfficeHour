@@ -27,13 +27,11 @@ class Subscribe extends CI_Controller
         $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', array('matches' => '%s tidak sesuai'));
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
-        //      $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|less_than[250]');
 
         $this->form_validation->set_message('required', '{field} wajib disini. Silahkan diisi');
         $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
         $this->form_validation->set_message('max_length', '{field} maksimal {param} karakter');
         $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
-        //   $this->form_validation->set_message('less_than', '{field} maksimal {param} orang');
 
         $baris = $this->M_Perusahaan->tampil_perusahaan()->num_rows();
         $id_perusahaan = 'PRSH' . $baris + 1;
