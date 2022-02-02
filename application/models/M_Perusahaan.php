@@ -6,6 +6,10 @@ class M_Perusahaan extends CI_Model
         return $this->db->query("SELECT * FROM perusahaan");
     }
 
+    function cek_login($table, $where)
+    {
+        return $this->db->get_where($table, $where);
+    }
 
     function insert_record($data, $table)
     {
