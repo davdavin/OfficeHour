@@ -363,7 +363,6 @@ h2.section-title-heading {
 }
 
 #pricing .pricing-table .table-header {
-	/* .pricing-table:nth-child(2) */
 	background: linear-gradient(
 		to right,
 		rgba(0, 172, 217, 0.62),
