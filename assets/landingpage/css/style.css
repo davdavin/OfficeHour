@@ -362,7 +362,8 @@ h2.section-title-heading {
 	padding-bottom: 2rem;
 }
 
-#pricing .pricing-table:nth-child(2) .table-header {
+#pricing .pricing-table .table-header {
+	/* .pricing-table:nth-child(2) */
 	background: linear-gradient(
 		to right,
 		rgba(0, 172, 217, 0.62),
@@ -374,13 +375,13 @@ h2.section-title-heading {
 	position: relative;
 }
 
-#pricing .pricing-table:nth-child(2) .table-header img {
+#pricing .pricing-table .table-header img {
 	position: absolute;
 	left: 5px;
 	top: 5px;
 }
 
-#pricing .pricing-table:nth-child(2) .table-header h4 {
+#pricing .pricing-table .table-header h4 {
 	color: #ffffff;
 	font-size: 1.5rem;
 	text-transform: uppercase;
