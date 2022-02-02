@@ -21,7 +21,7 @@ class Subscribe extends CI_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required'); //
         $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[25]|is_unique[perusahaan.username]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', array('matches' => '%s tidak sesuai'));
