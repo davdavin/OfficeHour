@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Login - Perusahaan</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/style.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </head>
 
 <body style="background-image: url('<?php echo base_url(); ?>assets/loginSignup/konten.png'), url('<?php echo base_url(); ?>assets/loginSignup/background.png');">
@@ -18,6 +20,7 @@
         <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
+                    <?php $this->load->view('message.php'); ?>
                     <div class="signin-image">
                         <figure><img src="<?php echo base_url(); ?>assets/loginSignup/loginimage.png" alt="sing up image"></figure>
                     </div>
@@ -44,6 +47,30 @@
     </div>
     <script src="<?php echo base_url(); ?>assets/loginSignup/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/loginSignup/js/main.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+        $(function() {
+            const sukses = $('.sukses').data('flashdata');
+            if (sukses) {
+                Swal.fire({
+                    title: 'Info',
+                    text: sukses,
+                    icon: 'info'
+                });
+            }
+
+            const gagal = $('.gagal').data('flashdata');
+            if (gagal) {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: gagal,
+                    icon: 'error'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
