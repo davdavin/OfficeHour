@@ -7,10 +7,12 @@ class LandingPage extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model(array('M_Subscribe'));
     }
 
     function index()
     {
-        $this->load->view('v_landingpage.php');
+        $data['paket'] = $this->M_Subscribe->tampil_paket()->result();
+        $this->load->view('v_landingpage.php', $data);
     }
 }

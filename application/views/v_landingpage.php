@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/landingpage/css/responsive.css">
-
 </head>
 
 <body>
@@ -36,10 +35,10 @@
                             <a class="nav-link" href="#features">features</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#download">download</a>
+                            <a class="nav-link" href="#subscribe">subscribe</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pricings">pricing</a>
+                            <a class="nav-link" href="#pricing">pricing</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">contact</a>
@@ -65,7 +64,6 @@
                         di dalam project.</p>
                     <div class="hero-buttons">
                         <a href="<?php echo base_url() . 'Login' ?>" class="btn btn-outline-primary btn-white">Log In</a>
-                        <a href="<?php echo base_url() . 'SignUp' ?>" class="btn btn-outline-primary btn-white">Sign Up</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -173,9 +171,42 @@
 
             <div class="row download-title justify-content-center">
                 <h2>Pantau projectmu dengan bergabung bersama kami</h2>
-                <div class="download-btns">
-                    <a href="<?php echo base_url() . 'SignUp/subscribe' ?>">Subscribe</a>
-                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section id="pricing">
+
+        <div class="container">
+
+            <div class="row section-title justify-content-center">
+                <h2 class="section-title-heading">Harga Paket</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <?php foreach ($paket as $list_paket) { ?>
+                    <div class="col-md pricing-table">
+
+                        <div class="table-header text-center">
+                            <h4><?php echo $list_paket->nama_paket ?></h4>
+                            <p><?php echo $list_paket->harga ?></p>
+                        </div>
+
+                        <div class="table-content">
+                            <p><?php echo 'Maksimal ' . $list_paket->maks_orang . ' orang' ?> </p>
+                            <p><?php echo $list_paket->deskripsi ?></p>
+                        </div>
+
+                        <div class="table-footer text-center">
+                            <a href="<?php echo base_url() . 'Subscribe/form_subscribe/' . $list_paket->id_paket ?>">subscribe now</a>
+                        </div>
+
+                    </div>
+                <?php } ?>
             </div>
 
         </div>
