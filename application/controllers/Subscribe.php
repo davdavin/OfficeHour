@@ -26,7 +26,6 @@ class Subscribe extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', array('matches' => '%s tidak sesuai'));
         $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
 
         $this->form_validation->set_message('required', '{field} wajib disini. Silahkan diisi');
         $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
@@ -40,9 +39,7 @@ class Subscribe extends CI_Controller
         $nama_perusahaan = $this->input->post('nama');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $passconf = $this->input->post('confirm_password');
         $email = $this->input->post('email');
-        $jumlah = $this->input->post('jumlah');
         date_default_timezone_set('Asia/Jakarta');
         $tanggal = date('Y-m-d');
 
@@ -54,7 +51,7 @@ class Subscribe extends CI_Controller
 
             $data_perusahaan = array(
                 'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => $password,
-                'email_perusahaan' => $email, 'jumlah_karyawan' => $jumlah
+                'email_perusahaan' => $email
             );
 
             $this->M_Perusahaan->insert_record($data_perusahaan, 'perusahaan');

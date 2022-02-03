@@ -64,11 +64,6 @@
                                 <input type="email" name="email" id="email" placeholder="Email" value="<?= set_value('email'); ?>" />
                             </div>
                             <?php echo form_error('email'); ?>
-                            <div class="form-group">
-                                <label for="jumlah"><i class="zmdi zmdi-account"></i></label>
-                                <input type="number" name="jumlah" id="jumlah" placeholder="Jumlah Karyawan" value="<?= set_value('jumlah'); ?>" />
-                            </div>
-                            <?php echo form_error('jumlah'); ?>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
                             </div>
