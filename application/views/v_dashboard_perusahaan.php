@@ -71,7 +71,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a class="d-block"><?php echo $this->session->userdata('username'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $this->session->userdata('id_perusahaan');  ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Account </p>
                             </a>
