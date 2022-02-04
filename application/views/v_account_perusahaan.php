@@ -79,14 +79,14 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $this->session->userdata('id_perusahaan');  ?>" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="<?php echo base_url() . 'Account_Perusahaan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Account </p>
                             </a>
@@ -125,7 +125,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Account</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -136,107 +136,47 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $this->session->userdata('id_perusahaan'); ?></h3>
-                                    <p>ID Perusahaan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>53</h3>
-                                    <p>Karyawan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-friends"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>65</h3>
-                                    <p>Klien</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>Detik</h3>
-                                    <p>Paket Subscribe</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row (main row) -->
-                </div><!-- /.container-fluid -->
-
-                <div class="container-fluid">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">List Nama Project</h3>
-                        </div>
-
                         <div class="card-body">
+                            <div class="card-body box-profile">
 
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nama</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                <h1 class="profile-username text-center">Profile</h1><br><br>
 
-                                </tbody>
-                            </table>
+                                <?php foreach ($profile_perusahaan as $detail_profile) {
+                                    $nama = $detail_profile->nama_perusahaan ?>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>ID</label>
+                                                <input type="text" class="form-control" name="id_perusahaan" value="<?= $detail_profile->id_perusahaan ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nama Perusahaan</label>
+                                                <input type="text" class="form-control" name="nama_perusahaan" value="<?= $detail_profile->nama_perusahaan ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="password" value="<?= $detail_profile->password ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-primary">Update</a>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </section>
