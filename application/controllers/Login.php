@@ -37,21 +37,27 @@ class Login extends CI_Controller
 
         $where = array(
             'username' => $username,
-            'password' => $password
+            'password' => $password,
         );
 
         $cek_login = $this->M_Perusahaan->cek_login('perusahaan', $where)->num_rows();
+        $cek_status = $this->M_Perusahaan->cek_status($username)->num_rows();
 
         if ($cek_login == 1) {
-            $session = array(
-                'status_login_perusahaan' => 'login'
-            );
+            if ($cek_status == 1) {
+                $session = array(
+                    'status_login_perusahaan' => 'login'
+                );
 
-            $session_data = $this->M_Perusahaan->cek_login('perusahaan', $where)->row_array();
+                $session_data = $this->M_Perusahaan->cek_login('perusahaan', $where)->row_array();
 
-            $this->session->set_userdata($session);
-            $this->session->set_userdata($session_data);
-            redirect('Dashboard_Perusahaan');
+                $this->session->set_userdata($session);
+                $this->session->set_userdata($session_data);
+                redirect('Dashboard_Perusahaan/tampil_menu_utama/' . $username);
+            } else {
+                $this->session->set_flashdata('gagal', 'Akun belum aktif');
+                redirect('Login/login_perusahaan');
+            }
         } else {
             $this->session->set_flashdata('gagal', 'Username atau password salah');
             redirect('Login/login_perusahaan');
