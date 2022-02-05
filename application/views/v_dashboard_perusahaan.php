@@ -92,13 +92,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Karyawan_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Karyawan </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Klien' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Klien </p>
                             </a>
@@ -132,6 +132,10 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+
+            <?php foreach ($info_perusahaan as $detail_perusahaan) {
+                $nama_paket = $detail_perusahaan->nama_paket;
+            } ?>
 
             <!-- Main content -->
             <section class="content">
@@ -181,7 +185,7 @@
                             <!-- small box -->
                             <div class="small-box bg-white">
                                 <div class="inner">
-                                    <h3>Detik</h3>
+                                    <h3><?php echo $nama_paket; ?></h3>
                                     <p>Paket Subscribe</p>
                                 </div>
                                 <div class="icon">

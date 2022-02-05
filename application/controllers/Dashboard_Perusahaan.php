@@ -10,10 +10,13 @@ class Dashboard_Perusahaan extends CI_Controller
         if ($this->session->userdata('status_login_perusahaan') != "login") {
             redirect('Login/login_perusahaan');
         }
+
+        $this->load->model(array('M_Perusahaan'));
     }
 
-    function index()
+    function tampil_menu_utama($username)
     {
-        $this->load->view('v_dashboard_perusahaan.php');
+        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+        $this->load->view('v_dashboard_perusahaan.php', $data);
     }
 }
