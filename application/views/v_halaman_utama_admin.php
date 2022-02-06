@@ -92,18 +92,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p> Karyawan </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Klien </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?php echo base_url() . 'Login/logout_perusahaan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Logout </p>
@@ -245,7 +233,8 @@
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": true,
-            "autoWidth": false
+            "autoWidth": false,
+            "searching": false
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     </script>
 
