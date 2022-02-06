@@ -24,8 +24,7 @@ class M_Perusahaan extends CI_Model
 
     function cek_status($username)
     {
-        return $this->db->query("SELECT username FROM perusahaan JOIN subscribe 
-                                ON perusahaan.id_perusahaan = subscribe.id_perusahaan WHERE username = '$username' AND status_subscribe = '1'");
+        return $this->db->query("SELECT username FROM perusahaan  WHERE username = '$username' AND status_perusahaan = '1'");
     }
 
     function insert_record($data, $table)
