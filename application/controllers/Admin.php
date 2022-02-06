@@ -43,10 +43,18 @@ class Admin extends CI_Controller
 
     function dashboard()
     {
-        if ($this->session->userdata('status_login_admin') != "login") {
+        if ($this->session->userdata('status_login_admin') != "login" /* && $this->session->userdata('username') == null*/) {
             redirect('Admin');
         } else {
             $this->load->view('v_halaman_utama_admin.php');
         }
+    }
+
+    function logout()
+    {
+        unset($_SESSION['status_login_admin']);
+        unset($_SESSION['username']);
+        //    $this->session->sess_destroy('status_login_admin');
+        redirect('Admin');
     }
 }
