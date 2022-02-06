@@ -40,9 +40,9 @@ class Subscribe extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $email = $this->input->post('email');
-        date_default_timezone_set('Asia/Jakarta');
+        /*       date_default_timezone_set('Asia/Jakarta');
         $tanggal = date('Y-m-d');
-
+*/
         if ($this->form_validation->run() == FALSE) {
             $data['paket'] = $this->M_Subscribe->tampilkan_paket_dipilih($id_paket)->result();
             $this->load->view('v_subscribe.php', $data);
@@ -51,13 +51,13 @@ class Subscribe extends CI_Controller
 
             $data_perusahaan = array(
                 'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => $password,
-                'email_perusahaan' => $email
+                'email_perusahaan' => $email, 'status_perusahaan' => 0
             );
 
             $this->M_Perusahaan->insert_record($data_perusahaan, 'perusahaan');
 
             $data_susbcribe = array(
-                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket, 'tanggal_bayar' => $tanggal, 'status_subscribe' => 0
+                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket
             );
 
             $this->M_Subscribe->insert_record($data_susbcribe, 'subscribe');
