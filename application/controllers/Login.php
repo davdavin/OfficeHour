@@ -51,7 +51,7 @@ class Login extends CI_Controller
                 );
 
                 $this->session->set_userdata($session);
-                redirect('Dashboard_Perusahaan/tampil_menu_utama/' . $username);
+                redirect('Dashboard_Perusahaan/tampil_menu_utama');
             } else {
                 $this->session->set_flashdata('gagal', 'Akun belum aktif');
                 redirect('Login/login_perusahaan');
