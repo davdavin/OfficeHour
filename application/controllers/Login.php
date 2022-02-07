@@ -46,14 +46,12 @@ class Login extends CI_Controller
         if ($cek_login == 1) {
             if ($cek_status == 1) {
                 $session = array(
-                    'status_login_perusahaan' => 'login'
+                    'username_perusahaan' => $username,
+                    'status_login_perusahaan' => 'login',
                 );
 
-                $session_data = $this->M_Perusahaan->cek_login('perusahaan', $where)->row_array();
-
                 $this->session->set_userdata($session);
-                $this->session->set_userdata($session_data);
-                redirect('Dashboard_Perusahaan/tampil_menu_utama/' . $username);
+                redirect('Dashboard_Perusahaan/tampil_menu_utama');
             } else {
                 $this->session->set_flashdata('gagal', 'Akun belum aktif');
                 redirect('Login/login_perusahaan');
