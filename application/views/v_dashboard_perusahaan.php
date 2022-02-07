@@ -71,7 +71,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
                     </div>
                 </div>
 
@@ -207,7 +207,7 @@
 
                         <div class="card-body">
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="list_project" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -306,11 +306,11 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#example1").DataTable({
+        $("#list_project").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
     </script>
 
 </body>
