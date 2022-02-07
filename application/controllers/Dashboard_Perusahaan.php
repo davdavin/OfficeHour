@@ -16,7 +16,7 @@ class Dashboard_Perusahaan extends CI_Controller
 
     function tampil_menu_utama()
     {
-        $username = $this->session->userdata('username');
+        $username = $this->session->userdata('username_perusahaan');
         $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
         $this->load->view('v_dashboard_perusahaan.php', $data);
     }
