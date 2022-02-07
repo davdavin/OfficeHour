@@ -46,8 +46,8 @@ class Login extends CI_Controller
         if ($cek_login == 1) {
             if ($cek_status == 1) {
                 $session = array(
-                    'username' => $username,
-                    'status_login_perusahaan' => 'login'
+                    'username_perusahaan' => $username,
+                    'status_login_perusahaan' => 'login',
                 );
 
                 $this->session->set_userdata($session);
