@@ -80,15 +80,15 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/paket' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
-                                <p> Account </p>
+                                <p> Paket </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -233,9 +233,8 @@
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": true,
-            "autoWidth": false,
-            "searching": false
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            "autoWidth": false
+        })
     </script>
 
 </body>
