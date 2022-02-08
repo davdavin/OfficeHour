@@ -50,7 +50,7 @@ class Subscribe extends CI_Controller
             $this->db->trans_start();
 
             $data_perusahaan = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => $password,
+                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
                 'email_perusahaan' => $email, 'status_perusahaan' => 0
             );
 
