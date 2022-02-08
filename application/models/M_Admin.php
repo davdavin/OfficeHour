@@ -5,4 +5,9 @@ class M_Admin extends CI_Model
     {
         return $this->db->get_where($table, $where);
     }
+
+    function tampil_paket()
+    {
+        return $this->db->query("SELECT * FROM paket");
+    }
 }
