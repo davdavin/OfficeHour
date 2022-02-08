@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_Perusahaan extends CI_Controller
+class Account_Perusahaan extends CI_Controller
 {
     function __construct()
     {
@@ -14,10 +14,9 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->load->model(array('M_Perusahaan'));
     }
 
-    function tampil_menu_utama()
+    function profile($id_perusahaan)
     {
-        $username = $this->session->userdata('username_perusahaan');
-        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
-        $this->load->view('v_dashboard_perusahaan.php', $data);
+        $data['profile_perusahaan'] = $this->M_Perusahaan->pilih_perusahaan($id_perusahaan)->result();
+        $this->load->view('v_account_perusahaan.php', $data);
     }
 }

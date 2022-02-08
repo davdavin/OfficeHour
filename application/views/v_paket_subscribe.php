@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OfficeHour - Perusahaan</title>
+    <title>OfficeHour - Admin</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -70,46 +70,32 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
                     <div class="info">
-                        <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
                 </div>
 
-
-                <?php foreach ($info_perusahaan as $detail_perusahaan) {
-                    $id_perusahaan = $detail_perusahaan->id_perusahaan;
-                    $nama_paket = $detail_perusahaan->nama_paket;
-                } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $id_perusahaan  ?>" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="<?php echo base_url() . 'Admin/paket' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
-                                <p> Account </p>
+                                <p> Paket </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p> Karyawan </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Klien </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Login/logout_perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/logout' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Logout </p>
                             </a>
@@ -127,10 +113,13 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h1>Paket</h1>
+                        </div>
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Paket</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -141,102 +130,42 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $id_perusahaan; ?></h3>
-                                    <p>ID Perusahaan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>53</h3>
-                                    <p>Karyawan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-friends"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>65</h3>
-                                    <p>Klien</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $nama_paket; ?></h3>
-                                    <p>Paket Subscribe</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row (main row) -->
-                </div><!-- /.container-fluid -->
 
-                <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List Nama Project</h3>
+                            <h3 class="card-title">List Paket</h3>
                         </div>
 
                         <div class="card-body">
 
-                            <table id="list_project" class="table table-bordered table-striped">
+                            <table id="list_paket" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama</th>
+                                        <th>Nama Paket</th>
+                                        <th>Maksimal Orang</th>
+                                        <th>Harga</th>
+                                        <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($paket as $list_paket) { ?>
+                                        <tr>
+                                            <td><?php echo $list_paket->id_paket ?></td>
+                                            <td><?php echo $list_paket->nama_paket ?></td>
+                                            <td><?php echo $list_paket->maks_orang ?></td>
+                                            <td><?php echo 'Rp. ' . number_format($list_paket->harga, '0', ',', '.'); ?></td>
+                                            <td><?php echo $list_paket->deskripsi ?></td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
@@ -306,11 +235,11 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#list_project").DataTable({
+        $("#list_paket").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
-        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
+        })
     </script>
 
 </body>

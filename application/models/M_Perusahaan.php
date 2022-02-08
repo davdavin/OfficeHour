@@ -6,9 +6,25 @@ class M_Perusahaan extends CI_Model
         return $this->db->query("SELECT * FROM perusahaan");
     }
 
+    function informasi_perusahaan($username)
+    {
+        return $this->db->query("SELECT * FROM perusahaan JOIN subscribe ON perusahaan.id_perusahaan = subscribe.id_perusahaan 
+                                JOIN paket ON subscribe.id_paket = paket.id_paket WHERE username = '$username'");
+    }
+
+    function pilih_perusahaan($id_perusahaan)
+    {
+        return $this->db->query("SELECT * FROM perusahaan WHERE id_perusahaan = '$id_perusahaan'");
+    }
+
     function cek_login($table, $where)
     {
         return $this->db->get_where($table, $where);
+    }
+
+    function cek_status($username)
+    {
+        return $this->db->query("SELECT username FROM perusahaan  WHERE username = '$username' AND status_perusahaan = '1'");
     }
 
     function insert_record($data, $table)

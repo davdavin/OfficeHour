@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OfficeHour - Perusahaan</title>
+    <title>OfficeHour - Admin</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -71,45 +71,28 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
                 </div>
 
-
-                <?php foreach ($info_perusahaan as $detail_perusahaan) {
-                    $id_perusahaan = $detail_perusahaan->id_perusahaan;
-                    $nama_paket = $detail_perusahaan->nama_paket;
-                } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $id_perusahaan  ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/paket' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
-                                <p> Account </p>
+                                <p> Paket </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p> Karyawan </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Klien </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Login/logout_perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/logout' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Logout </p>
                             </a>
@@ -141,65 +124,6 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $id_perusahaan; ?></h3>
-                                    <p>ID Perusahaan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>53</h3>
-                                    <p>Karyawan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-friends"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>65</h3>
-                                    <p>Klien</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $nama_paket; ?></h3>
-                                    <p>Paket Subscribe</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row (main row) -->
-                </div><!-- /.container-fluid -->
-
-                <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">List Nama Project</h3>
@@ -207,7 +131,7 @@
 
                         <div class="card-body">
 
-                            <table id="list_project" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -306,11 +230,11 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#list_project").DataTable({
+        $("#example1").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
-        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
+        })
     </script>
 
 </body>
