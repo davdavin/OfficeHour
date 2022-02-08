@@ -71,10 +71,15 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
                     </div>
                 </div>
 
+
+                <?php foreach ($info_perusahaan as $detail_perusahaan) {
+                    $id_perusahaan = $detail_perusahaan->id_perusahaan;
+                    $nama_paket = $detail_perusahaan->nama_paket;
+                } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -86,7 +91,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $this->session->userdata('id_perusahaan');  ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile/' . $id_perusahaan  ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Account </p>
                             </a>
@@ -133,10 +138,6 @@
             </div>
             <!-- /.content-header -->
 
-            <?php foreach ($info_perusahaan as $detail_perusahaan) {
-                $nama_paket = $detail_perusahaan->nama_paket;
-            } ?>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -146,7 +147,7 @@
                             <!-- small box -->
                             <div class="small-box bg-white">
                                 <div class="inner">
-                                    <h3><?php echo $this->session->userdata('id_perusahaan'); ?></h3>
+                                    <h3><?php echo $id_perusahaan; ?></h3>
                                     <p>ID Perusahaan</p>
                                 </div>
                                 <div class="icon">
@@ -206,7 +207,7 @@
 
                         <div class="card-body">
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="list_project" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -305,11 +306,11 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#example1").DataTable({
+        $("#list_project").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
     </script>
 
 </body>

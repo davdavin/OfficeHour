@@ -23,7 +23,7 @@ class Subscribe extends CI_Controller
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[25]|is_unique[perusahaan.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[25]');
         $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', array('matches' => '%s tidak sesuai'));
         $this->form_validation->set_rules('email', 'Email', 'required');
 
@@ -50,7 +50,7 @@ class Subscribe extends CI_Controller
             $this->db->trans_start();
 
             $data_perusahaan = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => $password,
+                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
                 'email_perusahaan' => $email, 'status_perusahaan' => 0
             );
 
