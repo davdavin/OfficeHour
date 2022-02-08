@@ -70,6 +70,9 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
                     <div class="info">
                         <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
@@ -126,47 +129,86 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List Nama Project</h3>
+                            <h3 class="card-title">List Subscriber</h3>
                         </div>
 
                         <div class="card-body">
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="list_subscriber" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nama</th>
+                                        <th>Nama Perusahaan</th>
+                                        <th>Nama Paket</th>
+                                        <th>Harga</th>
+                                        <th>Tanggal Bayar</th>
+                                        <th>Status Akun</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($subscriber as $list_subscriber) { ?>
+                                        <tr>
+                                            <td><?php echo $list_subscriber->nama_perusahaan ?></td>
+                                            <td><?php echo $list_subscriber->nama_paket ?></td>
+                                            <td><?php echo number_format($list_subscriber->harga, '0', ',', '.')  ?></td>
+                                            <td><?php echo $list_subscriber->tanggal_bayar ?></td>
+                                            <td>
+                                                <?php if ($list_subscriber->status_perusahaan == 1) {
+                                                    echo "Aktif";
+                                                } else {
+                                                    echo "Tidak Aktif";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Konfirmasi
+                                                </a>
+                                                <a class="btn btn-danger btn-sm tombol-hapus" href="">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Hapus
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
+                </div>
+                <!-- modal untuk menampilakn form edit -->
+                <div class="modal fade" id="modal-lg">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Form untuk validasi pembayaran</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="<?php echo base_url() . 'Wilayah/tambah_wilayah' ?>" method="post">
+                                    <div class="form-group">
+                                        <label>Tanggal Bayar</label>
+                                        <input type="date" class="form-control" name="tanggal_bayar" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <input type="text" class="form-control" name="status" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
                 </div>
             </section>
             <!-- /.content -->
@@ -230,7 +272,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#example1").DataTable({
+        $("#list_subscriber").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
