@@ -8,6 +8,7 @@ class Login extends CI_Controller
         parent::__construct();
 
         $this->load->model(array('M_Perusahaan'));
+        $this->load->library(array('form', 'url'));
     }
 
     function index()
@@ -41,7 +42,7 @@ class Login extends CI_Controller
         if ($cek_login) {
             if ($cek_login['status_perusahaan'] == 1) {
                 //cek password
-                if (password_verify($password, $cek_login['password'])) {
+                if (password_verify($this->input->post('password'), $cek_login['password'])) {
                     echo "test";
                 } else {
                     echo "salah";
