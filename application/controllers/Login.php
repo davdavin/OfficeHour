@@ -8,7 +8,7 @@ class Login extends CI_Controller
         parent::__construct();
 
         $this->load->model(array('M_Perusahaan'));
-        $this->load->library(array('form', 'url'));
+        $this->load->helper('form', 'url');
     }
 
     function index()
