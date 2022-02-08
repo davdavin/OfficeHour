@@ -52,15 +52,12 @@ class Admin extends CI_Controller
 
     function paket()
     {
-        /*   if ($this->session->userdata('status_login_admin') != "login") {
+        if ($this->session->userdata('status_login_admin') != "login") {
             redirect('Admin');
         } else {
             $data['paket'] = $this->M_Admin->tampil_paket()->result();
             $this->load->view('v_paket_subscribe.php', $data);
-        } */
-
-        $data['paket'] = $this->M_Admin->tampil_paket()->result();
-        $this->load->view('v_paket_subscribe.php', $data);
+        }
     }
 
     function logout()
