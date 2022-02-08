@@ -43,18 +43,29 @@ class Admin extends CI_Controller
 
     function dashboard()
     {
-        if ($this->session->userdata('status_login_admin') != "login" /* && $this->session->userdata('username') == null*/) {
+        if ($this->session->userdata('status_login_admin') != "login") {
             redirect('Admin');
         } else {
             $this->load->view('v_halaman_utama_admin.php');
         }
     }
 
+    function paket()
+    {
+        /*   if ($this->session->userdata('status_login_admin') != "login") {
+            redirect('Admin');
+        } else {
+            $data['paket'] = $this->M_Admin->tampil_paket()->result();
+            $this->load->view('v_paket_subscribe.php', $data);
+        } */
+
+        $data['paket'] = $this->M_Admin->tampil_paket()->result();
+        $this->load->view('v_paket_subscribe.php', $data);
+    }
+
     function logout()
     {
-        unset($_SESSION['status_login_admin']);
-        unset($_SESSION['username']);
-        //    $this->session->sess_destroy('status_login_admin');
+        $this->session->sess_destroy();
         redirect('Admin');
     }
 }
