@@ -7,7 +7,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array('M_Admin'));
+        $this->load->model(array('M_Admin', 'M_Subscribe', 'M_Perusahaan'));
     }
 
     function index()
@@ -46,7 +46,8 @@ class Admin extends CI_Controller
         if ($this->session->userdata('status_login_admin') != "login") {
             redirect('Admin');
         } else {
-            $this->load->view('v_halaman_utama_admin.php');
+            $data['subscriber'] = $this->M_Admin->tampil_subscriber()->result();
+            $this->load->view('v_halaman_utama_admin.php', $data);
         }
     }
 
@@ -58,6 +59,10 @@ class Admin extends CI_Controller
             $data['paket'] = $this->M_Admin->tampil_paket()->result();
             $this->load->view('v_paket_subscribe.php', $data);
         }
+    }
+
+    function proses_konfirmasi_pembayaran()
+    {
     }
 
     function logout()
