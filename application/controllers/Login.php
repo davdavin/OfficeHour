@@ -8,6 +8,7 @@ class Login extends CI_Controller
         parent::__construct();
 
         $this->load->model(array('M_Perusahaan'));
+        $this->load->library(array('form', 'url'));
     }
 
     function index()
@@ -35,15 +36,25 @@ class Login extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $where = array(
-            'username' => $username,
-            'password' => $password,
-        );
+        $cek_login = $this->M_Perusahaan->cek_login('perusahaan', ['username' => $username])->row_array();
+        //   $cek_status = $this->M_Perusahaan->cek_status($username)->num_rows();
 
-        $cek_login = $this->M_Perusahaan->cek_login('perusahaan', $where)->num_rows();
-        $cek_status = $this->M_Perusahaan->cek_status($username)->num_rows();
+        if ($cek_login) {
+            if ($cek_login['status_perusahaan'] == 1) {
+                //cek password
+                if (password_verify($this->input->post('password'), $cek_login['password'])) {
+                    echo "berhasil";
+                } else {
+                    echo "salah";
+                }
+            } else {
+                echo "tidak aktif";
+            }
+        } else {
+            echo 'salah username';
+        }
 
-        if ($cek_login == 1) {
+        /*  if ($cek_login == 1) {
             if ($cek_status == 1) {
                 $session = array(
                     'username_perusahaan' => $username,
@@ -59,7 +70,7 @@ class Login extends CI_Controller
         } else {
             $this->session->set_flashdata('gagal', 'Username atau password salah');
             redirect('Login/login_perusahaan');
-        }
+        } */
     }
 
     function logout_perusahaan()

@@ -70,6 +70,9 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
                     <div class="info">
                         <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
@@ -79,13 +82,13 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Admin/paket' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Paket </p>
@@ -110,10 +113,13 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h1>Paket</h1>
+                        </div>
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Paket</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -124,43 +130,42 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List Nama Project</h3>
+                            <h3 class="card-title">List Paket</h3>
                         </div>
 
                         <div class="card-body">
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="list_paket" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama</th>
+                                        <th>Nama Paket</th>
+                                        <th>Maksimal Orang</th>
+                                        <th>Harga</th>
+                                        <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($paket as $list_paket) { ?>
+                                        <tr>
+                                            <td><?php echo $list_paket->id_paket ?></td>
+                                            <td><?php echo $list_paket->nama_paket ?></td>
+                                            <td><?php echo $list_paket->maks_orang ?></td>
+                                            <td><?php echo 'Rp. ' . number_format($list_paket->harga, '0', ',', '.'); ?></td>
+                                            <td><?php echo $list_paket->deskripsi ?></td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
@@ -230,7 +235,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#example1").DataTable({
+        $("#list_paket").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false
