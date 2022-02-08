@@ -35,27 +35,41 @@ class Login extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $where = array(
-            'username' => $username,
-            'password' => $password
-        );
+        $cek_login = $this->M_Perusahaan->cek_login('perusahaan', ['username' => $username])->row_array();
+        //   $cek_status = $this->M_Perusahaan->cek_status($username)->num_rows();
 
-        $cek_login = $this->M_Perusahaan->cek_login('perusahaan', $where)->num_rows();
+        if ($cek_login) {
+            if ($cek_login['status_perusahaan'] == 1) {
+                //cek password
+                if (password_verify($password, $cek_login['password'])) {
+                    echo "test";
+                } else {
+                    echo "salah";
+                }
+            } else {
+                echo "tidak aktif";
+            }
+        } else {
+            echo 'salah username';
+        }
 
-        if ($cek_login == 1) {
-            $session = array(
-                'status_login_perusahaan' => 'login'
-            );
+        /*  if ($cek_login == 1) {
+            if ($cek_status == 1) {
+                $session = array(
+                    'username_perusahaan' => $username,
+                    'status_login_perusahaan' => 'login',
+                );
 
-            $session_data = $this->M_Perusahaan->cek_login('perusahaan', $where)->row_array();
-
-            $this->session->set_userdata($session);
-            $this->session->set_userdata($session_data);
-            redirect('Dashboard_Perusahaan');
+                $this->session->set_userdata($session);
+                redirect('Dashboard_Perusahaan/tampil_menu_utama');
+            } else {
+                $this->session->set_flashdata('gagal', 'Akun belum aktif');
+                redirect('Login/login_perusahaan');
+            }
         } else {
             $this->session->set_flashdata('gagal', 'Username atau password salah');
             redirect('Login/login_perusahaan');
-        }
+        } */
     }
 
     function logout_perusahaan()
