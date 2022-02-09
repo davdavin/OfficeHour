@@ -165,11 +165,13 @@
                                             </td>
                                             <td><?php echo $list_subscriber->status_bayar ?></td>
                                             <td>
-                                                <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Konfirmasi
-                                                </a>
+                                                <?php if ($list_subscriber->status_bayar == "Belum Bayar") { ?>
+                                                    <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Konfirmasi
+                                                    </a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -200,7 +202,7 @@
                                         <input type="hidden" class="form-control" name="id_subscribe" value="<?= $list_subscriber->id_subscribe; ?>">
                                         <div class="form-group">
                                             <label>Nama Perusahaan</label>
-                                            <input type="text" class="form-control" name="status" value="<?= $list_subscriber->nama_perusahaan; ?>" readonly>
+                                            <input type="text" class="form-control" name="nama_perusahaan" value="<?= $list_subscriber->nama_perusahaan; ?>" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Tanggal Bayar</label>
