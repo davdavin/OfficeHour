@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OfficeHour - Perusahaan</title>
+    <title>OfficeHour - Admin</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -70,8 +70,11 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
                     <div class="info">
-                        <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('username'); ?></a>
                     </div>
                 </div>
 
@@ -80,31 +83,19 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/paket' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
-                                <p> Account </p>
+                                <p> Paket </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p> Karyawan </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Klien </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Login/logout_perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Admin/logout' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Logout </p>
                             </a>
@@ -122,10 +113,13 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h1>Paket</h1>
+                        </div>
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Account</li>
+                                <li class="breadcrumb-item active">Paket</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -136,32 +130,47 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+
                     <div class="card">
-                        <div class="card-body">
-                            <div class="card-body box-profile">
-
-                                <h1 class="profile-username text-center">Profile</h1><br><br>
-
-                                <?php foreach ($profile_perusahaan as $detail_profile) { ?>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" class="form-control" name="id_perusahaan" value="<?= $detail_profile->id_perusahaan ?>" readonly>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nama Perusahaan</label>
-                                                <input type="text" class="form-control" name="nama_perusahaan" value="<?= $detail_profile->nama_perusahaan ?>" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary">Update</a>
-                                </div>
-                            </div>
+                        <div class="card-header">
+                            <h3 class="card-title">List Paket</h3>
                         </div>
+
+                        <div class="card-body">
+
+                            <table id="list_paket" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama Paket</th>
+                                        <th>Maksimal Orang</th>
+                                        <th>Harga</th>
+                                        <th>Deskripsi</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($paket as $list_paket) { ?>
+                                        <tr>
+                                            <td><?php echo $list_paket->id_paket ?></td>
+                                            <td><?php echo $list_paket->nama_paket ?></td>
+                                            <td><?php echo $list_paket->maks_orang ?></td>
+                                            <td><?php echo 'Rp. ' . number_format($list_paket->harga, '0', ',', '.'); ?></td>
+                                            <td><?php echo $list_paket->deskripsi ?></td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -224,6 +233,14 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $("#list_paket").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false
+        })
+    </script>
 
 </body>
 

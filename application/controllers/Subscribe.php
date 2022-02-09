@@ -23,7 +23,7 @@ class Subscribe extends CI_Controller
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[25]|is_unique[perusahaan.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[25]');
         $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', array('matches' => '%s tidak sesuai'));
         $this->form_validation->set_rules('email', 'Email', 'required');
 
@@ -40,9 +40,9 @@ class Subscribe extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $email = $this->input->post('email');
-        date_default_timezone_set('Asia/Jakarta');
+        /*       date_default_timezone_set('Asia/Jakarta');
         $tanggal = date('Y-m-d');
-
+*/
         if ($this->form_validation->run() == FALSE) {
             $data['paket'] = $this->M_Subscribe->tampilkan_paket_dipilih($id_paket)->result();
             $this->load->view('v_subscribe.php', $data);
@@ -50,14 +50,14 @@ class Subscribe extends CI_Controller
             $this->db->trans_start();
 
             $data_perusahaan = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => $password,
-                'email_perusahaan' => $email
+                'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
+                'email_perusahaan' => $email, 'status_perusahaan' => 0
             );
 
             $this->M_Perusahaan->insert_record($data_perusahaan, 'perusahaan');
 
             $data_susbcribe = array(
-                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket, 'tanggal_bayar' => $tanggal, 'status_subscribe' => 1
+                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket, 'status_bayar' => 'Belum Bayar'
             );
 
             $this->M_Subscribe->insert_record($data_susbcribe, 'subscribe');

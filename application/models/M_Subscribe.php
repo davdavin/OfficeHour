@@ -16,4 +16,10 @@ class M_Subscribe extends CI_Model
     {
         $this->db->insert($table, $data);
     }
+
+    function update_record($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
 }
