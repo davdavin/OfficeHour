@@ -161,7 +161,7 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
+                                                <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
                                                     Konfirmasi
@@ -181,35 +181,41 @@
 
                     </div>
                 </div>
-                <!-- modal untuk menampilakn form edit -->
-                <div class="modal fade" id="modal-lg">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Form untuk validasi pembayaran</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="<?php echo base_url() . 'Wilayah/tambah_wilayah' ?>" method="post">
-                                    <div class="form-group">
-                                        <label>Tanggal Bayar</label>
-                                        <input type="date" class="form-control" name="tanggal_bayar" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <input type="text" class="form-control" name="status" required>
-                                    </div>
 
-                                    <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
-                                </form>
+                <?php $no = 0;
+                foreach ($subscriber as $list_subscriber) {
+                    $no++; ?>
+                    <!-- modal untuk menampilakn form edit -->
+                    <div class="modal fade" id="modal-lg<?php echo $list_subscriber->id_subscribe ?>">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Form untuk validasi pembayaran</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="<?php echo base_url() . 'Admin/proses_konfirmasi_pembayaran' ?>" method="post">
+                                        <input type="hidden" class="form-control" name="id_perusahaan" value="<?= $list_subscriber->id_perusahaan; ?>">
+                                        <input type="hidden" class="form-control" name="id_subscribe" value="<?= $list_subscriber->id_subscribe; ?>">
+                                        <div class="form-group">
+                                            <label>Nama Perusahaan</label>
+                                            <input type="text" class="form-control" name="status" value="<?= $list_subscriber->nama_perusahaan; ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tanggal Bayar</label>
+                                            <input type="date" class="form-control" name="tanggal_bayar" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                                    </form>
+                                </div>
                             </div>
+                            <!-- /.modal-content -->
                         </div>
-                        <!-- /.modal-content -->
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-dialog -->
-                </div>
+                <?php } ?>
             </section>
             <!-- /.content -->
         </div>
