@@ -164,16 +164,15 @@
                                                 <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php } ?>
+                                    <?php } ?>
 
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary">Update</a>
-                                </div>
+                                    <div class="text-center">
+                                        <a href="#" class="btn btn-primary">Update</a>
+                                    </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>
