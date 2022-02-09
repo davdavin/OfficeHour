@@ -63,6 +63,26 @@ class Admin extends CI_Controller
 
     public function proses_konfirmasi_pembayaran()
     {
+        $id_perusahaan = $this->input->post('id_perusahaan');
+        $id_subscribe = $this->input->post('id_subscribe');
+        $tanggal_bayar = $this->input->post('tanggal_bayar');
+
+        $where_subscribe = array('id_subscribe' => $id_subscribe);
+
+        $data_subscribe = array(
+            'tanggal_bayar' => $tanggal_bayar, 'status_bayar' => 'Sudah Bayar'
+        );
+
+        $where_perusahaan = array('id_perusahaan' => $id_perusahaan);
+
+        $data_perusahaan = array(
+            'status_perusahaan' => 1
+        );
+
+        $this->M_Subscribe->update_record($where_subscribe, $data_subscribe, 'subscribe');
+        $this->M_Perusahaan->update_record($where_perusahaan, $data_perusahaan, 'perusahaan');
+        $this->session->set_flashdata('sukses', 'Konfirmasi berhasil dan status berhasil diubah');
+        redirect('Admin/dashboard');
     }
 
     public function logout()

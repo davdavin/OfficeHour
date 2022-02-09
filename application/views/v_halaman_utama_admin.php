@@ -126,6 +126,7 @@
 
             <!-- Main content -->
             <section class="content">
+                <?php $this->load->view('message.php'); ?>
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
@@ -165,11 +166,13 @@
                                             </td>
                                             <td><?php echo $list_subscriber->status_bayar ?></td>
                                             <td>
-                                                <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Konfirmasi
-                                                </a>
+                                                <?php if ($list_subscriber->status_bayar == "Belum Bayar") { ?>
+                                                    <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Konfirmasi
+                                                    </a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -200,7 +203,7 @@
                                         <input type="hidden" class="form-control" name="id_subscribe" value="<?= $list_subscriber->id_subscribe; ?>">
                                         <div class="form-group">
                                             <label>Nama Perusahaan</label>
-                                            <input type="text" class="form-control" name="status" value="<?= $list_subscriber->nama_perusahaan; ?>" readonly>
+                                            <input type="text" class="form-control" name="nama_perusahaan" value="<?= $list_subscriber->nama_perusahaan; ?>" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Tanggal Bayar</label>
@@ -262,6 +265,8 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -277,11 +282,31 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#list_subscriber").DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false
-        })
+        $(function() {
+            $("#list_subscriber").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false
+            });
+
+            const sukses = $('.sukses').data('flashdata');
+            if (sukses) {
+                Swal.fire({
+                    title: 'Info',
+                    text: sukses,
+                    icon: 'success'
+                });
+            }
+
+            const gagal = $('.gagal').data('flashdata');
+            if (gagal) {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: gagal,
+                    icon: 'error'
+                });
+            }
+        });
     </script>
 
 </body>
