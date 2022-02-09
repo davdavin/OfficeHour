@@ -162,7 +162,7 @@
                                         <div class="col-sm-6">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Username</label>
+                                                    <label>Password</label>
                                                     <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
                                                 </div>
                                                 <div class="form-group">
