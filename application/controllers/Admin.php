@@ -63,6 +63,7 @@ class Admin extends CI_Controller
 
     public function proses_konfirmasi_pembayaran()
     {
+        echo $this->input->post('tanggal_bayar');
     }
 
     public function logout()
