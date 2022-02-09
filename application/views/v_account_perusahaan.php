@@ -142,8 +142,7 @@
 
                                 <h1 class="profile-username text-center">Profile</h1><br><br>
 
-                                <?php foreach ($profile_perusahaan as $detail_profile) {
-                                    $nama = $detail_profile->nama_perusahaan ?>
+                                <?php foreach ($profile_perusahaan as $detail_profile) { ?>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -154,15 +153,11 @@
                                                 <label>Nama Perusahaan</label>
                                                 <input type="text" class="form-control" name="nama_perusahaan" value="<?= $detail_profile->nama_perusahaan ?>" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
-                                            </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="password" value="<?= $detail_profile->password ?>" required>
+                                                <label>Username</label>
+                                                <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
