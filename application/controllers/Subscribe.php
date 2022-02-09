@@ -57,7 +57,7 @@ class Subscribe extends CI_Controller
             $this->M_Perusahaan->insert_record($data_perusahaan, 'perusahaan');
 
             $data_susbcribe = array(
-                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket
+                'id_perusahaan' => $id_perusahaan, 'id_paket' => $id_paket, 'status_bayar' => 'Belum Bayar'
             );
 
             $this->M_Subscribe->insert_record($data_susbcribe, 'subscribe');
