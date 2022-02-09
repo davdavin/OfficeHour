@@ -15,7 +15,7 @@ class Admin extends CI_Controller
         $this->load->view('v_login_admin.php');
     }
 
-    function verifikasi_admin()
+    public function verifikasi_admin()
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
@@ -41,7 +41,7 @@ class Admin extends CI_Controller
         }
     }
 
-    function dashboard()
+    public function dashboard()
     {
         if ($this->session->userdata('status_login_admin') != "login") {
             redirect('Admin');
@@ -51,7 +51,7 @@ class Admin extends CI_Controller
         }
     }
 
-    function paket()
+    public function paket()
     {
         if ($this->session->userdata('status_login_admin') != "login") {
             redirect('Admin');
@@ -61,11 +61,11 @@ class Admin extends CI_Controller
         }
     }
 
-    function proses_konfirmasi_pembayaran()
+    public function proses_konfirmasi_pembayaran()
     {
     }
 
-    function logout()
+    public function logout()
     {
         $this->session->sess_destroy();
         redirect('Admin');

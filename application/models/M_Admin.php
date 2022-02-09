@@ -1,12 +1,12 @@
 <?php
 class M_Admin extends CI_Model
 {
-    function cek_login($table, $where)
+    public function cek_login($table, $where)
     {
         return $this->db->get_where($table, $where);
     }
 
-    function tampil_subscriber()
+    public function tampil_subscriber()
     {
         $this->db->select('perusahaan.id_perusahaan, nama_perusahaan, subscribe.id_subscribe, nama_paket, harga, tanggal_bayar, status_perusahaan');
         $this->db->from('perusahaan');
@@ -15,7 +15,7 @@ class M_Admin extends CI_Model
         return $this->db->get();
     }
 
-    function tampil_paket()
+    public function tampil_paket()
     {
         return $this->db->query("SELECT * FROM paket");
     }
