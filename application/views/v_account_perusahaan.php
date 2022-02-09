@@ -160,13 +160,15 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="password" value="<?= $detail_profile->password ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
