@@ -11,6 +11,9 @@
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/style.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/adminlte.min.css">
 </head>
 
 <body style="background-image: url('<?php echo base_url(); ?>assets/loginSignup/konten.png'), url('<?php echo base_url(); ?>assets/loginSignup/background.png');">
@@ -20,6 +23,7 @@
                 <div class="signup-content">
                     <div class="signup-image">
                         <figure><img src="<?php echo base_url(); ?>assets/loginSignup/signupimage.png" alt="sing up image"></figure>
+                        <a type="button" class="informasi-pembayaran" data-toggle="modal" data-target="#modal-md">Informasi Pembayaran Paket</a>
                     </div>
                     <div class="signup-form">
                         <h2 class="form-title">Form</h2>
@@ -72,9 +76,41 @@
                 </div>
             </div>
         </section>
+
+        <div class="modal fade" id="modal-md">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Informasi Pembayaran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-color">
+                        <div class="info-total-harga">
+                            <?php echo 'Total harga Rp. ' . number_format($paket_pilihan->harga, '0', ',', '.'); ?>
+                        </div>
+                        <br>
+                        <div class="info-nomor">
+                            Pembayaran melalui Virtual Account <br> NO VA 12102001081212
+                        </div>
+                        <br>
+                        <div class="info-proses">
+                            Kami akan validasi pembayaran anda dalam waktu 24 jam
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
     <script src="<?php echo base_url(); ?>assets/loginSignup/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/loginSignup/js/main.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 </body>
 
 </html>
