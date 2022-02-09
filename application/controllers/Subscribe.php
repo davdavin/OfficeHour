@@ -63,7 +63,7 @@ class Subscribe extends CI_Controller
             $this->M_Subscribe->insert_record($data_susbcribe, 'subscribe');
 
             $this->db->trans_complete();
-            $this->session->set_flashdata('sukses', 'Berhasil subscribe. Paket yang dipilih adalah ' . $nama_paket . ' Silahkan login dengan akun anda');
+            $this->session->set_flashdata('sukses', 'Berhasil subscribe. Paket yang dipilih adalah ' . $nama_paket . ' Silahkan login dengan akun anda. Segera melakukan pembayaran melalui Virtual Account 12102001081212');
             redirect('Login/login_perusahaan');
         }
     }
