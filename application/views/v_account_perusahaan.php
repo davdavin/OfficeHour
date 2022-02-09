@@ -154,16 +154,25 @@
                                                 <input type="text" class="form-control" name="nama_perusahaan" value="<?= $detail_profile->nama_perusahaan ?>" required>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php } ?>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
 
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary">Update</a>
-                                </div>
+                                    <div class="text-center">
+                                        <a href="#" class="btn btn-primary">Update</a>
+                                    </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>
