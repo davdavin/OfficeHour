@@ -137,17 +137,20 @@
                             <table id="list_subscriber" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>ID Subscribe</th>
                                         <th>Nama Perusahaan</th>
                                         <th>Nama Paket</th>
                                         <th>Harga</th>
                                         <th>Tanggal Bayar</th>
                                         <th>Status Akun</th>
+                                        <th>Status Pembayaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($subscriber as $list_subscriber) { ?>
                                         <tr>
+                                            <td><?php echo $list_subscriber->id_subscribe ?></td>
                                             <td><?php echo $list_subscriber->nama_perusahaan ?></td>
                                             <td><?php echo $list_subscriber->nama_paket ?></td>
                                             <td><?php echo number_format($list_subscriber->harga, '0', ',', '.')  ?></td>
@@ -160,16 +163,12 @@
                                                 }
                                                 ?>
                                             </td>
+                                            <td><?php echo $list_subscriber->status_bayar ?></td>
                                             <td>
                                                 <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
                                                     Konfirmasi
-                                                </a>
-                                                <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Hapus
                                                 </a>
                                             </td>
                                         </tr>
