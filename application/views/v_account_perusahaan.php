@@ -66,6 +66,13 @@
                 <span class="brand-text font-weight-light">OfficeHour</span>
             </a>
 
+
+            <?php foreach ($profile_perusahaan as $detail_profile) {
+                $id_perusahaan =  $detail_profile->id_perusahaan;
+                $nama_perusahaan = $detail_profile->nama_perusahaan;
+                $username = $detail_profile->username;
+                $email_perusahaan = $detail_profile->email_perusahaan;
+            } ?>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -80,19 +87,19 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/tampil_menu_utama' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Account_Perusahaan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Account_Perusahaan/profile' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Account </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Karyawan </p>
                             </a>
@@ -141,31 +148,28 @@
                             <div class="card-body box-profile">
 
                                 <h1 class="profile-username text-center">Profile</h1><br><br>
-
-                                <?php foreach ($profile_perusahaan as $detail_profile) { ?>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" class="form-control" name="id_perusahaan" value="<?= $detail_profile->id_perusahaan ?>" readonly>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nama Perusahaan</label>
-                                                <input type="text" class="form-control" name="nama_perusahaan" value="<?= $detail_profile->nama_perusahaan ?>" required>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>ID</label>
+                                            <input type="text" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan ?>" readonly>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control" name="username" value="<?= $detail_profile->username ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" class="form-control" name="email_perusahaan" value="<?= $detail_profile->email_perusahaan ?>" required>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Nama Perusahaan</label>
+                                            <input type="text" class="form-control" name="nama_perusahaan" value="<?= $nama_perusahaan ?>" required>
                                         </div>
                                     </div>
-                                <?php } ?>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" name="username" value="<?= $username ?>" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" name="email_perusahaan" value="<?= $email_perusahaan ?>" required>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="text-center">
                                     <a href="#" class="btn btn-primary">Update</a>
