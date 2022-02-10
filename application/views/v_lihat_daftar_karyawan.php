@@ -163,7 +163,7 @@
                                         <th>Email</th>
                                         <th>Posisi</th>
                                         <th>Foto</th>
-                                        <th>Status Karyawan</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
