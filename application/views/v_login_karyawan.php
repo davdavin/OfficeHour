@@ -29,8 +29,8 @@
                         <h2 class="form-title">Log In</h2>
                         <form action="<?php echo base_url() . 'Login/verifikasi_karyawan' ?>" method="post" class="register-form" id="login-form">
                             <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username" id="username" placeholder="Username" required />
+                                <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Email" required />
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
