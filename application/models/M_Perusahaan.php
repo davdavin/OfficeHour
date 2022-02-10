@@ -9,7 +9,7 @@ class M_Perusahaan extends CI_Model
     function informasi_perusahaan($username)
     {
         return $this->db->query("SELECT * FROM perusahaan JOIN subscribe ON perusahaan.id_perusahaan = subscribe.id_perusahaan 
-                                JOIN paket ON subscribe.id_paket = paket.id_paket WHERE username = '$username'");
+                                JOIN paket ON subscribe.id_paket = paket.id_paket WHERE username = '$username' AND status_subscribe = 'Sedang Progress'");
     }
 
     function pilih_perusahaan($id_perusahaan)
