@@ -7,7 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array('M_Perusahaan'));
+        $this->load->model(array('M_Perusahaan', 'M_Karyawan'));
         $this->load->helper('form', 'url');
     }
 
@@ -61,6 +61,37 @@ class Login extends CI_Controller
         } else {
             $this->session->set_flashdata('gagal', 'Username salah');
             redirect('Login/login_perusahaan');
+        }
+    }
+
+    function verifikasi_karyawan()
+    {
+        $email_karyawan = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $cek_login_karyawan = $this->M_Karyawan->cek_login('karyawan', ['email_karyawan' => $email_karyawan])->row_array();
+
+        if ($cek_login_karyawan) {
+            if ($cek_login_karyawan['status_karyawan'] == 1) {
+                if (password_verify($password, $cek_login_karyawan['password_karyawan'])) {
+                    $session = array(
+                        'nama_karyawan' => $cek_login_karyawan['nama_karyawan'],
+                        'status_login_karyawan' => 'login'
+                    );
+
+                    $this->session->set_userdata($session);
+                    redirect('TimeTracker');
+                } else {
+                    $this->session->set_flashdata('gagal', 'Password');
+                    redirect('Login/login_karyawan');
+                }
+            } else {
+                $this->session->set_flashdata('gagal', 'Akun karyawan tidak aktif');
+                redirect('Login/login_karyawan');
+            }
+        } else {
+            $this->session->set_flashdata('gagal', 'Username salah');
+            redirect('Login/login_karyawan');
         }
     }
 
