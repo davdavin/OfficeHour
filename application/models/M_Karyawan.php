@@ -1,6 +1,10 @@
 <?php
 class M_Karyawan extends CI_Model
 {
+    function cek_login($table, $where)
+    {
+        return $this->db->get_where($table, $where);
+    }
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
