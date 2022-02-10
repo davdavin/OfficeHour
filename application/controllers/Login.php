@@ -75,6 +75,7 @@ class Login extends CI_Controller
             if ($cek_login_karyawan['status_karyawan'] == 1) {
                 if (password_verify($password, $cek_login_karyawan['password_karyawan'])) {
                     $session = array(
+                        'id_karyawan' => $cek_login_karyawan['id_karyawan'],
                         'nama_karyawan' => $cek_login_karyawan['nama_karyawan'],
                         'status_login_karyawan' => 'login'
                     );
