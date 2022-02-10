@@ -97,7 +97,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Karyawan </p>
                             </a>
