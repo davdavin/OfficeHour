@@ -11,7 +11,7 @@ class Dashboard_Perusahaan extends CI_Controller
             redirect('Login/login_perusahaan');
         }
 
-        $this->load->model(array('M_Perusahaan, M_Karyawan'));
+        $this->load->model(array('M_Perusahaan', 'M_Karyawan'));
         $this->load->helper('form', 'url');
     }
 
