@@ -71,10 +71,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Test</a>
+            <a class="d-block"><?php echo $this->session->userdata('nama_karyawan'); ?></a>
           </div>
         </div>
 
@@ -84,15 +84,9 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href="<?php echo base_url() . 'TimeTracker'?>" class="nav-link">
+              <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
                 <i class="nav-icon fas fa-clock"></i>
                 <p> Time Tracker </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url() . 'Calendar' ?>" class="nav-link">
-                <i class="nav-icon fas fa-calendar"></i>
-                <p> Calendar </p>
               </a>
             </li>
             <li class="nav-item">
@@ -108,7 +102,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . 'Login_Akun/logout' ?>" class="nav-link">
+              <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-power-off"></i>
                 <p> Logout </p>
               </a>
@@ -128,7 +122,10 @@
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
+              <h3><?php echo 'ID anda: ' . $this->session->userdata('id_karyawan'); ?></h3>
+            </div>
+            <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Time Tracker</li>
@@ -149,8 +146,7 @@
               <div class="small-box bg-white">
                 <div class="inner">
                   <h3>150</h3>
-
-                  <p>Pendeta</p>
+                  <p>Test</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -164,7 +160,7 @@
                 <div class="inner">
                   <h3>53</h3>
 
-                  <p>Anggota Jemaat</p>
+                  <p>Test</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-user-friends"></i>
@@ -226,37 +222,37 @@
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Today</h3>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Today</h3>
+            </div>
+
+            <div class="card-body">
+
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <a class="btn btn-primary btn-sm tombol-detail" href="#">
+                        <i class="fas fa-eye"></i> Detail
+                      </a>
+                      <a class="btn btn-danger btn-sm tombol-hapus" href="<?php ?>>">
+                        <i class="fas fa-trash"></i> Hapus
+                      </a>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </div>
-
-        <div class="card-body">
-
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td></td>
-                  <td>
-                    <a class="btn btn-primary btn-sm tombol-detail" href="#">
-                      <i class="fas fa-eye"></i> Detail
-                    </a>
-                    <a class="btn btn-danger btn-sm tombol-hapus" href="<?php ?>>">
-                      <i class="fas fa-trash"></i> Hapus
-                    </a>
-                  </td>
-                </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
       </section>
       <!-- /.content -->
     </div>
@@ -304,19 +300,19 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 </body>
 
