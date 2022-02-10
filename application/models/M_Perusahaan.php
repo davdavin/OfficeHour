@@ -33,6 +33,11 @@ class M_Perusahaan extends CI_Model
                                 JOIN perusahaan ON karyawan.id_perusahaan = perusahaan.id_perusahaan WHERE perusahaan.id_perusahaan = '$id_perusahaan'");
     }
 
+    function jumlah_karyawan($id_perusahaan)
+    {
+        return $this->db->query("SELECT count(id_karyawan) as total_karyawan FROM karyawan WHERE id_perusahaan = '$id_perusahaan'");
+    }
+
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
