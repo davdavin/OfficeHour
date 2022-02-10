@@ -167,11 +167,17 @@
                                             <td><?php echo $list_subscriber->status_bayar ?></td>
                                             <td>
                                                 <?php if ($list_subscriber->status_bayar == "Belum Bayar") { ?>
-                                                    <a type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
+                                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         Konfirmasi
-                                                    </a>
+                                                    </button>
+                                                <?php } else { ?>
+                                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg<?php echo $list_subscriber->id_subscribe ?>" data-toggle="tooltip" data-placement="bottom" title="Konfirmasi Pembyaran" disabled>
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Konfirmasi
+                                                    </button>
                                                 <?php } ?>
                                             </td>
                                         </tr>
