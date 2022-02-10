@@ -81,6 +81,7 @@
                 <?php foreach ($info_perusahaan as $detail_perusahaan) {
                     $id_perusahaan = $detail_perusahaan->id_perusahaan;
                     $nama_paket = $detail_perusahaan->nama_paket;
+                    $maks_orang = $detail_perusahaan->maks_orang;
                 } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -150,9 +151,22 @@
                         </div>
 
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
-                                <i class="fas fa-plus"></i> Tambah karyawan
-                            </button><br><br>
+                            <?php foreach ($total_karyawan as $total) {
+                                $total_karyawan = $total->total_karyawan;
+                            } ?>
+                            <?php if ($total_karyawan < $maks_orang) { ?>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                    <i class="fas fa-plus"></i> Tambah karyawan
+                                </button><br><br>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg" disabled>
+                                    <i class="fas fa-plus"></i> Tambah karyawan
+                                </button><br><br>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <i class="icon fas fa-ban"></i> Anda tidak bisa lagi menambah karyawan. Karena paket yang dipesan maksimal <?php echo $maks_orang; ?> orang
+                                </div>
+                            <?php } ?>
 
                             <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>

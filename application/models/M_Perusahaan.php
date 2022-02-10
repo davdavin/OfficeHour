@@ -9,7 +9,7 @@ class M_Perusahaan extends CI_Model
     function informasi_perusahaan($username)
     {
         return $this->db->query("SELECT * FROM perusahaan JOIN subscribe ON perusahaan.id_perusahaan = subscribe.id_perusahaan 
-                                JOIN paket ON subscribe.id_paket = paket.id_paket WHERE username = '$username'");
+                                JOIN paket ON subscribe.id_paket = paket.id_paket WHERE username = '$username' AND status_subscribe = 'Sedang Progress'");
     }
 
     function pilih_perusahaan($id_perusahaan)
@@ -31,6 +31,11 @@ class M_Perusahaan extends CI_Model
     {
         return $this->db->query("SELECT perusahaan.id_perusahaan, id_karyawan, nama_karyawan, alamat_karyawan, email_karyawan, posisi_karyawan, status_karyawan, foto_karyawan from karyawan 
                                 JOIN perusahaan ON karyawan.id_perusahaan = perusahaan.id_perusahaan WHERE perusahaan.id_perusahaan = '$id_perusahaan'");
+    }
+
+    function jumlah_karyawan($id_perusahaan)
+    {
+        return $this->db->query("SELECT count(id_karyawan) as total_karyawan FROM karyawan WHERE id_perusahaan = '$id_perusahaan'");
     }
 
     function insert_record($data, $table)
