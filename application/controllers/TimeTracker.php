@@ -7,9 +7,9 @@ class TimeTracker extends CI_Controller
     {
         parent::__construct();
 
-        /*    if($this->session->userdata('status') != "login") {
-            redirect('Login_Admin');
-        } */
+        if ($this->session->userdata('status_login_karyawan') != "login") {
+            redirect('Login/login_karyawan');
+        }
     }
 
     function index()
