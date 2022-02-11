@@ -198,7 +198,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' ?>" method="post">
+                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_klien' ?>" method="post">
                                 <input type="hidden" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
                                 <div class="form-group">
                                     <label>Nama Klien</label>
