@@ -34,7 +34,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -79,17 +78,17 @@
                     </div>
                 </div>
 
-
                 <?php foreach ($info_perusahaan as $detail_perusahaan) {
                     $id_perusahaan = $detail_perusahaan->id_perusahaan;
                     $nama_paket = $detail_perusahaan->nama_paket;
+                    $maks_orang = $detail_perusahaan->maks_orang;
                 } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/tampil_menu_utama' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Dasboard </p>
                             </a>
@@ -101,12 +100,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan  ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Karyawan </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Klien </p>
@@ -134,7 +133,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Klien</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -144,103 +143,42 @@
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $id_perusahaan; ?></h3>
-                                    <p>ID Perusahaan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>53</h3>
-                                    <p>Karyawan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-friends"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>65</h3>
-                                    <p>Klien</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $nama_paket; ?></h3>
-                                    <p>Paket Subscribe</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row (main row) -->
-                </div><!-- /.container-fluid -->
-
+                <?php $this->load->view('message.php'); ?>
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List Nama Project</h3>
+                            <h3 class="card-title">Daftar Karyawan</h3>
                         </div>
 
                         <div class="card-body">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                <i class="fas fa-plus"></i> Tambah klien
+                            </button><br><br>
 
-                            <table id="list_project" class="table table-bordered table-striped">
+                            <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID Klien</th>
                                         <th>Nama</th>
+                                        <th>Email</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($klien as $list_klien) { ?>
+                                        <tr>
+                                            <td><?php echo $list_klien->id_client ?></td>
+                                            <td><?php echo $list_klien->nama_client ?></td>
+                                            <td><?php echo $list_klien->email_client ?></td>
+                                            <td>
+                                                <a href="" class="btn btn-info btn-sm">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
@@ -249,6 +187,42 @@
                     </div>
                 </div>
             </section>
+
+            <div class="modal fade" id="modal-lg">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Input Klien</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' ?>" method="post">
+                                <input type="hidden" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
+                                <div class="form-group">
+                                    <label>Nama Klien</label>
+                                    <input type="text" class="form-control" name="nama_klien" placeholder="Nama klien" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email_klien" placeholder="Email klien" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -275,18 +249,8 @@
     <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -295,6 +259,8 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -310,11 +276,31 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $("#list_project").DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false
-        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
+        $(function() {
+            $("#list_karyawan").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false
+            });
+
+            const sukses = $('.sukses').data('flashdata');
+            if (sukses) {
+                Swal.fire({
+                    title: 'Sukses',
+                    text: sukses,
+                    icon: 'success'
+                });
+            }
+
+            const gagal = $('.gagal').data('flashdata');
+            if (gagal) {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: gagal,
+                    icon: 'error'
+                });
+            }
+        });
     </script>
 
 </body>

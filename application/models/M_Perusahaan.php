@@ -29,8 +29,14 @@ class M_Perusahaan extends CI_Model
 
     function lihat_karyawan($id_perusahaan)
     {
-        return $this->db->query("SELECT perusahaan.id_perusahaan, id_karyawan, nama_karyawan, alamat_karyawan, email_karyawan, posisi_karyawan, status_karyawan, foto_karyawan from karyawan 
+        return $this->db->query("SELECT perusahaan.id_perusahaan, id_karyawan, nama_karyawan, alamat_karyawan, email_karyawan, posisi_karyawan, status_karyawan, foto_karyawan FROM karyawan 
                                 JOIN perusahaan ON karyawan.id_perusahaan = perusahaan.id_perusahaan WHERE perusahaan.id_perusahaan = '$id_perusahaan'");
+    }
+
+    function lihat_klien($id_perusahaan)
+    {
+        return $this->db->query("SELECT perusahaan.id_perusahaan, id_client, nama_client, email_client FROM client
+                                JOIN perusahaan ON client.id_perusahaan = perusahaan.id_perusahaan WHERE perusahaan.id_perusahaan = '$id_perusahaan'");
     }
 
     function jumlah_karyawan($id_perusahaan)

@@ -50,4 +50,12 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->session->set_flashdata('sukses', 'Berhasil tambah karyawan');
         redirect('Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan);
     }
+
+    public function lihat_klien($id_perusahaan)
+    {
+        $username = $this->session->userdata('username_perusahaan');
+        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+        $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
+        $this->load->view('v_lihat_daftar_klien.php', $data);
+    }
 }
