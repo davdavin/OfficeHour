@@ -11,7 +11,7 @@ class Dashboard_Perusahaan extends CI_Controller
             redirect('Login/login_perusahaan');
         }
 
-        $this->load->model(array('M_Perusahaan', 'M_Karyawan'));
+        $this->load->model(array('M_Perusahaan', 'M_Karyawan', 'M_Klien'));
         $this->load->helper('form', 'url');
     }
 
@@ -57,5 +57,21 @@ class Dashboard_Perusahaan extends CI_Controller
         $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
         $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
         $this->load->view('v_lihat_daftar_klien.php', $data);
+    }
+
+    public function proses_tambah_klien()
+    {
+        $id_perusahaan = $this->input->post('id_perusahaan');
+        $nama_klien = $this->input->post('nama_klien');
+        $email_klien = $this->input->post('email_klien');
+        $password = $this->input->post('password');
+
+        $data = array(
+            'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'password_client' => password_hash($password, PASSWORD_DEFAULT), 'email_client' => $email_klien
+        );
+
+        $this->M_Klien->insert_record($data, 'client');
+        $this->session->set_flashdata('sukses', 'Berhasil menambahkan klien baru');
+        redirect('Dashboard/lihat_klien/' . $id_perusahaan);
     }
 }
