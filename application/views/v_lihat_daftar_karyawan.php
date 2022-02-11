@@ -70,9 +70,9 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <!--   <div class="image">
-                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
-                    </div> -->
+                    <div class="image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/corporate.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
                     <div class="info">
                         <a class="d-block text-center"><?php echo $this->session->userdata('username_perusahaan'); ?></a>
                     </div>
@@ -106,7 +106,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Klien </p>
                             </a>
@@ -133,7 +133,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Karyawan</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -168,7 +168,7 @@
                                 </div>
                             <?php } ?>
 
-                            <table id="list_karyawan" class="table table-bordered table-striped">
+                            <table id="list_client" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID Karyawan</th>
@@ -325,7 +325,7 @@
 
     <script>
         $(function() {
-            $("#list_karyawan").DataTable({
+            $("#list_client").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false
