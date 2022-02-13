@@ -222,7 +222,7 @@
                                 <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_nama" role="alert" style="display: none">
+                            <div class="is-invalid error_nama" style="display: none">
                             </div>
 
                             <div class="form-group">
@@ -230,7 +230,7 @@
                                 <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_alamat" role="alert" style="display: none">
+                            <div class="is-invalid error_alamat" style="display: none">
                             </div>
 
                             <div class="form-group">
@@ -238,7 +238,7 @@
                                 <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_email" role="alert" style="display: none">
+                            <div class="is-invalid error_email" style="display: none">
                             </div>
 
                             <div class="form-group">
@@ -246,7 +246,7 @@
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_password" role="alert" style="display: none">
+                            <div class="is-invalid error_password" style="display: none">
                             </div>
 
                             <div class="form-group">
@@ -254,7 +254,7 @@
                                 <input type="posisi" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_posisi" role="alert" style="display: none">
+                            <div class="is-invalid error_posisi" style="display: none">
                             </div>
 
                             <!-- status -->
@@ -267,7 +267,7 @@
                                 </select>
                             </div>
                             <!-- INFO ERROR -->
-                            <div class="alert alert-danger error_status" role="alert" style="display: none">
+                            <div class="is-invalid error_status" style="display: none">
                             </div>
 
                             <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
@@ -379,7 +379,7 @@
                                 $('.error_alamat').show();
                                 $('.error_alamat').html($obj.error_alamat);
                             }
-                            if ($Obj.error_email) {
+                            if ($obj.error_email) {
                                 $('.error_email').show();
                                 $('.error_email').html($obj.error_email);
                             }
