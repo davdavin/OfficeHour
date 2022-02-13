@@ -81,7 +81,6 @@
                 <?php foreach ($info_perusahaan as $detail_perusahaan) {
                     $id_perusahaan = $detail_perusahaan->id_perusahaan;
                     $nama_paket = $detail_perusahaan->nama_paket;
-                    $maks_orang = $detail_perusahaan->maks_orang;
                 } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -106,7 +105,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' . $id_perusahaan ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Klien </p>
                             </a>
@@ -133,7 +132,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Karyawan</li>
+                                <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -151,24 +150,11 @@
                         </div>
 
                         <div class="card-body">
-                            <?php foreach ($total_karyawan as $total) {
-                                $total_karyawan = $total->total_karyawan;
-                            } ?>
-                            <?php if ($total_karyawan < $maks_orang) { ?>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
-                                    <i class="fas fa-plus"></i> Tambah karyawan
-                                </button><br><br>
-                            <?php } else { ?>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg" disabled>
-                                    <i class="fas fa-plus"></i> Tambah karyawan
-                                </button><br><br>
-                                <div class="alert alert-danger alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <i class="icon fas fa-ban"></i> Anda tidak bisa lagi menambah karyawan. Karena paket yang dipesan maksimal <?php echo $maks_orang; ?> orang
-                                </div>
-                            <?php } ?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                <i class="fas fa-plus"></i> Tambah karyawan
+                            </button><br><br>
 
-                            <table id="list_client" class="table table-bordered table-striped">
+                            <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID Karyawan</th>
@@ -177,7 +163,7 @@
                                         <th>Email</th>
                                         <th>Posisi</th>
                                         <th>Foto</th>
-                                        <th>Status</th>
+                                        <th>Status Karyawan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -226,45 +212,62 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' ?>" method="post">
-                                <input type="hidden" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
-                                <div class="form-group">
-                                    <label>Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="nama_karyawan" placeholder="Nama Lengkap" required>
-                                </div>
+                            <!-- kalau ada error -->
+                            <div class="alert alert-danger error_nama" style="display: none">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Alamat</label>
-                                    <input type="text" class="form-control" name="alamat_karyawan" placeholder="Alamat karyawan" required>
-                                </div>
+                            <div class="alert alert-danger error_alamat" style="display: none">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" name="email_karyawan" placeholder="Email karyawan" required>
-                                </div>
+                            <div class="alert alert-danger error_email" style="display: none">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                </div>
+                            <!--     <form action="<?php //echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' 
+                                                    ?>" method="post"> -->
+                            <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Posisi Karyawan</label>
-                                    <input type="posisi" class="form-control" name="posisi_karyawan" placeholder="Posisi karyawan" required>
-                                </div>
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
+                            </div>
 
-                                <!-- status -->
-                                <div class="form-group">
-                                    <label>Status Karyawan</label>
-                                    <select class="form-control select2bs4" style="width: 100%;" name="status" required>
-                                        <option selected disabled value>Status</option>
-                                        <option value="1">Aktif</option>
-                                        <option value="0">Tidak Aktif</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
+                            </div>
 
-                                <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
-                            </form>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Posisi Karyawan</label>
+                                <input type="posisi" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
+                            </div>
+
+                            <!-- status -->
+                            <div class="form-group">
+                                <label>Status Karyawan</label>
+                                <select class="form-control select2bs4" style="width: 100%;" id="status" name="status">
+                                    <option selected disabled value>Status</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
+                            <!-- </form> -->
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -325,7 +328,7 @@
 
     <script>
         $(function() {
-            $("#list_client").DataTable({
+            $("#list_karyawan").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false
@@ -340,14 +343,51 @@
                 });
             }
 
-            const gagal = $('.gagal').data('flashdata');
-            if (gagal) {
-                Swal.fire({
-                    title: 'Gagal',
-                    text: gagal,
-                    icon: 'error'
+            $('#tombolSimpan').on('click', function() {
+                var id_perusahaan = $('#id_perusahaan').val();
+                var nama = $('#nama_karyawan').val();
+                var alamat = $('#alamat_karyawan').val();
+                var email = $('#email_karyawan').val();
+                var password = $('#password').val();
+                var posisi = $('#posisi_karyawan').val();
+                var status = $('#status').val();
+
+                $.ajax({
+                    url: "<?php echo base_url('Dashboard_Perusahaan/proses_tambah_karyawan') ?>",
+                    type: "POST",
+                    data: {
+                        id_perusahaan: id_perusahaan,
+                        nama_karyawan: nama,
+                        alamat_karyawan: alamat,
+                        email_karyawan: email,
+                        password: password,
+                        posisi_karyawan: posisi,
+                        status: status
+                    },
+                    success: function(hasil) {
+                        var $obj = $.parseJSON(hasil);
+                        if ($obj.sukses == false) {
+                            $('.error_nama').show();
+                            $('.error_alamat').show();
+                            $('.error_email').show();
+                            $('.error_nama').html($obj.error_nama);
+                            $('.error_alamat').html($obj.error_alamat);
+                            $('.error_email').html($obj.error_email);
+                        } else {
+                            $('.error_nama').hide();
+                            $('.error_alamat').hide();
+                            $('.error_email').hide();
+                            Swal.fire({
+                                title: 'Sukses',
+                                text: $obj.sukses,
+                                icon: 'success',
+                                confirmButtonText: '<a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan; ?>">Ok</a>'
+                            });
+                        }
+                    }
                 });
-            }
+
+            });
         });
     </script>
 

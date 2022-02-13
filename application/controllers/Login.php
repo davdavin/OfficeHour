@@ -44,6 +44,7 @@ class Login extends CI_Controller
                 //cek password
                 if (password_verify($password, $cek_login['password'])) {
                     $session = array(
+                        'id_perusahaan' => $cek_login['id_perusahaan'],
                         'username_perusahaan' => $cek_login['username'],
                         'status_login_perusahaan' => 'login',
                     );
