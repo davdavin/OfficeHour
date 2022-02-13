@@ -212,58 +212,62 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <!-- kalau ada error -->
-                            <div class="alert alert-danger error_nama" style="display: none">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
-                            </div>
-
-                            <div class="alert alert-danger error_alamat" style="display: none">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
-                            </div>
-
-                            <div class="alert alert-danger error_email" style="display: none">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-ban"></i>Alert!</h5>
-                            </div>
 
                             <!--     <form action="<?php //echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' 
                                                     ?>" method="post"> -->
+
                             <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_nama" role="alert" style="display: none">
                             </div>
 
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
                             </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_alamat" role="alert" style="display: none">
+                            </div>
 
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_email" role="alert" style="display: none">
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_password" role="alert" style="display: none">
+                            </div>
 
                             <div class="form-group">
                                 <label>Posisi Karyawan</label>
                                 <input type="posisi" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
                             </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_posisi" role="alert" style="display: none">
+                            </div>
 
                             <!-- status -->
                             <div class="form-group">
                                 <label>Status Karyawan</label>
-                                <select class="form-control select2bs4" style="width: 100%;" id="status" name="status">
+                                <select class="form-control select2bs4" style="width: 100%;" id="status">
                                     <option selected disabled value>Status</option>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="alert alert-danger error_status" role="alert" style="display: none">
                             </div>
 
                             <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
@@ -367,21 +371,37 @@
                     success: function(hasil) {
                         var $obj = $.parseJSON(hasil);
                         if ($obj.sukses == false) {
-                            $('.error_nama').show();
-                            $('.error_alamat').show();
-                            $('.error_email').show();
-                            $('.error_nama').html($obj.error_nama);
-                            $('.error_alamat').html($obj.error_alamat);
-                            $('.error_email').html($obj.error_email);
+                            if ($obj.error_nama) {
+                                $('.error_nama').show();
+                                $('.error_nama').html($obj.error_nama);
+                            }
+                            if ($obj.error_nama) {
+                                $('.error_alamat').show();
+                                $('.error_alamat').html($obj.error_alamat);
+                            }
+                            if ($Obj.error_email) {
+                                $('.error_email').show();
+                                $('.error_email').html($obj.error_email);
+                            }
+                            if ($obj.error_password) {
+                                $('.error_password').show();
+                                $('.error_password').html($obj.error_password);
+                            }
+                            if ($obj.error_posisi) {
+                                $('.error_posisi').show();
+                                $('.error_posisi').html($obj.error_posisi);
+                            }
+                            if ($obj.error_status) {
+                                $('.error_status').show();
+                                $('.error_status').html($obj.error_status);
+                            }
                         } else {
-                            $('.error_nama').hide();
-                            $('.error_alamat').hide();
-                            $('.error_email').hide();
                             Swal.fire({
                                 title: 'Sukses',
                                 text: $obj.sukses,
                                 icon: 'success',
-                                confirmButtonText: '<a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan; ?>">Ok</a>'
+                            }).then((confirmed) => {
+                                window.location.reload();
                             });
                         }
                     }
