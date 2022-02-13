@@ -160,18 +160,22 @@
                             </div>
                         </div>
                         <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3>53</h3>
-                                    <p>Karyawan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-friends"></i>
+
+                        <?php foreach ($total_karyawan as $total) { ?>
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-white">
+                                    <div class="inner">
+                                        <h3><?php echo $total->total_karyawan; ?> </h3>
+                                        <p>Karyawan</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-user-friends"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        <?php } ?>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
@@ -181,7 +185,7 @@
                                     <p>Klien</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="fas fa-user-friends"></i>
                                 </div>
                             </div>
                         </div>
