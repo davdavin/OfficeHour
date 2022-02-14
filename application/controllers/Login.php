@@ -78,6 +78,7 @@ class Login extends CI_Controller
                     $session = array(
                         'id_karyawan' => $cek_login_karyawan['id_karyawan'],
                         'nama_karyawan' => $cek_login_karyawan['nama_karyawan'],
+                        'posisi_karyawan' => $cek_login_karyawan['posisi_karyawan'],
                         'status_login_karyawan' => 'login'
                     );
 
