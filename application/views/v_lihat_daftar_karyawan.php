@@ -81,6 +81,7 @@
                 <?php foreach ($info_perusahaan as $detail_perusahaan) {
                     $id_perusahaan = $detail_perusahaan->id_perusahaan;
                     $nama_paket = $detail_perusahaan->nama_paket;
+                    $maks_orang = $detail_perusahaan->maks_orang;
                 } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -105,7 +106,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_klien/' . $id_perusahaan ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Klien </p>
                             </a>
@@ -132,7 +133,7 @@
                         <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Karyawan</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -150,9 +151,20 @@
                         </div>
 
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
-                                <i class="fas fa-plus"></i> Tambah karyawan
-                            </button><br><br>
+                            <?php foreach ($total_karyawan as $total) {
+                                $totalKaryawan = $total->total_karyawan;
+                            }
+                            ?>
+                            <?php if ($totalKaryawan < $maks_orang) { ?>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                    <i class="fas fa-plus"></i> Tambah karyawan
+                                </button><br><br>
+                            <?php } else { ?>
+                                <button class="btn btn-primary" disabled>
+                                    <i class="fas fa-plus"></i> Tambah karyawan
+                                </button><br><br>
+                                <p class="text-red">Anda tidak bisa menambah karyawan lagi karena paket yang dipilih maksimal <?php echo $maks_orang; ?> orang</p>
+                            <?php } ?>
 
                             <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
@@ -162,7 +174,6 @@
                                         <th>Alamat</th>
                                         <th>Email</th>
                                         <th>Posisi</th>
-                                        <th>Foto</th>
                                         <th>Status Karyawan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -175,7 +186,6 @@
                                             <td><?php echo $list_karyawan->alamat_karyawan ?></td>
                                             <td><?php echo $list_karyawan->email_karyawan ?></td>
                                             <td><?php echo $list_karyawan->posisi_karyawan ?></td>
-                                            <td><?php echo $list_karyawan->foto_karyawan ?></td>
                                             <td>
                                                 <?php if ($list_karyawan->status_karyawan == 1) {
                                                     echo "Aktif";
@@ -185,10 +195,15 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info btn-sm">
+                                                <a class="btn btn-sm bg-info" data-toggle="modal" data-target="#modalEdit<?php echo $list_karyawan->id_karyawan ?>">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
                                                     Edit
+                                                </a>
+                                                <a href="<?php echo base_url() . 'Dashboard_Perusahaan/hapus_karyawan/' . $list_karyawan->id_karyawan; ?>" class="btn btn-sm bg-danger tombol-hapus">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Hapus
                                                 </a>
                                             </td>
                                         </tr>
@@ -251,7 +266,7 @@
 
                             <div class="form-group">
                                 <label>Posisi Karyawan</label>
-                                <input type="posisi" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
+                                <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
                             </div>
                             <!-- INFO ERROR -->
                             <div class="is-invalid error_posisi" style="display: none">
@@ -278,6 +293,51 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
+
+            <?php $no = 0;
+            foreach ($karyawan as $list_karyawan) {
+                $no++; ?>
+                <div class="modal fade" id="modalEdit<?php echo $list_karyawan->id_karyawan; ?>">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit Posisi & Status Karyawan</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_karyawan' ?>" method="post">
+                                    <div class="form-group">
+                                        <label>Posisi Karyawan</label>
+                                        <input type="text" class="form-control" name="posisi_karyawan" value="<?= $list_karyawan->posisi_karyawan; ?>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status Karyawan</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" name="status_karyawan" required>
+                                            <option selected disabled value>Status</option>
+                                            <?php if ($list_karyawan->status_karyawan == 1) { ?>
+                                                <option value="<?php echo $list_karyawan->status_karyawan; ?>" <?php echo "selected" ?>>Aktif</option>
+                                                <option value="0">Tidak Aktif</option>
+                                            <?php } ?>
+                                            <?php if ($list_karyawan->status_karyawan == 0) { ?>
+                                                <option value="1">Aktif</option>
+                                                <option value="<?php echo $list_karyawan->status_karyawan; ?>" <?php echo "selected" ?>>Tidak Aktif</option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            <?php } ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -347,7 +407,27 @@
                 });
             }
 
-            $('#tombolSimpan').on('click', function() {
+            $('.tombol-hapus').click(function(e) {
+                e.preventDefault();
+                const href = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Data karyawan akan dihapus',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Hapus'
+                }).then((result) => {
+                    if (result.value) {
+                        document.location.href = href;
+                    }
+                });
+            });
+
+            $('#tombolSimpan').click(function() {
                 var id_perusahaan = $('#id_perusahaan').val();
                 var nama = $('#nama_karyawan').val();
                 var alamat = $('#alamat_karyawan').val();
@@ -374,26 +454,44 @@
                             if ($obj.error_nama) {
                                 $('.error_nama').show();
                                 $('.error_nama').html($obj.error_nama);
+                                $('.error_nama').css("color", "red");
+                            } else {
+                                $('.error_nama').hide();
                             }
-                            if ($obj.error_nama) {
+                            if ($obj.error_alamat) {
                                 $('.error_alamat').show();
                                 $('.error_alamat').html($obj.error_alamat);
+                                $('.error_alamat').css("color", "red");
+                            } else {
+                                $('.error_alamat').hide();
                             }
                             if ($obj.error_email) {
                                 $('.error_email').show();
                                 $('.error_email').html($obj.error_email);
+                                $('.error_email').css("color", "red");
+                            } else {
+                                $('.error_email').hide();
                             }
                             if ($obj.error_password) {
                                 $('.error_password').show();
                                 $('.error_password').html($obj.error_password);
+                                $('.error_password').css("color", "red");
+                            } else {
+                                $('.error_password').hide();
                             }
                             if ($obj.error_posisi) {
                                 $('.error_posisi').show();
                                 $('.error_posisi').html($obj.error_posisi);
+                                $('.error_posisi').css("color", "red");
+                            } else {
+                                $('.error_posisi').hide();
                             }
                             if ($obj.error_status) {
                                 $('.error_status').show();
                                 $('.error_status').html($obj.error_status);
+                                $('.error_status').css("color", "red");
+                            } else {
+                                $('.error_status').hide();
                             }
                         } else {
                             Swal.fire({
