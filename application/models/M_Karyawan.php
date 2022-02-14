@@ -15,4 +15,10 @@ class M_Karyawan extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+
+    function delete_record($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 }
