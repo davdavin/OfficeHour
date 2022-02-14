@@ -92,7 +92,7 @@ class Login extends CI_Controller
                 redirect('Login/login_karyawan');
             }
         } else {
-            $this->session->set_flashdata('gagal', 'Username salah');
+            $this->session->set_flashdata('gagal', 'Email salah');
             redirect('Login/login_karyawan');
         }
     }
