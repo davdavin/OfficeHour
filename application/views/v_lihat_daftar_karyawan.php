@@ -309,6 +309,7 @@
                             <div class="modal-body">
 
                                 <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_karyawan' ?>" method="post">
+                                    <input type="hidden" name="id_karyawan" value="<?= $list_karyawan->id_karyawan ?>">
                                     <div class="form-group">
                                         <label>Posisi Karyawan</label>
                                         <input type="text" class="form-control" name="posisi_karyawan" value="<?= $list_karyawan->posisi_karyawan; ?>" required>
