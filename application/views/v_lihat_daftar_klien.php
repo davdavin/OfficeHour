@@ -161,7 +161,6 @@
                                         <th>ID Klien</th>
                                         <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -170,13 +169,6 @@
                                             <td><?php echo $list_klien->id_client ?></td>
                                             <td><?php echo $list_klien->nama_client ?></td>
                                             <td><?php echo $list_klien->email_client ?></td>
-                                            <td>
-                                                <a href="" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                            </td>
                                         </tr>
                                     <?php } ?>
 
@@ -198,25 +190,32 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_klien' ?>" method="post">
-                                <input type="hidden" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
-                                <div class="form-group">
-                                    <label>Nama Klien</label>
-                                    <input type="text" class="form-control" name="nama_klien" placeholder="Nama klien" required>
-                                </div>
+                            <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
+                            <div class="form-group">
+                                <label>Nama Klien</label>
+                                <input type="text" class="form-control" id="nama_klien" name="nama_klien" placeholder="Nama klien" required>
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="is-invalid error_nama" style="display: none">
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" name="email_klien" placeholder="Email klien" required>
-                                </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" id="email_klien" name="email_klien" placeholder="Email klien" required>
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="is-invalid error_email" style="display: none">
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            </div>
+                            <!-- INFO ERROR -->
+                            <div class="is-invalid error_password" style="display: none">
+                            </div>
 
-                                <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
-                            </form>
+                            <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -300,6 +299,63 @@
                     icon: 'error'
                 });
             }
+
+            $('#tombolSimpan').on('click', function() {
+                var id_perusahaan = $('#id_perusahaan').val();
+                var nama = $('#nama_klien').val();
+                var email = $('#email_klien').val();
+                var password = $('#password').val();
+
+                $.ajax({
+                    url: "<?php echo base_url('Dashboard_Perusahaan/proses_tambah_klien') ?>",
+                    type: "POST",
+                    data: {
+                        id_perusahaan: id_perusahaan,
+                        nama_klien: nama,
+                        email_klien: email,
+                        password: password
+                    },
+                    success: function(respon) {
+                        var obj = $.parseJSON(respon);
+                        if (obj.sukses == false) {
+                            if (obj.error_nama) {
+                                $('.error_nama').show();
+                                $('.error_nama').html(obj.error_nama);
+                                $('.error_nama').css("color", "red");
+                            } else {
+                                $('.error_nama').hide();
+                            }
+
+                            if (obj.error_email) {
+                                $('.error_email').show();
+                                $('.error_email').html(obj.error_email);
+                                $('.error_email').css("color", "red");
+                            } else {
+                                $('.error_email').hide();
+                            }
+                            if (obj.error_password) {
+                                $('.error_password').show();
+                                $('.error_password').html(obj.error_password);
+                                $('.error_password').css("color", "red");
+                            } else {
+                                $('.error_password').hide();
+                            }
+                        } else {
+                            Swal.fire({
+                                title: 'Sukses',
+                                text: obj.sukses,
+                                icon: 'success',
+                            }).then((confirmed) => {
+                                window.location.reload();
+                            });
+                        }
+
+                    }
+
+                });
+
+            });
+
         });
     </script>
 
