@@ -182,7 +182,7 @@
 
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Update</button><br><br>
+                                        <button type="submit" id="tombolUpdate" class="btn btn-primary">Update</button><br><br>
                                     </div>
 
                                 </form>
@@ -292,6 +292,26 @@
                     icon: 'success'
                 });
             }
+
+            $('#tombolUpdate').click(function(e) {
+                e.preventDefault();
+                const form = $(this).parents('form');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Update Data',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'cancel',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Update'
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+                    }
+                });
+            });
 
             $('.form-submit').submit(function(e) {
                 e.preventDefault();
