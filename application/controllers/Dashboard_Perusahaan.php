@@ -129,7 +129,6 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->form_validation->set_message('valid_email', '{field} wajib diisi email');
         $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
         $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
-        $this->form_validation->set_message('max_length', '{field} maksimal {param} karakter');
 
         if ($this->form_validation->run() == FALSE) {
             $respon = array(
