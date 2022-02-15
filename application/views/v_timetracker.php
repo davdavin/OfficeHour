@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OfficeHour - Pegawai</title>
+  <title>OfficeHour - Karyawan</title>
 
   <!-- Favicons -->
   <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -90,7 +90,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . 'Account' ?>" class="nav-link">
+              <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p> Account </p>
               </a>
@@ -123,16 +123,16 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h3><?php echo 'ID anda: ' . $this->session->userdata('id_karyawan'); ?></h3>
+              <h3><?php echo 'Anda sebagai ' . $this->session->userdata('posisi_karyawan'); ?></h3>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Time Tracker</li>
               </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.content-header -->
 
@@ -141,7 +141,7 @@
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-5 col-5">
               <!-- small box -->
               <div class="small-box bg-white">
                 <div class="inner">
@@ -154,35 +154,7 @@
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-6">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>53</h3>
-
-                  <p>Test</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-friends"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-2 col-6">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-5 col-5">
               <!-- small box -->
               <div class="small-box bg-white">
                 <div class="inner">
@@ -195,21 +167,6 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2 col-6">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-              </div>
-            </div>
-
-
             <!-- ./col -->
           </div>
           <!-- /.row -->
