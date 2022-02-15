@@ -228,65 +228,63 @@
                         </div>
                         <div class="modal-body">
 
-                            <!--     <form action="<?php //echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' 
-                                                    ?>" method="post"> -->
+                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' ?>" class="form-submit" method="post">
+                                <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
+                                <div class="form-group">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_nama" style="display: none">
+                                    </div>
+                                </div>
 
-                            <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
-                            <div class="form-group">
-                                <label>Nama Lengkap</label>
-                                <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_nama" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_alamat" style="display: none">
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Alamat</label>
-                                <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_alamat" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_email" style="display: none">
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_email" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_password" style="display: none">
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_password" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Posisi Karyawan</label>
+                                    <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_posisi" style="display: none">
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Posisi Karyawan</label>
-                                <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_posisi" style="display: none">
-                            </div>
+                                <!-- status -->
+                                <div class="form-group">
+                                    <label>Status Karyawan</label>
+                                    <select class="form-control select2bs4" style="width: 100%;" id="status" name="status">
+                                        <option selected disabled value>Status</option>
+                                        <option value="1">Aktif</option>
+                                        <option value="0">Tidak Aktif</option>
+                                    </select>
+                                    <!-- INFO ERROR -->
+                                    <div class="p-2 is-invalid error_status" style="display: none">
+                                    </div>
+                                </div>
 
-                            <!-- status -->
-                            <div class="form-group">
-                                <label>Status Karyawan</label>
-                                <select class="form-control select2bs4" style="width: 100%;" id="status">
-                                    <option selected disabled value>Status</option>
-                                    <option value="1">Aktif</option>
-                                    <option value="0">Tidak Aktif</option>
-                                </select>
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_status" style="display: none">
-                            </div>
-
-                            <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
-                            <!-- </form> -->
+                                <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
+                            </form>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -428,27 +426,12 @@
                 });
             });
 
-            $('#tombolSimpan').click(function() {
-                var id_perusahaan = $('#id_perusahaan').val();
-                var nama = $('#nama_karyawan').val();
-                var alamat = $('#alamat_karyawan').val();
-                var email = $('#email_karyawan').val();
-                var password = $('#password').val();
-                var posisi = $('#posisi_karyawan').val();
-                var status = $('#status').val();
-
+            $('.form-submit').submit(function(e) {
+                e.preventDefault();
                 $.ajax({
-                    url: "<?php echo base_url('Dashboard_Perusahaan/proses_tambah_karyawan') ?>",
+                    url: $(this).attr('action'),
                     type: "POST",
-                    data: {
-                        id_perusahaan: id_perusahaan,
-                        nama_karyawan: nama,
-                        alamat_karyawan: alamat,
-                        email_karyawan: email,
-                        password: password,
-                        posisi_karyawan: posisi,
-                        status: status
-                    },
+                    data: $(this).serialize(),
                     success: function(hasil) {
                         var $obj = $.parseJSON(hasil);
                         if ($obj.sukses == false) {
