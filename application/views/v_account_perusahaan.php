@@ -146,36 +146,48 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <?php $this->load->view('message.php'); ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="card-body box-profile">
 
                                 <h1 class="profile-username text-center">Profile</h1><br><br>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>ID</label>
-                                            <input type="text" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan ?>" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nama Perusahaan</label>
-                                            <input type="text" class="form-control" name="nama_perusahaan" value="<?= $nama_perusahaan ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Username</label>
-                                            <input type="text" class="form-control" name="username" value="<?= $username ?>" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="text" class="form-control" name="email_perusahaan" value="<?= $email_perusahaan ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
 
+                                <form action="<?php echo base_url() . 'Account_Perusahaan/update_profile' ?>" method="POST">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>ID</label>
+                                                <input type="text" class="form-control" name="id_perusahaan" value="<?= $id_perusahaan ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nama Perusahaan</label>
+                                                <input type="text" class="form-control" name="nama_perusahaan" value="<?= $nama_perusahaan ?>">
+                                                <?php echo form_error('nama_perusahaan'); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input type="text" class="form-control" name="username" value="<?= $username ?>">
+                                                <?php echo form_error('username'); ?>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" name="email_perusahaan" value="<?= $email_perusahaan ?>">
+                                                <?php echo form_error('email_perusahaan'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Update</button><br><br>
+                                    </div>
+
+                                </form>
                                 <div class="text-center">
-                                    <a href="#" class="btn btn-primary">Update</a>
+                                    <button data-toggle="modal" data-target="#modal-lg" class="btn btn-primary">Change Password</button>
                                 </div>
                             </div>
                         </div>
@@ -185,12 +197,48 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Password</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+                        <form action="<?php echo base_url() . 'Account_Perusahaan/update_password' ?>" method="post" class="form-submit">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" class="form-control" name="currentpass">
+                                <!-- INFO ERROR -->
+                                <div class="p-2 is-invalid error_currentpass" style="display: none">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" name="newpass">
+                                <!-- INFO ERROR -->
+                                <div class="p-2 is-invalid error_newpass" style="display: none">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Re-type new Password</label>
+                                <input type="password" class="form-control" name="confirmpass">
+                                <!-- INFO ERROR -->
+                                <div class="p-2 is-invalid error_retype" style="display: none">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
     <!-- ./wrapper -->
 
@@ -208,18 +256,8 @@
     <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -228,6 +266,8 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -241,6 +281,64 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(function() {
+            const sukses = $('.sukses').data('flashdata');
+            if (sukses) {
+                Swal.fire({
+                    title: 'Sukses',
+                    text: sukses,
+                    icon: 'success'
+                });
+            }
+
+            $('.form-submit').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    dataType: "JSON",
+                    data: $(this).serialize(),
+                    success: function(respon) {
+                        //var obj = $.parseJSON(respon);
+                        if (respon.sukses == false) {
+                            if (respon.error_currentpass) {
+                                $('.error_currentpass').show();
+                                $('.error_currentpass').html(respon.error_currentpass);
+                                $('.error_currentpass').css("color", "red");
+                            } else {
+                                $('.error_currentpass').hide();
+                            }
+                            if (respon.error_newpass) {
+                                $('.error_newpass').show();
+                                $('.error_newpass').html(respon.error_newpass);
+                                $('.error_newpass').css("color", "red");
+                            } else {
+                                $('.error_newpass').hide();
+                            }
+                            if (respon.error_retype) {
+                                $('.error_retype').show();
+                                $('.error_retype').html(respon.error_retype);
+                                $('.error_retype').css("color", "red");
+                            } else {
+                                $('.error_retype').hide();
+                            }
+
+                        } else {
+                            Swal.fire({
+                                title: 'Sukses',
+                                text: respon.sukses,
+                                icon: 'success',
+                            }).then((confirmed) => {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

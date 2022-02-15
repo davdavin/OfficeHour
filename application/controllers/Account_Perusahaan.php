@@ -71,16 +71,30 @@ class Account_Perusahaan extends CI_Controller
         $this->form_validation->set_message('max_length', '{field} maksimal {param} karakter');
 
         if ($this->form_validation->run() == FALSE) {
-            $respon = array();
+            $respon = array(
+                'sukses' => false,
+                'error_currentpass' => form_error('currentpass'),
+                'error_newpass' => form_error('newpass'),
+                'error_retype' => form_error('confirmpass')
+            );
             echo json_encode($respon);
         } else {
-            $where = array('id_perusahaan' => $id_perusahaan);
-            $data = array(
-                'password' => $pass_baru,
-            );
-            $this->M_Perusahaan->update_record($where, $data, 'perusahaan');
-            $respon['sukses'] = 'Berhasil ganti password';
-            echo json_encode($respon);
+            $cek_pass = $this->M_Perusahaan->cek_login('perusahaan', ['id_perusahaan' => $id_perusahaan])->row_array();
+            if (password_verify($pass_lama, $cek_pass['password'])) {
+                $where = array('id_perusahaan' => $id_perusahaan);
+                $data = array(
+                    'password' => password_hash($pass_baru, PASSWORD_DEFAULT),
+                );
+                $this->M_Perusahaan->update_record($where, $data, 'perusahaan');
+                $respon['sukses'] = 'Berhasil ganti password';
+                echo json_encode($respon);
+            } else {
+                $respon = array(
+                    'sukses' => false,
+                    'error_currentpass' => 'Password anda salah'
+                );
+                echo json_encode($respon);
+            }
         }
     }
 }
