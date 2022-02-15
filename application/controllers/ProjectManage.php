@@ -6,10 +6,11 @@ class ProjectManage extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if ($this->session->userdata('status_login_karyawan') != "login") {
+            redirect('Login/login_karyawan');
+        }
 
-        /*    if($this->session->userdata('status') != "login") {
-            redirect('Login_Admin');
-        } */
+        $this->load->model(array('M_Karyawan'));
     }
 
     function index()
