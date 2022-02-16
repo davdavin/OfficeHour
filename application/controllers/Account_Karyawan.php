@@ -55,6 +55,10 @@ class Account_Karyawan extends CI_Controller
                 'alamat_karyawan' => $this->input->post('alamat_karyawan'),
                 'email_karyawan' => $this->input->post('email_karyawan')
             );
+            $session = array(
+                'nama_karyawan' => $this->input->post('nama_karyawan')
+            );
+            $this->session->set_userdata($session);
             $this->M_Karyawan->update_record($where, $data, 'karyawan');
             $respon['sukses'] = "Berhasil update";
             echo json_encode($respon);
