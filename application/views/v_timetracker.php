@@ -181,29 +181,30 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Today</h3>
+              <h3 class="card-title">Aktivitas</h3>
             </div>
 
             <div class="card-body">
-
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th>Nama Project</th>
+                    <th>Nama Tugas</th>
+                    <th>Waktu</th>
+                    <th>Status Tugas</th>
+                    <th>Detail Aktivitas</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td>
-                      <a class="btn btn-primary btn-sm tombol-detail" href="#">
-                        <i class="fas fa-eye"></i> Detail
-                      </a>
-                      <a class="btn btn-danger btn-sm tombol-hapus" href="<?php ?>>">
-                        <i class="fas fa-trash"></i> Hapus
-                      </a>
-                    </td>
-                  </tr>
-
+                  <?php foreach ($aktivitas as $list_aktivitas) { ?>
+                    <tr>
+                      <td><?php echo $list_aktivitas->nama_project ?></td>
+                      <td><?php echo $list_aktivitas->nama_tugas ?> </td>
+                      <td><?php echo $list_aktivitas->waktu_mulai . ' - ' . $list_aktivitas->waktu_selesai ?></td>
+                      <td><?php echo $list_aktivitas->status_tugas ?></td>
+                      <td><?php echo $list_aktivitas->bukti ?></td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -214,12 +215,6 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 
@@ -227,21 +222,8 @@
   <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
   <!-- Bootstrap 4 -->
   <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
   <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
@@ -270,6 +252,16 @@
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <script>
+    $(function() {
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidht": false
+      });
+    });
+  </script>
 
 </body>
 

@@ -11,7 +11,7 @@ class TimeTracker extends CI_Controller
             redirect('Login/login_karyawan');
         }
 
-        $this->load->model(array('M_Karyawan'));
+        $this->load->model(array('M_Karyawan', 'M_TimeTracker'));
     }
 
     function index()
