@@ -71,10 +71,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Test</a>
+            <a href="#" class="d-block"><?php echo $this->session->userdata('nama_karyawan') ?></a>
           </div>
         </div>
 
@@ -102,7 +102,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . 'Login_Akun/logout' ?>" class="nav-link">
+              <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-power-off"></i>
                 <p> Logout </p>
               </a>
@@ -122,10 +122,13 @@
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
+              <h1>Project Manage</h1>
+            </div>
+            <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Time Tracker</li>
+                <li class="breadcrumb-item active">Project Manage</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -182,28 +185,22 @@
             <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3>65</h3>
-                  <h4>Done</h4>
+                  <h4><strong> Project</strong></h4>
+                  <h5>Done</h5>
+                  <button class="btn btn-primary">More</button>
                 </div>
               </div>
             </div>
             <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3>65</h3>
-                  <h4>Done</h4>
+                  <h4><strong> Project</strong></h4>
+                  <h5>On Progress</h5>
+                  <button class="btn btn-primary">More</button>
                 </div>
               </div>
             </div>
 
-            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
-              <div class="small-box bg-white" style="border-radius: 15px;">
-                <div class="inner text-center">
-                  <h3>65</h3>
-                  <h4>Done</h4>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
     </div>
