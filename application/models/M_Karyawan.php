@@ -8,7 +8,7 @@ class M_Karyawan extends CI_Model
 
     function profil_karyawan($id_karyawan)
     {
-        return $this->db->query("SELECT id_karyawan, nama_karyawan, alamat_karyawan, email_karyawan, posisi_karyawan FROM karyawan WHERE id_karyawan = '$id_karyawan'");
+        return $this->db->query("SELECT * FROM karyawan WHERE id_karyawan = '$id_karyawan'");
     }
 
     function insert_record($data, $table)
