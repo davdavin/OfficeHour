@@ -176,32 +176,26 @@
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
-          <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+          <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+          ?>
             <a href="" type="button" class="btn bg-green" style="border-radius: 25px;">
               <i class="fas fa-plus"></i> Project Baru
             </a><br><br>
           <?php } ?>
-          <div class="row">
-            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
-              <div class="small-box bg-white" style="border-radius: 15px;">
-                <div class="inner text-center">
-                  <h4><strong> Project</strong></h4>
-                  <h5>Done</h5>
-                  <button class="btn btn-primary">More</button>
-                </div>
-              </div>
-            </div>
-            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
-              <div class="small-box bg-white" style="border-radius: 15px;">
-                <div class="inner text-center">
-                  <h4><strong> Project</strong></h4>
-                  <h5>On Progress</h5>
-                  <button class="btn btn-primary">More</button>
-                </div>
-              </div>
-            </div>
 
-          </div>
+          <?php foreach ($projectKaryawan as $list_project) { ?>
+            <div class="row">
+              <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
+                <div class="small-box bg-white" style="border-radius: 15px;">
+                  <div class="inner text-center">
+                    <h4><strong> <?php echo $list_project->nama_project ?></strong></h4>
+                    <h5>Done</h5>
+                    <button class="btn btn-primary">More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php } ?>
         </div>
     </div>
     </section>
