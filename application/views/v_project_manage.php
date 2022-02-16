@@ -90,12 +90,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . 'Calendar' ?>" class="nav-link">
-                <i class="nav-icon fas fa-calendar"></i>
-                <p> Calendar </p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="<?php echo base_url() . 'Account' ?>" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p> Account </p>
@@ -144,129 +138,85 @@
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
                   <h3>150</h3>
-
-                  <p>Pendeta</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <h4>Project</h4>
                 </div>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
                   <h3>53</h3>
-
-                  <p>Anggota Jemaat</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-user-friends"></i>
+                  <h4>On Progress</h4>
                 </div>
               </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-2 col-6">
+            <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
                   <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <h4>Done</h4>
                 </div>
               </div>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-2 col-6">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-6">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-              </div>
-            </div>
-
-
             <!-- ./col -->
           </div>
           <!-- /.row -->
-          <!-- Main row -->
-          <div class="row">
-            <!-- Left col -->
-            <!-- right col -->
-          </div>
-          <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Today</h3>
+          <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+            <a href="" type="button" class="btn bg-green" style="border-radius: 25px;">
+              <i class="fas fa-plus"></i> Project Baru
+            </a><br><br>
+          <?php } ?>
+          <div class="row">
+            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
+                  <h3>65</h3>
+                  <h4>Done</h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
+                  <h3>65</h3>
+                  <h4>Done</h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
+                  <h3>65</h3>
+                  <h4>Done</h4>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="card-body">
-
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td></td>
-                  <td>
-                    <a class="btn btn-primary btn-sm tombol-detail" href="#">
-                      <i class="fas fa-eye"></i> Detail
-                    </a>
-                    <a class="btn btn-danger btn-sm tombol-hapus" href="<?php ?>>">
-                      <i class="fas fa-trash"></i> Hapus
-                    </a>
-                  </td>
-                </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-      </div>
     </div>
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 
@@ -304,19 +254,19 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 </body>
 
