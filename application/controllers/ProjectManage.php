@@ -15,6 +15,8 @@ class ProjectManage extends CI_Controller
 
     function index()
     {
-        $this->load->view('v_project_manage.php');
+        $id_karyawan = $this->session->userdata('id_karyawan');
+        $data['projectKaryawan'] = $this->M_Karyawan->project_karyawan($id_karyawan)->result();
+        $this->load->view('v_project_manage.php', $data);
     }
 }
