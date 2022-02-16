@@ -169,13 +169,6 @@
             </div>
             <!-- ./col -->
           </div>
-          <!-- /.row -->
-          <!-- Main row -->
-          <div class="row">
-            <!-- Left col -->
-            <!-- right col -->
-          </div>
-          <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
