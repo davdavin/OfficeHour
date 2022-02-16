@@ -11,6 +11,12 @@ class M_Karyawan extends CI_Model
         return $this->db->query("SELECT * FROM karyawan WHERE id_karyawan = '$id_karyawan'");
     }
 
+    function project_karyawan($id_karyawan)
+    {
+        return $this->db->query("SELECT * FROM project JOIN anggota_project ON anggota_project.id_project = project.id_project 
+                                WHERE id_karyawan = '$id_karyawan'");
+    }
+
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
