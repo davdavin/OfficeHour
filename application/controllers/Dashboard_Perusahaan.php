@@ -114,7 +114,7 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->load->view('v_lihat_daftar_klien.php', $data);
     }
 
-    public function proses_tambah_klien()
+    public function tambah_klien()
     {
         $id_perusahaan = $this->input->post('id_perusahaan');
         $nama_klien = $this->input->post('nama_klien');
@@ -122,7 +122,7 @@ class Dashboard_Perusahaan extends CI_Controller
         $password = $this->input->post('password');
 
         $this->form_validation->set_rules('nama_klien', 'Nama', 'required');
-        $this->form_validation->set_rules('email_klien', 'Email', 'required|valid_email|is_unique[klien.email_client]');
+        $this->form_validation->set_rules('email_klien', 'Email', 'required|valid_email|is_unique[client.email_client]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[20]');
 
         $this->form_validation->set_message('required', '{field} wajib diisi');

@@ -135,9 +135,9 @@
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Klien</li>
                             </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.content-header -->
 
@@ -190,32 +190,34 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
-                            <div class="form-group">
-                                <label>Nama Klien</label>
-                                <input type="text" class="form-control" id="nama_klien" name="nama_klien" placeholder="Nama klien" required>
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_nama" style="display: none">
-                            </div>
+                            <form class="form-submit" action="<?php echo base_url() . 'Dashboard_Perusahaan/tambah_klien' ?>" method="post">
+                                <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
+                                <div class="form-group">
+                                    <label>Nama Klien</label>
+                                    <input type="text" class="form-control" id="nama_klien" name="nama_klien" placeholder="Nama klien">
+                                </div>
+                                <!-- INFO ERROR -->
+                                <div class="is-invalid error_nama" style="display: none">
+                                </div>
 
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" id="email_klien" name="email_klien" placeholder="Email klien" required>
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_email" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="email_klien" name="email_klien" placeholder="Email klien">
+                                </div>
+                                <!-- INFO ERROR -->
+                                <div class="is-invalid error_email" style="display: none">
+                                </div>
 
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                            </div>
-                            <!-- INFO ERROR -->
-                            <div class="is-invalid error_password" style="display: none">
-                            </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                </div>
+                                <!-- INFO ERROR -->
+                                <div class="is-invalid error_password" style="display: none">
+                                </div>
 
-                            <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
+                                <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                            </form>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -300,21 +302,12 @@
                 });
             }
 
-            $('#tombolSimpan').on('click', function() {
-                var id_perusahaan = $('#id_perusahaan').val();
-                var nama = $('#nama_klien').val();
-                var email = $('#email_klien').val();
-                var password = $('#password').val();
-
+            $('.form-submit').submit(function(e) {
+                e.preventDefault();
                 $.ajax({
-                    url: "<?php echo base_url('Dashboard_Perusahaan/proses_tambah_klien') ?>",
+                    url: $(this).attr('action'),
                     type: "POST",
-                    data: {
-                        id_perusahaan: id_perusahaan,
-                        nama_klien: nama,
-                        email_klien: email,
-                        password: password
-                    },
+                    data: $(this).serialize(),
                     success: function(respon) {
                         var obj = $.parseJSON(respon);
                         if (obj.sukses == false) {
@@ -353,7 +346,6 @@
                     }
 
                 });
-
             });
 
         });
