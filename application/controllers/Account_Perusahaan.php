@@ -49,6 +49,10 @@ class Account_Perusahaan extends CI_Controller
                 'username' => $this->input->post('username'),
                 'email_perusahaan' => $this->input->post('email_perusahaan')
             );
+            $session = array(
+                'username' => $this->input->post('username_perusahaan')
+            );
+            $this->session->set_userdata($session);
             $this->M_Perusahaan->update_record($where, $data, 'perusahaan');
             $this->session->set_flashdata('sukses', 'Update berhasil');
             redirect('Account_Perusahaan/profile/' . $id_perusahaan);
