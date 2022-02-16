@@ -16,8 +16,8 @@ class TimeTracker extends CI_Controller
 
     function index()
     {
-        $this->session->userdata('id_karyawan');
-        // $data['aktivitas']
-        $this->load->view('v_timetracker.php');
+        $id_karyawan = $this->session->userdata('id_karyawan');
+        $data['aktivitas'] = $this->M_TimeTracker->aktivitas_karyawan($id_karyawan)->result();
+        $this->load->view('v_timetracker.php', $data);
     }
 }
