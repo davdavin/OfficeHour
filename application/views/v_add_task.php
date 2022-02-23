@@ -91,13 +91,13 @@
                                 <p> Time Tracker </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Account </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p> Project Manage </p>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="col-md-12" style="margin: 10px;">
                             <div class="box box-solid">
-                                <form action="<?php echo base_url('FormLoop_AddTask/post') ?>" method="post" id="SimpanData">
+                                <form action="<?php echo base_url('ProjectManage/proses_tambah_task') ?>" method="post" id="SimpanData">
                                     <div class="box-body">
 
                                         <table class="table table-bordered" id="tableLoop">
@@ -264,8 +264,8 @@
             Baris += '<input type="text" name="first_name[]" class="form-control first_name" placeholder="Task Name...." required="">';
             Baris += '</td>';
             Baris += '<td>';
-            Baris += ' <select class="form-control select2" style="width: 100%;"> ' +
-                '<option selected disabled value>Assign to</option>' + '<option>Brian</option>' +
+            Baris += ' <select  class="select2" multiple="multiple" data-placeholder="Assign to"  style="width: 100%;"> ' +
+                '<option>Brian</option>' +
                 '<option>California</option>' +
                 '<option>Joseph</option>' +
                 '</select>';
