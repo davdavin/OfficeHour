@@ -72,15 +72,19 @@ class ProjectManage extends CI_Controller
     {
         $i = 0; // untuk loopingnya
         $a = $this->input->post('first_name');
-        $b = $this->input->post('last_name');
+        $b = $this->input->post('member');
+        $c = $this->input->post('date');
         if ($a[0] !== null) {
             foreach ($a as $row) {
-                $data = [
-                    'first_name' => $row,
-                    'last_name' => $b[$i],
-                ];
 
-                $insert = $this->db->insert('biodata', $data);
+                $data = array(
+
+                    'nama_tugas' => $row,
+                    'id_anggota_project' => $b[$i],
+                    'batas_waktu' => $c[$i],
+                );
+
+                $insert = $this->db->insert('tugas_project', $data);
                 if ($insert) {
                     $i++;
                 }
@@ -89,8 +93,8 @@ class ProjectManage extends CI_Controller
 
         $arr['success'] = true;
         $arr['notif']  = '<div class="alert alert-success">
-          <i class="fa fa-check"></i> Data Berhasil Disimpan
-        </div>';
+      <i class="fa fa-check"></i> Data Berhasil Disimpan
+    </div>';
         return $this->output->set_output(json_encode($arr));
     }
 }
