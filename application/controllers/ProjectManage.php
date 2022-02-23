@@ -19,4 +19,52 @@ class ProjectManage extends CI_Controller
         $data['projectKaryawan'] = $this->M_Karyawan->project_karyawan($id_karyawan)->result();
         $this->load->view('v_project_manage.php', $data);
     }
+
+    function tambah_project()
+    {
+        $this->load->view('v_tambah_project.php');
+    }
+
+    function proses_tambah_project()
+    {
+
+
+        redirect('ProjectManage/asign_anggota_project' . '');
+    }
+
+    function asign_anggota_project()
+    {
+        $this->load->view('v_add_member.php');
+    }
+
+    function proses_tambah_anggota()
+    {
+        $i = 0; // untuk loopingnya
+        $a = $this->input->post('first_name');
+        $b = $this->input->post('last_name');
+        if ($a[0] !== null) {
+            foreach ($a as $row) {
+                $data = [
+                    'first_name' => $row,
+                    'last_name' => $b[$i],
+                ];
+
+                $insert = $this->db->insert('biodata', $data);
+                if ($insert) {
+                    $i++;
+                }
+            }
+        }
+
+        $arr['success'] = true;
+        $arr['notif']  = '<div class="alert alert-success">
+          <i class="fa fa-check"></i> Data Berhasil Disimpan
+        </div>';
+        return $this->output->set_output(json_encode($arr));
+    }
+
+    function tambah_task()
+    {
+        $this->load->view('v_add_task.php');
+    }
 }

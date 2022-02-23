@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OfficeHour - Pegawai</title>
+  <title>OfficeHour - Karyawan</title>
 
   <!-- Favicons -->
   <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -90,7 +90,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() . 'Account' ?>" class="nav-link">
+              <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p> Account </p>
               </a>
@@ -178,7 +178,7 @@
         <div class="container-fluid">
           <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
           ?>
-            <a href="" type="button" class="btn bg-green" style="border-radius: 25px;">
+            <a href="<?php echo base_url() . 'ProjectManage/tambah_project' ?>" type="button" class="btn bg-green" style="border-radius: 25px;">
               <i class="fas fa-plus"></i> Project Baru
             </a><br><br>
           <?php } ?>

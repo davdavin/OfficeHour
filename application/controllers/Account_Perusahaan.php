@@ -50,7 +50,7 @@ class Account_Perusahaan extends CI_Controller
                 'email_perusahaan' => $this->input->post('email_perusahaan')
             );
             $session = array(
-                'username' => $this->input->post('username_perusahaan')
+                'username_perusahaan' => $this->input->post('username')
             );
             $this->session->set_userdata($session);
             $this->M_Perusahaan->update_record($where, $data, 'perusahaan');
