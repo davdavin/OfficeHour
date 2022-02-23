@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -156,8 +159,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
+                                                    <th>Nama Karyawan</th>
                                                     <th><button class="btn btn-success btn-block" id="BarisBaru"><i class="fa fa-plus"></i> Baris Baru</button></th>
                                                 </tr>
                                             </thead>
@@ -200,6 +202,8 @@
     <script src="<?php echo base_url() ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?php echo base_url() ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -221,8 +225,6 @@
     <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
     <script>
@@ -257,10 +259,11 @@
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
-            Baris += '<input type="text" name="first_name[]" class="form-control first_name" placeholder="Firs Name..." required="">';
-            Baris += '</td>';
-            Baris += '<td>';
-            Baris += '<input type="text" name="last_name[]" class="form-control last_name" placeholder="Last Name..." required="">';
+            Baris += ' <select  class="form-control select2"  style="width: 100%;" name="first_name[]"> ' +
+                '<option selected disabled>-- Pilih --</option>' +
+                '<option value="california">California</option>' +
+                '<option value="joseph">Joseph</option>' +
+                '</select>';
             Baris += '</td>';
             Baris += '<td class="text-center">';
             Baris += '<a class="btn btn-sm btn-danger" data-toggle="tooltip" title="Hapus Baris" id="HapusBaris"><i class="fa fa-times"></i></a>';
@@ -271,6 +274,8 @@
             $("#tableLoop tbody tr").each(function() {
                 $(this).find('td:nth-child(2) input').focus();
             });
+
+            $('.select2').select2();
 
         }
 
