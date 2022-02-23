@@ -123,10 +123,14 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h2><b>ADD & ASSIGN TASK PROJECT</b></h2>
+                        </div>
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Account</li>
+                                <li class="breadcrumb-item active">Project Manage</li>
+                                <li class="breadcrumb-item active">Tambah Tugas</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -138,7 +142,6 @@
             <section class="content">
                 <div class="container-fluid">
                     <?php $this->load->view('message.php'); ?>
-                    <h2><b>ADD & ASSIGN TASK PROJECT</b></h2>
                     <!-- loop -->
 
                     <div class="row">
@@ -264,10 +267,10 @@
             Baris += '<input type="text" name="first_name[]" class="form-control first_name" placeholder="Task Name...." required="">';
             Baris += '</td>';
             Baris += '<td>';
-            Baris += ' <select  class="select2" multiple="multiple" data-placeholder="Assign to"  style="width: 100%;"> ' +
-                '<option>Brian</option>' +
-                '<option>California</option>' +
-                '<option>Joseph</option>' +
+            Baris += ' <select  class="select2" multiple="multiple" data-placeholder="Assign to"  style="width: 100%;" name="member[]"> ' +
+                '<option value="brian">Brian</option>' +
+                '<option value="california">California</option>' +
+                '<option value="joseph">Joseph</option>' +
                 '</select>';
             Baris += '</td>';
             Baris += '<td>';
@@ -284,10 +287,6 @@
             });
             $('.select2').select2();
         }
-
-
-
-        $('.select2').select2();
 
         $(document).on('click', '#HapusBaris', function(e) {
             e.preventDefault();
