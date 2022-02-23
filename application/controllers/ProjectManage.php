@@ -41,12 +41,10 @@ class ProjectManage extends CI_Controller
     {
         $i = 0; // untuk loopingnya
         $a = $this->input->post('first_name');
-        $b = $this->input->post('last_name');
         if ($a[0] !== null) {
             foreach ($a as $row) {
                 $data = [
                     'first_name' => $row,
-                    'last_name' => $b[$i],
                 ];
 
                 $insert = $this->db->insert('biodata', $data);
