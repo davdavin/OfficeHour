@@ -139,36 +139,8 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-5 col-5">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Test</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-5 col-5">
-              <!-- small box -->
-              <div class="small-box bg-white">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Petugas</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-          </div>
+          <a type="button" class="btn bg-green" style="border-radius: 25px;">Start time </a>
+          <a type="button" class="btn bg-red" style="border-radius: 25px;"> End time </a><br><br>
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
