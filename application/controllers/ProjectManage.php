@@ -67,4 +67,30 @@ class ProjectManage extends CI_Controller
     {
         $this->load->view('v_add_task.php');
     }
+
+    function proses_tambah_task()
+    {
+        $i = 0; // untuk loopingnya
+        $a = $this->input->post('first_name');
+        $b = $this->input->post('last_name');
+        if ($a[0] !== null) {
+            foreach ($a as $row) {
+                $data = [
+                    'first_name' => $row,
+                    'last_name' => $b[$i],
+                ];
+
+                $insert = $this->db->insert('biodata', $data);
+                if ($insert) {
+                    $i++;
+                }
+            }
+        }
+
+        $arr['success'] = true;
+        $arr['notif']  = '<div class="alert alert-success">
+          <i class="fa fa-check"></i> Data Berhasil Disimpan
+        </div>';
+        return $this->output->set_output(json_encode($arr));
+    }
 }
