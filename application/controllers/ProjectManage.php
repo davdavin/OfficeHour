@@ -10,7 +10,8 @@ class ProjectManage extends CI_Controller
             redirect('Login/login_karyawan');
         }
 
-        $this->load->model(array('M_Karyawan'));
+        $this->load->model(array('M_Karyawan', 'M_Perusahaan'));
+        $this->load->helper('form', 'url');
     }
 
     function index()
@@ -22,11 +23,22 @@ class ProjectManage extends CI_Controller
 
     function tambah_project()
     {
-        $this->load->view('v_tambah_project.php');
+        $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
+        $id_perusahaan = $id['id_perusahaan'];
+        $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
+        $this->load->view('v_tambah_project.php', $data);
     }
 
     function proses_tambah_project()
     {
+        $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
+        $id_perusahaan = $id['id_perusahaan'];
+        $project_name = $this->input->post('nama_project');
+        $project_manager = $this->input->post('project_manager');
+        $deskripsi = $this->input->post('deskripsi');
+        $project_start = $this->input->post('project_start');
+        $project_end = $this->input->post('project_end');
+        $id_klien = $this->input->post('id_klien');
 
 
         redirect('ProjectManage/asign_anggota_project' . '');
@@ -34,13 +46,16 @@ class ProjectManage extends CI_Controller
 
     function asign_anggota_project()
     {
-        $this->load->view('v_add_member.php');
+        $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
+        $id_perusahaan = $id['id_perusahaan'];
+        $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($id_perusahaan)->result();
+        $this->load->view('v_add_member.php', $data);
     }
 
     function proses_tambah_anggota()
     {
         $i = 0; // untuk loopingnya
-        $a = $this->input->post('first_name');
+        $a = $this->input->post('id_karyawan');
         if ($a[0] !== null) {
             foreach ($a as $row) {
                 $data = [
@@ -53,6 +68,7 @@ class ProjectManage extends CI_Controller
                 }
             }
         }
+
 
         $arr['success'] = true;
         $arr['notif']  = '<div class="alert alert-success">

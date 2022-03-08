@@ -259,10 +259,9 @@
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
-            Baris += ' <select  class="form-control select2"  style="width: 100%;" name="first_name[]"> ' +
-                '<option selected disabled>-- Pilih --</option>' +
-                '<option value="california">California</option>' +
-                '<option value="joseph">Joseph</option>' +
+            Baris += ' <select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
+                '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) { ?>' +
+                '<option value="<?= $list->id_karyawan ?>"> <?= $list->nama_karyawan ?></option>' + '<?php } ?>' +
                 '</select>';
             Baris += '</td>';
             Baris += '<td class="text-center">';
@@ -306,7 +305,6 @@
                 success: function(data) {
                     if (data.success == true) {
                         $('.first_name').val('');
-                        $('.last_name').val('');
                         $('#notif').fadeIn(800, function() {
                             $("#notif").html(data.notif).fadeOut(5000).delay(800);
                         });
