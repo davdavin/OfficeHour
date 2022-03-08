@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -144,27 +147,37 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Name</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="project name">
+                                    <input type="text" class="form-control" name="nama_project" id="exampleFormControlInput1" placeholder="project name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Manager</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="project manager" value="<?= $this->session->userdata('nama_karyawan'); ?>">
+                                    <input type="text" class="form-control" name="project_manager" id="exampleFormControlInput1" placeholder="project manager" value="<?= $this->session->userdata('nama_karyawan'); ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Project Description</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
 
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Start</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1">
+                                    <input type="date" class="form-control" name="project_start" id="exampleFormControlInput1" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project End</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1">
+                                    <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Klien</label>
+                                    <select class="form-control select2" style="width: 100%;" name="id_klien" required>
+                                        <option selected disabled>-- Pilih --</option>
+                                        <?php foreach ($klien as $list) { ?>
+                                            <option value="<?= $list->id_client ?>"> <?= $list->nama_client ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
 
                             </div>
@@ -201,6 +214,8 @@
     <script src="<?php echo base_url() ?>assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
     <!-- SweetAlert2 -->
     <script src="<?php echo base_url() ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 
