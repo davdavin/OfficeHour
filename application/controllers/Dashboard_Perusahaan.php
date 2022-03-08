@@ -39,7 +39,7 @@ class Dashboard_Perusahaan extends CI_Controller
         $id_perusahaan = $this->input->post('id_perusahaan');
         $nama_karyawan = $this->input->post('nama_karyawan');
         $email_karyawan = $this->input->post('email_karyawan');
-        $posisi_karyawan = $this->input->post('posisi_karyawan');
+        $posisi_karyawan = ucwords($this->input->post('posisi_karyawan'));
         $token = md5($_POST['email_karyawan']) . rand(10, 9999);
 
         $this->form_validation->set_rules('nama_karyawan', 'Nama', 'required');
@@ -93,6 +93,7 @@ class Dashboard_Perusahaan extends CI_Controller
             $this->email->message("Dear \n" . $nama_karyawan . "\n You are receiving this because you have an OfficeHour account associated with this email address.
 
                 Please click the link below to verify your account. \n" . $link);
+            $this->email->send();
 
             $this->M_Karyawan->insert_record($data, 'karyawan');
             $hasil['sukses'] = "Behasil tambah karyawan";
