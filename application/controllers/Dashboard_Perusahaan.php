@@ -38,18 +38,13 @@ class Dashboard_Perusahaan extends CI_Controller
     {
         $id_perusahaan = $this->input->post('id_perusahaan');
         $nama_karyawan = $this->input->post('nama_karyawan');
-        $alamat_karyawan = $this->input->post('alamat_karyawan');
         $email_karyawan = $this->input->post('email_karyawan');
-        $password = $this->input->post('password');
         $posisi_karyawan = $this->input->post('posisi_karyawan');
-        $status_karyawan = $this->input->post('status');
+        $token = md5($_POST['email_karyawan']) . rand(10, 9999);
 
         $this->form_validation->set_rules('nama_karyawan', 'Nama', 'required');
-        $this->form_validation->set_rules('alamat_karyawan', 'Alamat', 'required');
         $this->form_validation->set_rules('email_karyawan', 'Email', 'required|valid_email|is_unique[karyawan.email_karyawan]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[20]');
         $this->form_validation->set_rules('posisi_karyawan', 'Posisi', 'required');
-        $this->form_validation->set_rules('status', 'Status', 'required');
 
         $this->form_validation->set_message('required', '{field} wajib diisi');
         $this->form_validation->set_message('valid_email', '{field} harus diisi email');
@@ -61,22 +56,69 @@ class Dashboard_Perusahaan extends CI_Controller
             $hasil = array(
                 'sukses' => false,
                 'error_nama' => form_error('nama_karyawan'),
-                'error_alamat' => form_error('alamat_karyawan'),
                 'error_email' => form_error('email_karyawan'),
-                'error_password' => form_error('password'),
                 'error_posisi' => form_error('posisi_karyawan'),
                 'error_status' => form_error('status')
             );
             echo json_encode($hasil);
         } else {
             $data = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_karyawan' => $nama_karyawan, 'alamat_karyawan' => $alamat_karyawan, 'email_karyawan' => $email_karyawan,
-                'password_karyawan' => password_hash($password, PASSWORD_DEFAULT), 'posisi_karyawan' => $posisi_karyawan, 'status_karyawan' => $status_karyawan
+                'id_perusahaan' => $id_perusahaan, 'nama_karyawan' => $nama_karyawan, 'email_karyawan' => $email_karyawan,
+                'posisi_karyawan' => $posisi_karyawan, 'status_karyawan' => 0, 'token' => $token
             );
+
+            $config = [
+                'mailtype'  => 'html',
+                'charset'   => 'utf-8',
+                'protocol'  => 'smtp',
+                'smtp_host' => 'smtp.gmail.com',
+                'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                'smtp_pass'   => 'UpH12345',              // Password gmail
+                'smtp_crypto' => 'ssl',
+                'smtp_port'   => 465,
+                'crlf'    => "\r\n",
+                'newline' => "\r\n"
+            ];
+
+            // Load library email dan konfigurasinya
+            $this->load->library('email', $config);
+            // Email dan nama pengirim
+            $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+            // Email penerima
+            $this->email->to($email_karyawan);
+            // Subject
+            $this->email->subject('Thank You for Your Feedback.');
+            // Isi
+            $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
+            $this->email->message("Dear \n" . $nama_karyawan . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+
+                Please click the link below to verify your account. \n" . $link);
 
             $this->M_Karyawan->insert_record($data, 'karyawan');
             $hasil['sukses'] = "Behasil tambah karyawan";
             echo json_encode($hasil);
+
+            if ($this->email->send()) {
+                /*       $this->load->library('email', $config);
+
+                    // Email dan nama pengirim
+                    $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+
+                    // Email penerima
+                    $this->email->to($getEmail);
+
+                    // Subject
+                    $this->email->subject('Log in to your Office Hour Accont.');
+
+                    // Isi
+                 //   $this->email->message("Name: ".$getName.",\n Email: ".$getEmail.",\nFeedback: ".$getFeedback);
+
+                    
+
+                    echo 'Kirim';*/
+            } else {
+                echo 'Error! email tidak dapat dikirim.';
+            }
         }
     }
 

@@ -171,7 +171,6 @@
                                     <tr>
                                         <th>ID Karyawan</th>
                                         <th>Nama Karyawan</th>
-                                        <th>Alamat</th>
                                         <th>Email</th>
                                         <th>Posisi</th>
                                         <th>Status Karyawan</th>
@@ -183,7 +182,6 @@
                                         <tr>
                                             <td><?php echo $list_karyawan->id_karyawan ?></td>
                                             <td><?php echo $list_karyawan->nama_karyawan ?></td>
-                                            <td><?php echo $list_karyawan->alamat_karyawan ?></td>
                                             <td><?php echo $list_karyawan->email_karyawan ?></td>
                                             <td><?php echo $list_karyawan->posisi_karyawan ?></td>
                                             <td>
@@ -239,14 +237,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Alamat</label>
-                                    <input type="text" class="form-control" id="alamat_karyawan" name="alamat_karyawan" placeholder="Alamat karyawan">
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_alamat" style="display: none">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label>Email</label>
                                     <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
                                     <!-- INFO ERROR -->
@@ -255,31 +245,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_password" style="display: none">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label>Posisi Karyawan</label>
                                     <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
                                     <!-- INFO ERROR -->
                                     <div class="p-2 is-invalid error_posisi" style="display: none">
-                                    </div>
-                                </div>
-
-                                <!-- status -->
-                                <div class="form-group">
-                                    <label>Status Karyawan</label>
-                                    <select class="form-control select2bs4" style="width: 100%;" id="status" name="status">
-                                        <option selected disabled value>Status</option>
-                                        <option value="1">Aktif</option>
-                                        <option value="0">Tidak Aktif</option>
-                                    </select>
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_status" style="display: none">
                                     </div>
                                 </div>
 
@@ -442,13 +411,6 @@
                             } else {
                                 $('.error_nama').hide();
                             }
-                            if ($obj.error_alamat) {
-                                $('.error_alamat').show();
-                                $('.error_alamat').html($obj.error_alamat);
-                                $('.error_alamat').css("color", "red");
-                            } else {
-                                $('.error_alamat').hide();
-                            }
                             if ($obj.error_email) {
                                 $('.error_email').show();
                                 $('.error_email').html($obj.error_email);
@@ -456,26 +418,12 @@
                             } else {
                                 $('.error_email').hide();
                             }
-                            if ($obj.error_password) {
-                                $('.error_password').show();
-                                $('.error_password').html($obj.error_password);
-                                $('.error_password').css("color", "red");
-                            } else {
-                                $('.error_password').hide();
-                            }
                             if ($obj.error_posisi) {
                                 $('.error_posisi').show();
                                 $('.error_posisi').html($obj.error_posisi);
                                 $('.error_posisi').css("color", "red");
                             } else {
                                 $('.error_posisi').hide();
-                            }
-                            if ($obj.error_status) {
-                                $('.error_status').show();
-                                $('.error_status').html($obj.error_status);
-                                $('.error_status').css("color", "red");
-                            } else {
-                                $('.error_status').hide();
                             }
                         } else {
                             Swal.fire({

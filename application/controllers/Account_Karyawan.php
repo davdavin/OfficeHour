@@ -30,7 +30,6 @@ class Account_Karyawan extends CI_Controller
         $profil = $this->M_Karyawan->profil_karyawan($id_karyawan)->row_array();
 
         $this->form_validation->set_rules('nama_karyawan', 'Nama', 'required');
-        $this->form_validation->set_rules('alamat_karyawan', 'Alamat', 'required');
         if ($this->input->post('email_karyawan') == $profil['email_karyawan']) {
             $this->form_validation->set_rules('email_karyawan', 'Email', 'required|valid_email');
         } else {
@@ -44,7 +43,6 @@ class Account_Karyawan extends CI_Controller
             $respon = array(
                 'sukses' => false,
                 'error_nama' => form_error('nama_karyawan'),
-                'error_alamat' => form_error('alamat_karyawan'),
                 'error_email' => form_error('email_karyawan')
             );
             echo json_encode($respon);
@@ -52,7 +50,6 @@ class Account_Karyawan extends CI_Controller
             $where = array('id_karyawan' => $id_karyawan);
             $data = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan'),
-                'alamat_karyawan' => $this->input->post('alamat_karyawan'),
                 'email_karyawan' => $this->input->post('email_karyawan')
             );
             $session = array(
