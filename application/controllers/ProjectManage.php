@@ -10,7 +10,7 @@ class ProjectManage extends CI_Controller
             redirect('Login/login_karyawan');
         }
 
-        $this->load->model(array('M_Karyawan', 'M_Perusahaan'));
+        $this->load->model(array('M_Karyawan', 'M_Perusahaan', 'M_Project'));
         $this->load->helper('form', 'url');
     }
 
@@ -40,8 +40,18 @@ class ProjectManage extends CI_Controller
         $project_end = $this->input->post('project_end');
         $id_klien = $this->input->post('id_klien');
 
+        $data = array(
+            'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
+            'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 1
+        );
 
-        redirect('ProjectManage/asign_anggota_project' . '');
+        $this->M_Project->insert_record($data, 'project');
+
+        $session = array('id_project' => $this->db->insert_id());
+        $this->session->set_userdata($session);
+
+        //   redirect('ProjectManage/asign_anggota_project/?id=' . $this->db->insert_id());
+        redirect('ProjectManage/asign_anggota_project');
     }
 
     function asign_anggota_project()
@@ -55,20 +65,21 @@ class ProjectManage extends CI_Controller
     function proses_tambah_anggota()
     {
         $i = 0; // untuk loopingnya
-        $a = $this->input->post('id_karyawan');
-        if ($a[0] !== null) {
-            foreach ($a as $row) {
+        $id_project = $this->input->post('id_project');
+        $id_karyawan = $this->input->post('id_karyawan');
+        if ($id_karyawan[0] !== null) {
+            foreach ($id_karyawan as $row) {
                 $data = [
-                    'first_name' => $row,
+                    'id_project' => $id_project,
+                    'id_karyawan' => $row,
                 ];
 
-                $insert = $this->db->insert('biodata', $data);
+                $insert = $this->db->insert('anggota_project', $data);
                 if ($insert) {
                     $i++;
                 }
             }
         }
-
 
         $arr['success'] = true;
         $arr['notif']  = '<div class="alert alert-success">
@@ -79,23 +90,23 @@ class ProjectManage extends CI_Controller
 
     function tambah_task()
     {
-        $this->load->view('v_add_task.php');
+        $id_project = $this->session->userdata('id_project');
+        $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
+        $this->load->view('v_add_task.php', $data);
     }
 
     function proses_tambah_task()
     {
         $i = 0; // untuk loopingnya
-        $a = $this->input->post('first_name');
-        $b = $this->input->post('member');
-        $c = $this->input->post('date');
-        if ($a[0] !== null) {
-            foreach ($a as $row) {
-
+        $tugas = $this->input->post('tugas');
+        $anggota = $this->input->post('member');
+        $batas_waktu = $this->input->post('date');
+        if ($tugas[0] !== null) {
+            foreach ($tugas as $row) {
                 $data = array(
-
                     'nama_tugas' => $row,
-                    'id_anggota_project' => $b[$i],
-                    'batas_waktu' => $c[$i],
+                    'id_anggota_project' => $anggota[$i],
+                    'batas_waktu' => $batas_waktu[$i]
                 );
 
                 $insert = $this->db->insert('tugas_project', $data);

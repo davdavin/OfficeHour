@@ -205,6 +205,9 @@
     <script src="<?php echo base_url() ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- Select2 -->
     <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -256,25 +259,20 @@
         });
 
         function Barisbaru() {
-            $(document).ready(function() {
-                $("[data-toggle='tooltip']").tooltip();
-
-            });
             var Nomor = $("#tableLoop tbody tr").length + 1;
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
-            Baris += '<input type="text" name="first_name[]" class="form-control first_name" placeholder="Task Name...." required="">';
+            Baris += '<input type="text" name="tugas[]" class="form-control first_name" placeholder="Task Name...." required="">';
             Baris += '</td>';
             Baris += '<td>';
-            Baris += ' <select  class="select2" multiple="multiple" data-placeholder="Assign to"  style="width: 100%;" name="member[]"> ' +
-                '<option value="brian">Brian</option>' +
-                '<option value="california">California</option>' +
-                '<option value="joseph">Joseph</option>' +
+            Baris += '<select class="form-control select2"  style="width: 100%;" name="member[]"> ' +
+                '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($anggota_project as $list) { ?>' +
+                '<option value="<?= $list->id_anggota_project ?>"> <?= $list->nama_karyawan ?></option>' + '<?php } ?>' +
                 '</select>';
             Baris += '</td>';
             Baris += '<td>';
-            Baris += '<input type="date" name="date[]" class="form-control date" required="">';
+            Baris += '<input type="date" name="date[]" class="form-control tm date" data-date-format="DD-MMM-YYYY" required="">';
             Baris += '</td>';
             Baris += '<td class="text-center">';
             Baris += '<a class="btn btn-sm btn-danger" data-toggle="tooltip" title="Hapus Baris" id="HapusBaris"><i class="fa fa-times"></i></a>';
@@ -286,7 +284,16 @@
                 $(this).find('td:nth-child(2) input').focus();
             });
             $('.select2').select2();
+
+            $('.tm').on("change", function() {
+                this.setAttribute(
+                    "data-date",
+                    moment(this.value, "YYYY-MM-DD")
+                    .format(this.getAttribute("data-date-format"))
+                )
+            }).trigger("change")
         }
+
 
         $(document).on('click', '#HapusBaris', function(e) {
             e.preventDefault();
@@ -317,9 +324,17 @@
                         $('.first_name').val('');
                         $('.last_name').val('');
                         $('.date').val('');
-                        $('#notif').fadeIn(800, function() {
-                            $("#notif").html(data.notif).fadeOut(5000).delay(800);
+                        /*   $('#notif').fadeIn(800, function() {
+                               $("#notif").html(data.notif).fadeOut(5000).delay(800);
+                           }); */
+                        Swal.fire({
+                            title: 'Sukses',
+                            text: 'sukses',
+                            icon: 'success',
+                        }).then((confirmed) => {
+                            window.location.href = "<?php echo base_url() . 'ProjectManage' ?>";
                         });
+
                     } else {
                         $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>')
                     }
