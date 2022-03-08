@@ -143,7 +143,6 @@
                 <div class="container-fluid">
                     <?php $this->load->view('message.php'); ?>
                     <!-- loop -->
-
                     <div class="row">
                         <div class="box-header with-border">
                         </div>
@@ -154,7 +153,6 @@
                             <div class="box box-solid">
                                 <form action="<?php echo base_url('ProjectManage/proses_tambah_anggota') ?>" method="post" id="SimpanData">
                                     <div class="box-body">
-
                                         <table class="table table-bordered" id="tableLoop">
                                             <thead>
                                                 <tr>
@@ -259,7 +257,7 @@
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
-            Baris += ' <select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
+            Baris += '<input type="hidden" name="id_project" value="<?= $this->session->userdata('id_project') ?>">' + '<select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
                 '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) { ?>' +
                 '<option value="<?= $list->id_karyawan ?>"> <?= $list->nama_karyawan ?></option>' + '<?php } ?>' +
                 '</select>';
