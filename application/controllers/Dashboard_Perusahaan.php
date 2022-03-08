@@ -98,8 +98,8 @@ class Dashboard_Perusahaan extends CI_Controller
             $hasil['sukses'] = "Behasil tambah karyawan";
             echo json_encode($hasil);
 
-            /*        if ($this->email->send()) {
-                     /*       $this->load->library('email', $config);
+            if ($this->email->send()) {
+                /*       $this->load->library('email', $config);
 
                     // Email dan nama pengirim
                     $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
@@ -115,11 +115,10 @@ class Dashboard_Perusahaan extends CI_Controller
 
                     
 
-                    echo 'Kirim';
-                }
-                else {
-                    echo 'Error! email tidak dapat dikirim.';
-                } */
+                    echo 'Kirim';*/
+            } else {
+                echo 'Error! email tidak dapat dikirim.';
+            }
         }
     }
 
