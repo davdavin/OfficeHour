@@ -158,11 +158,6 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" class="form-control" name="alamat_karyawan" value="<?= $detail->alamat_karyawan ?>">
-                                                <p class="p-2 is-invalid error_alamat" style="display: none"></p>
-                                            </div>
-                                            <div class="form-group">
                                                 <label>Email</label>
                                                 <input type="email" class="form-control" name="email_karyawan" value=" <?= $detail->email_karyawan ?>">
                                                 <p class="p-2 is-invalid error_email" style="display: none"></p>
