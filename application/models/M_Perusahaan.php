@@ -17,6 +17,11 @@ class M_Perusahaan extends CI_Model
         return $this->db->query("SELECT * FROM perusahaan WHERE id_perusahaan = '$id_perusahaan'");
     }
 
+    function get_id_perusahaan($id_karyawan)
+    {
+        return $this->db->query("SELECT id_perusahaan FROM karyawan WHERE id_karyawan = '$id_karyawan'");
+    }
+
     function cek_login($table, $where)
     {
         return $this->db->get_where($table, $where);
