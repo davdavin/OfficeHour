@@ -93,33 +93,18 @@ class Dashboard_Perusahaan extends CI_Controller
             $this->email->message("Dear \n" . $nama_karyawan . "\n You are receiving this because you have an OfficeHour account associated with this email address.
 
                 Please click the link below to verify your account. \n" . $link);
-            $this->email->send();
 
-            $this->M_Karyawan->insert_record($data, 'karyawan');
+            /*        $this->M_Karyawan->insert_record($data, 'karyawan');
             $hasil['sukses'] = "Behasil tambah karyawan";
-            echo json_encode($hasil);
+            echo json_encode($hasil); */
 
-            /*    if ($this->email->send()) {
-                       $this->load->library('email', $config);
-
-                    // Email dan nama pengirim
-                    $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
-
-                    // Email penerima
-                    $this->email->to($getEmail);
-
-                    // Subject
-                    $this->email->subject('Log in to your Office Hour Accont.');
-
-                    // Isi
-                 //   $this->email->message("Name: ".$getName.",\n Email: ".$getEmail.",\nFeedback: ".$getFeedback);
-
-                    
-
-                    echo 'Kirim';
+            if ($this->email->send()) {
+                $this->M_Karyawan->insert_record($data, 'karyawan');
+                $hasil['sukses'] = "Behasil tambah karyawan";
+                echo json_encode($hasil);
             } else {
                 echo 'Error! email tidak dapat dikirim.';
-            } */
+            }
         }
     }
 
