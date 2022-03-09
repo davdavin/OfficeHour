@@ -250,16 +250,15 @@
         });
 
         function Barisbaru() {
-            $(document).ready(function() {
-                $("[data-toggle='tooltip']").tooltip();
-            });
             var Nomor = $("#tableLoop tbody tr").length + 1;
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
             Baris += '<input type="hidden" name="id_project" value="<?= $this->session->userdata('id_project') ?>">' + '<select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
-                '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) { ?>' +
-                '<option value="<?= $list->id_karyawan ?>"> <?= $list->nama_karyawan ?></option>' + '<?php } ?>' +
+                '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) {
+                                                                        if ($list->id_karyawan != $this->session->userdata('id_karyawan')) {  ?>' +
+                '<option value="<?= $list->id_karyawan ?>"> <?= $list->nama_karyawan ?></option>' + '<?php }
+                                                                                                } ?>' +
                 '</select>';
             Baris += '</td>';
             Baris += '<td class="text-center">';
