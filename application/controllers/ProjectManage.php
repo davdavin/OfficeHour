@@ -17,6 +17,7 @@ class ProjectManage extends CI_Controller
     function index()
     {
         $id_karyawan = $this->session->userdata('id_karyawan');
+        $data['totalProject'] = $this->M_Karyawan->project_karyawan($id_karyawan)->num_rows();
         $data['projectKaryawan'] = $this->M_Karyawan->project_karyawan($id_karyawan)->result();
         $this->load->view('v_project_manage.php', $data);
     }
@@ -42,7 +43,7 @@ class ProjectManage extends CI_Controller
 
         $data = array(
             'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
-            'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 1
+            'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
         );
 
         $this->M_Project->insert_record($data, 'project');
@@ -106,7 +107,8 @@ class ProjectManage extends CI_Controller
                 $data = array(
                     'nama_tugas' => $row,
                     'id_anggota_project' => $anggota[$i],
-                    'batas_waktu' => $batas_waktu[$i]
+                    'batas_waktu' => $batas_waktu[$i],
+                    'status_tugas' => 'SEDANG BERJALAN'[$i]
                 );
 
                 $insert = $this->db->insert('tugas_project', $data);
