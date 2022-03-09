@@ -145,7 +145,7 @@
               <!-- small box -->
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3>150</h3>
+                  <h3><?php echo $totalProject ?></h3>
                   <h4>Project</h4>
                 </div>
               </div>
