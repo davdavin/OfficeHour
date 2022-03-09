@@ -44,6 +44,10 @@
       outline: none;
     }
 
+    #display {
+      text-align: center;
+    }
+
     #pauseButton {
       display: none;
     }
@@ -194,6 +198,36 @@
             </div>
 
           </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Tugas Project</h3>
+            </div>
+
+            <div class="card-body">
+              <table id="list-project" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Nama Project</th>
+                    <th>Tugas</th>
+                    <th>Deadline</th>
+                    <th>Status Tugas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($aktivitas as $list_aktivitas) { ?>
+                    <tr>
+                      <td><?php echo $list_aktivitas->nama_project ?></td>
+                      <td><?php echo $list_aktivitas->nama_tugas ?> </td>
+                      <td><?php echo $list_aktivitas->waktu_mulai ?></td>
+                      <td><?php echo $list_aktivitas->status_tugas ?></td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </div>
       </section>
       <!-- /.content -->
@@ -240,6 +274,11 @@
   <script>
     $(function() {
       $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidht": false
+      });
+      $('#list-project').DataTable({
         "responsive": true,
         "lengthChange": true,
         "autoWidht": false

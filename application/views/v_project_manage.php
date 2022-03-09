@@ -190,7 +190,7 @@
                   <div class="inner text-center">
                     <h4><strong> <?php echo $list_project->nama_project ?></strong></h4>
                     <h5><?php echo $list_project->status_project ?></h5>
-                    <button class="btn btn-primary">More</button>
+                    <a href="<?php echo base_url() . 'ProjectManage/project_detail/' . $list_project->id_project ?>"><button class="btn btn-primary">More</button></a>
                   </div>
                 </div>
               </div>
