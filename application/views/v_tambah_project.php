@@ -151,7 +151,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Manager</label>
-                                    <input type="text" class="form-control" name="project_manager" id="exampleFormControlInput1" placeholder="project manager" value="<?= $this->session->userdata('nama_karyawan'); ?>" required>
+                                    <input type="hidden" class="form-control" name="project_manager" id="exampleFormControlInput1" value="<?= $this->session->userdata('id_karyawan'); ?>">
+                                    <input type="text" class="form-control bg-white" id="exampleFormControlInput1" value="<?= $this->session->userdata('nama_karyawan'); ?>" required readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Project Description</label>
