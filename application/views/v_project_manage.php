@@ -183,19 +183,19 @@
             </a><br><br>
           <?php } ?>
 
-          <?php foreach ($projectKaryawan as $list_project) { ?>
-            <div class="row">
-              <div class="card-body col-5" style="margin-left: auto; margin-right: auto">
+          <div class="row">
+            <?php foreach ($projectKaryawan as $list_project) { ?>
+              <div class="card-body col-6" style="margin-left: auto; margin-right: auto">
                 <div class="small-box bg-white" style="border-radius: 15px;">
                   <div class="inner text-center">
                     <h4><strong> <?php echo $list_project->nama_project ?></strong></h4>
-                    <h5>Done</h5>
+                    <h5><?php echo $list_project->status_project ?></h5>
                     <button class="btn btn-primary">More</button>
                   </div>
                 </div>
               </div>
-            </div>
-          <?php } ?>
+            <?php } ?>
+          </div>
         </div>
     </div>
     </section>
