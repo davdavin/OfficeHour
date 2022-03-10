@@ -22,6 +22,7 @@ class Dashboard_Perusahaan extends CI_Controller
         $username = $this->session->userdata('username_perusahaan');
         $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
         $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
+        $data['total_klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->num_rows();
         $this->load->view('v_dashboard_perusahaan.php', $data);
     }
 
