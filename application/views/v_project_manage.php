@@ -145,7 +145,15 @@
               <!-- small box -->
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3><?php echo $totalProject ?></h3>
+                  <h3>
+                    <?php
+                    if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+                      echo $totalProject + $total;
+                    } else {
+                      echo $totalProject;
+                    }
+                    ?>
+                  </h3>
                   <h4>Project</h4>
                 </div>
               </div>
@@ -195,6 +203,19 @@
                 </div>
               </div>
             <?php } ?>
+            <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+              foreach ($projectPM as $list_project_pm) { ?>
+                <div class="card-body col-6" style="margin-left: auto; margin-right: auto">
+                  <div class="small-box bg-white" style="border-radius: 15px;">
+                    <div class="inner text-center">
+                      <h4><strong> <?php echo $list_project_pm->nama_project ?></strong></h4>
+                      <h5><?php echo $list_project_pm->status_project ?></h5>
+                      <a href="<?php echo base_url() . 'ProjectManage/project_detail/' . $list_project_pm->id_project ?>"><button class="btn btn-primary">More</button></a>
+                    </div>
+                  </div>
+                </div>
+            <?php }
+            } ?>
           </div>
         </div>
     </div>
