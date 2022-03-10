@@ -90,7 +90,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan/tampil_menu_utama' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Dasboard </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -159,6 +159,13 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
                                     <i class="fas fa-plus"></i> Tambah karyawan
                                 </button><br><br>
+                                <a href="<?php echo base_url() . 'Dashboard_Perusahaan/Upload_Massal' ?>" type="button" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Upload Massal
+                                </a><br><br>
+
+                                <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                    <i class="fas fa-plus"></i> Tambah karyawan
+                                </button><br><br> -->
                             <?php } else { ?>
                                 <button class="btn btn-primary" disabled>
                                     <i class="fas fa-plus"></i> Tambah karyawan

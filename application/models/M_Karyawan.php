@@ -13,18 +13,33 @@ class M_Karyawan extends CI_Model
 
     function project_karyawan($id_karyawan)
     {
-        if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
-            return $this->db->query("SELECT project.id_project, nama_project, status_project FROM project, anggota_project WHERE anggota_project.id_project <> project.id_project 
+        /* if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+            $baris = $this->db->query("SELECT count(nama_project) as baris FROM project, anggota_project WHERE anggota_project.id_project <> project.id_project 
+            AND anggota_project.id_project = project.id_project AND project_manager = '$id_karyawan' OR id_karyawan = '$id_karyawan'")->row_array();
+
+            if ($baris['baris'] == 0) {
+                return $this->db->query("SELECT id_project, nama_project, status_project FROM project WHERE project_manager = '$id_karyawan'");
+            } else {
+                return $this->db->query("SELECT project.id_project, nama_project, status_project FROM project, anggota_project WHERE anggota_project.id_project <> project.id_project 
             AND anggota_project.id_project = project.id_project AND project_manager = '$id_karyawan' OR id_karyawan = '$id_karyawan'");
+            }
 
 
-            /*    return $this->db->query("SELECT nama_project, status_project FROM project LEFT JOIN anggota_project ON anggota_project.id_project = project.id_project
-            WHERE project.id_karyawan = '$id_karyawan' OR anggota_project.id_karyawan = '$id_karyawan' GROUP BY nama_project"); */
+           
         } else {
             return $this->db->query("SELECT * FROM project JOIN anggota_project ON anggota_project.id_project = project.id_project 
             WHERE anggota_project.id_karyawan = '$id_karyawan'");
-        }
+        } */
+
+        return $this->db->query("SELECT project.id_project, nama_project, status_project FROM project INNER JOIN anggota_project ON anggota_project.id_project = project.id_project
+            WHERE anggota_project.id_karyawan = '$id_karyawan'");
     }
+
+    function project_pm($id_karyawan)
+    {
+        return $this->db->query("SELECT id_project, nama_project, status_project FROM project WHERE project_manager = '$id_karyawan'");
+    }
+
 
     function insert_record($data, $table)
     {

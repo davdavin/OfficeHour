@@ -108,6 +108,15 @@ class Dashboard_Perusahaan extends CI_Controller
         }
     }
 
+    public function Upload_Massal()
+    {
+        $id_perusahaan = $this->session->userdata('id_perusahaan');
+        $username = $this->session->userdata('username_perusahaan');
+        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+        $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
+        $this->load->view('v_mass_upload.php', $data);
+    }
+
     public function proses_edit_karyawan()
     {
         $id_perusahaan = $this->session->userdata('id_perusahaan');
