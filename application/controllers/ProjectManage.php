@@ -110,7 +110,7 @@ class ProjectManage extends CI_Controller
                     'nama_tugas' => $row,
                     'id_anggota_project' => $anggota[$i],
                     'batas_waktu' => $batas_waktu[$i],
-                    'status_tugas' => 'SEDANG BERJALAN'[$i]
+                    'status_tugas' => 'SEDANG BERJALAN'
                 );
 
                 $insert = $this->db->insert('tugas_project', $data);

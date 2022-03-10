@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan/tampil_menu_utama' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Dasboard </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -193,8 +193,8 @@
                                 }
 
                                 if (!empty($name) || !empty($description)) {
-                                    $query = "insert into karyawan(nama_karyawan,email_karyawan) values(?,?)"; //      $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan) values(?,?,?)";
-                                    $paramType = "ss"; //$paramType = "ssss"
+                                    $query = "insert into karyawan(id_perusahaan,nama_karyawan,email_karyawan,posisi_karyawan) values(?,?,?,?)";
+                                    $paramType = "ssss";
                                     $paramArray = array(
                                         $id_perusahaan,
                                         $name,
@@ -236,8 +236,8 @@
                     <div id="response" class="<?php if (!empty($type)) {
                                                     echo $type . " display-block";
                                                 } ?>"><?php if (!empty($message)) {
-                                                                                                                    echo $message;
-                                                                                                                } ?></div>
+                                                            echo $message;
+                                                        } ?></div>
 
                 </div>
 

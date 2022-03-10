@@ -91,7 +91,7 @@
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Dasboard </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -181,7 +181,7 @@
                             <!-- small box -->
                             <div class="small-box bg-white">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3><?php echo $total_klien; ?></h3>
                                     <p>Klien</p>
                                 </div>
                                 <div class="icon">
