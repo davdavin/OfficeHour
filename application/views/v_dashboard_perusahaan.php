@@ -181,7 +181,7 @@
                             <!-- small box -->
                             <div class="small-box bg-white">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3><?php echo $total_klien; ?></h3>
                                     <p>Klien</p>
                                 </div>
                                 <div class="icon">
