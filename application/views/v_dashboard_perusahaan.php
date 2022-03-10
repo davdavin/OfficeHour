@@ -91,7 +91,7 @@
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Dasboard </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
