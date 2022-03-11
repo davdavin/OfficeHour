@@ -7,6 +7,18 @@ class M_Project extends CI_Model
                                 ON anggota_project.id_karyawan = karyawan.id_karyawan WHERE id_project = '$id_project'");
     }
 
+    function tampil_project($id_perusahaan)
+    {
+        return $this->db->query("SELECT * FROM project JOIN karyawan ON project.project_manager = karyawan.id_karyawan 
+                                JOIN client ON project.id_client = client.id_client WHERE karyawan.id_perusahaan = '$id_perusahaan'");
+    }
+
+    function tampil_anggota_project($id_perusahaan)
+    {
+        return $this->db->query("SELECT anggota_project.id_project, nama_karyawan, nama_tugas FROM anggota_project INNER JOIN karyawan ON anggota_project.id_karyawan = karyawan.id_karyawan 
+                                INNER JOIN tugas_project ON tugas_project.id_anggota_project = anggota_project.id_anggota_project WHERE id_perusahaan = '$id_perusahaan' ");
+    }
+
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
