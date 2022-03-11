@@ -11,7 +11,7 @@ class Dashboard_Perusahaan extends CI_Controller
             redirect('Login/login_perusahaan');
         }
 
-        $this->load->model(array('M_Perusahaan', 'M_Karyawan', 'M_Klien'));
+        $this->load->model(array('M_Perusahaan', 'M_Karyawan', 'M_Klien', 'M_Project'));
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
     }
@@ -23,6 +23,8 @@ class Dashboard_Perusahaan extends CI_Controller
         $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
         $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
         $data['total_klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->num_rows();
+        $data['list_project'] = $this->M_Project->tampil_project($id_perusahaan)->result();
+        $data['list_anggota_project'] = $this->M_Project->tampil_anggota_project($id_perusahaan)->result();
         $this->load->view('v_dashboard_perusahaan.php', $data);
     }
 
