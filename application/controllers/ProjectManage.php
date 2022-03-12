@@ -20,6 +20,8 @@ class ProjectManage extends CI_Controller
         $data['projectPM'] = $this->M_Karyawan->project_pm($id_karyawan)->result();
         $data['total'] = $this->M_Karyawan->project_pm($id_karyawan)->num_rows();
         $data['totalProject'] = $this->M_Karyawan->project_karyawan($id_karyawan)->num_rows();
+        $data['status_project_k'] = $this->M_Karyawan->get_status_project_karyawan($id_karyawan)->result();
+        $data['status_project_pm'] = $this->M_Karyawan->get_status_project_pm($id_karyawan)->result();
         $data['projectKaryawan'] = $this->M_Karyawan->project_karyawan($id_karyawan)->result();
         $this->load->view('v_project_manage.php', $data);
     }
