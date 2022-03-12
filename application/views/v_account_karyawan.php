@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -152,14 +154,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control" name="nama_karyawan" value="<?= $detail->nama_karyawan ?>">
+                                                <input type="text" class="form-control bg-input" name="nama_karyawan" value="<?= $detail->nama_karyawan ?>">
                                                 <p class="p-2 is-invalid error_nama" style="display: none"></p>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" name="email_karyawan" value=" <?= $detail->email_karyawan ?>">
+                                                <input type="email" class="form-control bg-input" name="email_karyawan" value=" <?= $detail->email_karyawan ?>">
                                                 <p class="p-2 is-invalid error_email" style="display: none"></p>
                                             </div>
                                         </div>
@@ -195,21 +197,21 @@
                         <form action="<?php echo base_url() . 'Account_Karyawan/update_password' ?>" method="post" class="form-submit">
                             <div class="form-group">
                                 <label>Current Password</label>
-                                <input type="password" class="form-control" name="currentpass">
+                                <input type="password" class="form-control bg-input" name="currentpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_currentpass" style="display: none">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>New Password</label>
-                                <input type="password" class="form-control" name="newpass">
+                                <input type="password" class="form-control bg-input" name="newpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_newpass" style="display: none">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Re-type new Password</label>
-                                <input type="password" class="form-control" name="confirmpass">
+                                <input type="password" class="form-control bg-input" name="confirmpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_retype" style="display: none">
                                 </div>
