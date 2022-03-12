@@ -1,0 +1,9 @@
+.bg-input {
+	border: none;
+	border-bottom: 1px solid lightskyblue;
+	border-radius: 0;
+}
+
+.bg-input:focus {
+	border-bottom: 1px solid maroon;
+}
