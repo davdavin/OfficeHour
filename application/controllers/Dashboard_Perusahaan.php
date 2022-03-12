@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+//Untuk upload excel
+use Phppot\DataSource;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+
+require_once 'DataSource.php';
+require_once('./vendor/autoload.php');
+//------
+
 class Dashboard_Perusahaan extends CI_Controller
 {
     function __construct()
@@ -118,6 +126,80 @@ class Dashboard_Perusahaan extends CI_Controller
         $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
         $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
         $this->load->view('v_mass_upload.php', $data);
+    }
+
+    public function proses_upload_massal()
+    {
+        $id_perusahaan = $this->session->userdata('id_perusahaan');
+
+        $db = new DataSource();
+        $conn = $db->getConnection();
+
+        $allowedFileType = [
+            'application/vnd.ms-excel',
+            'text/xls',
+            'text/xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
+
+        if (in_array($_FILES["file"]["type"], $allowedFileType)) {
+
+            $targetPath = 'uploads/' . $_FILES['file']['name'];
+            move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+
+            $Reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+            $spreadSheet = $Reader->load($targetPath);
+            $excelSheet = $spreadSheet->getActiveSheet();
+            $spreadSheetAry = $excelSheet->toArray();
+            $sheetCount = count($spreadSheetAry);
+
+            for ($i = 0; $i <= $sheetCount; $i++) {
+                $name = "";
+                if (isset($spreadSheetAry[$i][0])) {
+                    $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][0]);
+                }
+                $description = "";
+                if (isset($spreadSheetAry[$i][1])) {
+                    $description = mysqli_real_escape_string($conn, $spreadSheetAry[$i][1]);
+                }
+                $posisi = "";
+                if (isset($spreadSheetAry[$i][2])) {
+                    $posisi = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
+                }
+
+                if (!empty($name) || !empty($description) || !empty($posisi)) {
+                    $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan) values(?,?,?,?)";
+                    $paramType = "ssss";
+                    $paramArray = array(
+                        $name,
+                        $description,
+                        $posisi,
+                        $id_perusahaan
+                    );
+                    $insertId = $db->insert($query, $paramType, $paramArray);
+                    // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
+                    // $result = mysqli_query($conn, $query);
+
+                    if (!empty($insertId)) {
+                        $type = "success";
+                        $message = "Berhasil Upload";
+                        echo $message;
+                        //     $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
+                        //       redirect('Dashboard_Perusahaan/Upload_Massal');
+                    } else {
+                        $type = "error";
+                        $message = "Tidak Berhasil Upload";
+                        //  $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
+                        echo $message;
+                    }
+                }
+            }
+        } else {
+            $type = "error";
+            $message = "Tipe tidak sesuai. Upload file excel";
+            echo $message;
+        }
     }
 
     public function proses_edit_karyawan()
