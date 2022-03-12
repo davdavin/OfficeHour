@@ -168,19 +168,53 @@ class Dashboard_Perusahaan extends CI_Controller
                     $posisi = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
                 }
 
+                $token = md5($description) . rand(10, 9999);
                 if (!empty($name) || !empty($description) || !empty($posisi)) {
-                    $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan) values(?,?,?,?)";
-                    $paramType = "ssss";
+                    $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
+                    $paramType = "sssss";
                     $paramArray = array(
                         $name,
                         $description,
                         $posisi,
-                        $id_perusahaan
+                        $id_perusahaan,
+                        $token
                     );
                     $insertId = $db->insert($query, $paramType, $paramArray);
                     // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
                     // $result = mysqli_query($conn, $query);
 
+                    //mail
+                    $config = [
+                        'mailtype'  => 'html',
+                        'charset'   => 'utf-8',
+                        'protocol'  => 'smtp',
+                        'smtp_host' => 'smtp.gmail.com',
+                        'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                        'smtp_pass'   => 'UpH12345',              // Password gmail
+                        'smtp_crypto' => 'ssl',
+                        'smtp_port'   => 465,
+                        'crlf'    => "\r\n",
+                        'newline' => "\r\n"
+                    ];
+
+                    // Load library email dan konfigurasinya
+                    $this->load->library('email', $config);
+                    // Email dan nama pengirim
+                    $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+                    // Email penerima
+                    $this->email->to($description);
+                    // Subject
+                    $this->email->subject('Thank You for Your Feedback.');
+                    // Isi
+                    $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
+                    $this->email->message("Dear \n" . $name . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+        
+                        Please click the link below to verify your account. \n" . $link);
+                    if ($this->email->send()) {
+                        echo 'email terkirim';
+                    } else {
+                        echo 'Error! email tidak dapat dikirim.';
+                    }
                     if (!empty($insertId)) {
                         $type = "success";
                         $message = "Berhasil Upload";

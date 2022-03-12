@@ -153,7 +153,7 @@
                 <div class="container-fluid">
                     <?php
 
-                    use Phppot\DataSource;
+                    /*         use Phppot\DataSource;
                     use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
                     require_once 'DataSource.php';
@@ -195,20 +195,54 @@
                                 if (isset($spreadSheetAry[$i][2])) {
                                     $posisi = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
                                 }
-
+  $token = md5($description) . rand(10, 9999);
                                 if (!empty($name) || !empty($description)) {
-                                    $query = "insert into karyawan(id_perusahaan,nama_karyawan,email_karyawan,posisi_karyawan) values(?,?,?,?)";
-                                    $paramType = "ssss";
+                                    $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
+                                    $paramType = "sssss";
                                     $paramArray = array(
-                                        $id_perusahaan,
                                         $name,
                                         $description,
-                                        $posisi
+                                        $posisi,
+                                        $id_perusahaan,
+                                        $token
                                     );
                                     $insertId = $db->insert($query, $paramType, $paramArray);
                                     // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
                                     // $result = mysqli_query($conn, $query);
 
+                                       $CI =& get_instance();
+                                    //mail
+                                    $config = [
+                                        'mailtype'  => 'html',
+                                        'charset'   => 'utf-8',
+                                        'protocol'  => 'smtp',
+                                        'smtp_host' => 'smtp.gmail.com',
+                                        'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                                        'smtp_pass'   => 'UpH12345',              // Password gmail
+                                        'smtp_crypto' => 'ssl',
+                                        'smtp_port'   => 465,
+                                        'crlf'    => "\r\n",
+                                        'newline' => "\r\n"
+                                    ];
+                        
+                                    // Load library email dan konfigurasinya
+                                    $CI->load->library('email', $config);
+                                    // Email dan nama pengirim
+                                    $CI->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+                                    // Email penerima
+                                    $CI->email->to($description);
+                                    // Subject
+                                    $CI->email->subject('Thank You for Your Feedback.');
+                                    // Isi
+                                    $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
+                                    $CI->email->message("Dear \n" . $name . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+                        
+                                        Please click the link below to verify your account. \n" . $link);
+                                    if ($CI->email->send()) {
+                                           echo 'email terkirim';
+                                        } else {
+                                            echo 'Error! email tidak dapat dikirim.';
+                                        }   
                                     if (!empty($insertId)) {
                                         $type = "success";
                                         $message = "Excel Data Imported into the Database";
@@ -225,29 +259,30 @@
                             $type = "error";
                             $message = "Invalid File Type. Upload Excel File.";
                         }
-                    }
+                    } */
                     ?>
                     <!--   <h2>Import Excel File into MySQL Database using PHP</h2> -->
 
                     <div class="card">
                         <div class="card-body">
                             <div class="outer-container">
-                                <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                <form action="<?php echo base_url('Dashboard_Perusahaan/proses_upload_massal') ?>" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Pilih File Excel</label><br>
                                         <input type="file" name="file" id="file" accept=".xls,.xlsx">
                                     </div>
-                                    <button type="submit" id="submit" name="import" class="btn-submit">Submit</button>
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Submit</button>
                                 </form>
 
                             </div>
-                            <div id="response" class="<?php if (!empty($type)) {
+                            <div id="response" class="<?php /* if (!empty($type)) {
                                                             echo $type . " display-block";
                                                         }
                                                         ?>"><?php if (!empty($message)) {
                                                                 echo $message;
-                                                            }
-                                                            ?></div>
+                                                            } 
+                                                            */ ?>"> </div>
+                            <?php $this->load->view('message.php'); ?>
                         </div>
                     </div>
                 </div>
