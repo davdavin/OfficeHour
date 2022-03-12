@@ -133,10 +133,14 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h2>Upload Excel</h2>
+                        </div>
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Karyawan</li>
+                                <li class="breadcrumb-item active">Tambah</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -208,9 +212,12 @@
                                     if (!empty($insertId)) {
                                         $type = "success";
                                         $message = "Excel Data Imported into the Database";
+                                        //     $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
+                                        //       redirect('Dashboard_Perusahaan/Upload_Massal');
                                     } else {
                                         $type = "error";
                                         $message = "Problem in Importing Excel Data";
+                                        //  $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
                                     }
                                 }
                             }
@@ -220,25 +227,29 @@
                         }
                     }
                     ?>
-                    <h2>Import Excel File into MySQL Database using PHP</h2>
+                    <!--   <h2>Import Excel File into MySQL Database using PHP</h2> -->
 
-                    <div class="outer-container">
-                        <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
-                            <div>
-                                <label>Choose Excel File</label> <input type="file" name="file" id="file" accept=".xls,.xlsx">
-                                <button type="submit" id="submit" name="import" class="btn-submit">Import</button>
-                                x
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="outer-container">
+                                <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label>Pilih File Excel</label><br>
+                                        <input type="file" name="file" id="file" accept=".xls,.xlsx">
+                                    </div>
+                                    <button type="submit" id="submit" name="import" class="btn-submit">Submit</button>
+                                </form>
+
                             </div>
-
-                        </form>
-
+                            <div id="response" class="<?php if (!empty($type)) {
+                                                            echo $type . " display-block";
+                                                        }
+                                                        ?>"><?php if (!empty($message)) {
+                                                                echo $message;
+                                                            }
+                                                            ?></div>
+                        </div>
                     </div>
-                    <div id="response" class="<?php if (!empty($type)) {
-                                                    echo $type . " display-block";
-                                                } ?>"><?php if (!empty($message)) {
-                                                            echo $message;
-                                                        } ?></div>
-
                 </div>
 
             </section>
@@ -280,6 +291,17 @@
                     title: 'Sukses',
                     text: sukses,
                     icon: 'success'
+                }).then((confirmed) => {
+                    document.location.href = <?php echo base_url() . 'Dashboard_Perusahaan/Upload_Massal' ?>;
+                });
+            }
+
+            const gagal = $('.gagal').data('flashdata');
+            if (gagal) {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: gagal,
+                    icon: 'error'
                 });
             }
 

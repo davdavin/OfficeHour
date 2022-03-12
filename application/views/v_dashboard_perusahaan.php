@@ -219,32 +219,30 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama</th>
+                                        <th>Nama Project</th>
+                                        <th>Project Manager</th>
+                                        <th>Klien</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tes</td>
-                                        <td>tes</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href=">">
-                                                <i class="fas fa-eye">
-                                                </i>
-                                                Detail
-                                            </a>
-                                            <a class="btn btn-info btn-sm" href="">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                                Edit
-                                            </a>
-                                            <a class="btn btn-danger btn-sm tombol-hapus" href="">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($list_project as $detail) { ?>
+                                        <tr>
+                                            <td><?php echo $detail->id_project ?></td>
+                                            <td><?php echo $detail->nama_project ?></td>
+                                            <td><?php echo $detail->nama_karyawan ?></td>
+                                            <td><?php echo $detail->nama_client ?></td>
+                                            <td><?php echo $detail->status_project ?></td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailProject<?php echo $detail->id_project ?>">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                    Detail
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                 </tbody>
                             </table>
@@ -253,6 +251,90 @@
                     </div>
                 </div>
             </section>
+            <?php $no = 0;
+            foreach ($list_project as $detail) {
+                $no++ ?>
+                <div class="modal fade" id="detailProject<?php echo $detail->id_project; ?>">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Informasi Project</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th>ID</th>
+                                        <td><?php echo $detail->id_project ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama Project</th>
+                                        <td><?php echo $detail->nama_project ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Project Manager</th>
+                                        <td><?php echo $detail->nama_karyawan ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Klien</th>
+                                        <td><?php echo $detail->nama_client ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Mulai</th>
+                                        <td><?php $tanggal_mulai = date_format(date_create($detail->tanggal_mulai_project), "d/n/Y");
+                                            echo tanggal_indonesia($tanggal_mulai);
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Selesai</th>
+                                        <td><?php $tanggal_selesai = date_format(date_create($detail->tanggal_selesai_project), "d/n/Y");
+                                            echo tanggal_indonesia($tanggal_selesai);
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status Project</th>
+                                        <td><?php echo $detail->status_project  ?></td>
+                                    </tr>
+                                </table>
+                                <!-- masih error -->
+                                <div class="card-header">
+                                    <h3 class="card-title">Anggota Project</h3>
+                                </div>
+                                <?php $id_project = $detail->id_project; ?>
+                                <div class="card-body">
+                                    <table id="anggota_project<?php echo $id_project ?>" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Karyawan</th>
+                                                <th>Tugas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($list_anggota_project as $anggota) {
+                                                if ($anggota->id_project == $id_project) { ?>
+                                                    <tr>
+                                                        <td><?php echo $anggota->nama_karyawan ?></td>
+                                                        <td><?php echo $anggota->nama_tugas ?></td>
+                                                    </tr>
+                                            <?php }
+                                            } ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            <?php } ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -319,6 +401,16 @@
             "lengthChange": true,
             "autoWidth": false
         }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
+
+
+        <?php
+        for ($i = 0; $i <= $id_project; $i++) { ?>
+            $("#anggota_project<?php echo $i ?>").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false
+            }).buttons().container().appendTo('#list_anggota_project_wrapper .col-md-6:eq(0)');
+        <?php } ?>
     </script>
 
 </body>
