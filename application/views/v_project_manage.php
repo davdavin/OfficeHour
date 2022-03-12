@@ -159,12 +159,38 @@
               </div>
             </div>
             <!-- ./col -->
+            <?php
+            $total_berjalan_k = 0;
+            $total_selesai_k = 0;
+            $total_berjalan_pm = 0;
+            $total_selesai_pm = 0;
+
+            foreach ($status_project_k as $totalK) {
+              if ($totalK->status_project == "SEDANG BERJALAN") {
+                $total_berjalan_k =  $totalK->total;
+              } else {
+                $total_selesai_k =  $totalK->total;
+              }
+            }
+            foreach ($status_project_pm as $totalPM) {
+              if ($totalPM->status_project == "SEDANG BERJALAN") {
+                $total_berjalan_pm = $totalPM->total;
+              } else {
+                $total_selesai_pm = $totalPM->total;
+              }
+            } ?>
+
             <div class="col-lg-4 col-6">
               <!-- small box -->
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3>53</h3>
-                  <h4>On Progress</h4>
+                  <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+                    <h3><?php echo $total_berjalan_k + $total_berjalan_pm; ?></h3>
+                    <h4>Sedang Berjalan</h4>
+                  <?php } else { ?>
+                    <h3><?php echo $total_berjalan_k; ?></h3>
+                    <h4>Sedang Berjalan</h4>
+                  <?php }  ?>
                 </div>
               </div>
             </div>
@@ -173,8 +199,14 @@
               <!-- small box -->
               <div class="small-box bg-white" style="border-radius: 15px;">
                 <div class="inner text-center">
-                  <h3>65</h3>
-                  <h4>Done</h4>
+                  <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+                    <h3><?php echo $total_selesai_k + $total_selesai_pm; ?></h3>
+                    <h4>Selesai</h4>
+                  <?php } else { ?>
+                    <h3><?php echo $total_selesai_k; ?></h3>
+                    <h4>Selesai</h4>
+                  <?php } ?>
+
                 </div>
               </div>
             </div>
