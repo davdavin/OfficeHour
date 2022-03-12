@@ -40,7 +40,24 @@ class M_Karyawan extends CI_Model
         return $this->db->query("SELECT id_project, nama_project, status_project FROM project WHERE project_manager = '$id_karyawan'");
     }
 
+    function get_status_project_karyawan($id_karyawan)
+    {
+        return $this->db->query("SELECT status_project, count(anggota_project.id_project) as total FROM project JOIN anggota_project ON anggota_project.id_project = project.id_project
+        WHERE anggota_project.id_karyawan = '$id_karyawan' GROUP BY status_project");
+    }
 
+    function get_status_project_pm($id_karyawan)
+    {
+        return $this->db->query("SELECT status_project, count(id_project) as total FROM project WHERE project_manager = '$id_karyawan' GROUP BY status_project");
+    }
+
+    function tampil_semua_tugas($id_karyawan)
+    {
+    }
+
+
+    //SELECT status_project, count(project.id_project) as total FROM project JOIN anggota_project ON project.id_project and anggota_project.id_project 
+    //WHERE id_karyawan = '$id_karyawan' GROUP BY status_project
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
