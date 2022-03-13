@@ -149,6 +149,7 @@
                                         <h4>Project Detail</h4>
                                     </div>
                                     <?php foreach ($project_detail as $list) { ?>
+
                                         <table class="table">
                                             <tr>
                                                 <th>Nama Project</th>
@@ -218,35 +219,34 @@
                                     </h4>
                                 </div>
                             </div>
-                            <?php foreach ($total_status as $totalS) { ?>
-                                <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
-                                    <div class="inner text-center">
-                                        <h4>Sedang Berjalan</h4>
-                                        <h4>
-                                            <?php if ($totalS->status_tugas == "SEDANG BERJALAN") {
-                                                echo $totalS->totalStatus;
-                                            } else {
-                                                echo 0;
-                                            }  ?>
-                                        </h4>
+                            <?php foreach ($total_status as $totalS) {
+                                if ($totalS->status_tugas == "SEDANG BERJALAN") { ?>
+                                    <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
+                                        <div class="inner text-center">
+                                            <h4>Sedang Berjalan</h4>
+                                            <h4>
+                                                <?php echo $totalS->totalStatus;
+                                                ?>
+                                            </h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="small-box col-7 bg-green" style="border-radius: 15px;">
-                                    <div class="inner text-center">
-                                        <h4>Selesai</h4>
-                                        <h4>
-                                            <?php if ($totalS->status_tugas == "SELESAI") {
-                                                echo $totalS->totalStatus;
-                                            } else {
-                                                echo 0;
-                                            } ?>
-                                        </h4>
-                                    </div>
-                                </div><br><br>
-                                <div class="col-7">
-                                    <a type="button" class="btn btn-primary" href=""><i class="fas fa-plus"></i> Tambah Tugas</a>
-                                </div>
-                            <?php } ?>
+                            <?php }
+                            } ?>
+
+                            <?php foreach ($total_status as $totalS) {
+                                if ($totalS->status_tugas == "SELESAI") { ?>
+                                    <div class="small-box col-7 bg-green" style="border-radius: 15px;">
+                                        <div class="inner text-center">
+                                            <h4>Selesai</h4>
+                                            <h4> <?php echo $totalS->totalStatus; ?>
+                                            </h4>
+                                        </div>
+                                    </div><br><br>
+                            <?php }
+                            } ?>
+                            <div class="col-7">
+                                <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
+                            </div>
                         </section>
                     </div>
             </section>
