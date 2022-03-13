@@ -29,6 +29,7 @@ class ProjectManage extends CI_Controller
     function project_detail($id_project)
     {
         $id_perusahaan = $this->session->userdata('id_perusahaan');
+        $data['idProject'] = $id_project;
         $data['project_detail'] = $this->M_Project->project_detail($id_project, $id_perusahaan)->result();
         $data['total_tugas'] = $this->M_Project->total_tugas_project($id_project, $id_perusahaan)->result();
         $data['total_status'] = $this->M_Project->get_total_status($id_project, $id_perusahaan)->result();
@@ -106,6 +107,12 @@ class ProjectManage extends CI_Controller
     function tambah_task()
     {
         $id_project = $this->session->userdata('id_project');
+        $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
+        $this->load->view('v_add_task.php', $data);
+    }
+
+    function tambah_task_baru($id_project)
+    {
         $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
         $this->load->view('v_add_task.php', $data);
     }
