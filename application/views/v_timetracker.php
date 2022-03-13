@@ -203,7 +203,6 @@
             <div class="card-header">
               <h3 class="card-title">Tugas Project</h3>
             </div>
-
             <div class="card-body">
               <table id="list-project" class="table table-bordered table-striped">
                 <thead>
@@ -212,15 +211,19 @@
                     <th>Tugas</th>
                     <th>Deadline</th>
                     <th>Status Tugas</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($aktivitas as $list_aktivitas) { ?>
+                  <?php foreach ($tugas_project as $list_tugas_project) { ?>
                     <tr>
-                      <td><?php echo $list_aktivitas->nama_project ?></td>
-                      <td><?php echo $list_aktivitas->nama_tugas ?> </td>
-                      <td><?php echo $list_aktivitas->waktu_mulai ?></td>
-                      <td><?php echo $list_aktivitas->status_tugas ?></td>
+                      <td><?php echo $list_tugas_project->nama_project ?></td>
+                      <td><?php echo $list_tugas_project->nama_tugas ?> </td>
+                      <td><?php echo tanggal_indonesia(date_format(date_create($list_tugas_project->batas_waktu), "d/n/Y"))  ?></td>
+                      <td><?php echo $list_tugas_project->status_tugas ?></td>
+                      <td>
+                        <a type="button" class="btn btn-sm bg-info" data-toggle="modal" data-target="#tugas<?php echo $list_tugas_project->id_tugas_project ?>"><i class="fas fa-pencil-alt"></i> Update</a>
+                      </td>
                     </tr>
                   <?php } ?>
                 </tbody>
@@ -229,6 +232,34 @@
 
           </div>
         </div>
+
+
+        <?php $no = 0;
+        foreach ($tugas_project as $list_tugas_project) {
+          $no++; ?>
+          <div class="modal fade" id="tugas<?php echo $list_tugas_project->id_tugas_project; ?>">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Input Aktivitas</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_karyawan' ?>" method="post">
+
+                    <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                  </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+        <?php } ?>
       </section>
       <!-- /.content -->
     </div>
