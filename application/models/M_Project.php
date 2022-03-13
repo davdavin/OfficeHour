@@ -24,6 +24,24 @@ class M_Project extends CI_Model
         return $this->db->query("SELECT * FROM project JOIN karyawan ON karyawan.id_karyawan = project.project_manager WHERE id_project = '$id_project' AND project.id_perusahaan = '$id_perusahaan'");
     }
 
+    function total_tugas_project($id_project, $id_perusahaan)
+    {
+        return $this->db->query("SELECT count(id_tugas_project) as totalTugas FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+                                JOIN project ON project.id_project = anggota_project.id_project WHERE project.id_project = '$id_project' AND id_perusahaan = '$id_perusahaan'");
+    }
+
+    function get_total_status($id_project, $id_perusahaan)
+    {
+        return $this->db->query("SELECT status_tugas, count(id_tugas_project) as totalStatus FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+                                JOIN project ON project.id_project = anggota_project.id_project WHERE project.id_project = '$id_project' AND id_perusahaan = '$id_perusahaan' GROUP BY status_tugas");
+    }
+
+    function get_anggota_project($id_project, $id_perusahaan)
+    {
+        return $this->db->query("SELECT nama_tugas, nama_karyawan, status_tugas FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+        JOIN project ON project.id_project = anggota_project.id_project JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE project.id_project = '$id_project' AND project.id_perusahaan = '$id_perusahaan'");
+    }
+
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
