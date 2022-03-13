@@ -5,5 +5,5 @@
 }
 
 .bg-input:focus {
-	border-bottom: 1px solid maroon;
+	border-bottom: 2px solid rgba(0, 183, 255, 0.856);
 }
