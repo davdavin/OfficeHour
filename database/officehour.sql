@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2022 at 04:05 PM
+-- Generation Time: Mar 14, 2022 at 11:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -287,8 +287,8 @@ INSERT INTO `tugas_project` (`id_tugas_project`, `id_anggota_project`, `nama_tug
 (19, 13, 'QA', '2022-03-09', 'SEDANG BERJALAN'),
 (20, 15, 'Applying', '2022-03-09', 'SEDANG BERJALAN'),
 (21, 16, 'Finishing dan Negosiasi', '2022-03-09', 'SEDANG BERJALAN'),
-(24, 19, 'Memantau', '2022-03-24', 'S'),
-(25, 20, 'Testing', '2022-04-01', 'E'),
+(24, 19, 'Memantau', '2022-03-24', 'SEDANG BERJALAN'),
+(25, 20, 'Testing', '2022-04-01', 'SEDANG BERJALAN'),
 (26, 21, 'QA', '2022-03-11', 'SEDANG BERJALAN'),
 (27, 22, 'Persiapan', '2022-04-09', 'SEDANG BERJALAN');
 
