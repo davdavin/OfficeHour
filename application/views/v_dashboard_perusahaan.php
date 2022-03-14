@@ -284,15 +284,13 @@
                                     </tr>
                                     <tr>
                                         <th>Tanggal Mulai</th>
-                                        <td><?php $tanggal_mulai = date_format(date_create($detail->tanggal_mulai_project), "d/n/Y");
-                                            echo tanggal_indonesia($tanggal_mulai);
+                                        <td><?php echo tanggal_indonesia($detail->tanggal_mulai_project);
                                             ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Selesai</th>
-                                        <td><?php $tanggal_selesai = date_format(date_create($detail->tanggal_selesai_project), "d/n/Y");
-                                            echo tanggal_indonesia($tanggal_selesai);
+                                        <td><?php echo tanggal_indonesia($detail->tanggal_selesai_project);
                                             ?>
                                         </td>
                                     </tr>

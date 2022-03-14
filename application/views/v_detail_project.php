@@ -161,11 +161,11 @@
                                             </tr>
                                             <tr>
                                                 <th>Tanggal Mulai</th>
-                                                <td><?php echo tanggal_indonesia(date_format(date_create($list->tanggal_mulai_project), "d/n/Y")); ?></td>
+                                                <td><?php echo tanggal_indonesia($list->tanggal_mulai_project); ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Tanggal Selesai</th>
-                                                <td><?php echo tanggal_indonesia(date_format(date_create($list->tanggal_selesai_project), "d/n/Y")); ?></td>
+                                                <td><?php echo tanggal_indonesia($list->tanggal_selesai_project); ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Status</th>
