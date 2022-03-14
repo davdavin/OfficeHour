@@ -98,7 +98,7 @@ class Dashboard_Perusahaan extends CI_Controller
             // Email penerima
             $this->email->to($email_karyawan);
             // Subject
-            $this->email->subject('Thank You for Your Feedback.');
+            $this->email->subject('Sign Up Akun');
             // Isi
             $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
             $this->email->message("Dear \n" . $nama_karyawan . "\n You are receiving this because you have an OfficeHour account associated with this email address.
@@ -169,63 +169,72 @@ class Dashboard_Perusahaan extends CI_Controller
                 }
 
                 $token = md5($description) . rand(10, 9999);
-                if (!empty($name) || !empty($description) || !empty($posisi)) {
-                    $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
-                    $paramType = "sssss";
-                    $paramArray = array(
-                        $name,
-                        $description,
-                        $posisi,
-                        $id_perusahaan,
-                        $token
-                    );
-                    $insertId = $db->insert($query, $paramType, $paramArray);
-                    // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
-                    // $result = mysqli_query($conn, $query);
 
-                    //mail
-                    $config = [
-                        'mailtype'  => 'html',
-                        'charset'   => 'utf-8',
-                        'protocol'  => 'smtp',
-                        'smtp_host' => 'smtp.gmail.com',
-                        'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
-                        'smtp_pass'   => 'UpH12345',              // Password gmail
-                        'smtp_crypto' => 'ssl',
-                        'smtp_port'   => 465,
-                        'crlf'    => "\r\n",
-                        'newline' => "\r\n"
-                    ];
+                $this->form_validation->set_rules($description, 'Email', 'is_unique[karyawan.email_karyawan]');
+                $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
 
-                    // Load library email dan konfigurasinya
-                    $this->load->library('email', $config);
-                    // Email dan nama pengirim
-                    $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
-                    // Email penerima
-                    $this->email->to($description);
-                    // Subject
-                    $this->email->subject('Thank You for Your Feedback.');
-                    // Isi
-                    $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
-                    $this->email->message("Dear \n" . $name . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+                if ($this->form_validation->run() == FALSE) {
+                    echo validation_errors();
+                } else {
+
+                    if (!empty($name) || !empty($description) || !empty($posisi)) {
+                        $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
+                        $paramType = "sssss";
+                        $paramArray = array(
+                            $name,
+                            $description,
+                            $posisi,
+                            $id_perusahaan,
+                            $token
+                        );
+                        $insertId = $db->insert($query, $paramType, $paramArray);
+                        // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
+                        // $result = mysqli_query($conn, $query);
+
+                        //mail
+                        $config = [
+                            'mailtype'  => 'html',
+                            'charset'   => 'utf-8',
+                            'protocol'  => 'smtp',
+                            'smtp_host' => 'smtp.gmail.com',
+                            'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                            'smtp_pass'   => 'UpH12345',              // Password gmail
+                            'smtp_crypto' => 'ssl',
+                            'smtp_port'   => 465,
+                            'crlf'    => "\r\n",
+                            'newline' => "\r\n"
+                        ];
+
+                        // Load library email dan konfigurasinya
+                        $this->load->library('email', $config);
+                        // Email dan nama pengirim
+                        $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+                        // Email penerima
+                        $this->email->to($description);
+                        // Subject
+                        $this->email->subject('Thank You for Your Feedback.');
+                        // Isi
+                        $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
+                        $this->email->message("Dear \n" . $name . "\n You are receiving this because you have an OfficeHour account associated with this email address.
         
                         Please click the link below to verify your account. \n" . $link);
-                    if ($this->email->send()) {
-                        echo 'email terkirim';
-                    } else {
-                        echo 'Error! email tidak dapat dikirim.';
-                    }
-                    if (!empty($insertId)) {
-                        $type = "success";
-                        $message = "Berhasil Upload";
-                        echo $message;
-                        //     $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
-                        //       redirect('Dashboard_Perusahaan/Upload_Massal');
-                    } else {
-                        $type = "error";
-                        $message = "Tidak Berhasil Upload";
-                        //  $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
-                        echo $message;
+                        if ($this->email->send()) {
+                            echo 'email terkirim';
+                        } else {
+                            echo 'Error! email tidak dapat dikirim.';
+                        }
+                        if (!empty($insertId)) {
+                            $type = "success";
+                            $message = "Berhasil Upload";
+                            echo $message;
+                            //     $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
+                            //       redirect('Dashboard_Perusahaan/Upload_Massal');
+                        } else {
+                            $type = "error";
+                            $message = "Tidak Berhasil Upload";
+                            //  $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
+                            echo $message;
+                        }
                     }
                 }
             }
