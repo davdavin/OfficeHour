@@ -158,11 +158,11 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <h4 class="time" id="display">00:00:00</h4>
+          <!-- <h4 class="time" id="display">00:00:00:00</h4> -->
           <button class="buttonPlay" id="stopwatch">
-            <a type="button" id="playButton" class="btn bg-green" style="border-radius: 25px;">Start time </a>
-            <a type="button" id="pauseButton" class="btn bg-red" style="border-radius: 25px;"> Pause </a>
-            <a type="button" id="resetButton" class="btn bg-red" style="border-radius: 25px;"> Reset time </a><br><br>
+            <a type="button" id="start" class="btn bg-green" style="border-radius: 25px;">Mulai </a>
+            <a type="button" id="stop" class="btn bg-red" style="border-radius: 25px;"> Berhenti </a><br><br>
+            <!-- <a type="button" id="resetButton" class="btn bg-red" style="border-radius: 25px;"> Reset time </a><br><br> -->
           </button>
         </div><!-- /.container-fluid -->
 
@@ -188,7 +188,7 @@
                     <tr>
                       <td><?php echo $list_aktivitas->nama_project ?></td>
                       <td><?php echo $list_aktivitas->nama_tugas ?> </td>
-                      <td><?php echo $list_aktivitas->waktu_mulai . ' - ' . $list_aktivitas->waktu_selesai ?></td>
+                      <td><?php echo waktu($list_aktivitas->waktu_mulai) . ' - ' . waktu($list_aktivitas->waktu_selesai) ?></td>
                       <td><?php echo $list_aktivitas->status_tugas ?></td>
                       <td><?php echo $list_aktivitas->bukti ?></td>
                     </tr>
@@ -219,7 +219,7 @@
                     <tr>
                       <td><?php echo $list_tugas_project->nama_project ?></td>
                       <td><?php echo $list_tugas_project->nama_tugas ?> </td>
-                      <td><?php echo tanggal_indonesia(date_format(date_create($list_tugas_project->batas_waktu), "d/n/Y"))  ?></td>
+                      <td><?php echo tanggal_indonesia($list_tugas_project->batas_waktu)  ?></td>
                       <td><?php echo $list_tugas_project->status_tugas ?></td>
                       <td>
                         <a type="button" class="btn btn-sm bg-info" data-toggle="modal" data-target="#tugas<?php echo $list_tugas_project->id_tugas_project ?>"><i class="fas fa-pencil-alt"></i> Update</a>
@@ -233,10 +233,10 @@
           </div>
         </div>
 
-
         <?php $no = 0;
         foreach ($tugas_project as $list_tugas_project) {
-          $no++; ?>
+          $no++;
+          $id_tugas_project = $list_tugas_project->id_tugas_project; ?>
           <div class="modal fade" id="tugas<?php echo $list_tugas_project->id_tugas_project; ?>">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -248,8 +248,47 @@
                 </div>
                 <div class="modal-body">
 
-                  <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_karyawan' ?>" method="post">
-
+                  <form class="form-submit" action="<?php echo base_url() . 'TimeTracker/proses_input_aktivitas' ?>" method="post" id="submit-aktivitas<?php echo $list_tugas_project->id_tugas_project ?>">
+                    <div class="form-group">
+                      <label>Nama Project</label>
+                      <input type="hidden" name="id_project" value="<?= $list_tugas_project->id_project ?>">
+                      <input type="text" class="form-control" value="<?= $list_tugas_project->nama_project ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>Nama Tugas</label>
+                      <input type="hidden" name="id_tugas_project" value="<?= $list_tugas_project->id_tugas_project ?>">
+                      <input type="text" class="form-control" value="<?= $list_tugas_project->nama_tugas ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>Tanggal Aktivitas</label>
+                      <input type="date" class="form-control" name="tanggal_aktivitas">
+                      <p class="p-2 error_tanggal"></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Jam Mulai</label>
+                      <input type="time" class="form-control" name="waktu_mulai">
+                      <p class="p-2 error_mulai"></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Jam Selesai</label>
+                      <input type="time" class="form-control" name="waktu_selesai">
+                      <p class="p-2 error_selesai"></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Bukti</label>
+                      <input type="text" class="form-control" name="bukti">
+                      <p class="p-2 error_bukti"></p>
+                    </div>
+                    <div class="form-group">
+                      <label>Status Tugas</label>
+                      <select class="form-control" name="status_tugas">
+                        <option selected disabled value>-- Pilih --</option>
+                        <option value="SELESAI">Selesai</option>
+                        <option value="SEDANG BERJALAN">Masih Berjalan</option>
+                      </select>
+                      <p class="p-2 error_status"></p>
+                    </div>
+                    <p class="p-2 berhasil"></p>
                     <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
                   </form>
                 </div>
@@ -288,6 +327,8 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- DataTables  & Plugins -->
   <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -314,80 +355,153 @@
         "lengthChange": true,
         "autoWidht": false
       });
+
+      var timer = null,
+        interval = 1000 * 1 * 60;
+      $("#start").click(function() {
+        if (timer !== null) return;
+        timer = setInterval(function() {
+          alert("Please Screen Shoot :)");
+          window.open("<?php echo base_url() . 'LandingPage' ?>", '_blank');
+        }, interval);
+
+      });
+
+      $("#stop").click(function() {
+        clearInterval(timer);
+        timer = null
+      });
+
+      <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?>
+        $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: $(this).attr('action'),
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(hasil) {
+              var obj = $.parseJSON(hasil);
+              if (obj.sukses == false) {
+                if (obj.error_tanggal) {
+                  $('.error_tanggal').html(obj.error_tanggal);
+                  $('.error_tanggal').css("color", "red");
+                } else {
+                  $('.error_tanggal').hide();
+                }
+                if (obj.error_mulai) {
+                  $('.error_mulai').html(obj.error_mulai);
+                  $('.error_mulai').css("color", "red");
+                } else {
+                  $('.error_mulai').hide();
+                }
+                if (obj.error_selesai) {
+                  $('.error_selesai').html(obj.error_selesai);
+                  $('.error_selesai').css("color", "red");
+                } else {
+                  $('.error_selesai').hide();
+                }
+                if (obj.error_bukti) {
+                  $('.error_bukti').html(obj.error_bukti);
+                  $('.error_bukti').css("color", "red");
+                } else {
+                  $('.error_bukti').hide();
+                }
+                if (obj.error_status) {
+                  $('.error_status').html(obj.error_status);
+                  $('.error_status').css("color", "red");
+                } else {
+                  $('.error_status').hide();
+                }
+              } else {
+                Swal.fire({
+                  title: 'Sukses',
+                  text: obj.sukses,
+                  icon: 'success',
+                }).then((confirmed) => {
+                  window.location.reload();
+                });
+              }
+
+            }
+          });
+
+        });
+      <?php }
+      ?>
+
     });
-
     // Convert time to a format of hours, minutes, seconds, and milliseconds
-    function timeToString(time) {
-      let diffInHrs = time / 3600000;
-      let hh = Math.floor(diffInHrs);
+    /* function timeToString(time) {
+       let diffInHrs = time / 3600000;
+       let hh = Math.floor(diffInHrs);
 
-      let diffInMin = (diffInHrs - hh) * 60;
-      let mm = Math.floor(diffInMin);
+       let diffInMin = (diffInHrs - hh) * 60;
+       let mm = Math.floor(diffInMin);
 
-      let diffInSec = (diffInMin - mm) * 60;
-      let ss = Math.floor(diffInSec);
+       let diffInSec = (diffInMin - mm) * 60;
+       let ss = Math.floor(diffInSec);
 
-      let diffInMs = (diffInSec - ss) * 100;
-      let ms = Math.floor(diffInMs);
+       let diffInMs = (diffInSec - ss) * 100;
+       let ms = Math.floor(diffInMs);
 
-      let formattedMM = mm.toString().padStart(2, "0");
-      let formattedSS = ss.toString().padStart(2, "0");
-      let formattedMS = ms.toString().padStart(2, "0");
+       let formattedMM = mm.toString().padStart(2, "0");
+       let formattedSS = ss.toString().padStart(2, "0");
+       let formattedMS = ms.toString().padStart(2, "0");
 
-      return `${formattedMM}:${formattedSS}:${formattedMS}`;
-    }
+       return `${formattedMM}:${formattedSS}:${formattedMS}`;
+     }
 
-    // Declare variables to use in our functions below
-    let startTime;
-    let elapsedTime = 0;
-    let timerInterval;
+     // Declare variables to use in our functions below
+     let startTime;
+     let elapsedTime = 0;
+     let timerInterval;
 
-    // Create function to modify innerHTML
+     // Create function to modify innerHTML
 
-    function print(txt) {
-      document.getElementById("display").innerHTML = txt;
-    }
+     function print(txt) {
+       document.getElementById("display").innerHTML = txt;
+     }
 
-    // Create "start", "pause" and "reset" functions
+     // Create "start", "pause" and "reset" functions
 
-    function start() {
-      startTime = Date.now() - elapsedTime;
-      timerInterval = setInterval(function printTime() {
-        elapsedTime = Date.now() - startTime;
-        print(timeToString(elapsedTime));
-      }, 10);
-      showButton("PAUSE");
-    }
+     function start() {
+       startTime = Date.now() - elapsedTime;
+       timerInterval = setInterval(function printTime() {
+         elapsedTime = Date.now() - startTime;
+         print(timeToString(elapsedTime));
+       }, 10);
+       showButton("PAUSE");
+     }
 
-    function pause() {
-      clearInterval(timerInterval);
-      showButton("PLAY");
-    }
+     function pause() {
+       clearInterval(timerInterval);
+       showButton("PLAY");
+     }
 
-    function reset() {
-      clearInterval(timerInterval);
-      print("00:00:00");
-      elapsedTime = 0;
-      showButton("PLAY");
-    }
+     function reset() {
+       clearInterval(timerInterval);
+       print("00:00:00");
+       elapsedTime = 0;
+       showButton("PLAY");
+     }
 
-    // Create function to display buttons
+     // Create function to display buttons
 
-    function showButton(buttonKey) {
-      const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
-      const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
-      buttonToShow.style.display = "block";
-      buttonToHide.style.display = "none";
-    }
-    // Create event listeners
+     function showButton(buttonKey) {
+       const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
+       const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
+       buttonToShow.style.display = "block";
+       buttonToHide.style.display = "none";
+     }
+     // Create event listeners
 
-    let playButton = document.getElementById("playButton");
-    let pauseButton = document.getElementById("pauseButton");
-    let resetButton = document.getElementById("resetButton");
+     let playButton = document.getElementById("playButton");
+     let pauseButton = document.getElementById("pauseButton");
+     let resetButton = document.getElementById("resetButton");
 
-    playButton.addEventListener("click", start);
-    pauseButton.addEventListener("click", pause);
-    resetButton.addEventListener("click", reset);
+     playButton.addEventListener("click", start);
+     pauseButton.addEventListener("click", pause);
+     resetButton.addEventListener("click", reset); */
   </script>
 
 </body>
