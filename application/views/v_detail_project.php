@@ -187,16 +187,16 @@
                                     <table id="list-anggota" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Nama Tugas</th>
                                                 <th>Nama Karyawan</th>
+                                                <th>Nama Tugas</th>
                                                 <th>Status Tugas</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($anggota_project as $detail) { ?>
                                                 <tr>
-                                                    <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo $detail->nama_karyawan ?></td>
+                                                    <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo $detail->status_tugas ?></td>
                                                 </tr>
                                             <?php } ?>
