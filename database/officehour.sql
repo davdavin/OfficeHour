@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2022 at 11:09 AM
+-- Generation Time: Mar 15, 2022 at 01:21 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -55,6 +55,14 @@ CREATE TABLE `aktivitas` (
   `waktu_selesai` time NOT NULL,
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `aktivitas`
+--
+
+INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_project`, `tanggal_aktivitas`, `waktu_mulai`, `waktu_selesai`, `bukti`) VALUES
+(1, 2, 7, 20, '2022-03-25', '08:28:00', '20:28:00', 'Foto'),
+(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Foto');
 
 -- --------------------------------------------------------
 
@@ -113,18 +121,19 @@ CREATE TABLE `client` (
   `id_client` int(11) NOT NULL,
   `id_perusahaan` varchar(25) NOT NULL,
   `nama_client` varchar(50) NOT NULL,
-  `password_client` char(255) NOT NULL,
-  `email_client` varchar(50) NOT NULL
+  `password_client` char(255) DEFAULT NULL,
+  `email_client` varchar(50) NOT NULL,
+  `token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id_client`, `id_perusahaan`, `nama_client`, `password_client`, `email_client`) VALUES
-(1, 'PRSH5', 'Media Farma', '$2y$10$kpvGd3MaGJHZJcgvFV9SAerDZooLUCtP.VxvmPh8CCAMLIQMLeHUu', 'farmafarma@example.com'),
-(2, 'PRSH5', 'Nusantara Project', '$2y$10$Ty8taiLot9aMVY9z807hNeqhCEBjSVTqnx5/e0kqL10hLQ3hcTdKa', 'carcarcar@example.com'),
-(3, 'PRSH5', 'Sinar', '$2y$10$DjAARcVe/BXOlLvpqvd6fOlA7KYmfMQaAeBPz4.iXj6K9xbj9TFAy', 'sinsinsin@gmail.com');
+INSERT INTO `client` (`id_client`, `id_perusahaan`, `nama_client`, `password_client`, `email_client`, `token`) VALUES
+(1, 'PRSH5', 'Media Farma', '$2y$10$kpvGd3MaGJHZJcgvFV9SAerDZooLUCtP.VxvmPh8CCAMLIQMLeHUu', 'farmafarma@example.com', ''),
+(2, 'PRSH5', 'Nusantara Project', '$2y$10$Ty8taiLot9aMVY9z807hNeqhCEBjSVTqnx5/e0kqL10hLQ3hcTdKa', 'carcarcar@example.com', ''),
+(3, 'PRSH5', 'Sinar', '$2y$10$DjAARcVe/BXOlLvpqvd6fOlA7KYmfMQaAeBPz4.iXj6K9xbj9TFAy', 'sinsinsin@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -377,7 +386,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`

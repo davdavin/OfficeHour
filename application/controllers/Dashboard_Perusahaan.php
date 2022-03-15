@@ -304,7 +304,7 @@ class Dashboard_Perusahaan extends CI_Controller
             echo json_encode($respon);
         } else {
             $data = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'email_client' => $email_klien
+                'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'email_client' => $email_klien, 'token' => $token
             );
 
             $config = [
