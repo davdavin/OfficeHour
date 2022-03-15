@@ -60,7 +60,7 @@
                             <?php echo form_error('password'); ?>
                             <div class="form-group">
                                 <label for="passconf"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="confirm_password" id="passconf" placeholder="Re-type Password" />
+                                <input type="password" name="confirm_password" id="passconf" placeholder="Ketik Ulang Password" />
                             </div>
                             <?php echo form_error('confirm_password'); ?>
                             <div class="form-group">

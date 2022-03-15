@@ -168,11 +168,11 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" id="tombolUpdate" class="btn btn-primary">Update</button><br><br>
+                                        <button type="submit" id="tombolUpdate" class="btn btn-primary">Ubah</button><br><br>
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <button data-toggle="modal" data-target="#modal-lg" class="btn btn-primary">Change Password</button>
+                                    <button data-toggle="modal" data-target="#modal-lg" class="btn btn-primary">Ganti Password</button>
                                 </div>
                             <?php } ?>
 
@@ -187,7 +187,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Update Password</h4>
+                        <h4 class="modal-title">Ganti Password</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -196,21 +196,21 @@
 
                         <form action="<?php echo base_url() . 'Account_Karyawan/update_password' ?>" method="post" class="form-submit">
                             <div class="form-group">
-                                <label>Current Password</label>
+                                <label>Password Lama</label>
                                 <input type="password" class="form-control bg-input" name="currentpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_currentpass" style="display: none">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>New Password</label>
+                                <label>Password Baru</label>
                                 <input type="password" class="form-control bg-input" name="newpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_newpass" style="display: none">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Re-type new Password</label>
+                                <label>Ketik Ulang Password Baru</label>
                                 <input type="password" class="form-control bg-input" name="confirmpass">
                                 <!-- INFO ERROR -->
                                 <div class="p-2 is-invalid error_retype" style="display: none">
