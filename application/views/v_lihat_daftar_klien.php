@@ -208,10 +208,6 @@
                                 <div class="is-invalid error_email" style="display: none">
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                </div>
                                 <!-- INFO ERROR -->
                                 <div class="is-invalid error_password" style="display: none">
                                 </div>
@@ -325,13 +321,6 @@
                                 $('.error_email').css("color", "red");
                             } else {
                                 $('.error_email').hide();
-                            }
-                            if (obj.error_password) {
-                                $('.error_password').show();
-                                $('.error_password').html(obj.error_password);
-                                $('.error_password').css("color", "red");
-                            } else {
-                                $('.error_password').hide();
                             }
                         } else {
                             Swal.fire({

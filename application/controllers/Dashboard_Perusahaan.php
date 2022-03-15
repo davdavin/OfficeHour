@@ -101,9 +101,9 @@ class Dashboard_Perusahaan extends CI_Controller
             $this->email->subject('Sign Up Akun');
             // Isi
             $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
-            $this->email->message("Dear \n" . $nama_karyawan . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+            $this->email->message("Halo \n" . $nama_karyawan . "\n Anda menerima surel ini dikarenakan anda sudah terdaftar sebagai karyawan di dalam OfficeHour.
 
-                Please click the link below to verify your account. \n" . $link);
+            Untuk melakukan aktivasi akun mohon untuk klik link berikut ini. \n" . $link);
 
             /*        $this->M_Karyawan->insert_record($data, 'karyawan');
             $hasil['sukses'] = "Behasil tambah karyawan";
@@ -215,9 +215,9 @@ class Dashboard_Perusahaan extends CI_Controller
                         $this->email->subject('Thank You for Your Feedback.');
                         // Isi
                         $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
-                        $this->email->message("Dear \n" . $name . "\n You are receiving this because you have an OfficeHour account associated with this email address.
-        
-                        Please click the link below to verify your account. \n" . $link);
+                        $this->email->message("Halo \n" . $name . "\n Anda menerima surel ini dikarenakan anda sudah terdaftar sebagai karyawan di dalam OfficeHour.
+
+                        Untuk melakukan aktivasi akun mohon untuk klik link berikut ini \n" . $link);
                         if ($this->email->send()) {
                             echo 'email terkirim';
                         } else {
@@ -298,14 +298,15 @@ class Dashboard_Perusahaan extends CI_Controller
             $respon = array(
                 'sukses' => false,
                 'error_nama' => form_error('nama_klien'),
-                'error_email' => form_error('email_klien'),
-                'error_password' => form_error('password')
+                'error_email' => form_error('email_klien')
             );
             echo json_encode($respon);
         } else {
             $data = array(
                 'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'email_client' => $email_klien, 'token' => $token
             );
+
+            $nama_perusahaan = $this->db->query("SELECT nama_perusahaan FROM perusahaan WHERE id_perusahaan = '$id_perusahaan'")->row_array();
 
             $config = [
                 'mailtype'  => 'html',
@@ -329,14 +330,9 @@ class Dashboard_Perusahaan extends CI_Controller
             // Subject
             $this->email->subject('Sign Up Akun');
             // Isi
-            $link = "<a href='localhost/OfficeHour/Verifikasi/klien/?key=" . $token . "'>Form Sign Up</a>";
-            $this->email->message("Dear \n" . $nama_klien . "\n You are receiving this because you have an OfficeHour account associated with this email address.
-
-                Please click the link below to verify your account. \n" . $link);
-
-            /*        $this->M_Karyawan->insert_record($data, 'karyawan');
-            $hasil['sukses'] = "Behasil tambah karyawan";
-            echo json_encode($hasil); */
+            $link = "<a href='localhost/OfficeHour/Verifikasi/klien/?key=" . $token . "'>Verifikasi Email</a>";
+            $this->email->message("Halo \n" . $nama_klien . "\n Anda menerima email ini dikarenakan anda sudah terdaftar sebagai klien dari perusahaan " . $nama_perusahaan['nama_perusahaan'] .
+                " Untuk melakukan aktivasi akun mohon untuk klik link berikut ini. \n" . $link);
 
             if ($this->email->send()) {
                 $this->M_Klien->insert_record($data, 'client');
