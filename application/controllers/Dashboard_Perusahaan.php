@@ -284,16 +284,15 @@ class Dashboard_Perusahaan extends CI_Controller
         $id_perusahaan = $this->input->post('id_perusahaan');
         $nama_klien = $this->input->post('nama_klien');
         $email_klien = $this->input->post('email_klien');
-        $password = $this->input->post('password');
+        $token = md5($email_klien) . rand(10, 9999);
+
 
         $this->form_validation->set_rules('nama_klien', 'Nama', 'required');
         $this->form_validation->set_rules('email_klien', 'Email', 'required|valid_email|is_unique[client.email_client]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[20]');
 
         $this->form_validation->set_message('required', '{field} wajib diisi');
         $this->form_validation->set_message('valid_email', '{field} wajib diisi email');
         $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
-        $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
 
         if ($this->form_validation->run() == FALSE) {
             $respon = array(
@@ -305,12 +304,47 @@ class Dashboard_Perusahaan extends CI_Controller
             echo json_encode($respon);
         } else {
             $data = array(
-                'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'password_client' => password_hash($password, PASSWORD_DEFAULT), 'email_client' => $email_klien
+                'id_perusahaan' => $id_perusahaan, 'nama_client' => $nama_klien, 'email_client' => $email_klien
             );
 
-            $this->M_Klien->insert_record($data, 'client');
-            $respon['sukses'] = "Berhasil tambah klien";
-            echo json_encode($respon);
+            $config = [
+                'mailtype'  => 'html',
+                'charset'   => 'utf-8',
+                'protocol'  => 'smtp',
+                'smtp_host' => 'smtp.gmail.com',
+                'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                'smtp_pass'   => 'UpH12345',              // Password gmail
+                'smtp_crypto' => 'ssl',
+                'smtp_port'   => 465,
+                'crlf'    => "\r\n",
+                'newline' => "\r\n"
+            ];
+
+            // Load library email dan konfigurasinya
+            $this->load->library('email', $config);
+            // Email dan nama pengirim
+            $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+            // Email penerima
+            $this->email->to($email_klien);
+            // Subject
+            $this->email->subject('Sign Up Akun');
+            // Isi
+            $link = "<a href='localhost/OfficeHour/Verifikasi/client/?key=" . $token . "'>Click and Verify Email</a>";
+            $this->email->message("Dear \n" . $nama_klien . "\n You are receiving this because you have an OfficeHour account associated with this email address.
+
+                Please click the link below to verify your account. \n" . $link);
+
+            /*        $this->M_Karyawan->insert_record($data, 'karyawan');
+            $hasil['sukses'] = "Behasil tambah karyawan";
+            echo json_encode($hasil); */
+
+            if ($this->email->send()) {
+                $this->M_Klien->insert_record($data, 'client');
+                $respon['sukses'] = "Berhasil tambah klien";
+                echo json_encode($respon);
+            } else {
+                echo 'Error! email tidak dapat dikirim.';
+            }
         }
     }
 }
