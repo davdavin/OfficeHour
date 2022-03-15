@@ -124,7 +124,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2><b>ADD & ASSIGN TASK PROJECT</b></h2>
+                            <h2><b>Tambah Tugas</b></h2>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -159,9 +159,9 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">#</th>
-                                                    <th>Task Name</th>
-                                                    <th>Assign To</th>
-                                                    <th>Deadline</th>
+                                                    <th>Tugas</th>
+                                                    <th>Penanggung Jawab</th>
+                                                    <th>Batas Waktu</th>
                                                     <th><button class="btn btn-success btn-block" id="BarisBaru"><i class="fa fa-plus"></i> Baris Baru</button></th>
                                                 </tr>
                                             </thead>
@@ -263,7 +263,7 @@
             var Baris = '<tr>';
             Baris += '<td class="text-center">' + Nomor + '</td>';
             Baris += '<td>';
-            Baris += '<input type="text" name="tugas[]" class="form-control first_name" placeholder="Task Name...." required="">';
+            Baris += '<input type="text" name="tugas[]" class="form-control first_name" placeholder="Tugas ...." required="">';
             Baris += '</td>';
             Baris += '<td>';
             Baris += '<select class="form-control select2"  style="width: 100%;" name="member[]"> ' +

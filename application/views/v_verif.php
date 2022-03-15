@@ -33,7 +33,7 @@
                             <?php echo 'Email yang digunakan ' . $karyawan['email_karyawan']; ?><br><br>
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="nama_karyawan" value="<?= 'YourName ' . $karyawan['nama_karyawan'] ?>" readonly>
+                                <input type="text" name="nama_karyawan" value="<?= $karyawan['nama_karyawan'] ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
@@ -42,7 +42,7 @@
                             <?php echo form_error('password'); ?>
                             <div class="form-group">
                                 <label for="passconf"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="confirm_password" id="passconf" placeholder="Re-type Password" />
+                                <input type="password" name="confirm_password" id="passconf" placeholder="Ketik Ulang Password" />
                             </div>
                             <?php echo form_error('confirm_password'); ?>
                             <div class="form-group form-button">

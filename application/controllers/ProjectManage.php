@@ -26,6 +26,13 @@ class ProjectManage extends CI_Controller
         $this->load->view('v_project_manage.php', $data);
     }
 
+    function search_project()
+    {
+        $postData = $this->input->post();
+        $data = $this->M_Project->get_search_project($postData);
+        echo json_encode($data);
+    }
+
     function project_detail($id_project)
     {
         $id_perusahaan = $this->session->userdata('id_perusahaan');
