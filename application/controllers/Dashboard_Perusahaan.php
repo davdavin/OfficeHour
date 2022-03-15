@@ -329,7 +329,7 @@ class Dashboard_Perusahaan extends CI_Controller
             // Subject
             $this->email->subject('Sign Up Akun');
             // Isi
-            $link = "<a href='localhost/OfficeHour/Verifikasi/client/?key=" . $token . "'>Click and Verify Email</a>";
+            $link = "<a href='localhost/OfficeHour/Verifikasi/klien/?key=" . $token . "'>Form Sign Up</a>";
             $this->email->message("Dear \n" . $nama_klien . "\n You are receiving this because you have an OfficeHour account associated with this email address.
 
                 Please click the link below to verify your account. \n" . $link);
