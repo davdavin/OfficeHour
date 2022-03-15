@@ -15,12 +15,41 @@ class M_Project extends CI_Model
 
     function get_search_project($postData)
     {
+        $id_karyawan = $this->session->userdata('id_karyawan');
         $response = array();
 
         if ($postData['search']) {
-            $this->db->select("*");
-            $this->db->where("nama_project LIKE '%" . $postData['search'] . "%'");
-            $records = $this->db->get('project')->result();
+            //   $this->db->select("*");
+            //  $this->db->where("nama_project LIKE '%" . $postData['search'] . "%'");
+            //coba
+            if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+                $records = $this->db->query("SELECT * FROM project JOIN anggota_project ON anggota_project.id_project = project.id_project 
+                WHERE id_karyawan = '$id_karyawan' AND nama_project LIKE '%" . $postData['search'] . "%'")->result();
+                //$records = $this->db->get('project')->result();
+
+                foreach ($records as $row) {
+                    $response[] = array(
+                        'id' => $row->id_project,
+                        'label' => $row->nama_project,
+                        'nama' => $row->nama_project
+                    );
+                }
+                $records2 = $this->db->query("SELECT * FROM project WHERE project_manager = '$id_karyawan' AND nama_project LIKE '%" . $postData['search'] . "%'")->result();
+                //$records = $this->db->get('project')->result();
+
+                foreach ($records2 as $row) {
+                    $response[] = array(
+                        'id' => $row->id_project,
+                        'label' => $row->nama_project,
+                        'nama' => $row->nama_project
+                    );
+                }
+                return $response;
+            }
+
+            $records = $this->db->query("SELECT * FROM project JOIN anggota_project ON anggota_project.id_project = project.id_project 
+                            WHERE id_karyawan = '$id_karyawan' AND nama_project LIKE '%" . $postData['search'] . "%'")->result();
+            //$records = $this->db->get('project')->result();
 
             foreach ($records as $row) {
                 $response[] = array(
