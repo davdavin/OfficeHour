@@ -26,22 +26,22 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="#">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">about</a>
+                            <a class="nav-link" href="#about">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#features">features</a>
+                            <a class="nav-link" href="#features">Fitur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#subscribe">subscribe</a>
+                            <a class="nav-link" href="#subscribe">Berlangganan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pricing">pricing</a>
+                            <a class="nav-link" href="#pricing">Harga</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">contact</a>
+                            <a class="nav-link" href="#contact">Kontak</a>
                         </li>
 
                     </ul>
@@ -84,7 +84,7 @@
         <div class="container">
 
             <div class="row section-title justify-content-center">
-                <h2 class="section-title-heading">Why Choose Office Hour</h2>
+                <h2 class="section-title-heading">Mengapa OfficeHour?</h2>
             </div>
 
             <div class="row justify-content-center text-center mt-5">
@@ -123,7 +123,7 @@
         <div class="container">
 
             <div class="row section-title justify-content-center">
-                <h2 class="section-title-heading">app features</h2>
+                <h2 class="section-title-heading">Fitur</h2>
             </div>
 
             <div class="row mt-5">
@@ -202,7 +202,7 @@
                         </div>
 
                         <div class="table-footer text-center">
-                            <a href="<?php echo base_url() . 'Subscribe/form_subscribe/' . $list_paket->id_paket ?>">subscribe now</a>
+                            <a href="<?php echo base_url() . 'Subscribe/form_subscribe/' . $list_paket->id_paket ?>">Berlangganan Sekarang</a>
                         </div>
 
                     </div>
@@ -219,7 +219,7 @@
         <div class="container">
 
             <div class="row section-title justify-content-center">
-                <h2 class="section-title-heading">contact</h2>
+                <h2 class="section-title-heading">Kontak</h2>
             </div>
 
             <div class="row mt-5">
