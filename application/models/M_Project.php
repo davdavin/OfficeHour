@@ -13,6 +13,26 @@ class M_Project extends CI_Model
                                 JOIN client ON project.id_client = client.id_client WHERE karyawan.id_perusahaan = '$id_perusahaan'");
     }
 
+    function get_search_project($postData)
+    {
+        $response = array();
+
+        if ($postData['search']) {
+            $this->db->select("*");
+            $this->db->where("nama_project LIKE '%" . $postData['search'] . "%'");
+            $records = $this->db->get('project')->result();
+
+            foreach ($records as $row) {
+                $response[] = array(
+                    'id' => $row->id_project,
+                    'label' => $row->nama_project,
+                    'nama' => $row->nama_project
+                );
+            }
+            return $response;
+        }
+    }
+
     function tampil_anggota_project($id_perusahaan)
     {
         return $this->db->query("SELECT anggota_project.id_project, nama_karyawan, nama_tugas FROM anggota_project INNER JOIN karyawan ON anggota_project.id_karyawan = karyawan.id_karyawan 
