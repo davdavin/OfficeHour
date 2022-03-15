@@ -35,8 +35,6 @@
                         <figure><img src="<?php echo base_url(); ?>assets/loginSignup/signupimage.png" alt="sing up image"></figure>
                     </div>
                     <div class="signup-form">
-                        <h2 class="form-title">Who Are You</h2>
-
                         <a href="<?php echo base_url() . 'Login/login_perusahaan' ?>" style="text-decoration: none;"><button type="button" class="block form-submit">Perusahaan</button></a><br>
 
                         <a href="<?php echo base_url() . 'Login/login_klien' ?>" style="text-decoration: none;"><button type="button" class="block form-submit">Klien</button></a><br>
