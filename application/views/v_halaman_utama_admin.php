@@ -155,7 +155,7 @@
                                             <td><?php echo $list_subscriber->nama_perusahaan ?></td>
                                             <td><?php echo $list_subscriber->nama_paket ?></td>
                                             <td><?php echo number_format($list_subscriber->harga, '0', ',', '.')  ?></td>
-                                            <td><?php echo $list_subscriber->tanggal_bayar ?></td>
+                                            <td><?php echo tanggal_indonesia($list_subscriber->tanggal_bayar) ?></td>
                                             <td>
                                                 <?php if ($list_subscriber->status_perusahaan == 1) {
                                                     echo "Aktif";
