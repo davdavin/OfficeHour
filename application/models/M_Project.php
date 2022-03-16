@@ -87,7 +87,7 @@ class M_Project extends CI_Model
 
     function get_anggota_project($id_project, $id_perusahaan)
     {
-        return $this->db->query("SELECT nama_tugas, nama_karyawan, status_tugas FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+        return $this->db->query("SELECT * FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
         JOIN project ON project.id_project = anggota_project.id_project JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE project.id_project = '$id_project' AND project.id_perusahaan = '$id_perusahaan'");
     }
 

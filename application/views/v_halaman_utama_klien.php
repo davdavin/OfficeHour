@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OfficeHour - Karyawan</title>
+    <title><?php echo $title; ?></title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -71,44 +72,36 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="<?php echo base_url(); ?>assets/dist/img/corporate.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $this->session->userdata('nama_karyawan') ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('nama_klien'); ?></a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
+
+                        <li class="nav-item menu-open">
+                            <a href="<?php echo base_url() . 'Klien' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Time Tracker </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
+                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link">
+                                <i class="nav-icon fas fa-calendar"></i>
                                 <p> Akun </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Project Manage </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Login/logout_klien' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Keluar </p>
                             </a>
                         </li>
-
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -122,14 +115,10 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Project Manage</h1>
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Project Manage</li>
-                                <li class="breadcrumb-item active">Project Detail</li>
+                                <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -142,115 +131,85 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <section class="col-lg-8">
-                            <div class="card card-primary">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <h4>Project Detail</h4>
-                                    </div>
-                                    <?php foreach ($project_detail as $list) { ?>
-
-                                        <table class="table">
-                                            <tr>
-                                                <th>Nama Project</th>
-                                                <td><?php echo $list->nama_project; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Project Manager</th>
-                                                <td><?php echo $list->nama_karyawan; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tanggal Mulai</th>
-                                                <td><?php echo tanggal_indonesia($list->tanggal_mulai_project); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tanggal Selesai</th>
-                                                <td><?php echo tanggal_indonesia($list->tanggal_selesai_project); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Status</th>
-                                                <td><?php echo ucwords(strtolower($list->status_project)); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Deskripsi</th>
-                                                <td><?php echo $list->deskripsi_project; ?></td>
-                                            </tr>
-                                        </table>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                            <div class="card card-primary">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <h4>Anggota Project</h4>
-                                    </div>
-                                    <table id="list-anggota" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Karyawan</th>
-                                                <th>Nama Tugas</th>
-                                                <th>Status Tugas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($anggota_project as $detail) { ?>
-                                                <tr>
-                                                    <td><?php echo $detail->nama_karyawan ?></td>
-                                                    <td><?php echo $detail->nama_tugas ?></td>
-                                                    <td><?php echo $detail->status_tugas ?></td>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="col-lg-4">
+                        <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box col-7 bg-info" style="border-radius: 15px;">
-                                <div class="inner text-center">
-                                    <h4>Total Tugas</h4>
-                                    <h4>
-                                        <?php foreach ($total_tugas as $total) {
-                                            echo $total->totalTugas;
-                                        }
-                                        ?>
-                                    </h4>
+                            <div class="small-box bg-white">
+                                <div class="inner">
+                                    <h3><?php echo $this->session->userdata('id_klien'); ?></h3>
+                                    <p>ID Klien</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
                                 </div>
                             </div>
-                            <?php foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SEDANG BERJALAN") { ?>
-                                    <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Sedang Berjalan</h4>
-                                            <h4>
-                                                <?php echo $totalS->totalStatus;
-                                                ?>
-                                            </h4>
-                                        </div>
-                                    </div>
-                            <?php }
-                            } ?>
+                        </div>
+                        <!-- ./col -->
 
-                            <?php foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SELESAI") { ?>
-                                    <div class="small-box col-7 bg-green" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Selesai</h4>
-                                            <h4> <?php echo $totalS->totalStatus; ?>
-                                            </h4>
-                                        </div>
-                                    </div><br><br>
-                            <?php }
-                            } ?>
-                            <div class="col-7">
-                                <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-white">
+                                <div class="inner">
+                                    <h3><?php echo $total_project['totalProject']; ?></h3>
+                                    <p>Project</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
                             </div>
-                        </section>
+                        </div>
+                        <!-- ./col -->
                     </div>
+                    <!-- /.row (main row) -->
+                </div><!-- /.container-fluid -->
+
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Nama Project</h3>
+                        </div>
+
+                        <div class="card-body">
+
+                            <table id="list_project" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama Project</th>
+                                        <th>Perusahaan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1;
+                                    foreach ($list_project as $detail) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no++ ?></td>
+                                            <td><?php echo $detail->nama_project ?></td>
+                                            <td><?php echo $detail->nama_perusahaan ?></td>
+                                            <td><?php echo $detail->status_project ?></td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="<?php echo base_url() . 'Klien/project_detail/' . $detail->id_project . '/' . $detail->id_perusahaan ?>">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                    Detail
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
             </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -270,6 +229,18 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Summernote -->
@@ -297,15 +268,13 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
     <script>
-        $(function() {
-            $("#list-anggota").DataTable({
-                "responsive": true,
-                "lengthChange": true,
-                "autoWidth": false
-            });
-        });
+        $("#list_project").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false
+        }).buttons().container().appendTo('#list_project_wrapper .col-md-6:eq(0)');
     </script>
-</body>
 
+</body>
 
 </html>

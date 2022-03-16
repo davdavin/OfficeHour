@@ -74,7 +74,7 @@
                         <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php echo $this->session->userdata('nama_karyawan') ?></a>
+                        <a href="#" class="d-block"><?php echo $this->session->userdata('nama_klien') ?></a>
                     </div>
                 </div>
 
@@ -83,26 +83,21 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="<?php echo base_url() . 'Klien' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Time Tracker </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
+                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link">
+                                <i class="nav-icon fas fa-calendar"></i>
                                 <p> Akun </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Project Manage </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'Login/logout_klien' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
                                 <p> Keluar </p>
                             </a>
@@ -123,12 +118,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Project Manage</h1>
+                            <h1>Informasi Project</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Project Manage</li>
+                                <li class="breadcrumb-item active">Dashboard</li>
                                 <li class="breadcrumb-item active">Project Detail</li>
                             </ol>
                         </div><!-- /.col -->
@@ -189,6 +184,7 @@
                                             <tr>
                                                 <th>Nama Karyawan</th>
                                                 <th>Nama Tugas</th>
+                                                <th>Batas Waktu</th>
                                                 <th>Status Tugas</th>
                                             </tr>
                                         </thead>
@@ -197,6 +193,7 @@
                                                 <tr>
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
+                                                    <td><?php echo tanggal_indonesia($detail->batas_waktu) ?></td>
                                                     <td><?php echo $detail->status_tugas ?></td>
                                                 </tr>
                                             <?php } ?>
@@ -244,9 +241,6 @@
                                     </div><br><br>
                             <?php }
                             } ?>
-                            <div class="col-7">
-                                <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
-                            </div>
                         </section>
                     </div>
             </section>

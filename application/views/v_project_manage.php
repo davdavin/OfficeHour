@@ -92,7 +92,7 @@
             <li class="nav-item">
               <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
-                <p> Account </p>
+                <p> Akun </p>
               </a>
             </li>
             <li class="nav-item menu-open">
@@ -104,7 +104,7 @@
             <li class="nav-item">
               <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                 <i class="nav-icon fas fa-power-off"></i>
-                <p> Logout </p>
+                <p> Keluar </p>
               </a>
             </li>
 
@@ -216,14 +216,39 @@
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
-          <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
-          ?>
-            <a href="<?php echo base_url() . 'ProjectManage/tambah_project' ?>" type="button" class="btn bg-green" style="border-radius: 25px;">
-              <i class="fas fa-plus"></i> Project Baru
-            </a><br><br>
-          <?php } ?>
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") {
+              ?>
+                <a href="<?php echo base_url() . 'ProjectManage/tambah_project' ?>" type="button" class="btn bg-green" style="border-radius: 25px;">
+                  <i class="fas fa-plus"></i> Project Baru
+                </a><br><br>
+              <?php } ?>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
 
-          <div class="row">
+                <!--    masih belum bisa      <input type="text" id="text-search-project" class="form-control" placeholder="Cari Project"> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="tampil">
+            <div class="card-body col-6" style="margin-left: auto; margin-right: auto">
+              <div class="small-box bg-white" style="border-radius: 15px;">
+                <div class="inner text-center">
+                  <h4 id="nama-project"><strong><?php //echo $list_project->nama_project 
+                                                ?>Tidak ada</strong></h4>
+                  <h5><?php //echo $list_project->status_project 
+                      ?></h5>
+                  <a id="id-project"><button class=" btn btn-primary">Selebihnya</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" id="list-project">
             <?php foreach ($projectKaryawan as $list_project) { ?>
               <div class="card-body col-6" style="margin-left: auto; margin-right: auto">
                 <div class="small-box bg-white" style="border-radius: 15px;">
@@ -242,7 +267,7 @@
                     <div class="inner text-center">
                       <h4><strong> <?php echo $list_project_pm->nama_project ?></strong></h4>
                       <h5><?php echo $list_project_pm->status_project ?></h5>
-                      <a href="<?php echo base_url() . 'ProjectManage/project_detail/' . $list_project_pm->id_project ?>"><button class="btn btn-primary">Selebihnya</button></a>
+                      <a id="id-project" href="<?php echo base_url() . 'ProjectManage/project_detail/' . $list_project_pm->id_project ?>"><button class="btn btn-primary">Selebihnya</button></a>
                     </div>
                   </div>
                 </div>
@@ -266,6 +291,7 @@
 
   <!-- jQuery -->
   <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>jquery-3.4.1.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -284,6 +310,55 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#tampil').hide();
+      $('#text-search-project').autocomplete({
+
+        source: function(request, response) {
+
+          //fetch data
+          $.ajax({
+            url: '<?php echo base_url() . 'ProjectManage/search_project' ?>',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+              search: request.term
+            },
+            success: function(data) {
+              response(data);
+              $('#list-project').hide();
+            }
+
+          });
+        },
+        select: function(event, ui) {
+          $('#tampil').show();
+          $('#text-search-project').val(ui.item.label);
+          $('#nama-project').html(ui.item.nama);
+
+          // var obj = JSON.parse(id);
+
+          var link = document.getElementById('id-project');
+
+          link.href = "<?php echo base_url() .  'ProjectManage/project_detail/' ?>";
+
+          //masih belum bisa
+          /*   var data = {
+               "link": "<?php echo base_url() .  'ProjectManage' ?>"
+             };
+
+             var obj = JSON.parse(data);
+
+
+             $('#id-project').href = obj.link; */
+
+          return false;
+        }
+      });
+    });
+  </script>
 
 </body>
 

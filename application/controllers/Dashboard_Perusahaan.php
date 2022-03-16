@@ -170,14 +170,12 @@ class Dashboard_Perusahaan extends CI_Controller
 
                 $token = md5($description) . rand(10, 9999);
 
-                $this->form_validation->set_rules($description, 'Email', 'is_unique[karyawan.email_karyawan]');
-                $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
+                $cekEmail = $this->db->query("SELECT email_karyawan FROM karyawan WHERE email_karyawan = '$description'")->row_array();
 
-                if ($this->form_validation->run() == FALSE) {
-                    echo validation_errors();
-                } else {
-
-                    if (!empty($name) || !empty($description) || !empty($posisi)) {
+                if (!empty($name) || !empty($description) || !empty($posisi)) {
+                    if ($description == $cekEmail['email_karyawan']) {
+                        echo $description . ' email ini sudah digunakan' . '<br>';
+                    } else {
                         $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
                         $paramType = "sssss";
                         $paramArray = array(

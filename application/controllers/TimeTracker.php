@@ -23,6 +23,36 @@ class TimeTracker extends CI_Controller
         $this->load->view('v_timetracker.php', $data);
     }
 
+    function foto_ss()
+    {
+        //masih belum bisa
+
+        $config['upload_path'] = './screenshoot';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 100000; //100 MB         
+
+        $this->load->library('upload', $config);
+        foreach ($_FILES['foto']['name'] as $filename) {
+            echo $filename . '<br/>';
+            /*    $file = pathinfo($filename, PATHINFO_EXTENSION);
+            if ($file != 'gif' || $file != 'jpg' || $file != 'png') {
+                $this->session->set_flashdata('gagal', 'Upload gagal');
+                redirect('TimeTracker');
+            } else {
+                echo $filename . '<br/>';
+            }*/
+            $foto = $this->upload->data($filename);
+            echo $foto;
+            // if (!$this->upload->do_upload('foto[]')) {
+            //     $this->session->set_flashdata('gagal', 'Upload gagal');
+            //     redirect('Konten');
+            // } else {
+            //     foreach ($_FILES['foto']['name'] as $filename) {
+            //         echo $filename.'<br/>';}
+
+        }
+    }
+
     function proses_input_aktivitas()
     {
         $id_project = $this->input->post('id_project');
