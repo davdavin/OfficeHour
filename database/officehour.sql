@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 01:21 PM
+-- Generation Time: Mar 16, 2022 at 04:37 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -123,17 +123,38 @@ CREATE TABLE `client` (
   `nama_client` varchar(50) NOT NULL,
   `password_client` char(255) DEFAULT NULL,
   `email_client` varchar(50) NOT NULL,
-  `token` varchar(100) NOT NULL
+  `token` varchar(100) NOT NULL,
+  `status_client` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id_client`, `id_perusahaan`, `nama_client`, `password_client`, `email_client`, `token`) VALUES
-(1, 'PRSH5', 'Media Farma', '$2y$10$kpvGd3MaGJHZJcgvFV9SAerDZooLUCtP.VxvmPh8CCAMLIQMLeHUu', 'farmafarma@example.com', ''),
-(2, 'PRSH5', 'Nusantara Project', '$2y$10$Ty8taiLot9aMVY9z807hNeqhCEBjSVTqnx5/e0kqL10hLQ3hcTdKa', 'carcarcar@example.com', ''),
-(3, 'PRSH5', 'Sinar', '$2y$10$DjAARcVe/BXOlLvpqvd6fOlA7KYmfMQaAeBPz4.iXj6K9xbj9TFAy', 'sinsinsin@gmail.com', '');
+INSERT INTO `client` (`id_client`, `id_perusahaan`, `nama_client`, `password_client`, `email_client`, `token`, `status_client`) VALUES
+(1, 'PRSH5', 'Media Farma', '$2y$10$ZFErsRDKOzO.nTU1LscoFe.P0GtAG18It0dVi0gWanZKBm6GM.J.O', 'farmafarma@example.com', '', 1),
+(2, 'PRSH5', 'Nusantara Project', '$2y$10$Ty8taiLot9aMVY9z807hNeqhCEBjSVTqnx5/e0kqL10hLQ3hcTdKa', 'carcarcar@example.com', '', 1),
+(3, 'PRSH5', 'Sinar', '$2y$10$DjAARcVe/BXOlLvpqvd6fOlA7KYmfMQaAeBPz4.iXj6K9xbj9TFAy', 'sinsinsin@gmail.com', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foto_screenshoot`
+--
+
+CREATE TABLE `foto_screenshoot` (
+  `id_foto_screenshoot` int(11) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
+  `id_tugas_project` int(11) NOT NULL,
+  `foto` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `foto_screenshoot`
+--
+
+INSERT INTO `foto_screenshoot` (`id_foto_screenshoot`, `id_karyawan`, `id_tugas_project`, `foto`) VALUES
+(1, 7, 25, 'OfficeHour_TRD.png');
 
 -- --------------------------------------------------------
 
@@ -336,6 +357,12 @@ ALTER TABLE `client`
   ADD PRIMARY KEY (`id_client`);
 
 --
+-- Indexes for table `foto_screenshoot`
+--
+ALTER TABLE `foto_screenshoot`
+  ADD PRIMARY KEY (`id_foto_screenshoot`);
+
+--
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -405,6 +432,12 @@ ALTER TABLE `anggota_project`
 --
 ALTER TABLE `client`
   MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `foto_screenshoot`
+--
+ALTER TABLE `foto_screenshoot`
+  MODIFY `id_foto_screenshoot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
