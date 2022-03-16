@@ -85,7 +85,7 @@
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Admin/dashboard' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
-                                <p> Dasboard </p>
+                                <p> Dashboard </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -97,7 +97,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Admin/logout' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
-                                <p> Logout </p>
+                                <p> Keluar </p>
                             </a>
                         </li>
                     </ul>
