@@ -319,12 +319,12 @@
                 <input type="hidden" class="form-control" id="id_karyawan" name="id_karyawan" value="<?= $this->session->userdata('id_karyawan'); ?>">
                 <div class="form-group">
                   <label>Update ScreenShoot</label>
-                  <input type="file" class="form-control" id="foto" name="foto[]" placeholder="Input SS" multiple required>
+                  <input type="file" class="form-control" id="foto" name="foto" placeholder="Input SS" required>
                 </div>
 
                 <div class="form-group">
                   <label>Update Aktivitas Tugas</label>
-                  <select class="form-control select2" style="width: 100%;" name="id_karyawan" required>
+                  <select class="form-control select2" style="width: 100%;" name="tugas" required>
                     <option selected disabled value>-- Pilih --</option>
                     <?php foreach ($tugas_project as $list_tugas_project) { ?>
                       <option value="<?= $list_tugas_project->id_tugas_project ?>"> <?= $list_tugas_project->nama_tugas ?></option>
