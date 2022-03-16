@@ -102,9 +102,9 @@ class Login extends CI_Controller
         }
     }
 
-    function verifikasi_kien()
+    function verifikasi_klien()
     {
-        $email = $this->input->post('eamil');
+        $email = $this->input->post('email');
         $password = $this->input->post('password');
 
         $cek_login = $this->M_Klien->cek_login('client', ['email_client' => $email])->row_array();
@@ -114,7 +114,7 @@ class Login extends CI_Controller
                 if (password_verify($password, $cek_login['password_client'])) {
                     $session = array(
                         'id_klien' => $cek_login['id_client'],
-                        'nama_client' => $cek_login['nama_client'],
+                        'nama_klien' => $cek_login['nama_client'],
                         'status_login_klien' => 'login'
                     );
 
