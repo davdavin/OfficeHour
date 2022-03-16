@@ -25,31 +25,24 @@ class TimeTracker extends CI_Controller
 
     function foto_ss()
     {
-        //masih belum bisa
+        $id_tugas_project = $this->input->post('tugas');
 
         $config['upload_path'] = './screenshoot';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = 100000; //100 MB         
+        $config['max_size'] = 100000; //100 MB
 
         $this->load->library('upload', $config);
-        foreach ($_FILES['foto']['name'] as $filename) {
-            echo $filename . '<br/>';
-            /*    $file = pathinfo($filename, PATHINFO_EXTENSION);
-            if ($file != 'gif' || $file != 'jpg' || $file != 'png') {
-                $this->session->set_flashdata('gagal', 'Upload gagal');
-                redirect('TimeTracker');
-            } else {
-                echo $filename . '<br/>';
-            }*/
-            $foto = $this->upload->data($filename);
-            echo $foto;
-            // if (!$this->upload->do_upload('foto[]')) {
-            //     $this->session->set_flashdata('gagal', 'Upload gagal');
-            //     redirect('Konten');
-            // } else {
-            //     foreach ($_FILES['foto']['name'] as $filename) {
-            //         echo $filename.'<br/>';}
 
+        if (!$this->upload->do_upload('foto')) {
+            $this->session->set_flashdata('gagal', 'Upload gagal');
+            redirect('TimeTracker');
+        } else {
+            $foto = $this->upload->data('file_name');
+            $data = array('id_karyawan' => $this->session->userdata('id_karyawan'), 'id_tugas_project' => $id_tugas_project, 'foto' => $foto);
+
+            $this->M_TimeTracker->insert_record($data, 'foto_screenshoot');
+            $this->session->set_flashdata('sukses', 'Foto berhasil diinput');
+            redirect('TimeTracker');
         }
     }
 
