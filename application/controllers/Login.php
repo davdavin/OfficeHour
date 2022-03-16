@@ -7,7 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array('M_Perusahaan', 'M_Karyawan'));
+        $this->load->model(array('M_Perusahaan', 'M_Karyawan', 'M_Klien'));
         $this->load->helper('form', 'url');
     }
 
@@ -89,7 +89,7 @@ class Login extends CI_Controller
                         redirect('TimeTracker');
                     }
                 } else {
-                    $this->session->set_flashdata('gagal', 'Password');
+                    $this->session->set_flashdata('gagal', 'Password salah');
                     redirect('Login/login_karyawan');
                 }
             } else {
@@ -99,6 +99,38 @@ class Login extends CI_Controller
         } else {
             $this->session->set_flashdata('gagal', 'Email salah');
             redirect('Login/login_karyawan');
+        }
+    }
+
+    function verifikasi_kien()
+    {
+        $email = $this->input->post('eamil');
+        $password = $this->input->post('password');
+
+        $cek_login = $this->M_Klien->cek_login('client', ['email_client' => $email])->row_array();
+
+        if ($cek_login) {
+            if ($cek_login['status_client'] == 1) {
+                if (password_verify($password, $cek_login['password_client'])) {
+                    $session = array(
+                        'id_klien' => $cek_login['id_client'],
+                        'nama_client' => $cek_login['nama_client'],
+                        'status_login_klien' => 'login'
+                    );
+
+                    $this->session->set_userdata($session);
+                    redirect('Klien');
+                } else {
+                    $this->session->set_flashdata('gagal', 'Password salah');
+                    redirect('Login/login_klien');
+                }
+            } else {
+                $this->session->set_flashdata('gagal', 'Akun anda belum aktif');
+                redirect('Login/login_klien');
+            }
+        } else {
+            $this->session->set_flashdata('gagal', 'Email anda salah. Mohon untuk dicek kembali.');
+            redirect('Login/login_klien');
         }
     }
 
