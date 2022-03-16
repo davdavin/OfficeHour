@@ -181,7 +181,7 @@
                             </div>
                             <div class="card card-primary">
                                 <div class="card-body">
-                                    <div class="card-header text-center">
+                                    <div class="text-center">
                                         <h4>Anggota Project</h4>
                                     </div>
                                     <table id="list-anggota" class="table table-bordered table-striped">
