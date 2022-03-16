@@ -94,7 +94,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p> Account </p>
+                                <p> Akun </p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
@@ -106,7 +106,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
-                                <p> Logout </p>
+                                <p> Keluar </p>
                             </a>
                         </li>
 
@@ -124,13 +124,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2><b>ADD NEW PROJECT</b></h2>
+                            <h2><b>Membuat Project Baru</b></h2>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Project Manage</li>
-                                <li class="breadcrumb-item active">Create New</li>
+                                <li class="breadcrumb-item active">Tambah Project</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Name</label>
+                                    <label for="exampleFormControlInput1" class="form-label">Nama Project</label>
                                     <input type="text" class="form-control" name="nama_project" id="exampleFormControlInput1" placeholder="project name" required>
                                 </div>
                                 <div class="mb-3">
@@ -155,26 +155,26 @@
                                     <input type="text" class="form-control bg-white" id="exampleFormControlInput1" value="<?= $this->session->userdata('nama_karyawan'); ?>" required readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Project Description</label>
+                                    <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Project</label>
                                     <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
 
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Start</label>
+                                    <label for="exampleFormControlInput1" class="form-label">Tanggal Mulai</label>
                                     <input type="date" class="form-control" name="project_start" id="exampleFormControlInput1" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project End</label>
+                                    <label for="exampleFormControlInput1" class="form-label">tanggal Selesai</label>
                                     <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Nama Klien</label>
+                                    <label class="form-label">Klien</label>
                                     <select class="form-control select2" style="width: 100%;" name="id_klien" required>
-                                        <option selected disabled>-- Pilih --</option>
+                                        <option selected disabled value>-- Pilih --</option>
                                         <?php foreach ($klien as $list) { ?>
                                             <option value="<?= $list->id_client ?>"> <?= $list->nama_client ?></option>
                                         <?php } ?>

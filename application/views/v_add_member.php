@@ -94,7 +94,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p> Account </p>
+                                <p> Akun </p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
@@ -106,7 +106,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
-                                <p> Logout </p>
+                                <p> Keluar </p>
                             </a>
                         </li>
 
