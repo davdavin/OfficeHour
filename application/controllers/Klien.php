@@ -24,6 +24,7 @@ class Klien extends CI_Controller
 
     function project_detail($id_project, $id_perusahaan)
     {
+        $data['title'] = 'OfficeHour - Klien | Project';
         $data['project_detail'] = $this->M_Project->project_detail($id_project, $id_perusahaan)->result();
         $data['total_tugas'] = $this->M_Project->total_tugas_project($id_project, $id_perusahaan)->result();
         $data['total_status'] = $this->M_Project->get_total_status($id_project, $id_perusahaan)->result();
