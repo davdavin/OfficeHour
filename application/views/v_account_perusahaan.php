@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -162,19 +164,19 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Nama Perusahaan</label>
-                                                <input type="text" class="form-control" name="nama_perusahaan" value="<?= $nama_perusahaan ?>">
+                                                <input type="text" class="form-control bg-input" name="nama_perusahaan" value="<?= $nama_perusahaan ?>">
                                                 <?php echo form_error('nama_perusahaan'); ?>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control" name="username" value="<?= $username ?>">
+                                                <input type="text" class="form-control bg-input" name="username" value="<?= $username ?>">
                                                 <?php echo form_error('username'); ?>
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" name="email_perusahaan" value="<?= $email_perusahaan ?>">
+                                                <input type="email" class="form-control bg-input" name="email_perusahaan" value="<?= $email_perusahaan ?>">
                                                 <?php echo form_error('email_perusahaan'); ?>
                                             </div>
                                         </div>
