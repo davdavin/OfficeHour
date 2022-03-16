@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
@@ -137,6 +140,7 @@
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+      <?php $this->load->view('message.php'); ?>
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
@@ -161,7 +165,8 @@
           <!-- <h4 class="time" id="display">00:00:00:00</h4> -->
           <button class="buttonPlay" id="stopwatch">
             <a type="button" id="start" class="btn bg-green" style="border-radius: 25px;">Mulai </a>
-            <a type="button" id="stop" class="btn bg-red" style="border-radius: 25px;"> Berhenti </a><br><br>
+            <a type="button" id="stop" class="btn bg-red" style="border-radius: 25px;"> Berhenti </a>
+            <a type="button" id="stop" class="btn bg-blue" style="border-radius: 25px;" data-toggle="modal" data-target="#modal-lg"> Kirim Screen Shoot </a><br><br>
             <!-- <a type="button" id="resetButton" class="btn bg-red" style="border-radius: 25px;"> Reset time </a><br><br> -->
           </button>
         </div><!-- /.container-fluid -->
@@ -300,6 +305,41 @@
 
         <?php } ?>
       </section>
+      <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Update Aktivitas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="form-submit" action="<?php echo base_url() . 'TimeTracker/foto_ss' ?>" method="post" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" id="id_karyawan" name="id_karyawan" value="<?= $this->session->userdata('id_karyawan'); ?>">
+                <div class="form-group">
+                  <label>Update ScreenShoot</label>
+                  <input type="file" class="form-control" id="foto" name="foto[]" placeholder="Input SS" multiple required>
+                </div>
+
+                <div class="form-group">
+                  <label>Update Aktivitas Tugas</label>
+                  <select class="form-control select2" style="width: 100%;" name="id_karyawan" required>
+                    <option selected disabled value>-- Pilih --</option>
+                    <?php foreach ($tugas_project as $list_tugas_project) { ?>
+                      <option value="<?= $list_tugas_project->id_tugas_project ?>"> <?= $list_tugas_project->nama_tugas ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -329,6 +369,8 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
   <!-- SweetAlert2 -->
   <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <!-- Select2 -->
+  <script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
   <!-- DataTables  & Plugins -->
   <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -345,6 +387,26 @@
 
   <script>
     $(function() {
+
+      const sukses = $('.sukses').data('flashdata');
+      if (sukses) {
+        Swal.fire({
+          title: 'Info',
+          text: sukses,
+          icon: 'success'
+        });
+      }
+
+      const gagal = $('.gagal').data('flashdata');
+      if (gagal) {
+        Swal.fire({
+          title: 'Gagal',
+          text: gagal,
+          icon: 'error'
+        });
+      }
+
+      $('.select2').select2()
       $('#example1').DataTable({
         "responsive": true,
         "lengthChange": true,
@@ -361,16 +423,19 @@
       $("#start").click(function() {
         if (timer !== null) return;
         timer = setInterval(function() {
-          alert("Please Screen Shoot :)");
-          window.open("<?php echo base_url() . 'LandingPage' ?>", '_blank');
+          alert("Mohon upload screenshoot aktivtas yang sedang di kerjakan. Klik tombol kirim screenshoot");
+          // window.open("<?php echo base_url() . 'LandingPage' ?>", '_blank');
+          ('#modal-lg').show();
         }, interval);
 
       });
 
       $("#stop").click(function() {
         clearInterval(timer);
-        timer = null
+        timer = null;
+        $('#start').show();
       });
+
 
       <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?>
         $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
