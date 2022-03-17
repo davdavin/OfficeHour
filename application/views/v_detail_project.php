@@ -245,7 +245,9 @@
                             <?php }
                             } ?>
                             <div class="col-7">
-                                <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
+                                <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { ?>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
+                                <?php } ?>
                             </div>
                         </section>
                     </div>
