@@ -147,7 +147,7 @@
                                                 <input type="text" class="form-control" name="id_klien" value="<?= $detail->id_client ?>" readonly>
                                             </div>
                                             <div class="form-group">
-                                                <label>Nama Lengkap</label>
+                                                <label>Nama</label>
                                                 <input type="text" class="form-control bg-input" name="nama_klien" value="<?= $detail->nama_client ?>">
                                                 <p class="p-2 is-invalid error_nama" style="display: none"></p>
                                             </div>
