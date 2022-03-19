@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2022 at 04:37 PM
+-- Generation Time: Mar 18, 2022 at 12:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -62,7 +62,10 @@ CREATE TABLE `aktivitas` (
 
 INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_project`, `tanggal_aktivitas`, `waktu_mulai`, `waktu_selesai`, `bukti`) VALUES
 (1, 2, 7, 20, '2022-03-25', '08:28:00', '20:28:00', 'Foto'),
-(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Foto');
+(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Foto'),
+(3, 2, 7, 20, '2022-03-02', '13:30:00', '13:30:00', 'Foto'),
+(4, 2, 7, 20, '2022-04-01', '14:21:00', '14:26:00', 'Foto'),
+(5, 6, 1, 28, '2022-03-17', '14:34:00', '14:35:00', 'Foto');
 
 -- --------------------------------------------------------
 
@@ -101,15 +104,15 @@ CREATE TABLE `anggota_project` (
 --
 
 INSERT INTO `anggota_project` (`id_anggota_project`, `id_project`, `id_karyawan`) VALUES
-(12, 1, 2),
-(13, 1, 3),
-(14, 1, 10),
-(15, 2, 7),
-(16, 2, 2),
-(19, 4, 3),
-(20, 4, 7),
-(21, 5, 2),
-(22, 5, 10);
+(1, 1, 3),
+(2, 1, 1),
+(3, 1, 61),
+(4, 0, 3),
+(5, 3, 3),
+(11, 3, 10),
+(12, 3, 64),
+(16, 1, 2),
+(19, 1, 63);
 
 -- --------------------------------------------------------
 
@@ -170,7 +173,6 @@ CREATE TABLE `karyawan` (
   `password_karyawan` char(255) DEFAULT NULL,
   `posisi_karyawan` varchar(25) NOT NULL,
   `status_karyawan` int(11) NOT NULL DEFAULT 0,
-  `foto_karyawan` varchar(50) DEFAULT NULL,
   `token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -178,17 +180,18 @@ CREATE TABLE `karyawan` (
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_karyawan`, `password_karyawan`, `posisi_karyawan`, `status_karyawan`, `foto_karyawan`, `token`) VALUES
-(1, 'PRSH5', 'Thomas', 'carcartho@example.com', '$2y$10$aeo.Z7W71XrdxTIQ2XSO1.ey2hBQOASA3/MKidsCSUWjYuWyFG1C.', 'Project Manager', 1, '', ''),
-(2, 'PRSH5', 'Tomi', 'thomthom@example.com', '$2y$10$SLR4trs14K6jFdqkVFQ/qeM273Dgtaekn2r2Jky256eVb4nU.qd.S', 'Technical Writer', 1, '', ''),
-(3, 'PRSH5', 'Christile', 'chris@example.com', '$2y$10$zMN7G6ltrM/YpnE.qmurJeE4lGk91HXXFdraQL3SMew2n0erQvynG', 'QA', 1, '', ''),
-(5, 'PRSH4', 'Toni', 'carcar@example.com', '$2y$10$1Gopto66FtDFvUZJ2bFxDO9qOMQx1o296DWM96JNn6EhXDpRvzkZa', 'Project Manager', 1, '', ''),
-(6, 'PRSH4', 'Tom', 'carlo@gmail.com', '$2y$10$WzKcde0ecyUQA0hM5/CpJOqUY2JuBRLjPRNpQMlwIKXXcQ2n2w29.', 'QA', 1, '', ''),
-(7, 'PRSH5', 'Ton', 'carcarcarcar@example.com', '$2y$10$BnK3.bdATmOeUc7ZpWK1COfRAFWPaRyDcY/tpS.P0qtvvnEpT0/JK', 'Project Manager', 1, '', ''),
-(10, 'PRSH5', 'Car', 'carlotoorop@gmail.com', '$2y$10$z9aquoPxQeKxGNEicZLK.O9kO/Dxo6QjYZAFE/5RATx8dz/qvXzyu', 'Project Manager', 1, '', 'f62a89698ec1ced7a6e0f9a057e0b7a91521'),
-(61, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, NULL, ''),
-(62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, NULL, ''),
-(63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, NULL, '');
+INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_karyawan`, `password_karyawan`, `posisi_karyawan`, `status_karyawan`, `token`) VALUES
+(1, 'PRSH5', 'Thomas', 'carcartho@example.com', '$2y$10$aeo.Z7W71XrdxTIQ2XSO1.ey2hBQOASA3/MKidsCSUWjYuWyFG1C.', 'Project Manager', 1, ''),
+(2, 'PRSH5', 'Tomi', 'thomthom@example.com', '$2y$10$SLR4trs14K6jFdqkVFQ/qeM273Dgtaekn2r2Jky256eVb4nU.qd.S', 'Technical Writer', 1, ''),
+(3, 'PRSH5', 'Christile', 'chris@example.com', '$2y$10$zMN7G6ltrM/YpnE.qmurJeE4lGk91HXXFdraQL3SMew2n0erQvynG', 'QA', 1, ''),
+(5, 'PRSH4', 'Toni', 'carcar@example.com', '$2y$10$1Gopto66FtDFvUZJ2bFxDO9qOMQx1o296DWM96JNn6EhXDpRvzkZa', 'Project Manager', 1, ''),
+(6, 'PRSH4', 'Tom', 'carlo@gmail.com', '$2y$10$WzKcde0ecyUQA0hM5/CpJOqUY2JuBRLjPRNpQMlwIKXXcQ2n2w29.', 'QA', 1, ''),
+(7, 'PRSH5', 'Ton', 'carcarcarcar@example.com', '$2y$10$BnK3.bdATmOeUc7ZpWK1COfRAFWPaRyDcY/tpS.P0qtvvnEpT0/JK', 'Project Manager', 1, ''),
+(10, 'PRSH5', 'Car', 'carlotoorop@gmail.com', '$2y$10$z9aquoPxQeKxGNEicZLK.O9kO/Dxo6QjYZAFE/5RATx8dz/qvXzyu', 'Project Manager', 1, 'f62a89698ec1ced7a6e0f9a057e0b7a91521'),
+(61, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, ''),
+(62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, ''),
+(63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, ''),
+(64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276');
 
 -- --------------------------------------------------------
 
@@ -262,10 +265,9 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_manager`, `nama_project`, `deskripsi_project`, `tanggal_mulai_project`, `tanggal_selesai_project`, `status_project`) VALUES
-(1, 'PRSH5', 3, 7, 'Birthday Website', 'Sa', '2022-03-19', '2022-03-25', 'SEDANG BERJALAN'),
-(2, 'PRSH5', 3, 10, 'E-commerce', 'Sasasasa', '2022-04-02', '2022-06-16', 'SEDANG BERJALAN'),
-(4, 'PRSH5', 1, 1, 'test', 'test', '2022-03-10', '2022-04-09', 'SEDANG BERJALAN'),
-(5, 'PRSH5', 3, 7, 'Webinar', 'Test', '2022-03-17', '2022-03-19', 'SEDANG BERJALAN');
+(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', 'SEDANG BERJALAN'),
+(2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', 'SEDANG BERJALAN'),
+(3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', 'SEDANG BERJALAN');
 
 -- --------------------------------------------------------
 
@@ -304,7 +306,7 @@ CREATE TABLE `tugas_project` (
   `id_anggota_project` int(11) NOT NULL,
   `nama_tugas` varchar(50) NOT NULL,
   `batas_waktu` date NOT NULL,
-  `status_tugas` varchar(20) NOT NULL
+  `status_tugas` varchar(20) NOT NULL DEFAULT 'BELUM BERJALAN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -312,15 +314,17 @@ CREATE TABLE `tugas_project` (
 --
 
 INSERT INTO `tugas_project` (`id_tugas_project`, `id_anggota_project`, `nama_tugas`, `batas_waktu`, `status_tugas`) VALUES
-(17, 14, 'Memantau', '2022-03-09', 'SEDANG BERJALAN'),
-(18, 12, 'Testing', '2022-03-09', 'SEDANG BERJALAN'),
-(19, 13, 'QA', '2022-03-09', 'SEDANG BERJALAN'),
-(20, 15, 'Applying', '2022-03-09', 'SEDANG BERJALAN'),
-(21, 16, 'Finishing dan Negosiasi', '2022-03-09', 'SEDANG BERJALAN'),
-(24, 19, 'Memantau', '2022-03-24', 'SEDANG BERJALAN'),
-(25, 20, 'Testing', '2022-04-01', 'SEDANG BERJALAN'),
-(26, 21, 'QA', '2022-03-11', 'SEDANG BERJALAN'),
-(27, 22, 'Persiapan', '2022-04-09', 'SEDANG BERJALAN');
+(35, 39, 'Applying', '2022-03-09', 'BELUM BERJALAN'),
+(36, 41, 'Memantau', '2022-03-04', 'BELUM BERJALAN'),
+(37, 2, 'Membuat Framewrok II', '2022-03-19', 'BELUM BERJALAN'),
+(38, 1, 'Membuat Framewrok III', '2022-04-09', 'BELUM BERJALAN'),
+(39, 3, 'Memantau', '2022-03-03', 'BELUM BERJALAN'),
+(40, 4, 'Applying', '2022-03-02', 'BELUM BERJALAN'),
+(41, 5, 'Applying', '2022-03-18', 'BELUM BERJALAN'),
+(42, 12, 'Membuat Framewrok II', '2022-03-19', 'BELUM BERJALAN'),
+(43, 11, 'QA', '2022-03-05', 'BELUM BERJALAN'),
+(44, 16, 'QA', '2022-03-17', 'BELUM BERJALAN'),
+(45, 18, 'Memantau', '2022-03-05', 'BELUM BERJALAN');
 
 --
 -- Indexes for dumped tables
@@ -413,7 +417,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`
@@ -425,7 +429,7 @@ ALTER TABLE `akun_admin`
 -- AUTO_INCREMENT for table `anggota_project`
 --
 ALTER TABLE `anggota_project`
-  MODIFY `id_anggota_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_anggota_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -443,7 +447,7 @@ ALTER TABLE `foto_screenshoot`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `paket`
@@ -455,7 +459,7 @@ ALTER TABLE `paket`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subscribe`
@@ -467,7 +471,7 @@ ALTER TABLE `subscribe`
 -- AUTO_INCREMENT for table `tugas_project`
 --
 ALTER TABLE `tugas_project`
-  MODIFY `id_tugas_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_tugas_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
