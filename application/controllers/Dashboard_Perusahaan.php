@@ -119,7 +119,7 @@ class Dashboard_Perusahaan extends CI_Controller
         }
     }
 
-    public function Upload_Massal()
+    function Upload_Massal()
     {
         $id_perusahaan = $this->session->userdata('id_perusahaan');
         $username = $this->session->userdata('username_perusahaan');
@@ -174,7 +174,26 @@ class Dashboard_Perusahaan extends CI_Controller
 
                 if (!empty($name) || !empty($description) || !empty($posisi)) {
                     if ($description == $cekEmail['email_karyawan']) {
-                        echo $description . ' email ini sudah digunakan' . '<br>';
+                        $hasil[$i] = $description . ' email ini sudah digunakan';
+
+                        $data['hasil'] = array($hasil[$i]);
+                        if ($data['hasil']) {
+                            $i++;
+                        }
+
+
+                        //   return $this->output->set_output($data['hasil']);
+
+                        /*         $id_perusahaan = $this->session->userdata('id_perusahaan');
+                        $username = $this->session->userdata('username_perusahaan');
+                        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+                        $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
+                        $this->load->view('v_mass_upload.php', $data);
+*/
+                        //                $data['hasil'] = json_encode($variabel);
+                        // redirect('Dashboard_Perusahaan/Upload_Massal');
+
+                        //   echo $description . ' email ini sudah digunakan' . '<br>';
                     } else {
                         $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
                         $paramType = "sssss";
