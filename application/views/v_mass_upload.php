@@ -282,7 +282,10 @@
                                                                 echo $message;
                                                             } 
                                                             */ ?>"> </div>
-                            <?php $this->load->view('message.php'); ?>
+                            <?php foreach ($hasil as $row) {
+                                echo $row;
+                            } //$this->load->view('message.php'); 
+                            ?>
                         </div>
                     </div>
                 </div>

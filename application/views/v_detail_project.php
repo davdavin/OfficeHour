@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -190,6 +192,7 @@
                                                 <th>Nama Karyawan</th>
                                                 <th>Nama Tugas</th>
                                                 <th>Status Tugas</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -198,6 +201,11 @@
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo $detail->status_tugas ?></td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm bg-info" href="<?php echo $detail->id_tugas_project; ?>">
+                                                            <i class="fas fa-pencil-alt"></i> Detail
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -213,7 +221,8 @@
                                     <h4>Total Tugas</h4>
                                     <h4>
                                         <?php foreach ($total_tugas as $total) {
-                                            echo $total->totalTugas;
+                                            $totalTugas = $total->totalTugas;
+                                            echo $totalTugas;
                                         }
                                         ?>
                                     </h4>
@@ -225,7 +234,8 @@
                                         <div class="inner text-center">
                                             <h4>Sedang Berjalan</h4>
                                             <h4>
-                                                <?php echo $totalS->totalStatus;
+                                                <?php $totalBerjalan = $totalS->totalStatus;
+                                                echo $totalBerjalan;
                                                 ?>
                                             </h4>
                                         </div>
@@ -233,19 +243,34 @@
                             <?php }
                             } ?>
 
-                            <?php foreach ($total_status as $totalS) {
+                            <?php $totalSelesai = 0;
+                            foreach ($total_status as $totalS) {
                                 if ($totalS->status_tugas == "SELESAI") { ?>
                                     <div class="small-box col-7 bg-green" style="border-radius: 15px;">
                                         <div class="inner text-center">
                                             <h4>Selesai</h4>
-                                            <h4> <?php echo $totalS->totalStatus; ?>
+                                            <h4> <?php
+                                                    $totalSelesai = $totalS->totalStatus;
+                                                    echo $totalSelesai;
+                                                    ?>
                                             </h4>
                                         </div>
                                     </div><br><br>
                             <?php }
                             } ?>
+                            <div class="flex-wrapper">
+                                <div class="single-chart">
+                                    <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                        <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <text x="18" y="20.35" class="percentage"><?php echo $totalSelesai / $totalTugas * 100 . '%'; ?></text>
+                                    </svg>
+                                </div>
+                            </div>
                             <div class="col-7">
                                 <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { ?>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/asign_anggota_project_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Anggota Project</a><br><br>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
                                 <?php } ?>
                             </div>

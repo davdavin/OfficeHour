@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
@@ -30,9 +33,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -124,13 +124,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2><b>Membuat Project Baru</b></h2>
+                            <h2><b>Pilih Anggota Project</b></h2>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Project Manage</li>
-                                <li class="breadcrumb-item active">Tambah Project</li>
+                                <li class="breadcrumb-item active">Tambah Anggota</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -142,57 +142,42 @@
             <section class="content">
                 <div class="container-fluid">
                     <?php $this->load->view('message.php'); ?>
-                    <form action="<?php echo base_url() . 'ProjectManage/proses_tambah_project' ?>" method="POST">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Nama Project</label>
-                                    <input type="text" class="form-control" name="nama_project" id="exampleFormControlInput1" placeholder="project name" required value="<?= set_value('nama_project'); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Project Manager</label>
-                                    <input type="hidden" class="form-control" name="project_manager" id="exampleFormControlInput1" value="<?= $this->session->userdata('id_karyawan'); ?>">
-                                    <input type="text" class="form-control bg-white" id="exampleFormControlInput1" value="<?= $this->session->userdata('nama_karyawan'); ?>" required readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Project</label>
-                                    <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"><?= set_value('deskripsi'); ?></textarea>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Tanggal Mulai</label>
-                                    <input type="date" class="form-control" name="project_start" id="exampleFormControlInput1" required value="<?= set_value('project_start'); ?>">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">tanggal Selesai</label>
-                                    <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required value="<?= set_value('project_end'); ?>">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Klien</label>
-                                    <select class="form-control select2" style="width: 100%;" name="id_klien" required>
-                                        <option selected disabled value>-- Pilih --</option>
-                                        <?php foreach ($klien as $list) { ?>
-                                            <option value="<?= $list->id_client ?>"> <?= $list->nama_client ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="p-2" style="color: red">
-                                    <?php echo $message; ?>
-                                </div>
-
-                            </div>
-
+                    <!-- loop -->
+                    <div class="row">
+                        <div class="box-header with-border">
                         </div>
-                        <div class="text-center">
-                            <button type="submit" id="tombolCpdate" class="btn btn-primary">Create</button><br><br>
+                        <div class="col-md-12">
+                            <div id="notif"></div>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-md-12" style="margin: 10px;">
+                            <div class="box box-solid">
+                                <form action="<?php echo base_url('ProjectManage/proses_tambah_anggota_baru') ?>" method="post" id="SimpanData">
+                                    <div class="box-body">
+                                        <table class="table table-bordered" id="tableLoop">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th>Nama Karyawan</th>
+                                                    <th><button class="btn btn-success btn-block" id="BarisBaru"><i class="fa fa-plus"></i> Baris Baru</button></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
 
+                                        </table>
+                                    </div>
+                                    <div class="box-footer">
+                                        <div class="form-group text-right">
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Simpan</button>
+                                            <button type="reset" class="btn btn-default">Batal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- close loop -->
+                    <?php echo $idProject; ?>
             </section>
             <!-- /.content -->
         </div>
@@ -214,14 +199,29 @@
     <script src="<?php echo base_url() ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?php echo base_url() ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="<?php echo base_url() ?>assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="<?php echo base_url() ?>assets/dist/js/pages/dashboard.js"></script>
     <!-- SweetAlert2 -->
     <script src="<?php echo base_url() ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="<?php echo base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/jszip/jszip.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
     <script>
@@ -234,8 +234,89 @@
                     icon: 'success'
                 });
             }
-
         });
+
+        $(document).ready(function() {
+            for (B = 1; B <= 1; B++) {
+                Barisbaru();
+            }
+            $('#BarisBaru').click(function(e) {
+                e.preventDefault();
+                Barisbaru();
+            });
+
+            $("tableLoop tbody").find('input[type=text]').filter(':visible:first').focus();
+        });
+
+        function Barisbaru() {
+            var Nomor = $("#tableLoop tbody tr").length + 1;
+            var Baris = '<tr>';
+            Baris += '<td class="text-center">' + Nomor + '</td>';
+            Baris += '<td>';
+            Baris += '<input type="hidden" name="getIdProject" value="<?= $idProject ?>">' + '<select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
+                '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) {
+                                                                        if ($list->id_karyawan != $this->session->userdata('id_karyawan') && $list->id_karyawan != $anggota->id_karyawan) {  ?>' +
+                '<option value="<?= $anggota->id_karyawan ?>"> <?= $anggota->nama_karyawan ?></option>' + '<?php
+                                                                                                        }
+                                                                                                    } ?>' +
+                '</select>';
+            Baris += '</td>';
+            Baris += '<td class="text-center">';
+            Baris += '<a class="btn btn-sm btn-danger" data-toggle="tooltip" title="Hapus Baris" id="HapusBaris"><i class="fa fa-times"></i></a>';
+            Baris += '</td>';
+            Baris += '</tr>';
+
+            $("#tableLoop tbody").append(Baris);
+            $("#tableLoop tbody tr").each(function() {
+                $(this).find('td:nth-child(2) input').focus();
+            });
+
+            $('.select2').select2();
+
+        }
+
+        $(document).on('click', '#HapusBaris', function(e) {
+            e.preventDefault();
+            var Nomor = 1;
+            $(this).parent().parent().remove();
+            $('tableLoop tbody tr').each(function() {
+                $(this).find('td:nth-child(1)').html(Nomor);
+                Nomor++;
+            });
+        });
+
+        $(document).ready(function() {
+            $('#SimpanData').submit(function(e) {
+                e.preventDefault();
+                biodata();
+            });
+        });
+
+        function biodata() {
+            $.ajax({
+                url: $("#SimpanData").attr('action'),
+                type: 'post',
+                cache: false,
+                dataType: "json",
+                data: $("#SimpanData").serialize(),
+                success: function(data) {
+                    if (data.success == true) {
+                        $('.first_name').val('');
+                        $('#notif').fadeIn(800, function() {
+                            $("#notif").html(data.notif).fadeOut(5000).delay(800);
+                        });
+                        window.location.href = "<?php echo base_url() . 'ProjectManage/tambah_task' ?>";
+                    } else {
+                        $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>');
+                    }
+                },
+
+                error: function(error) {
+                    alert(error);
+                }
+
+            });
+        }
     </script>
 
 </body>
