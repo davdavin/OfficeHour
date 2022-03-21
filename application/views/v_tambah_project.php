@@ -147,7 +147,7 @@
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Nama Project</label>
-                                    <input type="text" class="form-control" name="nama_project" id="exampleFormControlInput1" placeholder="project name" required>
+                                    <input type="text" class="form-control" name="nama_project" id="exampleFormControlInput1" placeholder="project name" required value="<?= set_value('nama_project'); ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Project Manager</label>
@@ -156,19 +156,19 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Project</label>
-                                    <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"><?= set_value('deskripsi'); ?></textarea>
                                 </div>
 
                             </div>
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tanggal Mulai</label>
-                                    <input type="date" class="form-control" name="project_start" id="exampleFormControlInput1" required>
+                                    <input type="date" class="form-control" name="project_start" id="exampleFormControlInput1" required value="<?= set_value('project_start'); ?>">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">tanggal Selesai</label>
-                                    <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required>
+                                    <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required value="<?= set_value('project_end'); ?>">
                                 </div>
 
                                 <div class="mb-3">
@@ -179,6 +179,9 @@
                                             <option value="<?= $list->id_client ?>"> <?= $list->nama_client ?></option>
                                         <?php } ?>
                                     </select>
+                                </div>
+                                <div class="p-2" style="color: red">
+                                    <?php echo $message; ?>
                                 </div>
 
                             </div>
