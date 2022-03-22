@@ -191,6 +191,7 @@
                                             <tr>
                                                 <th>Nama Karyawan</th>
                                                 <th>Nama Tugas</th>
+                                                <th>Batas Waktu</th>
                                                 <th>Status Tugas</th>
                                                 <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
                                                     <th>Aksi</th>
@@ -202,6 +203,7 @@
                                                 <tr>
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
+                                                    <td><?php echo tanggal_indonesia($detail->batas_waktu) ?></td>
                                                     <td><?php echo $detail->status_tugas ?></td>
                                                     <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
                                                         <td>
