@@ -192,7 +192,9 @@
                                                 <th>Nama Karyawan</th>
                                                 <th>Nama Tugas</th>
                                                 <th>Status Tugas</th>
-                                                <th>Aksi</th>
+                                                <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+                                                    <th>Aksi</th>
+                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -201,11 +203,13 @@
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo $detail->status_tugas ?></td>
-                                                    <td>
-                                                        <a type="button" class="btn btn-sm bg-info" href="<?php echo $detail->id_tugas_project; ?>">
-                                                            <i class="fas fa-pencil-alt"></i> Detail
-                                                        </a>
-                                                    </td>
+                                                    <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
+                                                        <td>
+                                                            <a type="button" class="btn btn-sm bg-info" href="<?php echo base_url() . 'ProjectManage/detail_tugas/' . $detail->id_tugas_project; ?>">
+                                                                <i class="fas fa-pencil-alt"></i> Detail
+                                                            </a>
+                                                        </td>
+                                                    <?php } ?>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -228,43 +232,54 @@
                                     </h4>
                                 </div>
                             </div>
-                            <?php foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SEDANG BERJALAN") { ?>
-                                    <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Sedang Berjalan</h4>
-                                            <h4>
-                                                <?php $totalBerjalan = $totalS->totalStatus;
-                                                echo $totalBerjalan;
-                                                ?>
-                                            </h4>
-                                        </div>
-                                    </div>
-                            <?php }
-                            } ?>
 
-                            <?php $totalSelesai = 0;
-                            foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SELESAI") { ?>
-                                    <div class="small-box col-7 bg-green" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Selesai</h4>
-                                            <h4> <?php
-                                                    $totalSelesai = $totalS->totalStatus;
-                                                    echo $totalSelesai;
-                                                    ?>
-                                            </h4>
-                                        </div>
-                                    </div><br><br>
-                            <?php }
-                            } ?>
+                            <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
+                                <div class="inner text-center">
+                                    <h4>Sedang Berjalan</h4>
+                                    <?php
+                                    foreach ($total_status_berjalan as $total) { ?>
+                                        <h4> <?php $totalBerjalan = $total->totalStatus;
+                                                echo $totalBerjalan; ?>
+                                        </h4>
+                                    <?php
+                                    } ?>
+                                </div>
+
+                            </div>
+
+
+                            <?php  ?>
+                            <div class="small-box col-7 bg-green" style="border-radius: 15px;">
+                                <div class="inner text-center">
+                                    <h4>Selesai</h4>
+                                    <?php // $totalSelesai = 0;
+                                    foreach ($total_status_selesai as $total) { ?>
+                                        <h4> <?php
+                                                $totalSelesai = $total->totalStatus;
+                                                echo $totalSelesai;
+                                                ?>
+                                        </h4>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div><br><br>
+
+                            <h3>Progres</h3>
                             <div class="flex-wrapper">
                                 <div class="single-chart">
                                     <svg viewBox="0 0 36 36" class="circular-chart orange">
-                                        <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                        <path class="circle" stroke-dasharray="<?php if ($totalTugas == 0) {
+                                                                                    echo '0%';
+                                                                                } else {
+                                                                                    echo $totalSelesai / $totalTugas * 100 . '%';
+                                                                                } ?>, 100" d="M18 2.0845
                                         a 15.9155 15.9155 0 0 1 0 31.831
                                         a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                        <text x="18" y="20.35" class="percentage"><?php echo $totalSelesai / $totalTugas * 100 . '%'; ?></text>
+                                        <text x="18" y="20.35" class="percentage"><?php if ($totalTugas == 0) {
+                                                                                        echo '0%';
+                                                                                    } else {
+                                                                                        echo $totalSelesai / $totalTugas * 100 . '%';
+                                                                                    } ?></text>
                                     </svg>
                                 </div>
                             </div>
