@@ -39,9 +39,16 @@ class ProjectManage extends CI_Controller
         $data['idProject'] = $id_project;
         $data['project_detail'] = $this->M_Project->project_detail($id_project, $id_perusahaan)->result();
         $data['total_tugas'] = $this->M_Project->total_tugas_project($id_project, $id_perusahaan)->result();
-        $data['total_status'] = $this->M_Project->get_total_status($id_project, $id_perusahaan)->result();
+        $data['total_status_berjalan'] = $this->M_Project->get_total_status_berjalan($id_project, $id_perusahaan)->result();
+        $data['total_status_selesai'] = $this->M_Project->get_total_status_selesai($id_project, $id_perusahaan)->result();
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
         $this->load->view('v_detail_project.php', $data);
+    }
+
+    function detail_tugas($id_tugas_project)
+    {
+        $data['tugas'] = $this->M_Project->detail_tugas($id_tugas_project)->result();
+        $this->load->view('v_detail_aktivitas.php', $data);
     }
 
     function tambah_project()
@@ -49,6 +56,7 @@ class ProjectManage extends CI_Controller
         $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
         $id_perusahaan = $id['id_perusahaan'];
         $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
+        $data['message'] = " ";
         $this->load->view('v_tambah_project.php', $data);
     }
 
@@ -63,18 +71,25 @@ class ProjectManage extends CI_Controller
         $project_end = $this->input->post('project_end');
         $id_klien = $this->input->post('id_klien');
 
-        $data = array(
-            'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
-            'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
-        );
+        if ($project_start == date('Y-m-d') && $project_end > $project_start) {
+            $data = array(
+                'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
+                'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
+            );
 
-        $this->M_Project->insert_record($data, 'project');
+            $this->M_Project->insert_record($data, 'project');
 
-        $session = array('id_project' => $this->db->insert_id());
-        $this->session->set_userdata($session);
+            $session = array('id_project' => $this->db->insert_id());
+            $this->session->set_userdata($session);
 
-        //   redirect('ProjectManage/asign_anggota_project/?id=' . $this->db->insert_id());
-        redirect('ProjectManage/asign_anggota_project');
+            redirect('ProjectManage/asign_anggota_project');
+        } else {
+            $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
+            $id_perusahaan = $id['id_perusahaan'];
+            $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
+            $data['message'] = "Tanggal yang dipilih harus benar. Tanggal selesai harus lebih dari tanggal mulai dan tanggal mulai harus sama dengan tanggal sekarang";
+            $this->load->view('v_tambah_project.php', $data);
+        }
     }
 
     function asign_anggota_project()
@@ -85,10 +100,49 @@ class ProjectManage extends CI_Controller
         $this->load->view('v_add_member.php', $data);
     }
 
+    function asign_anggota_project_baru($id_project)
+    {
+        $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
+        $id_perusahaan = $id['id_perusahaan'];
+        $data['idProject'] = $id_project;
+        $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($id_perusahaan)->result();
+        $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
+        $this->load->view('v_add_member_baru.php', $data);
+    }
+
     function proses_tambah_anggota()
     {
+
         $i = 0; // untuk loopingnya
         $id_project = $this->input->post('id_project');
+        $id_karyawan = $this->input->post('id_karyawan');
+        if ($id_karyawan[0] !== null) {
+
+            foreach ($id_karyawan as $row) {
+                $data = [
+                    'id_project' => $id_project,
+                    'id_karyawan' => $row,
+                ];
+
+                $insert = $this->db->insert('anggota_project', $data);
+                if ($insert) {
+                    $i++;
+                }
+            }
+        }
+
+        $arr['success'] = true;
+        $arr['notif']  = '<div class="alert alert-success">
+          <i class="fa fa-check"></i> Data Berhasil Disimpan
+        </div>';
+        return $this->output->set_output(json_encode($arr));
+    }
+
+
+    function proses_tambah_anggota_baru()
+    {
+        $i = 0; // untuk loopingnya
+        $id_project = $this->input->post('getIdProject');
         $id_karyawan = $this->input->post('id_karyawan');
         if ($id_karyawan[0] !== null) {
             foreach ($id_karyawan as $row) {
@@ -120,36 +174,84 @@ class ProjectManage extends CI_Controller
 
     function tambah_task_baru($id_project)
     {
+        $data['id_project'] = $id_project;
         $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
-        $this->load->view('v_add_task.php', $data);
+        $this->load->view('v_add_task_baru.php', $data);
     }
 
     function proses_tambah_task()
     {
+        $id_project = $this->session->userdata('id_project');
+        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, tanggal_selesai_project FROM project WHERE id_project = '$id_project'")->row_array();
+
         $i = 0; // untuk loopingnya
         $tugas = $this->input->post('tugas');
         $anggota = $this->input->post('member');
         $batas_waktu = $this->input->post('date');
         if ($tugas[0] !== null) {
-            foreach ($tugas as $row) {
-                $data = array(
-                    'nama_tugas' => $row,
-                    'id_anggota_project' => $anggota[$i],
-                    'batas_waktu' => $batas_waktu[$i],
-                    'status_tugas' => 'SEDANG BERJALAN'
-                );
 
-                $insert = $this->db->insert('tugas_project', $data);
-                if ($insert) {
-                    $i++;
+            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['tanggal_selesai_project']) {
+                foreach ($tugas as $row) {
+                    $data = array(
+                        'nama_tugas' => $row,
+                        'id_anggota_project' => $anggota[$i],
+                        'batas_waktu' => $batas_waktu[$i]
+                    );
+
+                    $insert = $this->db->insert('tugas_project', $data);
+                    if ($insert) {
+                        $i++;
+                    }
                 }
+
+                $this->session->unset_userdata('id_project');
+                $arr['success'] = true;
+                $arr['notif']  = '<div class="alert alert-success">
+                                    <i class="fa fa-check"></i> Data Berhasil Disimpan
+                                    </div>';
+                return $this->output->set_output(json_encode($arr));
+            } else {
+                $arr['success'] = false;
+                return $this->output->set_output(json_encode($arr));
             }
         }
+    }
 
-        $arr['success'] = true;
-        $arr['notif']  = '<div class="alert alert-success">
-      <i class="fa fa-check"></i> Data Berhasil Disimpan
-    </div>';
-        return $this->output->set_output(json_encode($arr));
+    function proses_tambah_task_baru()
+    {
+        $id_project = $this->input->post('id_project');
+        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, tanggal_selesai_project FROM project WHERE id_project = '$id_project'")->row_array();
+
+        $i = 0; // untuk loopingnya
+        $tugas = $this->input->post('tugas');
+        $anggota = $this->input->post('member');
+        $batas_waktu = $this->input->post('date');
+        if ($tugas[0] !== null) {
+
+            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['tanggal_selesai_project']) {
+                foreach ($tugas as $row) {
+                    $data = array(
+                        'nama_tugas' => $row,
+                        'id_anggota_project' => $anggota[$i],
+                        'batas_waktu' => $batas_waktu[$i]
+                    );
+
+                    $insert = $this->db->insert('tugas_project', $data);
+                    if ($insert) {
+                        $i++;
+                    }
+                }
+
+                $this->session->unset_userdata('id_project');
+                $arr['success'] = true;
+                $arr['notif']  = '<div class="alert alert-success">
+                                    <i class="fa fa-check"></i> Data Berhasil Disimpan
+                                    </div>';
+                return $this->output->set_output(json_encode($arr));
+            } else {
+                $arr['success'] = false;
+                return $this->output->set_output(json_encode($arr));
+            }
+        }
     }
 }
