@@ -335,7 +335,7 @@
                         });
 
                     } else {
-                        $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>')
+                        $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan. Batas Waktu harus diisi sesuai dari tanggal mulai hingga selesai</div>');
                     }
                 },
 
