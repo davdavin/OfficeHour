@@ -182,7 +182,7 @@ class Dashboard_Perusahaan extends CI_Controller
                 $token = md5($description) . rand(10, 9999);
 
                 $cekEmail = $this->db->query("SELECT email_karyawan FROM karyawan WHERE email_karyawan = '$description'")->row_array();
-                $isi = 1;
+                // $isi = 1;
                 if (!empty($name) || !empty($description) || !empty($posisi)) {
                     if ($description == $cekEmail['email_karyawan']) {
                         $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token,terkirim) values(?,?,?,?,?,?)";
@@ -211,7 +211,7 @@ class Dashboard_Perusahaan extends CI_Controller
                         // redirect('Dashboard_Perusahaan/Upload_Massal');
 
                         //   echo $description . ' email ini sudah digunakan' . '<br>';
-                        redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
+                        // redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
                     } else {
                         $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token,terkirim) values(?,?,?,?,?,?)";
                         $paramType = "ssssss";
@@ -254,17 +254,14 @@ class Dashboard_Perusahaan extends CI_Controller
                         $this->email->message("Halo \n" . $name . "\n Anda menerima surel ini dikarenakan anda sudah terdaftar sebagai karyawan di dalam OfficeHour.
 
                         Untuk melakukan aktivasi akun mohon untuk klik link berikut ini \n" . $link);
-                        /*    if ($this->email->send()) {
-                            echo 'email terkirim';
-                        } else {
-                            echo 'Error! email tidak dapat dikirim.';
-                        } */
+
                         if (!empty($insertId)) {
                             $type = "success";
                             $message = "Berhasil Upload";
                             // echo $message;
                             // $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
-                            redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
+                            // redirect('Dashboard_Perusahaan/Upload_Massal');
+                            // redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
                         } else {
                             $type = "error";
                             $message = "Tidak Berhasil Upload";
@@ -280,6 +277,7 @@ class Dashboard_Perusahaan extends CI_Controller
             $message = "Tipe tidak sesuai. Upload file excel";
             echo $message;
         }
+        redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
     }
 
     public function proses_edit_karyawan()
