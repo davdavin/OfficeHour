@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 06:52 AM
+-- Generation Time: Mar 23, 2022 at 11:51 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -194,7 +194,8 @@ INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_
 (61, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, ''),
 (62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, ''),
 (63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, ''),
-(64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276');
+(64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276'),
+(65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975');
 
 -- --------------------------------------------------------
 
@@ -458,7 +459,7 @@ ALTER TABLE `foto_screenshoot`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `paket`
