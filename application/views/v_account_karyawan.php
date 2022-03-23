@@ -84,24 +84,40 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-clock"></i>
-                                <p> Time Tracker </p>
-                            </a>
-                        </li>
+                        <?php if ($this->session->userdata('posisi_karyawan') == "Supervisor") { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-clock"></i>
+                                    <p> Project Manage </p>
+                                </a>
+                            </li>
+                        <?php } ?>
+
+                        <?php if ($this->session->userdata('posisi_karyawan') != "Supervisor") { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-clock"></i>
+                                    <p> Time Tracker </p>
+                                </a>
+                            </li>
+                        <?php } ?>
+
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Akun </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-user-tie"></i>
-                                <p> Project Manage </p>
-                            </a>
-                        </li>
+
+                        <?php if ($this->session->userdata('posisi_karyawan') != "Supervisor") { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tie"></i>
+                                    <p> Project Manage </p>
+                                </a>
+                            </li>
+                        <?php } ?>
+
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>

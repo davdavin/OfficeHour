@@ -432,7 +432,7 @@
           ('#modal-lg').show();
         }, interval);
         $('#text').html('Anda sedang bekerja');
-        $('#start').attr('disable', 'disabled');
+        //   $('#start').attr('disable', 'disabled');
       });
 
       $("#stop").click(function() {
