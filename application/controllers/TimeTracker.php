@@ -71,23 +71,29 @@ class TimeTracker extends CI_Controller
                 'error_mulai' => form_error('waktu_mulai'),
                 'error_selesai' => form_error('waktu_selesai'),
                 'error_bukti' => form_error('bukti'),
-                'erro_status' => form_error('status_tugas')
+                'error_status' => form_error('status_tugas')
             );
             echo json_encode($hasil);
         } else {
-            if ($status == "SELESAI") {
-                $tanggal_selesai_tugas = date('Y-m-d');
+            if ($waktu_mulai >= $waktu_selesai) {
+                $hasil['sukses'] = false;
+                $hasil['error_selesai'] = "Waktu selesai harus diisi lebih dari waktu mulai";
+                echo json_encode($hasil);
             } else {
-                $tanggal_selesai_tugas = NULL;
+                if ($status == "SELESAI") {
+                    $tanggal_selesai_tugas = date('Y-m-d');
+                } else {
+                    $tanggal_selesai_tugas = NULL;
+                }
+                $data = array(
+                    'id_project' => $id_project, 'id_karyawan' => $this->session->userdata('id_karyawan'), 'id_tugas_project' => $id_tugas_project, 'tanggal_aktivitas' => $tanggal_aktivitas,
+                    'waktu_mulai' => $waktu_mulai, 'waktu_selesai' => $waktu_selesai, 'bukti' => $bukti
+                );
+                $this->M_TimeTracker->insert_record($data, 'aktivitas');
+                $this->M_TimeTracker->update_record(['id_tugas_project' => $id_tugas_project], ['status_tugas' => $status, 'tanggal_selesai_tugas' => $tanggal_selesai_tugas], 'tugas_project');
+                $hasil['sukses'] = "Berhasil upload aktivitas";
+                echo json_encode($hasil);
             }
-            $data = array(
-                'id_project' => $id_project, 'id_karyawan' => $this->session->userdata('id_karyawan'), 'id_tugas_project' => $id_tugas_project, 'tanggal_aktivitas' => $tanggal_aktivitas,
-                'waktu_mulai' => $waktu_mulai, 'waktu_selesai' => $waktu_selesai, 'bukti' => $bukti
-            );
-            $this->M_TimeTracker->insert_record($data, 'aktivitas');
-            $this->M_TimeTracker->update_record(['id_tugas_project' => $id_tugas_project], ['status_tugas' => $status, 'tanggal_selesai_tugas' => $tanggal_selesai_tugas], 'tugas_project');
-            $hasil['sukses'] = "Berhasil upload aktivitas";
-            echo json_encode($hasil);
         }
     }
 }
