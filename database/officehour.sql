@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 11:51 AM
+-- Generation Time: Mar 23, 2022 at 04:00 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -65,7 +65,10 @@ INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_
 (2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Foto'),
 (3, 2, 7, 20, '2022-03-02', '13:30:00', '13:30:00', 'Foto'),
 (4, 2, 7, 20, '2022-04-01', '14:21:00', '14:26:00', 'Foto'),
-(5, 6, 1, 28, '2022-03-17', '14:34:00', '14:35:00', 'Foto');
+(5, 6, 1, 28, '2022-03-17', '14:34:00', '14:35:00', 'Foto'),
+(15, 1, 1, 37, '2022-03-19', '05:58:00', '06:48:00', 'Foto'),
+(16, 1, 1, 37, '2022-03-23', '18:18:00', '19:20:00', 'Foto'),
+(17, 1, 1, 37, '2022-03-23', '18:24:00', '22:24:00', 'Foto');
 
 -- --------------------------------------------------------
 
@@ -176,26 +179,27 @@ CREATE TABLE `karyawan` (
   `password_karyawan` char(255) DEFAULT NULL,
   `posisi_karyawan` varchar(25) NOT NULL,
   `status_karyawan` int(11) NOT NULL DEFAULT 0,
-  `token` varchar(100) NOT NULL
+  `token` varchar(100) NOT NULL,
+  `terkirim` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_karyawan`, `password_karyawan`, `posisi_karyawan`, `status_karyawan`, `token`) VALUES
-(1, 'PRSH5', 'Thomas', 'carcartho@example.com', '$2y$10$aeo.Z7W71XrdxTIQ2XSO1.ey2hBQOASA3/MKidsCSUWjYuWyFG1C.', 'Project Manager', 1, ''),
-(2, 'PRSH5', 'Tomi', 'thomthom@example.com', '$2y$10$SLR4trs14K6jFdqkVFQ/qeM273Dgtaekn2r2Jky256eVb4nU.qd.S', 'Technical Writer', 1, ''),
-(3, 'PRSH5', 'Christile', 'chris@example.com', '$2y$10$zMN7G6ltrM/YpnE.qmurJeE4lGk91HXXFdraQL3SMew2n0erQvynG', 'QA', 1, ''),
-(5, 'PRSH4', 'Toni', 'carcar@example.com', '$2y$10$1Gopto66FtDFvUZJ2bFxDO9qOMQx1o296DWM96JNn6EhXDpRvzkZa', 'Project Manager', 1, ''),
-(6, 'PRSH4', 'Tom', 'carlo@gmail.com', '$2y$10$WzKcde0ecyUQA0hM5/CpJOqUY2JuBRLjPRNpQMlwIKXXcQ2n2w29.', 'QA', 1, ''),
-(7, 'PRSH5', 'Ton', 'carcarcarcar@example.com', '$2y$10$BnK3.bdATmOeUc7ZpWK1COfRAFWPaRyDcY/tpS.P0qtvvnEpT0/JK', 'Project Manager', 1, ''),
-(10, 'PRSH5', 'Car', 'carlotoorop@gmail.com', '$2y$10$z9aquoPxQeKxGNEicZLK.O9kO/Dxo6QjYZAFE/5RATx8dz/qvXzyu', 'Project Manager', 1, 'f62a89698ec1ced7a6e0f9a057e0b7a91521'),
-(61, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, ''),
-(62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, ''),
-(63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, ''),
-(64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276'),
-(65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975');
+INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_karyawan`, `password_karyawan`, `posisi_karyawan`, `status_karyawan`, `token`, `terkirim`) VALUES
+(1, 'PRSH5', 'Thomas', 'carcartho@example.com', '$2y$10$aeo.Z7W71XrdxTIQ2XSO1.ey2hBQOASA3/MKidsCSUWjYuWyFG1C.', 'Project Manager', 1, '', 1),
+(2, 'PRSH5', 'Tomi', 'thomthom@example.com', '$2y$10$SLR4trs14K6jFdqkVFQ/qeM273Dgtaekn2r2Jky256eVb4nU.qd.S', 'Technical Writer', 1, '', 1),
+(3, 'PRSH5', 'Christile', 'chris@example.com', '$2y$10$zMN7G6ltrM/YpnE.qmurJeE4lGk91HXXFdraQL3SMew2n0erQvynG', 'QA', 1, '', 1),
+(5, 'PRSH4', 'Toni', 'carcar@example.com', '$2y$10$1Gopto66FtDFvUZJ2bFxDO9qOMQx1o296DWM96JNn6EhXDpRvzkZa', 'Project Manager', 1, '', 1),
+(6, 'PRSH4', 'Tom', 'carlo@gmail.com', '$2y$10$WzKcde0ecyUQA0hM5/CpJOqUY2JuBRLjPRNpQMlwIKXXcQ2n2w29.', 'QA', 1, '', 1),
+(7, 'PRSH5', 'Ton', 'carcarcarcar@example.com', '$2y$10$BnK3.bdATmOeUc7ZpWK1COfRAFWPaRyDcY/tpS.P0qtvvnEpT0/JK', 'Project Manager', 1, '', 1),
+(10, 'PRSH5', 'Car', 'carlotoorop@gmail.com', '$2y$10$z9aquoPxQeKxGNEicZLK.O9kO/Dxo6QjYZAFE/5RATx8dz/qvXzyu', 'Project Manager', 1, 'f62a89698ec1ced7a6e0f9a057e0b7a91521', 1),
+(61, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, '', 1),
+(62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, '', 1),
+(63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, '', 1),
+(64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276', 1),
+(65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975', 1);
 
 -- --------------------------------------------------------
 
@@ -274,8 +278,8 @@ INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_mana
 (2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, 'SEDANG BERJALAN'),
 (3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, 'SEDANG BERJALAN'),
 (4, 'PRSH5', 3, 7, 'Planner Website', 'Website untuk menjual buku perencanaan', '2022-03-21', '2022-03-26', NULL, 'SEDANG BERJALAN'),
-(5, 'PRSH5', 1, 7, 'Planner Website', 'dadsada', '2022-03-21', '2022-04-02', NULL, 'SEDANG BERJALAN'),
-(6, 'PRSH5', 3, 7, 'Planner Website', 'dasda', '2022-03-21', '2022-04-09', NULL, 'SEDANG BERJALAN');
+(5, 'PRSH5', 1, 7, 'Lamp Shop', 'Menjual berbagai jenis lampu', '2022-03-21', '2022-04-02', NULL, 'SEDANG BERJALAN'),
+(6, 'PRSH5', 3, 7, 'Good Shop', 'Mmenjual berbagai jenis peralatan rumah tangga', '2022-03-21', '2022-04-09', NULL, 'SEDANG BERJALAN');
 
 -- --------------------------------------------------------
 
@@ -429,7 +433,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`

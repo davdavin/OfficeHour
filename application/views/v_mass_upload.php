@@ -264,6 +264,7 @@
                     <!--   <h2>Import Excel File into MySQL Database using PHP</h2> -->
 
                     <div class="card">
+
                         <div class="card-body">
                             <div class="outer-container">
                                 <form action="<?php echo base_url('Dashboard_Perusahaan/proses_upload_massal') ?>" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
@@ -274,18 +275,11 @@
                                     <button type="submit" id="submit" name="import" class="btn btn-primary">Submit</button>
                                 </form>
 
-                            </div>
-                            <div id="response" class="<?php /* if (!empty($type)) {
-                                                            echo $type . " display-block";
-                                                        }
-                                                        ?>"><?php if (!empty($message)) {
-                                                                echo $message;
-                                                            } 
-                                                            */ ?>"> </div>
-                            <?php foreach ($hasil as $row) {
-                                echo $row;
-                            } //$this->load->view('message.php'); 
-                            ?>
+                            </div><br><br>
+                            <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan') ?>" type="button" class="btn btn-primary">
+                                Lihat Gagal Input Karyawan
+                            </a><br><br>
+
                         </div>
                     </div>
                 </div>
