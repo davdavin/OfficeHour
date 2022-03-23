@@ -71,7 +71,7 @@ class ProjectManage extends CI_Controller
         $project_end = $this->input->post('project_end');
         $id_klien = $this->input->post('id_klien');
 
-        if ($project_start == date('Y-m-d') && $project_end > $project_start) {
+        if ($project_end > $project_start) {
             $data = array(
                 'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
                 'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'batas_waktu_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
@@ -87,7 +87,7 @@ class ProjectManage extends CI_Controller
             $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
             $id_perusahaan = $id['id_perusahaan'];
             $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
-            $data['message'] = "Tanggal yang dipilih harus benar. Tanggal selesai harus lebih dari tanggal mulai dan tanggal mulai harus sama dengan tanggal sekarang";
+            $data['message'] = "Tanggal yang dipilih harus benar. Batas waktu harus lebih dari tanggal mulai dan tanggal mulai";
             $this->load->view('v_tambah_project.php', $data);
         }
     }
