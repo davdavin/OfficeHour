@@ -103,6 +103,11 @@ class M_Project extends CI_Model
                                 JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan JOIN project ON project.id_project = aktivitas.id_project WHERE aktivitas.id_tugas_project = '$id_tugas_project'");
     }
 
+    function get_tanggal_waktu_aktivitas()
+    {
+        return $this->db->query("SELECT * FROM aktivitas WHERE id_aktivitas = 2");
+    }
+
     function insert_record($data, $table)
     {
         $this->db->insert($table, $data);
