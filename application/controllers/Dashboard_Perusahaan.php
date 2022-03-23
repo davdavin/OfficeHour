@@ -45,6 +45,17 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->load->view('v_lihat_daftar_karyawan.php', $data);
     }
 
+    public function lihat_karyawan_gagal($id_perusahaan)
+    {
+        $username = $this->session->userdata('username_perusahaan');
+        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+        $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan_gagal($id_perusahaan)->result();
+        $data['total_karyawan'] = $this->M_Perusahaan->jumlah_karyawan($id_perusahaan)->result();
+        $this->load->view('v_gagal_kirim.php', $data);
+    }
+
+
+
     function proses_tambah_karyawan()
     {
         $id_perusahaan = $this->input->post('id_perusahaan');
@@ -171,16 +182,22 @@ class Dashboard_Perusahaan extends CI_Controller
                 $token = md5($description) . rand(10, 9999);
 
                 $cekEmail = $this->db->query("SELECT email_karyawan FROM karyawan WHERE email_karyawan = '$description'")->row_array();
-
+                $isi = 1;
                 if (!empty($name) || !empty($description) || !empty($posisi)) {
                     if ($description == $cekEmail['email_karyawan']) {
-                        $hasil[$i] = $description . ' email ini sudah digunakan';
+                        $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token,terkirim) values(?,?,?,?,?,?)";
+                        $paramType = "ssssss";
+                        $paramArray = array(
+                            $name,
+                            $description,
+                            $posisi,
+                            $id_perusahaan,
+                            $token,
+                            0
 
-                        $data['hasil'] = array($hasil[$i]);
-                        if ($data['hasil']) {
-                            $i++;
-                        }
-
+                        );
+                        $insertId = $db->insert($query, $paramType, $paramArray);
+                        // redirect('Dashboard_Perusahaan/Upload_Massal');
 
                         //   return $this->output->set_output($data['hasil']);
 
@@ -194,15 +211,17 @@ class Dashboard_Perusahaan extends CI_Controller
                         // redirect('Dashboard_Perusahaan/Upload_Massal');
 
                         //   echo $description . ' email ini sudah digunakan' . '<br>';
+                        redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
                     } else {
-                        $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token) values(?,?,?,?,?)";
-                        $paramType = "sssss";
+                        $query = "insert into karyawan(nama_karyawan,email_karyawan,posisi_karyawan,id_perusahaan,token,terkirim) values(?,?,?,?,?,?)";
+                        $paramType = "ssssss";
                         $paramArray = array(
                             $name,
                             $description,
                             $posisi,
                             $id_perusahaan,
-                            $token
+                            $token,
+                            1
                         );
                         $insertId = $db->insert($query, $paramType, $paramArray);
                         // $query = "insert into tbl_info(name,description) values('" . $name . "','" . $description . "')";
@@ -235,22 +254,23 @@ class Dashboard_Perusahaan extends CI_Controller
                         $this->email->message("Halo \n" . $name . "\n Anda menerima surel ini dikarenakan anda sudah terdaftar sebagai karyawan di dalam OfficeHour.
 
                         Untuk melakukan aktivasi akun mohon untuk klik link berikut ini \n" . $link);
-                        if ($this->email->send()) {
+                        /*    if ($this->email->send()) {
                             echo 'email terkirim';
                         } else {
                             echo 'Error! email tidak dapat dikirim.';
-                        }
+                        } */
                         if (!empty($insertId)) {
                             $type = "success";
                             $message = "Berhasil Upload";
-                            echo $message;
-                            //     $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
-                            //       redirect('Dashboard_Perusahaan/Upload_Massal');
+                            // echo $message;
+                            // $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
+                            redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
                         } else {
                             $type = "error";
                             $message = "Tidak Berhasil Upload";
-                            //  $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
-                            echo $message;
+                            $this->session->set_flashdata('gagal', 'Tidak berhasil input karyawan');
+                            // echo $message;
+                            redirect('Dashboard_Perusahaan/Upload_Massal');
                         }
                     }
                 }
@@ -286,6 +306,15 @@ class Dashboard_Perusahaan extends CI_Controller
         $this->M_Karyawan->delete_record($where, 'karyawan');
         $this->session->set_flashdata('sukses', 'Data berhasil dihapus');
         redirect('Dashboard_Perusahaan/lihat_karyawan/' . $id_perusahaan);
+    }
+
+    public function hapus_karyawan_gagal($id_karyawan)
+    {
+        $id_perusahaan = $this->session->userdata('id_perusahaan');
+        $where = array('id_karyawan' => $id_karyawan);
+        $this->M_Karyawan->delete_record($where, 'karyawan');
+        $this->session->set_flashdata('sukses', 'Data berhasil dihapus');
+        redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $id_perusahaan);
     }
 
     public function lihat_klien($id_perusahaan)
