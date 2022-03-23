@@ -159,8 +159,19 @@
                                                 <td><?php echo tanggal_indonesia($list->tanggal_mulai_project); ?></td>
                                             </tr>
                                             <tr>
+                                                <th>Batas Waktu</th>
+                                                <td><?php echo tanggal_indonesia($list->batas_waktu_project);
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <th>Tanggal Selesai</th>
-                                                <td><?php echo tanggal_indonesia($list->tanggal_selesai_project); ?></td>
+                                                <td><?php if ($list->tanggal_selesai_project == NULL) {
+                                                        echo "-";
+                                                    } else {
+                                                        echo tanggal_indonesia($list->tanggal_selesai_project);
+                                                    } ?>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Status</th>
@@ -183,9 +194,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Nama Karyawan</th>
-                                                <th>Nama Tugas</th>
+                                                <th>Tugas</th>
                                                 <th>Batas Waktu</th>
-                                                <th>Status Tugas</th>
+                                                <th>Tanggal Selesai</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -194,6 +206,13 @@
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo tanggal_indonesia($detail->batas_waktu) ?></td>
+                                                    <td><?php if ($detail->tanggal_selesai_tugas == NULL) {
+                                                            echo "-";
+                                                        } else {
+                                                            echo tanggal_indonesia($detail->tanggal_selesai_tugas);
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td><?php echo $detail->status_tugas ?></td>
                                                 </tr>
                                             <?php } ?>
@@ -216,31 +235,32 @@
                                     </h4>
                                 </div>
                             </div>
-                            <?php foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SEDANG BERJALAN") { ?>
-                                    <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Sedang Berjalan</h4>
-                                            <h4>
-                                                <?php echo $totalS->totalStatus;
-                                                ?>
-                                            </h4>
-                                        </div>
-                                    </div>
-                            <?php }
-                            } ?>
+                            <div class="small-box col-7 bg-maroon" style="border-radius: 15px;">
+                                <div class="inner text-center">
+                                    <h4>Sedang Berjalan</h4>
+                                    <?php foreach ($total_status_berjalan as $total) { ?>
+                                        <h4> <?php $totalBerjalan = $total->totalStatus;
+                                                echo $totalBerjalan; ?>
+                                        </h4>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div>
 
-                            <?php foreach ($total_status as $totalS) {
-                                if ($totalS->status_tugas == "SELESAI") { ?>
-                                    <div class="small-box col-7 bg-green" style="border-radius: 15px;">
-                                        <div class="inner text-center">
-                                            <h4>Selesai</h4>
-                                            <h4> <?php echo $totalS->totalStatus; ?>
-                                            </h4>
-                                        </div>
-                                    </div><br><br>
-                            <?php }
-                            } ?>
+                            <div class="small-box col-7 bg-green" style="border-radius: 15px;">
+                                <div class="inner text-center">
+                                    <h4>Selesai</h4>
+                                    <?php // $totalSelesai = 0;
+                                    foreach ($total_status_selesai as $total) { ?>
+                                        <h4> <?php
+                                                $totalSelesai = $total->totalStatus;
+                                                echo $totalSelesai;
+                                                ?>
+                                        </h4>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div><br><br>
                         </section>
                     </div>
             </section>

@@ -84,6 +84,8 @@ class Login extends CI_Controller
                     );
 
                     if ($cek_login_karyawan['posisi_karyawan'] == "Supervisor") {
+                        $this->session->set_userdata($session);
+                        redirect('Supervisor');
                     } else {
                         $this->session->set_userdata($session);
                         redirect('TimeTracker');

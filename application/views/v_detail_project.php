@@ -165,9 +165,19 @@
                                                 <th>Tanggal Mulai</th>
                                                 <td><?php echo tanggal_indonesia($list->tanggal_mulai_project); ?></td>
                                             </tr>
+                                            <th>Batas Waktu</th>
+                                            <td><?php echo tanggal_indonesia($list->batas_waktu_project);
+                                                ?>
+                                            </td>
+                                            </tr>
                                             <tr>
                                                 <th>Tanggal Selesai</th>
-                                                <td><?php echo tanggal_indonesia($list->tanggal_selesai_project); ?></td>
+                                                <td><?php if ($list->tanggal_selesai_project == NULL) {
+                                                        echo "-";
+                                                    } else {
+                                                        echo tanggal_indonesia($list->tanggal_selesai_project);
+                                                    } ?>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th>Status</th>
@@ -190,9 +200,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Nama Karyawan</th>
-                                                <th>Nama Tugas</th>
+                                                <th>Tugas</th>
                                                 <th>Batas Waktu</th>
-                                                <th>Status Tugas</th>
+                                                <th>Tanggal Selesai</th>
+                                                <th>Status</th>
                                                 <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
                                                     <th>Aksi</th>
                                                 <?php } ?>
@@ -204,6 +215,13 @@
                                                     <td><?php echo $detail->nama_karyawan ?></td>
                                                     <td><?php echo $detail->nama_tugas ?></td>
                                                     <td><?php echo tanggal_indonesia($detail->batas_waktu) ?></td>
+                                                    <td><?php if ($detail->tanggal_selesai_tugas == NULL) {
+                                                            echo "-";
+                                                        } else {
+                                                            echo tanggal_indonesia($detail->tanggal_selesai_tugas);
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td><?php echo $detail->status_tugas ?></td>
                                                     <?php if ($this->session->userdata('posisi_karyawan') == "Project Manager") { ?>
                                                         <td>
