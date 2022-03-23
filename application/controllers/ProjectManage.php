@@ -74,7 +74,7 @@ class ProjectManage extends CI_Controller
         if ($project_start == date('Y-m-d') && $project_end > $project_start) {
             $data = array(
                 'id_perusahaan' => $id_perusahaan, 'id_client' => $id_klien, 'project_manager' => $project_manager, 'nama_project' => $project_name,
-                'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'tanggal_selesai_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
+                'deskripsi_project' => $deskripsi, 'tanggal_mulai_project' => $project_start, 'batas_waktu_project' => $project_end, 'status_project' => 'SEDANG BERJALAN'
             );
 
             $this->M_Project->insert_record($data, 'project');
@@ -182,7 +182,7 @@ class ProjectManage extends CI_Controller
     function proses_tambah_task()
     {
         $id_project = $this->session->userdata('id_project');
-        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, tanggal_selesai_project FROM project WHERE id_project = '$id_project'")->row_array();
+        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, batas_waktu_project FROM project WHERE id_project = '$id_project'")->row_array();
 
         $i = 0; // untuk loopingnya
         $tugas = $this->input->post('tugas');
@@ -190,7 +190,7 @@ class ProjectManage extends CI_Controller
         $batas_waktu = $this->input->post('date');
         if ($tugas[0] !== null) {
 
-            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['tanggal_selesai_project']) {
+            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['batas_waktu_project']) {
                 foreach ($tugas as $row) {
                     $data = array(
                         'nama_tugas' => $row,
@@ -220,7 +220,7 @@ class ProjectManage extends CI_Controller
     function proses_tambah_task_baru()
     {
         $id_project = $this->input->post('id_project');
-        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, tanggal_selesai_project FROM project WHERE id_project = '$id_project'")->row_array();
+        $get_tanggal = $this->db->query("SELECT tanggal_mulai_project, batas_waktu_project FROM project WHERE id_project = '$id_project'")->row_array();
 
         $i = 0; // untuk loopingnya
         $tugas = $this->input->post('tugas');
@@ -228,7 +228,7 @@ class ProjectManage extends CI_Controller
         $batas_waktu = $this->input->post('date');
         if ($tugas[0] !== null) {
 
-            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['tanggal_selesai_project']) {
+            if ($batas_waktu[$i] >= $get_tanggal['tanggal_mulai_project'] && $batas_waktu[$i] <= $get_tanggal['batas_waktu_project']) {
                 foreach ($tugas as $row) {
                     $data = array(
                         'nama_tugas' => $row,

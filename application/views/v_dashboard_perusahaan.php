@@ -289,9 +289,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Tanggal Selesai</th>
-                                        <td><?php echo tanggal_indonesia($detail->tanggal_selesai_project);
+                                        <th>Batas Waktu</th>
+                                        <td><?php echo tanggal_indonesia($detail->batas_waktu_project);
                                             ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Selesai</th>
+                                        <td><?php if ($detail->tanggal_selesai_project == NULL) {
+                                                echo "-";
+                                            } else {
+                                                echo tanggal_indonesia($detail->tanggal_selesai_project);
+                                            } ?>
                                         </td>
                                     </tr>
                                     <tr>

@@ -169,6 +169,7 @@
             <a type="button" id="stop" class="btn bg-blue" style="border-radius: 25px;" data-toggle="modal" data-target="#modal-lg"> Kirim Screen Shoot </a><br><br>
             <!-- <a type="button" id="resetButton" class="btn bg-red" style="border-radius: 25px;"> Reset time </a><br><br> -->
           </button>
+          <p id="text"></p>
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid">
@@ -388,6 +389,18 @@
   <script>
     $(function() {
 
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidht": false
+      });
+
+      $('#list-project').DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidht": false
+      });
+
       const sukses = $('.sukses').data('flashdata');
       if (sukses) {
         Swal.fire({
@@ -406,20 +419,11 @@
         });
       }
 
-      $('.select2').select2()
-      $('#example1').DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidht": false
-      });
-      $('#list-project').DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidht": false
-      });
+      $('.select2').select2();
 
       var timer = null,
         interval = 1000 * 1 * 60;
+
       $("#start").click(function() {
         if (timer !== null) return;
         timer = setInterval(function() {
@@ -427,18 +431,19 @@
           // window.open("<?php echo base_url() . 'LandingPage' ?>", '_blank');
           ('#modal-lg').show();
         }, interval);
-
+        $('#text').html('Anda sedang bekerja');
+        $('#start').attr('disable', 'disabled');
       });
 
       $("#stop").click(function() {
         clearInterval(timer);
         timer = null;
         $('#start').show();
+        $('#text').html('Anda telah selesai kerja');
       });
 
 
-      <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?>
-        $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
+      <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?> $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
           e.preventDefault();
           $.ajax({
             url: $(this).attr('action'),

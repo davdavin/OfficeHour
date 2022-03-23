@@ -27,7 +27,8 @@ class Klien extends CI_Controller
         $data['title'] = 'OfficeHour - Klien | Project';
         $data['project_detail'] = $this->M_Project->project_detail($id_project, $id_perusahaan)->result();
         $data['total_tugas'] = $this->M_Project->total_tugas_project($id_project, $id_perusahaan)->result();
-        $data['total_status'] = $this->M_Project->get_total_status($id_project, $id_perusahaan)->result();
+        $data['total_status_berjalan'] = $this->M_Project->get_total_status_berjalan($id_project, $id_perusahaan)->result();
+        $data['total_status_selesai'] = $this->M_Project->get_total_status_selesai($id_project, $id_perusahaan)->result();
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
         $this->load->view('v_detail_project_klien.php', $data);
     }

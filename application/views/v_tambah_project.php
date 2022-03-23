@@ -167,7 +167,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">tanggal Selesai</label>
+                                    <label for="exampleFormControlInput1" class="form-label">Batas Waktu</label>
                                     <input type="date" class="form-control" name="project_end" id="exampleFormControlInput1" required value="<?= set_value('project_end'); ?>">
                                 </div>
 
