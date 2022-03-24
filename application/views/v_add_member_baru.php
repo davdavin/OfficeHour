@@ -305,7 +305,7 @@
                         $('#notif').fadeIn(800, function() {
                             $("#notif").html(data.notif).fadeOut(5000).delay(800);
                         });
-                        window.location.href = "<?php echo base_url() . 'ProjectManage/tambah_task' ?>";
+                        window.location.href = "<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject ?>";
                     } else {
                         $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>');
                     }

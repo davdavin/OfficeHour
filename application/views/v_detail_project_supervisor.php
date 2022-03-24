@@ -375,7 +375,7 @@
                                         <text x="18" y="20.35" class="percentage"><?php if ($totalTugas == 0) {
                                                                                         echo '0%';
                                                                                     } else {
-                                                                                        echo $totalSelesai / $totalTugas * 100 . '%';
+                                                                                        echo number_format($totalSelesai / $totalTugas * 100, 0) . '%';
                                                                                     } ?></text>
                                     </svg>
                                 </div>

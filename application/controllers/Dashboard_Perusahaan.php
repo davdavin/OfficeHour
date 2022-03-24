@@ -165,7 +165,7 @@ class Dashboard_Perusahaan extends CI_Controller
             $spreadSheetAry = $excelSheet->toArray();
             $sheetCount = count($spreadSheetAry);
 
-            for ($i = 0; $i <= $sheetCount; $i++) {
+            for ($i = 1; $i <= $sheetCount; $i++) {
                 $name = "";
                 if (isset($spreadSheetAry[$i][0])) {
                     $name = mysqli_real_escape_string($conn, $spreadSheetAry[$i][0]);

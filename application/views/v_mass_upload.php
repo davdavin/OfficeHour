@@ -279,6 +279,7 @@
                             <a href="<?php echo base_url() . 'Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan') ?>" type="button" class="btn btn-primary">
                                 Lihat Gagal Input Karyawan
                             </a><br><br>
+                            <a href="<?php echo base_url() . 'Template/excel_daftar_karyawan.xlsx' ?>" download>Download Template Excel</a>
 
                         </div>
                     </div>
