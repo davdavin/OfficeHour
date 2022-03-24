@@ -155,7 +155,7 @@
                                 $totalKaryawan = $total->total_karyawan;
                             }
                             ?>
-                            
+
                             <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -184,9 +184,9 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm bg-info" data-toggle="modal" data-target="#modalEdit<?php echo $list_karyawan->id_karyawan ?>">
-                                                    <i class="fas fa-pencil-alt">
+                                                    <i class="fas fa-plus">
                                                     </i>
-                                                    Edit
+                                                    Manual
                                                 </a>
                                                 <a href="<?php echo base_url() . 'Dashboard_Perusahaan/hapus_karyawan_gagal/' . $list_karyawan->id_karyawan; ?>" class="btn btn-sm bg-danger tombol-hapus">
                                                     <i class="fas fa-trash">
@@ -205,52 +205,6 @@
                 </div>
             </section>
 
-            <div class="modal fade" id="modal-lg">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Input Karyawan</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                            <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan' ?>" class="form-submit" method="post">
-                                <input type="hidden" class="form-control" id="id_perusahaan" name="id_perusahaan" value="<?= $id_perusahaan; ?>">
-                                <div class="form-group">
-                                    <label>Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" placeholder="Nama Lengkap">
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_nama" style="display: none">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" placeholder="Email karyawan">
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_email" style="display: none">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Posisi Karyawan</label>
-                                    <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" placeholder="Posisi karyawan">
-                                    <!-- INFO ERROR -->
-                                    <div class="p-2 is-invalid error_posisi" style="display: none">
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn btn-block btn-primary btn-sm" id="tombolSimpan">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
             <?php $no = 0;
             foreach ($karyawan as $list_karyawan) {
                 $no++; ?>
@@ -258,33 +212,37 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Edit Posisi & Status Karyawan</h4>
+                                <h4 class="modal-title">Tambah Karyawan</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_karyawan' ?>" method="post">
+                                <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan_manual' ?>" method="post" class="form-submit">
                                     <input type="hidden" name="id_karyawan" value="<?= $list_karyawan->id_karyawan ?>">
                                     <div class="form-group">
-                                        <label>Posisi Karyawan</label>
-                                        <input type="text" class="form-control" name="posisi_karyawan" value="<?= $list_karyawan->posisi_karyawan; ?>" required>
+                                        <label>Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" value="<?= $list_karyawan->nama_karyawan; ?>">
+                                        <!-- INFO ERROR -->
+                                        <div class="p-2 is-invalid error_nama" style="display: none">
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Status Karyawan</label>
-                                        <select class="form-control select2bs4" style="width: 100%;" name="status_karyawan" required>
-                                            <option selected disabled value>Status</option>
-                                            <?php if ($list_karyawan->status_karyawan == 1) { ?>
-                                                <option value="<?php echo $list_karyawan->status_karyawan; ?>" <?php echo "selected" ?>>Aktif</option>
-                                                <option value="0">Tidak Aktif</option>
-                                            <?php } ?>
-                                            <?php if ($list_karyawan->status_karyawan == 0) { ?>
-                                                <option value="1">Aktif</option>
-                                                <option value="<?php echo $list_karyawan->status_karyawan; ?>" <?php echo "selected" ?>>Tidak Aktif</option>
-                                            <?php } ?>
-                                        </select>
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" id="email_karyawan" name="email_karyawan" value="<?= $list_karyawan->email_karyawan; ?> ">
+                                        <!-- INFO ERROR -->
+                                        <div class="p-2 is-invalid error_email" style="display: none">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Posisi Karyawan</label>
+                                        <input type="text" class="form-control" id="posisi_karyawan" name="posisi_karyawan" value="<?= $list_karyawan->posisi_karyawan; ?> ">
+                                        <!-- INFO ERROR -->
+                                        <div class="p-2 is-invalid error_posisi" style="display: none">
+                                        </div>
                                     </div>
 
                                     <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>

@@ -184,6 +184,7 @@
                   <tr>
                     <th>Nama Project</th>
                     <th>Nama Tugas</th>
+                    <th>Tanggal Aktivitas</th>
                     <th>Waktu</th>
                     <th>Status Tugas</th>
                     <th>Detail Aktivitas</th>
@@ -194,6 +195,7 @@
                     <tr>
                       <td><?php echo $list_aktivitas->nama_project ?></td>
                       <td><?php echo $list_aktivitas->nama_tugas ?> </td>
+                      <td><?php echo tanggal_indonesia($list_aktivitas->tanggal_aktivitas) ?> </td>
                       <td><?php echo waktu($list_aktivitas->waktu_mulai) . ' - ' . waktu($list_aktivitas->waktu_selesai) ?></td>
                       <td><?php echo $list_aktivitas->status_tugas ?></td>
                       <td><?php echo $list_aktivitas->bukti ?></td>
@@ -228,7 +230,11 @@
                       <td><?php echo tanggal_indonesia($list_tugas_project->batas_waktu)  ?></td>
                       <td><?php echo $list_tugas_project->status_tugas ?></td>
                       <td>
-                        <a type="button" class="btn btn-sm bg-info" data-toggle="modal" data-target="#tugas<?php echo $list_tugas_project->id_tugas_project ?>"><i class="fas fa-pencil-alt"></i> Update</a>
+                        <?php if ($list_tugas_project->status_tugas == "SEDANG BERJALAN") { ?>
+                          <a type="button" class="btn btn-sm bg-info" data-toggle="modal" data-target="#tugas<?php echo $list_tugas_project->id_tugas_project ?>"><i class="fas fa-pencil-alt"></i> Update</a>
+                        <?php } else { ?>
+                          <button class="btn btn-sm bg-info" disabled><i class="fas fa-pencil-alt"></i> Update</button>
+                        <?php } ?>
                       </td>
                     </tr>
                   <?php } ?>
@@ -482,6 +488,18 @@
                 } else {
                   $('.error_status').hide();
                 }
+                if (obj.error_message) {
+                  Swal.fire({
+                    title: 'Tidak Berhasil',
+                    text: obj.error_message,
+                    icon: 'error',
+                  });
+
+                  /*   $('.error_message').html(obj.error_message);
+                     $('.error_message').css("color", "red"); */
+                } //else {
+                //    $('.error_message').hide();
+                //    }
               } else {
                 Swal.fire({
                   title: 'Sukses',
