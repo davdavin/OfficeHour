@@ -120,12 +120,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h3>Daftar Karyawan</h3>
+                            <h3>Informasi Aktivitas Karyawan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Karyawan</li>
+                                <li class="breadcrumb-item active">Detail Karyawan</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -137,44 +138,63 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h3><?php echo $info['nama_karyawan']; ?></h3>
+                                <h3><?php echo $info['posisi_karyawan']; ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Karyawan</h3>
+                            <h3 class="card-title">Informasi Bukti Saat Waktu Kerja</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="list_screenshot" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Tugas</th>
+                                        <th>Foto Screenshot</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($foto as $list_foto) { ?>
+                                        <tr>
+                                            <td><?php echo $list_foto->nama_tugas ?></td>
+                                            <td><img src="<?php echo base_url() . 'screenshoot/' . $list_foto->foto ?>" style="width: 250px; height: 250px;"></td>
+
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Tugas Project</h3>
                         </div>
 
                         <div class="card-body">
 
-                            <table id="list_karyawan" class="table table-bordered table-striped">
+                            <table id="list_tugas" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nama Karyawan</th>
-                                        <th>Email</th>
-                                        <th>Posisi</th>
-                                        <th>Status Karyawan</th>
-                                        <th>Aksi</th>
+                                        <th>Project</th>
+                                        <th>Tugas</th>
+                                        <th>Batas Waktu</th>
+                                        <th>Status Tugas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($karyawan as $list_karyawan) { ?>
+                                    <?php foreach ($tugas as $list_tugas) { ?>
                                         <tr>
-                                            <td><?php echo $list_karyawan->id_karyawan ?></td>
-                                            <td><?php echo $list_karyawan->nama_karyawan ?></td>
-                                            <td><?php echo $list_karyawan->email_karyawan ?></td>
-                                            <td><?php echo $list_karyawan->posisi_karyawan ?></td>
-                                            <td>
-                                                <?php if ($list_karyawan->status_karyawan == 1) { ?>
-                                                    <span class="badge badge-success">Aktif</span>
-                                                <?php } else { ?>
-                                                    <span class="badge badge-danger">Tidak Aktif</span>
-                                                <?php }  ?>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm bg-info" href="<?php echo base_url() . 'Supervisor/aktivitas/' . $list_karyawan->id_karyawan ?>">
-                                                    <i class="fas fa-eye">
-                                                    </i>
-                                                    Aktivitas
-                                                </a>
-                                            </td>
+                                            <td><?php echo $list_tugas->nama_project ?></td>
+                                            <td><?php echo $list_tugas->nama_tugas ?></td>
+                                            <td><?php echo tanggal_indonesia($list_tugas->batas_waktu) ?></td>
+                                            <td><?php echo $list_tugas->status_tugas ?></td>
+
                                         </tr>
                                     <?php } ?>
 
@@ -237,7 +257,7 @@
 
     <script>
         $(function() {
-            $("#list_karyawan").DataTable({
+            $("#list_screenshot").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
@@ -245,7 +265,28 @@
                     "sLengthMenu": "Tampil _MENU_ Baris",
                     "sZeroRecords": "Pencarian tidak ditemukan",
                     "sEmptyTable": "Data Kosong",
-                    "sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ baris", //"sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ entri",
+                    "sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ entri", //"sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ baris",
+                    "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 baris",
+                    "sSearch": "Cari:",
+                    "sLoadingRecords": "Sedang memproses",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": "Selanjutnya",
+                        "sPrevious": "Sebelumnya"
+                    }
+                }
+            });
+
+            $("#list_tugas").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "language": {
+                    "sLengthMenu": "Tampil _MENU_ Baris",
+                    "sZeroRecords": "Pencarian tidak ditemukan",
+                    "sEmptyTable": "Data Kosong",
+                    "sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ entri", //"sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ baris",
                     "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 baris",
                     "sSearch": "Cari:",
                     "sLoadingRecords": "Sedang memproses",

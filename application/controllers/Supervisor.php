@@ -38,14 +38,18 @@ class Supervisor extends CI_Controller
         $this->load->view('v_detail_project_supervisor.php', $data);
     }
 
-    public function daftar_karyawan() {
+    public function daftar_karyawan()
+    {
         $data['title'] = 'OfficeHour - Karyawan | Supervisor';
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
         $this->load->view('v_lihat_karyawan_supervisor.php', $data);
     }
 
-    public function aktivitas($id_karyawan) {
+    public function aktivitas($id_karyawan)
+    {
         $data['title'] = 'OfficeHour - Karyawan | Supervisor';
+        $data['info'] = $this->M_Supervisor->get_karyawan($id_karyawan)->row_array();
+        $data['foto'] = $this->M_Supervisor->get_ss($id_karyawan)->result();
         $data['tugas'] = $this->M_Supervisor->tugas_karyawan($id_karyawan)->result();
         $this->load->view('v_detail_karyawan.php', $data);
     }

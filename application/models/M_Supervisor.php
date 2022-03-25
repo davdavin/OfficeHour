@@ -29,4 +29,20 @@ class M_Supervisor extends CI_Model
     {
         return $this->db->query("SELECT * FROM project JOIN karyawan ON karyawan.id_karyawan = project.project_manager WHERE id_project = '$id_project' AND project.id_perusahaan = '$id_perusahaan'");
     }
+
+    function get_karyawan($id_karyawan)
+    {
+        return $this->db->query("SELECT nama_karyawan, posisi_karyawan FROM karyawan WHERE id_karyawan = '$id_karyawan'");
+    }
+
+    function get_ss($id_karyawan)
+    {
+        return $this->db->query("SELECT * FROM foto_screenshoot JOIN tugas_project ON tugas_project.id_tugas_project = foto_screenshoot.id_tugas_project WHERE id_karyawan = '$id_karyawan'");
+    }
+
+    function tugas_karyawan($id_karyawan)
+    {
+        return $this->db->query("SELECT * FROM project INNER JOIN anggota_project ON anggota_project.id_project = project.id_project INNER JOIN tugas_project ON tugas_project.id_anggota_project = anggota_project.id_anggota_project  
+        WHERE id_karyawan = '$id_karyawan' ORDER BY nama_project ASC");
+    }
 }
