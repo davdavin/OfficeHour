@@ -15,3 +15,10 @@ unset($_SESSION['info']); ?>
 <?php
 }
 unset($_SESSION['gagal']); ?>
+
+
+<!--  <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <i class="icon fas fa-exclamation-triangle"></i> <?php //echo $this->session->flashdata('gagal'); 
+                                                            ?>
+                                                            </div>-->
