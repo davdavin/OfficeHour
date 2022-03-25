@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $title;?></title>
+    <title><?php echo $title; ?></title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -82,7 +82,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Project Manage </p>
@@ -164,12 +164,12 @@
                                             <td>
                                                 <?php if ($list_karyawan->status_karyawan == 1) { ?>
                                                     <span class="badge badge-success">Aktif</span>
-                                                    <?php } else { ?>
+                                                <?php } else { ?>
                                                     <span class="badge badge-danger">Tidak Aktif</span>
                                                 <?php }  ?>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm bg-info" href="<?php echo base_url() . 'Supervisor/aktivitas/' . $list_karyawan->id_karyawan?>">
+                                                <a class="btn btn-sm bg-info" href="<?php echo base_url() . 'Supervisor/aktivitas/' . $list_karyawan->id_karyawan ?>">
                                                     <i class="fas fa-eye">
                                                     </i>
                                                     Aktivitas
@@ -186,7 +186,7 @@
                 </div>
             </section>
 
-          
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -240,7 +240,22 @@
             $("#list_karyawan").DataTable({
                 "responsive": true,
                 "lengthChange": true,
-                "autoWidth": false
+                "autoWidth": false,
+                "language": {
+                    "sLengthMenu": "Tampil _MENU_ Baris",
+                    "sZeroRecords": "Pencarian tidak ditemukan",
+                    "sEmptyTable": "Data Kosong",
+                    "sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ baris", //"sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ entri",
+                    "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 baris",
+                    "sSearch": "Cari:",
+                    "sLoadingRecords": "Sedang memproses",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": "Selanjutnya",
+                        "sPrevious": "Sebelumnya"
+                    }
+                }
             });
 
             const sukses = $('.sukses').data('flashdata');
