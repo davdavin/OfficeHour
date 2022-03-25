@@ -368,7 +368,7 @@
                                         <path class="circle" stroke-dasharray="<?php if ($totalTugas == 0) {
                                                                                     echo '0%';
                                                                                 } else {
-                                                                                    echo $totalSelesai / $totalTugas * 100 . '%';
+                                                                                    echo $totalSelesai / $totalTugas * 100;
                                                                                 } ?>, 100" d="M18 2.0845
                                         a 15.9155 15.9155 0 0 1 0 31.831
                                         a 15.9155 15.9155 0 0 1 0 -31.831" />

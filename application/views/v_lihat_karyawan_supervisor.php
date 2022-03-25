@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OfficeHour - Perusahaan</title>
+    <title><?php echo $title;?></title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -74,37 +74,38 @@
                         <img src="<?php echo base_url(); ?>assets/dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                    <a href="#" class="d-block"><?php echo $this->session->userdata('nama_karyawan') ?></a>
+                        <a class="d-block text-center"><?php echo $this->session->userdata('nama_karyawan'); ?></a>
                     </div>
                 </div>
+
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+                    <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link">
+                                <i class="nav-icon fas fa-clock"></i>
+                                <p> Project Manage </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
-                                <a href="<?php echo base_url() . 'TimeTracker' ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-clock"></i>
-                                    <p> Time Tracker </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p> Akun </p>
-                                </a>
-                            </li>
-                            <li class="nav-item menu-open">
-                                <a href="<?php echo base_url() . 'ProjectManage' ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-user-tie"></i>
-                                    <p> Project Manage </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-power-off"></i>
-                                    <p> Keluar </p>
-                                </a>
-                            </li>
+                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p> Akun </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p> Karyawan </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Login/logout_karyawan' ?>" class="nav-link">
+                                <i class="nav-icon fas fa-power-off"></i>
+                                <p> Keluar </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -119,56 +120,61 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Aktivitas Tugas</h1>
+                            <h3>Daftar Karyawan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Project Manage</li>
-                                <li class="breadcrumb-item active">Detail Aktivitas Tugas</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Karyawan</li>
                             </ol>
-                        </div>
-                    </div>
-                </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
 
             <!-- Main content -->
             <section class="content">
-                <?php $this->load->view('message.php'); ?>
-                <?php $nama_tugas = " ";
-                $nama_project = " ";
-                 foreach($tugas as $list_aktivitas) { 
-                                  $nama_tugas =  $list_aktivitas->nama_tugas;
-                                  $nama_project = $list_aktivitas->nama_project;
-                             } ?>
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                                    <h3 class="card-title">List Aktivitas <?php echo $nama_tugas;?></h3><br>
-                                  <h3 class="card-title">Project: <?php echo $nama_project;?></h3>
+                            <h3 class="card-title">Karyawan</h3>
                         </div>
 
                         <div class="card-body">
 
-                            <table id="list_aktivitas" class="table table-bordered table-striped">
+                            <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Tanggal Aktivitas</th>
-                                        <th>Waktu Mulai</th>
-                                        <th>Waktu Selesai</th>
-                                        <th>Bukti</th>
+                                        <th>ID</th>
+                                        <th>Nama Karyawan</th>
+                                        <th>Email</th>
+                                        <th>Posisi</th>
+                                        <th>Status Karyawan</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1;  foreach ($tugas as $list_aktivitas) { ?>
+                                    <?php foreach ($karyawan as $list_karyawan) { ?>
                                         <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo tanggal_indonesia($list_aktivitas->tanggal_aktivitas) ?></td>
-                                            <td><?php echo waktu($list_aktivitas->waktu_mulai) ?></td>
-                                            <td><?php echo waktu($list_aktivitas->waktu_selesai) ?></td>
-                                            <td><?php echo $list_aktivitas->bukti ?></td>
+                                            <td><?php echo $list_karyawan->id_karyawan ?></td>
+                                            <td><?php echo $list_karyawan->nama_karyawan ?></td>
+                                            <td><?php echo $list_karyawan->email_karyawan ?></td>
+                                            <td><?php echo $list_karyawan->posisi_karyawan ?></td>
+                                            <td>
+                                                <?php if ($list_karyawan->status_karyawan == 1) { ?>
+                                                    <span class="badge badge-success">Aktif</span>
+                                                    <?php } else { ?>
+                                                    <span class="badge badge-danger">Tidak Aktif</span>
+                                                <?php }  ?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm bg-info" href="<?php echo base_url() . 'Supervisor/aktivitas/' . $list_karyawan->id_karyawan?>">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                    Aktivitas
+                                                </a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
 
@@ -179,6 +185,8 @@
                     </div>
                 </div>
             </section>
+
+          
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -201,10 +209,6 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
@@ -233,7 +237,7 @@
 
     <script>
         $(function() {
-            $("#list_aktivitas").DataTable({
+            $("#list_karyawan").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false
@@ -245,15 +249,6 @@
                     title: 'Sukses',
                     text: sukses,
                     icon: 'success'
-                });
-            }
-
-            const gagal = $('.gagal').data('flashdata');
-            if (gagal) {
-                Swal.fire({
-                    title: 'Gagal',
-                    text: gagal,
-                    icon: 'error'
                 });
             }
 
