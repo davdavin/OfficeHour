@@ -176,7 +176,7 @@ class Dashboard_Perusahaan extends CI_Controller
                 }
                 $posisi = "";
                 if (isset($spreadSheetAry[$i][2])) {
-                    $posisi = mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]);
+                    $posisi = ucwords(mysqli_real_escape_string($conn, $spreadSheetAry[$i][2]));
                 }
 
                 $token = md5($description) . rand(10, 9999);
@@ -258,10 +258,6 @@ class Dashboard_Perusahaan extends CI_Controller
                         if (!empty($insertId)) {
                             $type = "success";
                             $message = "Berhasil Upload";
-                            // echo $message;
-                            // $this->session->set_flashdata('sukses', 'Berhasil input karyawan');
-                            // redirect('Dashboard_Perusahaan/Upload_Massal');
-                            // redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
                         } else {
                             $type = "error";
                             $message = "Tidak Berhasil Upload";
@@ -278,6 +274,79 @@ class Dashboard_Perusahaan extends CI_Controller
             echo $message;
         }
         redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
+    }
+
+    public function proses_edit_tambah_karyawan() {
+        $id_karyawan = $this->input->post('id_karyawan');
+        $nama_karyawan = $this->input->post('nama_karyawan');
+        $email_karyawan = $this->input->post('email_karyawan');
+        $posisi_karyawan = ucwords($this->input->post('posisi_karyawan'));
+        $token = md5($_POST['email_karyawan']) . rand(10, 9999);
+
+        $this->form_validation->set_rules('nama_karyawan', 'Nama', 'required');
+        $this->form_validation->set_rules('email_karyawan', 'Email', 'required|valid_email|is_unique[karyawan.email_karyawan]');
+        $this->form_validation->set_rules('posisi_karyawan', 'Posisi', 'required');
+
+        $this->form_validation->set_message('required', '{field} wajib diisi');
+        $this->form_validation->set_message('valid_email', '{field} harus diisi email');
+        $this->form_validation->set_message('is_unique', '{field} sudah digunakan');
+        $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
+        $this->form_validation->set_message('max_length', '{field} maksimal {param} karakter');
+
+        if ($this->form_validation->run() == FALSE) {
+            $hasil = array(
+                'sukses' => false,
+                'error_nama' => form_error('nama_karyawan'),
+                'error_email' => form_error('email_karyawan'),
+                'error_posisi' => form_error('posisi_karyawan')
+            );
+            echo json_encode($hasil);
+        } else {
+            $where = array('id_karyawan' => $id_karyawan);
+            $data = array(
+                'nama_karyawan' => $nama_karyawan, 'email_karyawan' => $email_karyawan,
+                'posisi_karyawan' => $posisi_karyawan, 'token' => $token, 'terkirim' => 1
+            );
+
+            $config = [
+                'mailtype'  => 'html',
+                'charset'   => 'utf-8',
+                'protocol'  => 'smtp',
+                'smtp_host' => 'smtp.gmail.com',
+                'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                'smtp_pass'   => 'UpH12345',              // Password gmail
+                'smtp_crypto' => 'ssl',
+                'smtp_port'   => 465,
+                'crlf'    => "\r\n",
+                'newline' => "\r\n"
+            ];
+
+            // Load library email dan konfigurasinya
+            $this->load->library('email', $config);
+            // Email dan nama pengirim
+            $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+            // Email penerima
+            $this->email->to($email_karyawan);
+            // Subject
+            $this->email->subject('Sign Up Akun');
+            // Isi
+            $link = "<a href='localhost/OfficeHour/Verifikasi/?key=" . $token . "'>Click and Verify Email</a>";
+            $this->email->message("Halo \n" . $nama_karyawan . "\n Anda menerima surel ini dikarenakan anda sudah terdaftar sebagai karyawan di dalam OfficeHour.
+
+            Untuk melakukan aktivasi akun mohon untuk klik link berikut ini. \n" . $link);
+
+            /*        $this->M_Karyawan->insert_record($data, 'karyawan');
+            $hasil['sukses'] = "Behasil tambah karyawan";
+            echo json_encode($hasil); */
+
+            if ($this->email->send()) {
+                $this->M_Karyawan->update_record($where, $data, 'karyawan');
+                $hasil['sukses'] = "Behasil tambah karyawan";
+                echo json_encode($hasil);
+            } else {
+               echo 'Error! email tidak dapat dikirim.';
+           }
+        }
     }
 
     public function proses_edit_karyawan()
