@@ -142,6 +142,15 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <?php if ($this->session->has_userdata('gagal')) { ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <h5><i class="icon fas fa-ban"></i>Perhatian!</h5>
+                                    <?php echo $this->session->flashdata('gagal'); ?>
+                                </div>
+                    <?php unset($_SESSION['gagal']);
+                    } ?>
+                    <?php $this->load->view('message.php');?>
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
                         <section class="col-lg-8">
@@ -289,9 +298,9 @@
                                 <div class="single-chart">
                                     <svg viewBox="0 0 36 36" class="circular-chart orange">
                                         <path class="circle" stroke-dasharray="<?php if ($totalTugas == 0) {
-                                                                                    echo '0%';
+                                                                                    echo '0';
                                                                                 } else {
-                                                                                    echo $totalSelesai / $totalTugas * 100 . '%';
+                                                                                    echo $totalSelesai / $totalTugas * 100;
                                                                                 } ?>, 100" d="M18 2.0845
                                         a 15.9155 15.9155 0 0 1 0 31.831
                                         a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -306,7 +315,8 @@
                             <div class="col-7">
                                 <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { ?>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/asign_anggota_project_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Anggota Project</a><br><br>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a><br><br>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_selesai/' . $idProject; ?>"><i class="fas fa-check"></i> Selesai Project</a>
                                 <?php } ?>
                             </div>
                         </section>
@@ -344,6 +354,8 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
+     <!-- SweetAlert2 -->
+     <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -365,6 +377,24 @@
                 "lengthChange": true,
                 "autoWidth": false
             });
+
+            const sukses = $('.sukses').data('flashdata');
+            if (sukses) {
+                Swal.fire({
+                    title: 'Sukses',
+                    text: sukses,
+                    icon: 'success'
+                });
+            }
+
+            const info = $('.info').data('flashdata');
+            if (info) {
+                Swal.fire({
+                    title: 'Info',
+                    text: info,
+                    icon: 'info'
+                });
+            }
         });
     </script>
 </body>

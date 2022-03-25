@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -229,7 +231,8 @@
                                     <h4>Total Tugas</h4>
                                     <h4>
                                         <?php foreach ($total_tugas as $total) {
-                                            echo $total->totalTugas;
+                                            $totalTugas = $total->totalTugas;
+                                            echo $totalTugas;
                                         }
                                         ?>
                                     </h4>
@@ -261,6 +264,26 @@
                                     } ?>
                                 </div>
                             </div><br><br>
+
+                            <h3>Progres</h3>
+                            <div class="flex-wrapper">
+                                <div class="single-chart">
+                                    <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                        <path class="circle" stroke-dasharray="<?php if ($totalTugas == 0) {
+                                                                                    echo '0%';
+                                                                                } else {
+                                                                                    echo $totalSelesai / $totalTugas * 100;
+                                                                                } ?>, 100" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <text x="18" y="20.35" class="percentage"><?php if ($totalTugas == 0) {
+                                                                                        echo '0%';
+                                                                                    } else {
+                                                                                        echo number_format($totalSelesai / $totalTugas * 100, 0) . '%';
+                                                                                    } ?></text>
+                                    </svg>
+                                </div>
+                            </div>
                         </section>
                     </div>
             </section>

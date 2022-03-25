@@ -219,7 +219,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_tambah_karyawan_manual' ?>" method="post" class="form-submit">
+                                <form action="<?php echo base_url() . 'Dashboard_Perusahaan/proses_edit_tambah_karyawan' ?>" method="post" class="form-submit">
                                     <input type="hidden" name="id_karyawan" value="<?= $list_karyawan->id_karyawan ?>">
                                     <div class="form-group">
                                         <label>Nama Lengkap</label>

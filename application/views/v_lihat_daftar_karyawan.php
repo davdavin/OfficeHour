@@ -160,7 +160,7 @@
                                     <i class="fas fa-plus"></i> Tambah karyawan
                                 </button><br><br>
                                 <a href="<?php echo base_url() . 'Dashboard_Perusahaan/Upload_Massal' ?>" type="button" class="btn btn-primary">
-                                    <i class="fas fa-plus"></i> Upload Massal
+                                   Upload Massal
                                 </a><br><br>
 
                                 <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">

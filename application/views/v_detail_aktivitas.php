@@ -136,13 +136,17 @@
             <!-- Main content -->
             <section class="content">
                 <?php $this->load->view('message.php'); ?>
+                <?php $nama_tugas = " ";
+                $nama_project = " ";
+                 foreach($tugas as $list_aktivitas) { 
+                                  $nama_tugas =  $list_aktivitas->nama_tugas;
+                                  $nama_project = $list_aktivitas->nama_project;
+                             } ?>
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <?php foreach($tugas as $list_aktivitas) { ?>
-                                    <h3 class="card-title">List Aktivitas <?php echo $list_aktivitas->nama_tugas;?></h3><br>
-                                  <h3 class="card-title">Project: <?php echo $list_aktivitas->nama_project;?></h3>
-                            <?php } ?>
+                                    <h3 class="card-title">List Aktivitas <?php echo $nama_tugas;?></h3><br>
+                                  <h3 class="card-title">Project: <?php echo $nama_project;?></h3>
                         </div>
 
                         <div class="card-body">
@@ -151,7 +155,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Karyawan</th>
                                         <th>Tanggal Aktivitas</th>
                                         <th>Waktu Mulai</th>
                                         <th>Waktu Selesai</th>
@@ -162,7 +165,6 @@
                                     <?php $no = 1;  foreach ($tugas as $list_aktivitas) { ?>
                                         <tr>
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $list_aktivitas->nama_karyawan ?></td>
                                             <td><?php echo tanggal_indonesia($list_aktivitas->tanggal_aktivitas) ?></td>
                                             <td><?php echo waktu($list_aktivitas->waktu_mulai) ?></td>
                                             <td><?php echo waktu($list_aktivitas->waktu_selesai) ?></td>
