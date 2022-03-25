@@ -11,7 +11,7 @@ class Supervisor extends CI_Controller
             redirect('Login/login_karyawan');
         }
 
-        $this->load->model(array('M_Project', 'M_Supervisor'));
+        $this->load->model(array('M_Project', 'M_Supervisor', 'M_Perusahaan'));
     }
 
     function index()
@@ -36,5 +36,17 @@ class Supervisor extends CI_Controller
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
         $data['jam'] = $this->db->query("SELECT TIMESTAMPDIFF(hour, waktu_mulai , waktu_selesai) AS MinuteDiff from aktivitas WHERE id_aktivitas = 2")->row_array();
         $this->load->view('v_detail_project_supervisor.php', $data);
+    }
+
+    public function daftar_karyawan() {
+        $data['title'] = 'OfficeHour - Karyawan | Supervisor';
+        $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
+        $this->load->view('v_lihat_karyawan_supervisor.php', $data);
+    }
+
+    public function aktivitas($id_karyawan) {
+        $data['title'] = 'OfficeHour - Karyawan | Supervisor';
+        $data['tugas'] = $this->M_Supervisor->tugas_karyawan($id_karyawan)->result();
+        $this->load->view('v_detail_karyawan.php', $data);
     }
 }

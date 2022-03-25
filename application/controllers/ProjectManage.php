@@ -254,4 +254,36 @@ class ProjectManage extends CI_Controller
             }
         }
     }
+
+    function konfirmasi_project_selesai($id_project) {
+        $id_perusahaan = $this->db->query("SELECT id_perusahaan FROM project WHERE id_project = '$id_project'")->row_array();
+        $cekStatus = $this->db->query("SELECT status_project FROM project WHERE id_project = '$id_project'")->row_array();
+        $totalTugas = $this->M_Project->total_tugas_project($id_project,$id_perusahaan['id_perusahaan'])->row_array();
+        $totalSelesai = $this->M_Project->get_total_status_selesai($id_project,$id_perusahaan['id_perusahaan'])->row_array();
+
+        if($totalTugas['totalTugas'] == 0 && $totalSelesai['totalStatus'] == 0) {
+            $this->session->set_flashdata('gagal', 'Belum ada tugas project pada project ini');
+            redirect('ProjectManage/project_detail/' . $id_project);
+        } else {
+            if($cekStatus['status_project'] == "SELESAI") { 
+                $this->session->set_flashdata('info', 'Project ini sudah di konfirmasi telah selesai');
+                redirect('ProjectManage/project_detail/' . $id_project);
+            } else {
+                if($totalTugas['totalTugas'] == $totalSelesai['totalStatus']) {
+                    $where = array('id_project' => $id_project);
+                    $data = array(
+                        'tanggal_selesai_project' => date('Y-m-d'), 'status_project' => 'SELESAI'
+                    );
+        
+                    $this->M_Project->update_record($where,$data,'project');
+        
+                    $this->session->set_flashdata('sukses', 'Berhasil konfirmasi status project telah selesai');
+                    redirect('ProjectManage/project_detail/' . $id_project);
+                } else {
+                    $this->session->set_flashdata('gagal', 'Tidak berhasil melakukan konfirmasi project selesai. Masih ada tugas project yang belum selesai. Mohon diperhatikan kembali');
+                    redirect('ProjectManage/project_detail/' . $id_project);
+                }
+            }
+        }
+    }
 }
