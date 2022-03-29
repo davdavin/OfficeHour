@@ -255,6 +255,8 @@ class Dashboard_Perusahaan extends CI_Controller
 
                         Untuk melakukan aktivasi akun mohon untuk klik link berikut ini \n" . $link);
 
+                        $this->email->send();
+
                         if (!empty($insertId)) {
                             $type = "success";
                             $message = "Berhasil Upload";
@@ -276,7 +278,8 @@ class Dashboard_Perusahaan extends CI_Controller
         redirect('Dashboard_Perusahaan/lihat_karyawan_gagal/' . $this->session->userdata('id_perusahaan'));
     }
 
-    public function proses_edit_tambah_karyawan() {
+    public function proses_edit_tambah_karyawan()
+    {
         $id_karyawan = $this->input->post('id_karyawan');
         $nama_karyawan = $this->input->post('nama_karyawan');
         $email_karyawan = $this->input->post('email_karyawan');
@@ -344,8 +347,8 @@ class Dashboard_Perusahaan extends CI_Controller
                 $hasil['sukses'] = "Behasil tambah karyawan";
                 echo json_encode($hasil);
             } else {
-               echo 'Error! email tidak dapat dikirim.';
-           }
+                echo 'Error! email tidak dapat dikirim.';
+            }
         }
     }
 
