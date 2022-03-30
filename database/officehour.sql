@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 04:00 PM
+-- Generation Time: Mar 30, 2022 at 02:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -53,6 +53,8 @@ CREATE TABLE `aktivitas` (
   `tanggal_aktivitas` date NOT NULL,
   `waktu_mulai` time NOT NULL,
   `waktu_selesai` time NOT NULL,
+  `hari` varchar(25) NOT NULL,
+  `durasi` int(11) NOT NULL,
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,15 +62,17 @@ CREATE TABLE `aktivitas` (
 -- Dumping data for table `aktivitas`
 --
 
-INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_project`, `tanggal_aktivitas`, `waktu_mulai`, `waktu_selesai`, `bukti`) VALUES
-(1, 2, 7, 20, '2022-03-25', '08:28:00', '20:28:00', 'Foto'),
-(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Foto'),
-(3, 2, 7, 20, '2022-03-02', '13:30:00', '13:30:00', 'Foto'),
-(4, 2, 7, 20, '2022-04-01', '14:21:00', '14:26:00', 'Foto'),
-(5, 6, 1, 28, '2022-03-17', '14:34:00', '14:35:00', 'Foto'),
-(15, 1, 1, 37, '2022-03-19', '05:58:00', '06:48:00', 'Foto'),
-(16, 1, 1, 37, '2022-03-23', '18:18:00', '19:20:00', 'Foto'),
-(17, 1, 1, 37, '2022-03-23', '18:24:00', '22:24:00', 'Foto');
+INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_project`, `tanggal_aktivitas`, `waktu_mulai`, `waktu_selesai`, `hari`, `durasi`, `bukti`) VALUES
+(1, 2, 7, 20, '2022-03-25', '08:28:00', '20:28:00', 'Mon', 4, 'Foto'),
+(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Tue', 3, 'Foto'),
+(3, 2, 7, 20, '2022-03-02', '13:30:00', '13:30:00', 'Wed', 3, 'Foto'),
+(4, 2, 7, 20, '2022-04-01', '14:21:00', '14:26:00', 'Thu', 2, 'Foto'),
+(5, 6, 1, 28, '2022-03-17', '14:34:00', '14:35:00', 'Fri', 2, 'Foto'),
+(15, 1, 1, 37, '2022-03-19', '05:58:00', '06:48:00', 'Sat', 2, 'Foto'),
+(16, 1, 1, 37, '2022-03-23', '18:18:00', '19:20:00', 'Sun', 1, 'Foto'),
+(17, 1, 1, 37, '2022-03-23', '18:24:00', '22:24:00', 'Wed', 5, 'Foto'),
+(32, 1, 1, 37, '2022-03-23', '18:24:00', '22:28:00', 'Fri', 2, 'Foto'),
+(34, 1, 1, 37, '2022-03-23', '18:24:00', '22:25:00', 'Thu', 7, 'Foto');
 
 -- --------------------------------------------------------
 
@@ -163,7 +167,7 @@ CREATE TABLE `foto_screenshoot` (
 --
 
 INSERT INTO `foto_screenshoot` (`id_foto_screenshoot`, `id_karyawan`, `id_tugas_project`, `foto`) VALUES
-(1, 7, 25, 'OfficeHour_TRD.png');
+(1, 3, 38, 'OfficeHour_TRD.png');
 
 -- --------------------------------------------------------
 
@@ -180,7 +184,7 @@ CREATE TABLE `karyawan` (
   `posisi_karyawan` varchar(25) NOT NULL,
   `status_karyawan` int(11) NOT NULL DEFAULT 0,
   `token` varchar(100) NOT NULL,
-  `terkirim` int(11) NOT NULL DEFAULT 0
+  `terkirim` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -199,7 +203,10 @@ INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_
 (62, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, '', 1),
 (63, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, '', 1),
 (64, 'PRSH5', 'Thomas Car', 'chriss@example.com', '$2y$10$YCGP9ZNZZMAG.w0NsLJtMu15VxEm0Z2WOyXbSRi5lfrTcDU/FJri6', 'Analisis', 1, '640046d369b52dfe2a90edee6957e7544276', 1),
-(65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975', 1);
+(65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975', 1),
+(78, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, '31ba0a78f04a7480ae82e100b14d200d7065', 0),
+(79, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, '3c289eaaa3eadee71fd1f4ad97a3aa0d1207', 0),
+(80, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, 'b977e3380f2d6cdf0f8884b574ea3d309468', 0);
 
 -- --------------------------------------------------------
 
@@ -433,7 +440,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`
@@ -463,7 +470,7 @@ ALTER TABLE `foto_screenshoot`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `paket`
