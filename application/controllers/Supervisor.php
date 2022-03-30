@@ -57,6 +57,7 @@ class Supervisor extends CI_Controller
         $data['info'] = $this->M_Supervisor->get_karyawan($id_karyawan)->row_array();
         $data['foto'] = $this->M_Supervisor->get_ss($id_karyawan)->result();
         $data['tugas'] = $this->M_Supervisor->tugas_karyawan($id_karyawan)->result();
+        $data['aktivitas'] = $this->M_Supervisor->aktivitas_karyawan($id_karyawan)->result();
         $this->load->view('v_detail_karyawan.php', $data);
     }
 }
