@@ -34,7 +34,13 @@ class Supervisor extends CI_Controller
         $data['total_status_berjalan'] = $this->M_Project->get_total_status_berjalan($id_project, $id_perusahaan)->result();
         $data['total_status_selesai'] = $this->M_Project->get_total_status_selesai($id_project, $id_perusahaan)->result();
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
-        $data['jam'] = $this->db->query("SELECT TIMESTAMPDIFF(hour, waktu_mulai , waktu_selesai) AS MinuteDiff from aktivitas WHERE id_aktivitas = 2")->row_array();
+        $data['senin'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Mon'")->row_array();
+        $data['selasa'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Tue'")->row_array();
+        $data['rabu'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Wed'")->row_array();
+        $data['kamis'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Thu'")->row_array();
+        $data['jumat'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Fri'")->row_array();
+        $data['sabtu'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Sat'")->row_array();
+        $data['minggu'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Sun'")->row_array();
         $this->load->view('v_detail_project_supervisor.php', $data);
     }
 

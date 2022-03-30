@@ -230,7 +230,7 @@
                       <td><?php echo tanggal_indonesia($list_tugas_project->batas_waktu)  ?></td>
                       <td><?php echo $list_tugas_project->status_tugas ?></td>
                       <td>
-                        <?php if ($list_tugas_project->status_tugas == "SEDANG BERJALAN") { ?>
+                        <?php if ($list_tugas_project->status_tugas == "SEDANG BERJALAN" || $list_tugas_project->status_tugas == "BELUM BERJALAN") { ?>
                           <a type="button" class="btn btn-sm bg-info" data-toggle="modal" data-target="#tugas<?php echo $list_tugas_project->id_tugas_project ?>"><i class="fas fa-pencil-alt"></i> Update</a>
                         <?php } else { ?>
                           <button class="btn btn-sm bg-info" disabled><i class="fas fa-pencil-alt"></i> Update</button>
@@ -449,7 +449,8 @@
       });
 
 
-      <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?> $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
+      <?php for ($i = 0; $i <= $id_tugas_project; $i++) {  ?>
+        $('#submit-aktivitas<?php echo $i ?>').submit(function(e) {
           e.preventDefault();
           $.ajax({
             url: $(this).attr('action'),

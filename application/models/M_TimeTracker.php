@@ -4,7 +4,7 @@ class M_TimeTracker extends CI_Model
     function aktivitas_karyawan()
     {
         $id_karyawan = $this->session->userdata('id_karyawan');
-        return $this->db->query("SELECT nama_project, nama_tugas, waktu_mulai, waktu_selesai, status_tugas, bukti FROM aktivitas JOIN tugas_project 
+        return $this->db->query("SELECT nama_project, nama_tugas, tanggal_aktivitas, waktu_mulai, waktu_selesai, status_tugas, bukti FROM aktivitas JOIN tugas_project 
                                  ON aktivitas.id_tugas_project = tugas_project.id_tugas_project 
                                  JOIN project ON aktivitas.id_project = project.id_project 
                                  JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project

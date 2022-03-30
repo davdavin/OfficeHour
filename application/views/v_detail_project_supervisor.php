@@ -266,55 +266,7 @@
                                     <canvas id="myChart"></canvas>
                                 </div>
                             </div>
-                            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                            <script>
-                                // setup 
-                                const data = {
-                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                    datasets: [{
-                                        label: 'Weekly Sales',
-                                        data: [<?php echo $jam['MinuteDiff'] ?>, <?php echo $jam['MinuteDiff'] ?>, 6, 9, 12, 3, 9],
-                                        backgroundColor: [
-                                            'rgba(255, 26, 104, 0.2)',
-                                            'rgba(54, 162, 235, 0.2)',
-                                            'rgba(255, 206, 86, 0.2)',
-                                            'rgba(75, 192, 192, 0.2)',
-                                            'rgba(153, 102, 255, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)',
-                                            'rgba(0, 0, 0, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 26, 104, 1)',
-                                            'rgba(54, 162, 235, 1)',
-                                            'rgba(255, 206, 86, 1)',
-                                            'rgba(75, 192, 192, 1)',
-                                            'rgba(153, 102, 255, 1)',
-                                            'rgba(255, 159, 64, 1)',
-                                            'rgba(0, 0, 0, 1)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                };
-
-                                // config 
-                                const config = {
-                                    type: 'bar',
-                                    data,
-                                    options: {
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true
-                                            }
-                                        }
-                                    }
-                                };
-
-                                // render init block
-                                const myChart = new Chart(
-                                    document.getElementById('myChart'),
-                                    config
-                                );
-                            </script> <br>
+                            <br>
 
                             <!-- small box -->
                             <div class="small-box col-7 bg-info" style="border-radius: 15px;">
@@ -368,7 +320,7 @@
                                         <path class="circle" stroke-dasharray="<?php if ($totalTugas == 0) {
                                                                                     echo '0%';
                                                                                 } else {
-                                                                                    echo $totalSelesai / $totalTugas * 100;
+                                                                                    echo $totalSelesai / $totalTugas * 100 . '%';
                                                                                 } ?>, 100" d="M18 2.0845
                                         a 15.9155 15.9155 0 0 1 0 31.831
                                         a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -393,6 +345,7 @@
     </div>
     <!-- ./wrapper -->
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -429,6 +382,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+
     <script>
         $(function() {
             $("#list-anggota").DataTable({
@@ -437,6 +391,59 @@
                 "autoWidth": false
             });
         });
+        // setup 
+        const data = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Total Jam',
+                data: [<?php echo $senin['MinuteDiff'] ?>,
+                    <?php echo $selasa['MinuteDiff'] ?>,
+                    <?php echo $rabu['MinuteDiff'] ?>,
+                    <?php echo $kamis['MinuteDiff'] ?>,
+                    <?php echo $jumat['MinuteDiff'] ?>,
+                    <?php echo $sabtu['MinuteDiff'] ?>,
+                    <?php echo $minggu['MinuteDiff'] ?>
+                ],
+                backgroundColor: [
+                    'rgba(255, 26, 104, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(0, 0, 0, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 26, 104, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 0, 0, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // config 
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // render init block
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
     </script>
 </body>
 
