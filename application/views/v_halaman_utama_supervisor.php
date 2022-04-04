@@ -97,7 +97,7 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p> Karyawan </p>
+                                <p> Report </p>
                             </a>
                         </li>
                         <li class="nav-item">

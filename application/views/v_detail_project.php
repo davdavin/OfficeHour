@@ -313,9 +313,12 @@
                                 </div>
                             </div>
                             <div class="col-7">
-                                <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { ?>
+                                <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { 
+                                    if($list->status_project != "SELESAI") { ?>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/asign_anggota_project_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Anggota Project</a><br><br>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a><br><br>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_tidakselesai/' . $idProject; ?>"><i class="fas fa-check"></i> Tutup Project</a><br><br>
+                                    <?php } ?>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_selesai/' . $idProject; ?>"><i class="fas fa-check"></i> Selesai Project</a>
                                 <?php } ?>
                             </div>
