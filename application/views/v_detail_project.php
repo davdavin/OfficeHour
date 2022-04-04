@@ -188,6 +188,14 @@
                                                     } ?>
                                                 </td>
                                             </tr>
+                                            <?php if ($list->status_project == "TIDAK SELESAI") { ?>
+                                                <tr>
+                                                    <th>Tanggal Project Dibatalkan</th>
+                                                    <td>
+                                                        <?php echo tanggal_indonesia($list->tanggal_berhenti_project); ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                             <tr>
                                                 <th>Status</th>
                                                 <td><?php echo ucwords(strtolower($list->status_project)); ?></td>
@@ -313,13 +321,13 @@
                                 </div>
                             </div>
                             <div class="col-7">
-                                <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) { 
-                                    if($list->status_project != "SELESAI") { ?>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/asign_anggota_project_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Anggota Project</a><br><br>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a><br><br>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_tidakselesai/' . $idProject; ?>"><i class="fas fa-check"></i> Tutup Project</a><br><br>
+                                <?php if ($this->session->userdata('id_karyawan') == $list->project_manager) {
+                                    if ($list->status_project != "SELESAI") { ?>
+                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/asign_anggota_project_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Anggota Project</a><br><br>
+                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/tambah_task_baru/' . $idProject; ?>"><i class="fas fa-plus"></i> Tambah Tugas</a><br><br>
+                                        <a type="button" class="btn bg-red batal" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_tidakselesai/' . $idProject; ?>"><i class="fas fa-times"></i> Tutup Project</a><br><br>
                                     <?php } ?>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_selesai/' . $idProject; ?>"><i class="fas fa-check"></i> Selesai Project</a>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_selesai/' . $idProject; ?>"><i class="fas fa-check"></i> Selesai Project</a><br><br>
                                 <?php } ?>
                             </div>
                         </section>
@@ -379,6 +387,26 @@
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false
+            });
+
+            $('.batal').click(function(e) {
+                e.preventDefault();
+                const href = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Project ini akan dibatalkan',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Hapus'
+                }).then((result) => {
+                    if (result.value) {
+                        document.location.href = href;
+                    }
+                });
             });
 
             const sukses = $('.sukses').data('flashdata');
