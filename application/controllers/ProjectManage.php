@@ -288,4 +288,17 @@ class ProjectManage extends CI_Controller
             }
         }
     }
+
+    function konfirmasi_project_tidakselesai($id_project)
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        $where = array('id_project' => $id_project);
+        $data = array(
+            'tanggal_berhenti_project' => date('Y-m-d'), 'status_project' => 'TIDAK SELESAI'
+        );
+        $this->M_Project->update_record($where, $data, 'project');
+
+        $this->session->set_flashdata('sukses', 'Berhasil status project diubah');
+        redirect('ProjectManage/project_detail/' . $id_project);
+    }
 }

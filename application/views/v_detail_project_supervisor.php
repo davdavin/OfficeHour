@@ -207,6 +207,14 @@
                                                     } ?>
                                                 </td>
                                             </tr>
+                                            <?php if ($list->status_project == "TIDAK SELESAI") { ?>
+                                                <tr>
+                                                    <th>Tanggal Project Dibatalkan</th>
+                                                    <td>
+                                                        <?php echo tanggal_indonesia($list->tanggal_berhenti_project); ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                             <tr>
                                                 <th>Status</th>
                                                 <td><?php echo ucwords(strtolower($list->status_project)); ?></td>
