@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 02:14 PM
+-- Generation Time: Apr 05, 2022 at 02:56 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -273,6 +273,7 @@ CREATE TABLE `project` (
   `tanggal_mulai_project` date NOT NULL,
   `batas_waktu_project` date NOT NULL,
   `tanggal_selesai_project` date DEFAULT NULL,
+  `tanggal_berhenti_project` date DEFAULT NULL,
   `status_project` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -280,13 +281,13 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_manager`, `nama_project`, `deskripsi_project`, `tanggal_mulai_project`, `batas_waktu_project`, `tanggal_selesai_project`, `status_project`) VALUES
-(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', NULL, 'SEDANG BERJALAN'),
-(2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, 'SEDANG BERJALAN'),
-(3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, 'SEDANG BERJALAN'),
-(4, 'PRSH5', 3, 7, 'Planner Website', 'Website untuk menjual buku perencanaan', '2022-03-21', '2022-03-26', NULL, 'SEDANG BERJALAN'),
-(5, 'PRSH5', 1, 7, 'Lamp Shop', 'Menjual berbagai jenis lampu', '2022-03-21', '2022-04-02', NULL, 'SEDANG BERJALAN'),
-(6, 'PRSH5', 3, 7, 'Good Shop', 'Mmenjual berbagai jenis peralatan rumah tangga', '2022-03-21', '2022-04-09', NULL, 'SEDANG BERJALAN');
+INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_manager`, `nama_project`, `deskripsi_project`, `tanggal_mulai_project`, `batas_waktu_project`, `tanggal_selesai_project`, `tanggal_berhenti_project`, `status_project`) VALUES
+(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', NULL, NULL, 'SEDANG BERJALAN'),
+(2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
+(3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
+(4, 'PRSH5', 3, 7, 'Planner Website', 'Website untuk menjual buku perencanaan', '2022-03-21', '2022-03-26', NULL, NULL, 'SEDANG BERJALAN'),
+(5, 'PRSH5', 1, 7, 'Lamp Shop', 'Menjual berbagai jenis lampu', '2022-03-21', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
+(6, 'PRSH5', 3, 7, 'Good Shop', 'Mmenjual berbagai jenis peralatan rumah tangga', '2022-03-21', '2022-04-09', NULL, NULL, 'SELESAI');
 
 -- --------------------------------------------------------
 
