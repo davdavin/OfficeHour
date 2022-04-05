@@ -110,8 +110,8 @@ class M_Project extends CI_Model
 
     function update_status_tugas($tanggal, $status, $id_project)
     {
-        $this->db->query("UPDATE tugas_project SET tanggal_berhenti_tugas = '$tanggal', status_tugas = '$status' FROM tugas_project INNER JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
-                        INNER JOIN project ON project.id_project = anggota_project.id_project WHERE id_project = '$id_project'");
+        $this->db->query("UPDATE tugas_project,project,anggota_project SET tanggal_berhenti_tugas = '$tanggal', status_tugas = '$status' 
+                        WHERE project.id_project = '$id_project' AND anggota_project.id_anggota_project = tugas_project.id_anggota_project AND project.id_project = anggota_project.id_project");
     }
 
     function insert_record($data, $table)
