@@ -98,7 +98,7 @@ class TimeTracker extends CI_Controller
                 $cekWaktuAktivitas = $this->db->query("SELECT * FROM aktivitas WHERE id_tugas_project = '$id_tugas_project' AND tanggal_aktivitas = '$tanggal_aktivitas' AND waktu_mulai = '$waktu_mulai' AND waktu_selesai = '$waktu_selesai'")->num_rows();
                 if ($cekWaktuAktivitas == 1) {
                     $hasil['sukses'] = false;
-                    $hasil['error_message'] = "Update aktivitas tugas dengan tanggal dan waktu yang diinput sudah terupdate";
+                    $hasil['error_message'] = "Tidak bisa mengisi aktivitas pada waktu dan tanggal yang sama";
                     echo json_encode($hasil);
                 } else {
                     if ($status == "SELESAI") {
