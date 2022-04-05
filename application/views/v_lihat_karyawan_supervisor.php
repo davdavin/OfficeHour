@@ -97,7 +97,7 @@
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p> Report </p>
+                                <p> Laporan </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -125,7 +125,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Karyawan</li>
+                                <li class="breadcrumb-item active">Laporan</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -138,7 +138,7 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Karyawan</h3>
+                            <h3 class="card-title">Laporan Karyawan</h3>
                         </div>
 
                         <div class="card-body">
