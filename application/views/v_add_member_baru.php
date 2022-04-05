@@ -255,10 +255,10 @@
             Baris += '<td>';
             Baris += '<input type="hidden" name="getIdProject" value="<?= $idProject ?>">' + '<select  class="form-control select2"  style="width: 100%;" name="id_karyawan[]"> ' +
                 '<option selected disabled>-- Pilih --</option>' + '<?php foreach ($karyawan as $list) {
-                                                                        if ($list->id_karyawan != $this->session->userdata('id_karyawan') && $list->id_karyawan != $anggota->id_karyawan) {  ?>' +
-                '<option value="<?= $anggota->id_karyawan ?>"> <?= $anggota->nama_karyawan ?></option>' + '<?php
-                                                                                                        }
-                                                                                                    } ?>' +
+                                                                        if ($list->id_karyawan != $this->session->userdata('id_karyawan') && $list->posisi_karyawan != "Supervisor") {  ?>' +
+                '<option value="<?= $list->id_karyawan ?>"> <?= $list->nama_karyawan ?></option>' + '<?php
+                                                                                                    }
+                                                                                                } ?>' +
                 '</select>';
             Baris += '</td>';
             Baris += '<td class="text-center">';
