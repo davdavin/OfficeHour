@@ -298,11 +298,10 @@ class ProjectManage extends CI_Controller
         );
         $this->M_Project->update_record($where, $data, 'project');
 
-        $data_tugas = array(
-            'tanggal_berhenti_tugas' => date('Y-m-d'), 'status_tugas' => 'DIBATALKAN'
-        );
+        $tanggal = date('Y-m-d');
+        $status = "DIBATALKAN";
 
-        $this->M_Project->update_record($where, $data_tugas, 'tugas_project');
+        $this->M_Project->update_status_tugas($tanggal, $status, $id_project);
 
         $this->session->set_flashdata('sukses', 'Berhasil status project diubah');
         redirect('ProjectManage/project_detail/' . $id_project);
