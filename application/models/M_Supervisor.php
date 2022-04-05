@@ -32,7 +32,7 @@ class M_Supervisor extends CI_Model
 
     function get_karyawan($id_karyawan)
     {
-        return $this->db->query("SELECT nama_karyawan, posisi_karyawan FROM karyawan WHERE id_karyawan = '$id_karyawan'");
+        return $this->db->query("SELECT id_karyawan, nama_karyawan, posisi_karyawan FROM karyawan WHERE id_karyawan = '$id_karyawan'");
     }
 
     function get_ss($id_karyawan)

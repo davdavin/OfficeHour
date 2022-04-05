@@ -60,4 +60,32 @@ class Supervisor extends CI_Controller
         $data['aktivitas'] = $this->M_Supervisor->aktivitas_karyawan($id_karyawan)->result();
         $this->load->view('v_detail_karyawan.php', $data);
     }
+
+    public function export($id_karyawan, $nama_karyawan)
+    {
+        $conn = new mysqli('localhost', 'root', '');
+        mysqli_select_db($conn, 'officehour');
+        $sql = "SELECT nama_project, nama_tugas, tanggal_aktivitas, waktu_mulai, waktu_selesai, durasi, bukti FROM aktivitas JOIN tugas_project 
+                ON aktivitas.id_tugas_project = tugas_project.id_tugas_project 
+                JOIN project ON aktivitas.id_project = project.id_project 
+                JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project
+                WHERE anggota_project.id_karyawan = '$id_karyawan'";
+        $setRec = mysqli_query($conn, $sql);
+        $columnHeader = '';
+        $columnHeader = "Project" . "\t" . "Tugas" . "\t" . "Tanggal Aktivitas" . "\t" . "Waktu Mulai" . "\t" . "Waktu Selesai" . "\t" . "Durasi" . "\t" . "Keterangan" . "\t";
+        $setData = '';
+        while ($rec = mysqli_fetch_row($setRec)) {
+            $rowData = '';
+            foreach ($rec as $value) {
+                $value = '"' . $value . '"' . "\t";
+                $rowData .= $value;
+            }
+            $setData .= trim($rowData) . "\n";
+        }
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=Aktivitas_" . $nama_karyawan . ".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        echo ucwords($columnHeader) . "\n" . $setData . "\n";
+    }
 }
