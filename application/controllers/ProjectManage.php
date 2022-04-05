@@ -267,7 +267,7 @@ class ProjectManage extends CI_Controller
             redirect('ProjectManage/project_detail/' . $id_project);
         } else {
             if ($cekStatus['status_project'] == "SELESAI") {
-                $this->session->set_flashdata('info', 'Project ini sudah di konfirmasi telah selesai');
+                $this->session->set_flashdata('sukses', 'Project ini sudah di konfirmasi telah selesai');
                 redirect('ProjectManage/project_detail/' . $id_project);
             } else {
                 if ($totalTugas['totalTugas'] == $totalSelesai['totalStatus']) {
@@ -295,6 +295,24 @@ class ProjectManage extends CI_Controller
         $where = array('id_project' => $id_project);
         $data = array(
             'tanggal_berhenti_project' => date('Y-m-d'), 'status_project' => 'TIDAK SELESAI'
+        );
+        $this->M_Project->update_record($where, $data, 'project');
+
+        $data_tugas = array(
+            'tanggal_berhenti_tugas' => date('Y-m-d'), 'status_tugas' => 'DIBATALKAN'
+        );
+
+        $this->M_Project->update_record($where, $data_tugas, 'tugas_project');
+
+        $this->session->set_flashdata('sukses', 'Berhasil status project diubah');
+        redirect('ProjectManage/project_detail/' . $id_project);
+    }
+
+    function konfirmasi_project_dilanjutkan($id_project)
+    {
+        $where = array('id_project' => $id_project);
+        $data = array(
+            'status_project' => 'SEDANG BERJALAN'
         );
         $this->M_Project->update_record($where, $data, 'project');
 

@@ -261,6 +261,11 @@
                 <div class="modal-body">
 
                   <form class="form-submit" action="<?php echo base_url() . 'TimeTracker/proses_input_aktivitas' ?>" method="post" id="submit-aktivitas<?php echo $list_tugas_project->id_tugas_project ?>">
+
+                    <div class="alert alert-danger alert-dismissible error_message" style="display: none;">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <i class="icon fas fa-ban"></i>
+                    </div>
                     <div class="form-group">
                       <label>Nama Project</label>
                       <input type="hidden" name="id_project" value="<?= $list_tugas_project->id_project ?>">
@@ -490,17 +495,18 @@
                   $('.error_status').hide();
                 }
                 if (obj.error_message) {
-                  Swal.fire({
-                    title: 'Tidak Berhasil',
-                    text: obj.error_message,
-                    icon: 'error',
-                  });
+                  /*   Swal.fire({
+                       title: 'Tidak Berhasil',
+                       text: obj.error_message,
+                       icon: 'error',
+                     }); */
 
-                  /*   $('.error_message').html(obj.error_message);
-                     $('.error_message').css("color", "red"); */
-                } //else {
-                //    $('.error_message').hide();
-                //    }
+                  $('.error_message').show();
+                  $('.error_message').html(obj.error_message);
+                  $('.error_message').css("color", "red");
+                } else {
+                  $('.error_message').hide();
+                }
               } else {
                 Swal.fire({
                   title: 'Sukses',
