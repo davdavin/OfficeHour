@@ -173,11 +173,51 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tugas Project</h3>
+                            <h3 class="card-title">Aktivitas Karyawan</h3>
                         </div>
 
                         <div class="card-body">
 
+                            <form action="" method="post">
+                                <a href="<?php echo base_url() . 'Supervisor/export/' . $info['id_karyawan'] . '/' . $info['nama_karyawan'] ?>" type="submit" id="btnExport" name='export' value="Export to Excel" class="btn btn-info">Export to Excel</a>
+                            </form><br>
+
+
+                            <table id="list_aktivitas" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Tugas</th>
+                                        <th>Tanggal</th>
+                                        <th>Waktu</th>
+                                        <th>Status Tugas</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($aktivitas as $list_aktivitas) { ?>
+                                        <tr>
+                                            <td><?php echo $list_aktivitas->nama_project ?></td>
+                                            <td><?php echo $list_aktivitas->nama_tugas ?> </td>
+                                            <td><?php echo tanggal_indonesia($list_aktivitas->tanggal_aktivitas) ?> </td>
+                                            <td><?php echo waktu($list_aktivitas->waktu_mulai) . ' - ' . waktu($list_aktivitas->waktu_selesai) ?></td>
+                                            <td><?php echo $list_aktivitas->status_tugas ?></td>
+                                            <td><?php echo $list_aktivitas->bukti ?></td>
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Tugas Project</h3>
+                        </div>
+
+                        <div class="card-body">
                             <table id="list_tugas" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -257,7 +297,7 @@
 
     <script>
         $(function() {
-            $("#list_screenshot").DataTable({
+            $("#list_screenshot, #list_aktivitas").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
