@@ -299,10 +299,10 @@ class ProjectManage extends CI_Controller
 
         $tanggal = date('Y-m-d');
         $status = "DIBATALKAN";
-
+        $keterangan = "BATAL";
 
         $this->M_Project->update_record($where, $data, 'project');
-        $this->M_Project->update_status_tugas($tanggal, $status, $id_project);
+        $this->M_Project->update_status_tugas($tanggal, $status, $id_project, $keterangan);
 
         $this->session->set_flashdata('sukses', 'Berhasil status project diubah');
         redirect('ProjectManage/project_detail/' . $id_project);
@@ -314,7 +314,12 @@ class ProjectManage extends CI_Controller
         $data = array(
             'status_project' => 'SEDANG BERJALAN'
         );
+        $tanggal = date('Y-m-d');
+        $status = "SEDANG BERJALAN";
+        $keterangan = "LANJUT";
+
         $this->M_Project->update_record($where, $data, 'project');
+        $this->M_Project->update_status_tugas($tanggal, $status, $id_project, $keterangan);
 
         $this->session->set_flashdata('sukses', 'Berhasil status project diubah');
         redirect('ProjectManage/project_detail/' . $id_project);
