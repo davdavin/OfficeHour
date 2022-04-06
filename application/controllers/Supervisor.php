@@ -46,7 +46,20 @@ class Supervisor extends CI_Controller
 
     public function daftar_karyawan()
     {
+        /*$data['title'] = 'OfficeHour - Karyawan | Supervisor';
+        $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
+        $this->load->view('v_lihat_karyawan_supervisor.php', $data); */
+
+
         $data['title'] = 'OfficeHour - Karyawan | Supervisor';
+        $id_karyawan = $this->session->userdata('id_karyawan');
+        $id_perusahaan = $this->db->query("SELECT id_perusahaan FROM karyawan WHERE id_karyawan = $id_karyawan")->row_array();
+        $id = $id_perusahaan['id_perusahaan'];
+        $data['graph'] = $this->db->query("SELECT nama_project, sum(durasi) as durasi FROM aktivitas JOIN tugas_project 
+        ON aktivitas.id_tugas_project = tugas_project.id_tugas_project 
+        JOIN project ON aktivitas.id_project = project.id_project 
+        JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project
+        WHERE  id_perusahaan = '$id' AND status_project = 'SEDANG BERJALAN' GROUP BY nama_project ")->result();
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
         $this->load->view('v_lihat_karyawan_supervisor.php', $data);
     }
