@@ -329,7 +329,7 @@
                                     <?php } ?>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_selesai/' . $idProject; ?>"><i class="fas fa-check"></i> Selesai Project</a><br><br>
                                     <?php if ($list->status_project == "SELESAI" || $list->status_project == "TIDAK SELESAI") { ?>
-                                        <a type="button" class="btn btn-primary" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_dilanjutkan/' . $idProject; ?>"><i class="fas fa-check"></i> Melanjutkan Project</a><br><br>
+                                        <a type="button" class="btn btn-primary lanjut" href="<?php echo base_url() . 'ProjectManage/konfirmasi_project_dilanjutkan/' . $idProject; ?>"><i class="fas fa-check"></i> Melanjutkan Project</a><br><br>
                                 <?php }
                                 } ?>
                             </div>
@@ -404,7 +404,27 @@
                     cancelButtonText: 'batal',
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Hapus'
+                    confirmButtonText: 'Ya'
+                }).then((result) => {
+                    if (result.value) {
+                        document.location.href = href;
+                    }
+                });
+            });
+
+            $('.lanjut').click(function(e) {
+                e.preventDefault();
+                const href = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Project ini akan dilanjutkan kembali',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya'
                 }).then((result) => {
                     if (result.value) {
                         document.location.href = href;

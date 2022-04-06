@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2022 at 03:34 PM
+-- Generation Time: Apr 06, 2022 at 01:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -282,7 +282,7 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_manager`, `nama_project`, `deskripsi_project`, `tanggal_mulai_project`, `batas_waktu_project`, `tanggal_selesai_project`, `tanggal_berhenti_project`, `status_project`) VALUES
-(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', NULL, NULL, 'SEDANG BERJALAN'),
+(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', NULL, '2022-04-06', 'SEDANG BERJALAN'),
 (2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
 (3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
 (4, 'PRSH5', 3, 7, 'Planner Website', 'Website untuk menjual buku perencanaan', '2022-03-21', '2022-03-26', NULL, NULL, 'SEDANG BERJALAN'),
@@ -328,7 +328,7 @@ CREATE TABLE `tugas_project` (
   `batas_waktu` date NOT NULL,
   `tanggal_selesai_tugas` date DEFAULT NULL,
   `tanggal_berhenti_tugas` date DEFAULT NULL,
-  `status_tugas` varchar(20) NOT NULL DEFAULT 'BELUM BERJALAN'
+  `status_tugas` enum('BELUM BERJALAN','SEDANG BERJALAN','SELESAI','SELESAI & DIBATALKAN','DIBATALKAN') NOT NULL DEFAULT 'BELUM BERJALAN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

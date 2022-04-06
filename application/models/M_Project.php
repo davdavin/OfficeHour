@@ -108,10 +108,17 @@ class M_Project extends CI_Model
         return $this->db->query("SELECT * FROM aktivitas WHERE id_aktivitas = 2");
     }
 
-    function update_status_tugas($tanggal, $status, $id_project)
+    function update_status_tugas($tanggal, $status, $id_project, $keterangan)
     {
-        $this->db->query("UPDATE tugas_project,project,anggota_project SET tanggal_berhenti_tugas = '$tanggal', status_tugas = '$status' 
-                        WHERE project.id_project = '$id_project' AND anggota_project.id_anggota_project = tugas_project.id_anggota_project AND project.id_project = anggota_project.id_project");
+        if ($keterangan == "BATAL") {
+            $this->db->query("UPDATE tugas_project,project,anggota_project SET tanggal_berhenti_tugas = CASE WHEN status_tugas = 'SELESAI' THEN NULL ELSE '$tanggal' END, 
+            status_tugas = CASE WHEN status_tugas = 'SELESAI' THEN 'SELESAI & DIBATALKAN' ELSE '$status' END  
+            WHERE project.id_project = '$id_project' AND anggota_project.id_anggota_project = tugas_project.id_anggota_project AND project.id_project = anggota_project.id_project");
+        }
+        if ($keterangan == "LANJUT") {
+            $this->db->query("UPDATE tugas_project,project,anggota_project SET tanggal_berhenti_tugas = NULL, status_tugas = CASE WHEN status_tugas = 'SELESAI & DIBATALKAN' THEN 'SELESAI' ELSE '$status' END  
+            WHERE project.id_project = '$id_project' AND anggota_project.id_anggota_project = tugas_project.id_anggota_project AND project.id_project = anggota_project.id_project");
+        }
     }
 
     function insert_record($data, $table)
