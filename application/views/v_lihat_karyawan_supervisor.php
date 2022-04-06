@@ -120,7 +120,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h3>Daftar Karyawan</h3>
+                            <h3>Laporan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -137,12 +137,16 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
+                        <div class="container">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Laporan Karyawan</h3>
                         </div>
 
                         <div class="card-body">
-
                             <table id="list_karyawan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -199,6 +203,8 @@
     </div>
     <!-- ./wrapper -->
 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -268,7 +274,35 @@
             }
 
         });
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    <?php
+                    foreach ($graph as $data) {
+                        echo "'" . $data->nama_project . "',";
+                    }
+                    ?>
+                ],
+                datasets: [{
+                    label: 'Jumlah Durasi Setiap Project',
+                    backgroundColor: '#ADD8E6',
+                    borderColor: '##93C3D2',
+                    data: [
+                        <?php
+                        foreach ($graph as $data) {
+                            echo $data->durasi . ", ";
+                        }
+                        ?>
+                    ]
+                }]
+            },
+        });
     </script>
+
+
 
 </body>
 
