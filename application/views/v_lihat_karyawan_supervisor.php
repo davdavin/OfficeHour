@@ -136,15 +136,19 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="card">
-                        <div class="container">
-                            <canvas id="myChart"></canvas>
+
+                    <section class="col-lg-6">
+                        <div class="card">
+                            <div class="container">
+                                <canvas id="myChart"></canvas>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Laporan Karyawan</h3>
                         </div>
+
 
                         <div class="card-body">
                             <table id="list_karyawan" class="table table-bordered table-striped">
@@ -262,7 +266,7 @@
                         "sPrevious": "Sebelumnya"
                     }
                 }
-            });
+            })
 
             const sukses = $('.sukses').data('flashdata');
             if (sukses) {
@@ -288,8 +292,25 @@
                 ],
                 datasets: [{
                     label: 'Jumlah Durasi Setiap Project',
-                    backgroundColor: '#ADD8E6',
-                    borderColor: '##93C3D2',
+                    backgroundColor: [
+                        'rgba(255, 26, 104, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(0, 0, 0, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 26, 104, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(0, 0, 0, 1)'
+                    ],
+                    borderWidth: 1,
                     data: [
                         <?php
                         foreach ($graph as $data) {

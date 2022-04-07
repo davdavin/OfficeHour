@@ -145,6 +145,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <section class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-center">Total Waktu Dalam Setiap Project</h3>
+                            </div>
+                            <div class="container">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </section>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Informasi Bukti Saat Waktu Kerja</h3>
@@ -259,6 +270,7 @@
     </div>
     <!-- ./wrapper -->
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -297,7 +309,7 @@
 
     <script>
         $(function() {
-            $("#list_screenshot, #list_aktivitas").DataTable({
+            $("#list_screenshot, #list_tugas").DataTable({
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
@@ -318,7 +330,10 @@
                 }
             });
 
-            $("#list_tugas").DataTable({
+            $("#list_aktivitas").DataTable({
+                // "dom": 'lBfrtip',
+                dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
+                    "<'row'<'col-md-12'tr>>" + "<'row'<'col-md-5'i><'col-md-7'p>>",
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
@@ -336,8 +351,19 @@
                         "sNext": "Selanjutnya",
                         "sPrevious": "Sebelumnya"
                     }
-                }
-            });
+                },
+                "buttons": [{
+                        extend: 'pdfHtml5',
+                        //   className: 'btn-primary',
+                        orientation: 'potrait',
+                        pageSize: 'A4',
+                        title: 'Aktivitas Karyawan <?php echo $info['nama_karyawan']; ?>'
+                        //   download: 'open'
+                    },
+                    'print', 'colvis'
+                ]
+                // "buttons": ["pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#list_aktivitas_wrapper .col-md-5:eq(0)');
 
             const sukses = $('.sukses').data('flashdata');
             if (sukses) {
@@ -347,6 +373,70 @@
                     icon: 'success'
                 });
             }
+
+        });
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var chart = new Chart(ctx, {
+
+            type: 'pie',
+
+            data: {
+
+                labels: [
+
+                    <?php
+
+                    foreach ($grafik_karyawan as $data) {
+
+                        echo "'" . $data->nama_project . "',";
+                    }
+
+                    ?>
+
+                ],
+
+                datasets: [{
+
+                    label: 'Jumlah Durasi Setiap Project',
+
+                    backgroundColor: [
+                        'rgba(255, 26, 104, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(0, 0, 0, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 26, 104, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(0, 0, 0, 1)'
+                    ],
+                    borderWidth: 1,
+
+                    data: [
+
+                        <?php
+
+                        foreach ($grafik_karyawan as $data) {
+
+                            echo $data->durasi . ", ";
+                        }
+
+                        ?>
+
+                    ]
+
+                }]
+
+            },
 
         });
     </script>
