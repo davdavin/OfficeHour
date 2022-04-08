@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login - Karyawan</title>
+    <title>Forget - Password</title>
 
     <!-- Favicons -->
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
@@ -31,53 +31,24 @@
                         <figure><img src="<?php echo base_url(); ?>assets/loginSignup/loginimage.png" alt="sing up image"></figure>
                     </div>
 
-
                     <div class="signin-form">
-                        <h2 class="form-title">Log In</h2>
-                        <form action="<?php echo base_url() . 'Login/verifikasi_karyawan' ?>" method="post" class="register-form" id="login-form">
+                        <h2 class="form-title">Change Password</h2>
+                        <form action="<?php echo base_url() . 'forget/ganti_pass' ?>" method="post" class="register-form" id="login-form">
                             <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Email" required />
+                                <input type="hidden" value=<?php echo $karyawan['email_karyawan']; ?> name="email">
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="pass" placeholder="Password" required />
+                                <input type="password" name="password" id="pass" placeholder="New Password" required />
                             </div>
                             <div class="form-group form-button">
                                 <input type="submit" id="signin" class="form-submit" value="Log in" />
                             </div>
-
-                            <a class="text-blue" type="button" data-toggle="modal" data-target="#modalForgot">
-                                Forgot Password
-                            </a>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="modal fade" id="modalForgot">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Masukan Email</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="<?php echo base_url() . 'login/forgot_password' ?>" method="post" class="form-forget">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="email" placeholder="email anda" required>
-                                <p class="p-2 error_email"></p>
-                            </div>
-                            <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
     </div>
     <script src="<?php echo base_url(); ?>assets/loginSignup/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/loginSignup/js/main.js"></script>
@@ -112,36 +83,6 @@
                     icon: 'error'
                 });
             }
-            $('.form-forget').submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: "POST",
-                    data: $(this).serialize(),
-                    success: function(hasil) {
-                        var $obj = $.parseJSON(hasil);
-                        if ($obj.sukses == false) {
-
-                            if ($obj.error_email) {
-                                $('.error_email').html($obj.error_email);
-                                $('.error_email').css("color", "red");
-                            } else {
-                                $('.error_email').hide();
-                            }
-
-                        } else {
-                            Swal.fire({
-                                title: 'Sukses',
-                                text: $obj.sukses,
-                                icon: 'success',
-                            }).then((confirmed) => {
-                                window.location.reload();
-                            });
-                        }
-                    }
-                });
-
-            });
         });
     </script>
 </body>
