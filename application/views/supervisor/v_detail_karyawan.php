@@ -96,7 +96,7 @@
                         </li>
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
+                                <i class="nav-icon fas fa-file"></i>
                                 <p> Laporan </p>
                             </a>
                         </li>
@@ -149,27 +149,27 @@
                     <div class="row">
                         <section class="col-lg-6 connectedSortable">
                             <div class="card card-outline">
-                            <div class="card-header bg-green">
-                                <h3 class="card-title">
-                                <i class="far fa-chart-bar"></i>
-                                Total Waktu Setiap Project Dalam Perjam
-                                </h3>
+                                <div class="card-header bg-green">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        Total Waktu Setiap Project Dalam Perjam
+                                    </h3>
 
-                                <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus text-white"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times text-white"></i>
-                                </button>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times text-white"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="container">
-                                    <canvas id="myChart"></canvas>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- /.card-body-->
+                                <!-- /.card-body-->
                             </div>
                         </section>
                     </div>
