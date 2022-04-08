@@ -63,7 +63,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a class="brand-link">
+            <a class="brand-link bg-navy">
                 <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">OfficeHour</span>
             </a>
@@ -90,8 +90,8 @@
                                 <p> Dashboard </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link bg-teal">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Akun </p>
                             </a>

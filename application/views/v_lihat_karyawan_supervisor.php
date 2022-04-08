@@ -137,13 +137,62 @@
             <section class="content">
                 <div class="container-fluid">
 
-                    <section class="col-lg-6">
-                        <div class="card">
-                            <div class="container">
-                                <canvas id="myChart"></canvas>
+                <div class="row">
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="card card-outline">
+                        <div class="card-header bg-green">
+                            <h3 class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            Durasi Setiap Project Dalam Waktu Jam
+                            </h3>
+
+                            <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus text-white"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times text-white"></i>
+                            </button>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                        </div>
+                        <!-- /.card-body-->
+                        </div>
+
                     </section>
+
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="card card-outline">
+                        <div class="card-header bg-green">
+                            <h3 class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            Karyawan Paling Sering Telat Selesaikan Tugas
+                            </h3>
+
+                            <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus text-white"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times text-white"></i>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                    <canvas id="chart-karyawan"></canvas>
+                                </div>
+                        </div>
+                        <!-- /.card-body-->
+                        </div>
+
+                    </section>
+                </div>
+                   
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Laporan Karyawan</h3>
@@ -169,7 +218,7 @@
                                             <td><?php echo $list_karyawan->nama_karyawan ?></td>
                                             <td><?php echo $list_karyawan->email_karyawan ?></td>
                                             <td><?php echo $list_karyawan->posisi_karyawan ?></td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if ($list_karyawan->status_karyawan == 1) { ?>
                                                     <span class="badge badge-success">Aktif</span>
                                                 <?php } else { ?>
@@ -285,9 +334,12 @@
             data: {
                 labels: [
                     <?php
-                    foreach ($graph as $data) {
-                        echo "'" . $data->nama_project . "',";
+                    if(count($graph)>0) {
+                        foreach ($graph as $data) {
+                            echo "'" . $data->nama_project . "',";
+                        }
                     }
+                   
                     ?>
                 ],
                 datasets: [{
@@ -315,6 +367,52 @@
                         <?php
                         foreach ($graph as $data) {
                             echo $data->durasi . ", ";
+                        }
+                        ?>
+                    ]
+                }]
+            },
+        });
+
+        var ctx = document.getElementById('chart-karyawan').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    <?php
+                    if(count($overtime)>0) {
+                        foreach ($overtime as $data) {
+                            echo "'" . $data->nama_karyawan . "',";
+                        }
+                    }
+                   
+                    ?>
+                ],
+                datasets: [{
+                    label: 'Total',
+                    backgroundColor: [
+                        'rgba(255, 26, 104, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(0, 0, 0, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 26, 104, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(0, 0, 0, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: [
+                        <?php
+                        foreach ($overtime as $data) {
+                            echo $data->total . ", ";
                         }
                         ?>
                     ]
