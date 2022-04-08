@@ -96,7 +96,7 @@
                         </li>
                         <li class="nav-item menu-open">
                             <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
+                                <i class="nav-icon fas fa-file"></i>
                                 <p> Laporan </p>
                             </a>
                         </li>
@@ -137,62 +137,62 @@
             <section class="content">
                 <div class="container-fluid">
 
-                <div class="row">
-                    <section class="col-lg-6 connectedSortable">
-                        <div class="card card-outline">
-                        <div class="card-header bg-green">
-                            <h3 class="card-title">
-                            <i class="far fa-chart-bar"></i>
-                            Durasi Setiap Project Dalam Waktu Jam
-                            </h3>
+                    <div class="row">
+                        <section class="col-lg-6 connectedSortable">
+                            <div class="card card-outline">
+                                <div class="card-header bg-green">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        Durasi Setiap Project Dalam Waktu Jam
+                                    </h3>
 
-                            <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus text-white"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times text-white"></i>
-                            </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                    <canvas id="myChart"></canvas>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times text-white"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                        </div>
-                        <!-- /.card-body-->
-                        </div>
-
-                    </section>
-
-                    <section class="col-lg-6 connectedSortable">
-                        <div class="card card-outline">
-                        <div class="card-header bg-green">
-                            <h3 class="card-title">
-                            <i class="far fa-chart-bar"></i>
-                            Karyawan Paling Sering Telat Selesaikan Tugas
-                            </h3>
-
-                            <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus text-white"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times text-white"></i>
-                            </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                    <canvas id="chart-karyawan"></canvas>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
                                 </div>
-                        </div>
-                        <!-- /.card-body-->
-                        </div>
+                                <!-- /.card-body-->
+                            </div>
 
-                    </section>
-                </div>
-                   
+                        </section>
+
+                        <section class="col-lg-6 connectedSortable">
+                            <div class="card card-outline">
+                                <div class="card-header bg-green">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        Karyawan Paling Sering Telat Selesaikan Tugas
+                                    </h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <canvas id="chart-karyawan"></canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body-->
+                            </div>
+
+                        </section>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Laporan Karyawan</h3>
@@ -334,12 +334,12 @@
             data: {
                 labels: [
                     <?php
-                    if(count($graph)>0) {
+                    if (count($graph) > 0) {
                         foreach ($graph as $data) {
                             echo "'" . $data->nama_project . "',";
                         }
                     }
-                   
+
                     ?>
                 ],
                 datasets: [{
@@ -380,12 +380,12 @@
             data: {
                 labels: [
                     <?php
-                    if(count($overtime)>0) {
+                    if (count($overtime) > 0) {
                         foreach ($overtime as $data) {
                             echo "'" . $data->nama_karyawan . "',";
                         }
                     }
-                   
+
                     ?>
                 ],
                 datasets: [{

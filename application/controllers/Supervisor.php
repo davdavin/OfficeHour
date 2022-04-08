@@ -21,7 +21,7 @@ class Supervisor extends CI_Controller
         $data['status_berjalan'] = $this->M_Supervisor->status_project_berjalan($this->session->userdata('id_karyawan'))->row_array();
         $data['status_selesai'] = $this->M_Supervisor->status_project_selesai($this->session->userdata('id_karyawan'))->row_array();
         $data['project'] = $this->M_Supervisor->semua_project($this->session->userdata('id_karyawan'))->result();
-        $this->load->view('v_halaman_utama_supervisor.php', $data);
+        $this->load->view('supervisor/v_halaman_utama_supervisor.php', $data);
     }
 
     function project_detail($id_project)
@@ -41,7 +41,7 @@ class Supervisor extends CI_Controller
         $data['jumat'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Fri'")->row_array();
         $data['sabtu'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Sat'")->row_array();
         $data['minggu'] = $this->db->query("SELECT sum(durasi) AS MinuteDiff from aktivitas WHERE id_project = $id_project AND hari = 'Sun'")->row_array();
-        $this->load->view('v_detail_project_supervisor.php', $data);
+        $this->load->view('supervisor/v_detail_project_supervisor.php', $data);
     }
 
     public function daftar_karyawan()
@@ -55,7 +55,7 @@ class Supervisor extends CI_Controller
         $data['overtime'] = $this->db->query("SELECT nama_karyawan, count(nama_tugas) as total FROM tugas_project INNER JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
                                             INNER JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE tanggal_selesai_tugas > batas_waktu GROUP BY nama_karyawan")->result();
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
-        $this->load->view('v_lihat_karyawan_supervisor.php', $data);
+        $this->load->view('supervisor/v_lihat_karyawan_supervisor.php', $data);
     }
 
     public function aktivitas($id_karyawan)
@@ -67,7 +67,7 @@ class Supervisor extends CI_Controller
         $data['foto'] = $this->M_Supervisor->get_ss($id_karyawan)->result();
         $data['tugas'] = $this->M_Supervisor->tugas_karyawan($id_karyawan)->result();
         $data['aktivitas'] = $this->M_Supervisor->aktivitas_karyawan($id_karyawan)->result();
-        $this->load->view('v_detail_karyawan.php', $data);
+        $this->load->view('supervisor/v_detail_karyawan.php', $data);
     }
 
     public function export($id_karyawan, $nama_karyawan)

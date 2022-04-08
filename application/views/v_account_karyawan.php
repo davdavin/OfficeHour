@@ -121,7 +121,7 @@
                         <?php if ($this->session->userdata('posisi_karyawan') == "Supervisor") { ?>
                             <li class="nav-item">
                                 <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
+                                    <i class="nav-icon fas fa-file"></i>
                                     <p> Laporan </p>
                                 </a>
                             </li>
