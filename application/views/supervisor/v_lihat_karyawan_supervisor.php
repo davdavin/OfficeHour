@@ -323,6 +323,8 @@
     <script>
         $(function() {
             $("#list_karyawan").DataTable({
+                "processing": true,
+                "severside": true,
                 "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
@@ -455,18 +457,17 @@
                 datasets: [{
                     label: 'Total',
                     backgroundColor: [
-                    'rgba(255, 26, 104, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 26, 104, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1,
-                data: [<?php echo $selesai['totalSelesai'];?>,<?php echo $sedang_berjalan['totalSedangBerjalan'];?>,<?php echo $tidak_selesai['totalTidakSelesai'];?>
-                ],
+                        'rgba(255, 26, 104, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 26, 104, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: [<?php echo $selesai['totalSelesai']; ?>, <?php echo $sedang_berjalan['totalSedangBerjalan']; ?>, <?php echo $tidak_selesai['totalTidakSelesai']; ?>],
                 }]
             },
         });
