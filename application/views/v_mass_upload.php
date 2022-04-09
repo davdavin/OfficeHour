@@ -270,7 +270,7 @@
                                 <form action="<?php echo base_url('Dashboard_Perusahaan/proses_upload_massal') ?>" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Pilih File Excel</label><br>
-                                        <input type="file" name="file" id="file" accept=".xls,.xlsx">
+                                        <input type="file" name="file" id="file" accept=".xls,.xlsx" required>
                                     </div>
                                     <button type="submit" id="submit" name="import" class="btn btn-primary">Submit</button>
                                 </form>

@@ -11,6 +11,10 @@
     <link href="<?php echo base_url(); ?>assets/dist/img/logo.png" rel="icon">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/loginSignup/style.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free/css/all.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Theme style -->
@@ -67,10 +71,10 @@
                     <div class="modal-body">
                         <form action="<?php echo base_url() . 'login/forgot_password' ?>" method="post" class="form-forget">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="email" placeholder="email anda" required>
+                                <input type="text" class="form-control" name="email" placeholder="email anda">
                                 <p class="p-2 error_email"></p>
                             </div>
-                            <button type="submit" class="btn btn-block btn-primary btn-sm">Submit</button>
+                            <button type="submit" class="btn btn-block btn-primary btn-sm simpan">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -118,6 +122,15 @@
                     url: $(this).attr('action'),
                     type: "POST",
                     data: $(this).serialize(),
+                    beforeSend: function() {
+                        $('.simpan').html('<i class="fa fa-spin fa-spinner"></i>');
+                        $('.simpan').attr('disabled', 'disabled');
+
+                    },
+                    complete: function() {
+                        $('.simpan').removeAttr('disabled');
+                        $('.simpan').html('Submit');
+                    },
                     success: function(hasil) {
                         var $obj = $.parseJSON(hasil);
                         if ($obj.sukses == false) {
