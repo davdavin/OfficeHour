@@ -55,6 +55,9 @@ class Supervisor extends CI_Controller
         $data['overtime'] = $this->db->query("SELECT nama_karyawan, count(nama_tugas) as total FROM tugas_project INNER JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
                                             INNER JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE tanggal_selesai_tugas > batas_waktu GROUP BY nama_karyawan")->result();
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
+        $data['selesai'] = $this->db->query("SELECT count(id_project) as totalSelesai FROM project WHERE status_project = 'SELESAI'")->row_array();
+        $data['sedang_berjalan'] = $this->db->query("SELECT count(id_project) as totalSedangBerjalan FROM project WHERE status_project = 'SEDANG BERJALAN'")->row_array();
+        $data['tidak_selesai'] = $this->db->query("SELECT count(id_project) as totalTidakSelesai FROM project WHERE status_project = 'TIDAK SELESAI'")->row_array();
         $this->load->view('supervisor/v_lihat_karyawan_supervisor.php', $data);
     }
 

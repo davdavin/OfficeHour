@@ -140,7 +140,7 @@
                     <div class="row">
                         <section class="col-lg-6 connectedSortable">
                             <div class="card card-outline">
-                                <div class="card-header bg-green">
+                                <div class="card-header bg-gray">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
                                         Durasi Setiap Project Dalam Waktu Jam
@@ -160,14 +160,38 @@
                                         <canvas id="myChart"></canvas>
                                     </div>
                                 </div>
-                                <!-- /.card-body-->
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header bg-gray">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        Total Status Project
+                                    </h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chartCard">
+                                        <div class="chartBox">
+                                            <canvas id="chart-status-project"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </section>
 
                         <section class="col-lg-6 connectedSortable">
                             <div class="card card-outline">
-                                <div class="card-header bg-green">
+                                <div class="card-header bg-gray">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
                                         Karyawan Paling Sering Telat Selesaikan Tugas
@@ -272,6 +296,8 @@
     <script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -416,6 +442,31 @@
                         }
                         ?>
                     ]
+                }]
+            },
+        });
+
+        //grafik status project
+        var c = document.getElementById('chart-status-project').getContext('2d');
+        var chart = new Chart(c, {
+            type: 'pie',
+            data: {
+                labels: ['Selesai', 'Sedang Berjalan', 'Tidak Selesai'],
+                datasets: [{
+                    label: 'Total',
+                    backgroundColor: [
+                    'rgba(255, 26, 104, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 26, 104, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                data: [<?php echo $selesai['totalSelesai'];?>,<?php echo $sedang_berjalan['totalSedangBerjalan'];?>,<?php echo $tidak_selesai['totalTidakSelesai'];?>
+                ],
                 }]
             },
         });
