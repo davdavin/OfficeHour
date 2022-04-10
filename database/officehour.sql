@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 09:23 AM
+-- Generation Time: Apr 10, 2022 at 11:30 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -205,7 +205,8 @@ INSERT INTO `karyawan` (`id_karyawan`, `id_perusahaan`, `nama_karyawan`, `email_
 (65, 'PRSH5', 'Daniel', 'dandandan@gmail.com', '$2y$10$8by9BAv.hQuEzdJaLG9e8u694l1BiPVlanxq8ZzPF5Hdwd./J4fHK', 'Supervisor', 1, 'd56f06f53970d012f520b628ea0f15d39975', 1),
 (78, 'PRSH5', 'Philin', 'phil@gmail.com', NULL, 'Project Manager', 0, '31ba0a78f04a7480ae82e100b14d200d7065', 0),
 (79, 'PRSH5', 'Gurna', 'gur@gmail.com', NULL, 'QA', 0, '3c289eaaa3eadee71fd1f4ad97a3aa0d1207', 0),
-(80, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, 'b977e3380f2d6cdf0f8884b574ea3d309468', 0);
+(80, 'PRSH5', 'Brother', 'brother@gmail.com', NULL, 'UI/UX Designer', 0, 'b977e3380f2d6cdf0f8884b574ea3d309468', 0),
+(81, 'PRSH5', 'Jack', 'jack@gmail.com', NULL, 'Supervisor', 0, '77864601526fc73452f5c7f942ac4ff48965', 1);
 
 -- --------------------------------------------------------
 
@@ -242,6 +243,7 @@ CREATE TABLE `perusahaan` (
   `username` varchar(25) NOT NULL,
   `password` char(255) NOT NULL,
   `email_perusahaan` text NOT NULL,
+  `token` varchar(100) NOT NULL,
   `status_perusahaan` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -249,12 +251,12 @@ CREATE TABLE `perusahaan` (
 -- Dumping data for table `perusahaan`
 --
 
-INSERT INTO `perusahaan` (`id_perusahaan`, `nama_perusahaan`, `username`, `password`, `email_perusahaan`, `status_perusahaan`) VALUES
-('PRSH1', 'Pt. Test', 'testtest', '12345', 'yoyoyoyo@gmail.com', 1),
-('PRSH2', 'Pt. Test2', 'testt', '12345', 'testtest@example.com', 1),
-('PRSH3', 'Pt. Sampoerna', 'sempurna', '123455', 'yoyoyoyo@gmail.com', 1),
-('PRSH4', 'Pt. Jaya Bersama', 'jayajayajaya', '$2y$10$QB80y9rEn/otmM74sndPjevpKb5QetQfFW/Zn0K8/YZheobluprCi', 'yoyoyoyo@gmail.com', 1),
-('PRSH5', 'Pt Nam Jon', 'companyy', '$2y$10$GZeZrXNQpam3e7HgDEnNwuSs1xI.8kGCAqUAbU7gpAiMEW5HzqQa.', 'sipsip@gmail.com', 1);
+INSERT INTO `perusahaan` (`id_perusahaan`, `nama_perusahaan`, `username`, `password`, `email_perusahaan`, `token`, `status_perusahaan`) VALUES
+('PRSH1', 'Pt. Test', 'testtest', '12345', 'yoyoyoyo@gmail.com', '', 1),
+('PRSH2', 'Pt. Test2', 'testt', '12345', 'testtest@example.com', '', 1),
+('PRSH3', 'Pt. Sampoerna', 'sempurna', '123455', 'yoyoyoyo@gmail.com', '', 1),
+('PRSH4', 'Pt. Jaya Bersama', 'jayajayajaya', '$2y$10$QB80y9rEn/otmM74sndPjevpKb5QetQfFW/Zn0K8/YZheobluprCi', 'yoyoyoyo@gmail.com', '', 1),
+('PRSH5', 'Pt Nam Jon', 'companyy', '$2y$10$GZeZrXNQpam3e7HgDEnNwuSs1xI.8kGCAqUAbU7gpAiMEW5HzqQa.', 'sipsip@gmail.com', '', 1);
 
 -- --------------------------------------------------------
 
@@ -471,7 +473,7 @@ ALTER TABLE `foto_screenshoot`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `paket`

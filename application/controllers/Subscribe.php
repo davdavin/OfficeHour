@@ -49,9 +49,11 @@ class Subscribe extends CI_Controller
         } else {
             $this->db->trans_start();
 
+            $token = md5($email) . rand(10, 9999);
+
             $data_perusahaan = array(
                 'id_perusahaan' => $id_perusahaan, 'nama_perusahaan' => $nama_perusahaan, 'username' => $username, 'password' => password_hash($password, PASSWORD_DEFAULT),
-                'email_perusahaan' => $email, 'status_perusahaan' => 0
+                'email_perusahaan' => $email, 'status_perusahaan' => 0,'token'=>$token
             );
 
             $this->M_Perusahaan->insert_record($data_perusahaan, 'perusahaan');

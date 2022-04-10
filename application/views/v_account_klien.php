@@ -36,6 +36,14 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
+
+    <style>
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: black;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background-color: lightskyblue;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -91,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link bg-teal">
+                            <a href="<?php echo base_url() . 'Account_Klien/profile/' . $this->session->userdata('id_klien')  ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p> Akun </p>
                             </a>

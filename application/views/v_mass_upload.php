@@ -272,7 +272,7 @@
                                         <label>Pilih File Excel</label><br>
                                         <input type="file" name="file" id="file" accept=".xls,.xlsx" required>
                                     </div>
-                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Submit</button>
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary simpan">Submit</button>
                                 </form>
 
                             </div><br><br>
@@ -337,6 +337,26 @@
                     icon: 'error'
                 });
             }
+
+            $('#frmExcelImport').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: $(this).serialize(),
+                    beforeSend: function() {
+                        $('.simpan').html('<i class="fa fa-spin fa-spinner"></i>');
+                        $('.simpan').attr('disabled', 'disabled');
+
+                    },
+                    complete: function() {
+                        $('.simpan').removeAttr('disabled');
+                        $('.simpan').html('Submit');
+                    }
+
+                });
+
+            });
 
         });
     </script>
