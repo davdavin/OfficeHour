@@ -251,11 +251,8 @@
                     <img src="<?php echo base_url(); ?>assets/landingpage/img/logo.png" alt="">
                 </div>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/channel/UC9gVrKcChMJ0k9G5izKBOcg"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/officehourcompany/"><i class="fab fa-instagram"></i></a>
                 </div>
                 <div class="copyright text-center">
                     <p></p>
