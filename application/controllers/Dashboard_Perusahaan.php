@@ -55,7 +55,6 @@ class Dashboard_Perusahaan extends CI_Controller
     }
 
 
-
     function proses_tambah_karyawan()
     {
         $id_perusahaan = $this->input->post('id_perusahaan');

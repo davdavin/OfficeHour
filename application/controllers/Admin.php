@@ -69,8 +69,11 @@ class Admin extends CI_Controller
 
         $where_subscribe = array('id_subscribe' => $id_subscribe);
 
+        $tanggal_hariini = strtotime(date('Y-m-d'));
+
         $data_subscribe = array(
-            'tanggal_bayar' => $tanggal_bayar, 'status_bayar' => 'Sudah Bayar', 'status_subscribe' => 'Sedang Progress'
+            'tanggal_bayar' => $tanggal_bayar, 'tanggal_mulai_langganan' => date('Y-m-d'), 'tanggal_selesai_langganan' => date('Y-m-d', strtotime('+1 years',$tanggal_hariini)),
+            'status_bayar' => 'Sudah Bayar', 'status_subscribe' => 'Sedang Progress'
         );
 
         $where_perusahaan = array('id_perusahaan' => $id_perusahaan);

@@ -32,7 +32,7 @@ class Account_Perusahaan extends CI_Controller
         } else {
             $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[20]|is_unique[perusahaan.username]');
         }
-        $this->form_validation->set_rules('email_perusahaan', 'Email', 'required');
+        $this->form_validation->set_rules('email_perusahaan', 'Email', 'required|valid_email');
 
         $this->form_validation->set_message('required', '{field} wajib diisi. Silahkan diisi');
         $this->form_validation->set_message('min_length', '{field} minimal {param} karakter');
