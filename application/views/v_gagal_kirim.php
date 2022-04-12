@@ -183,16 +183,18 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm bg-info" data-toggle="modal" data-target="#modalEdit<?php echo $list_karyawan->id_karyawan ?>">
-                                                    <i class="fas fa-plus">
-                                                    </i>
-                                                    Manual
-                                                </a>
-                                                <a href="<?php echo base_url() . 'Dashboard_Perusahaan/hapus_karyawan_gagal/' . $list_karyawan->id_karyawan; ?>" class="btn btn-sm bg-danger tombol-hapus">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Hapus
-                                                </a>
+                                                <div class="btn-group btn-sm">
+                                                    <a class="btn btn-sm bg-info" data-toggle="modal" data-target="#modalEdit<?php echo $list_karyawan->id_karyawan ?>">
+                                                        <i class="fas fa-plus">
+                                                        </i>
+                                                        Manual
+                                                    </a>
+                                                    <a href="<?php echo base_url() . 'Dashboard_Perusahaan/hapus_karyawan_gagal/' . $list_karyawan->id_karyawan; ?>" class="btn btn-sm bg-danger tombol-hapus">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Hapus
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>
