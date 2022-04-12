@@ -82,7 +82,6 @@
 
                 <?php foreach ($info_perusahaan as $detail_perusahaan) {
                     $id_perusahaan = $detail_perusahaan->id_perusahaan;
-                    $nama_paket = $detail_perusahaan->nama_paket;
                 } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -138,19 +137,6 @@
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-white">
-                                <div class="inner">
-                                    <h3><?php echo $nama_paket; ?></h3>
-                                    <p>Paket Subscribe</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
                                 </div>
                             </div>
                         </div>
