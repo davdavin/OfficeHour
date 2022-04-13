@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2022 at 11:30 AM
+-- Generation Time: Apr 12, 2022 at 02:17 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -301,6 +301,8 @@ CREATE TABLE `subscribe` (
   `id_perusahaan` varchar(25) NOT NULL,
   `id_paket` int(11) NOT NULL,
   `tanggal_bayar` date DEFAULT NULL,
+  `tanggal_mulai_langganan` date DEFAULT NULL,
+  `tanggal_selesai_langganan` date DEFAULT NULL,
   `status_bayar` varchar(15) NOT NULL,
   `status_subscribe` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -309,12 +311,12 @@ CREATE TABLE `subscribe` (
 -- Dumping data for table `subscribe`
 --
 
-INSERT INTO `subscribe` (`id_subscribe`, `id_perusahaan`, `id_paket`, `tanggal_bayar`, `status_bayar`, `status_subscribe`) VALUES
-(1, 'PRSH1', 1, '2022-01-30', 'Sudah Bayar', 'Sedang Progress'),
-(2, 'PRSH2', 2, '2022-02-09', 'Sudah Bayar', 'Sedang Progress'),
-(3, 'PRSH3', 2, '2022-01-18', 'Sudah Bayar', 'Sedang Progress'),
-(4, 'PRSH4', 1, '2022-02-08', 'Sudah Bayar', 'Sedang Progress'),
-(5, 'PRSH5', 1, '2022-02-08', 'Sudah Bayar', 'Sedang Progress');
+INSERT INTO `subscribe` (`id_subscribe`, `id_perusahaan`, `id_paket`, `tanggal_bayar`, `tanggal_mulai_langganan`, `tanggal_selesai_langganan`, `status_bayar`, `status_subscribe`) VALUES
+(1, 'PRSH1', 1, '2022-01-30', NULL, NULL, 'Sudah Bayar', 'Sedang Progress'),
+(2, 'PRSH2', 2, '2022-02-09', NULL, NULL, 'Sudah Bayar', 'Sedang Progress'),
+(3, 'PRSH3', 2, '2022-01-18', NULL, NULL, 'Sudah Bayar', 'Sedang Progress'),
+(4, 'PRSH4', 1, '2022-02-08', NULL, NULL, 'Sudah Bayar', 'Sedang Progress'),
+(5, 'PRSH5', 1, '2022-02-08', '2022-02-09', '2023-02-09', 'Sudah Bayar', 'Sedang Progress');
 
 -- --------------------------------------------------------
 
