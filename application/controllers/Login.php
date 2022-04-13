@@ -37,50 +37,53 @@ class Login extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
+        $tanggal = date('Y-m-d');
+
         $cek_login = $this->M_Perusahaan->cek_login('perusahaan', ['username' => $username])->row_array();
         $cek_langganan = $this->db->query("SELECT tanggal_selesai_langganan FROM subscribe JOIN perusahaan ON perusahaan.id_perusahaan = subscribe.id_perusahaan 
-                                        WHERE username = '$username' AND status_subscribe = 'Sedang Progress'")->row_array();
+                                        WHERE username = '$username' AND tanggal_selesai_langganan = '$tanggal'")->result();
 
         if ($cek_login) {
 
             //cek masa langganan 
-            if ($cek_langganan['tanggal_selesai_langganan'] != date('Y-m-d')) {
-                //cek status
-                if ($cek_login['status_perusahaan'] == 1) {
-                    //cek password
-                    if (password_verify($password, $cek_login['password'])) {
-                        $session = array(
-                            'id_perusahaan' => $cek_login['id_perusahaan'],
-                            'username_perusahaan' => $cek_login['username'],
-                            'status_login_perusahaan' => 'login',
-                        );
+            foreach($cek_langganan as $row) { 
+                if ($row->tanggal_selesai_langganan != date('Y-m-d')) {
+                    //cek status
+                    if ($cek_login['status_perusahaan'] == 1) {
+                        //cek password
+                        if (password_verify($password, $cek_login['password'])) {
+                            $session = array(
+                                'id_perusahaan' => $cek_login['id_perusahaan'],
+                                'username_perusahaan' => $cek_login['username'],
+                                'status_login_perusahaan' => 'login',
+                            );
 
-                        $this->session->set_userdata($session);
-                        redirect('Dashboard_Perusahaan/tampil_menu_utama');
+                            $this->session->set_userdata($session);
+                            redirect('Dashboard_Perusahaan/tampil_menu_utama');
+                        } else {
+                            $this->session->set_flashdata('gagal', 'Password salah');
+                            redirect('Login/login_perusahaan');
+                        }
                     } else {
-                        $this->session->set_flashdata('gagal', 'Password salah');
+                        $this->session->set_flashdata('gagal', 'Akun belum aktif');
                         redirect('Login/login_perusahaan');
                     }
                 } else {
-                    $this->session->set_flashdata('gagal', 'Akun belum aktif');
-                    redirect('Login/login_perusahaan');
+                    //masih belum
+
+                    $id = $cek_login['id_perusahaan'];
+
+                    $this->db->query("UPDATE subscribe SET status_subscribe = 'Selesai' WHERE id_perusahaan = '$id' AND tanggal_selesai_langganan = '$tanggal'");
+
+                    $session = array(
+                        'id_perusahaan' => $cek_login['id_perusahaan'],
+                        'username_perusahaan' => $cek_login['username'],
+                        'status_login_perusahaan' => 'masa_langganan_habis',
+                    );
+
+                    $this->session->set_userdata($session);
+                    redirect('Info_Subscribe');
                 }
-            } else {
-                //masih belum
-
-                $id = $cek_login['id_perusahaan'];
-                $tanggal = date('Y-m-d');
-
-                $this->db->query("UPDATE subscribe SET status_subscribe = 'Selesai' WHERE id_perusahaan = '$id' AND tanggal_selesai_langganan = $tanggal");
-
-                $session = array(
-                    'id_perusahaan' => $cek_login['id_perusahaan'],
-                    'username_perusahaan' => $cek_login['username'],
-                    'status_login_perusahaan' => 'masa_langganan_habis',
-                );
-
-                $this->session->set_userdata($session);
-                redirect('Info_Subscribe');
             }
         } else {
             $this->session->set_flashdata('gagal', 'Username salah');
@@ -147,6 +150,132 @@ class Login extends CI_Controller
                 echo json_encode($hasil);
             }
         }
+    }
+
+    function forgot_password_perusahaan() {
+
+        $email = $this->input->post('email');
+
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_message('required', '{field} wajib diisi');
+        $this->form_validation->set_message('valid_email', '{field} harus diisi email');
+        if ($this->form_validation->run() == FALSE) {
+            $hasil = array(
+                'sukses' => false,
+                'error_email' => form_error('email')
+            );
+            echo json_encode($hasil);
+        } else {
+            $cekEmail = $this->db->query("SELECT email_perusahaan FROM perusahaan WHERE email_perusahaan = '$email'")->row_array();
+            if ($cekEmail) {
+                $ambilToken = $this->db->query("SELECT token FROM perusahaan WHERE email_perusahaan = '$email'")->row_array();
+                $token = $ambilToken['token'];
+                $config = [
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8',
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'smtp.gmail.com',
+                    'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                    'smtp_pass'   => 'UpH12345',              // Password gmail
+                    'smtp_crypto' => 'ssl',
+                    'smtp_port'   => 465,
+                    'crlf'    => "\r\n",
+                    'newline' => "\r\n"
+                ];
+
+                // Load library email dan konfigurasinya
+                $this->load->library('email', $config);
+                // Email dan nama pengirim
+                $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+                // Email penerima
+                $this->email->to($email);
+                // Subject
+                $this->email->subject('Sign Up Akun');
+                // Isi
+                $link = "<a href='localhost/OfficeHour/Forget/?key=" . $token . "'>Click and Verify Email</a>";
+                $this->email->message("Halo ntuk melakukan pergantian password klik link berikut . \n" . $link);
+
+                /*        $this->M_Karyawan->insert_record($data, 'karyawan');
+            $hasil['sukses'] = "Behasil tambah karyawan";
+            echo json_encode($hasil); */
+
+                if ($this->email->send()) {
+                    $hasil['sukses'] = "Email Terkirim";
+                    echo json_encode($hasil);
+                } else {
+                    echo 'Error! email tidak dapat dikirim.';
+                }
+            } else {
+                $hasil['sukses'] = false;
+                $hasil['error_email'] = "Email salah";
+                echo json_encode($hasil);
+            }
+        }
+       
+    }
+
+    function forgot_password_client() {
+
+        $email = $this->input->post('email');
+
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_message('required', '{field} wajib diisi');
+        $this->form_validation->set_message('valid_email', '{field} harus diisi email');
+        if ($this->form_validation->run() == FALSE) {
+            $hasil = array(
+                'sukses' => false,
+                'error_email' => form_error('email')
+            );
+            echo json_encode($hasil);
+        } else {
+            $cekEmail = $this->db->query("SELECT email_client FROM client WHERE email_client = '$email'")->row_array();
+            if ($cekEmail) {
+                $ambilToken = $this->db->query("SELECT token FROM client WHERE email_client = '$email'")->row_array();
+                $token = $ambilToken['token'];
+                $config = [
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8',
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'smtp.gmail.com',
+                    'smtp_user' => 'officehourcompany@gmail.com',      // Email gmail
+                    'smtp_pass'   => 'UpH12345',              // Password gmail
+                    'smtp_crypto' => 'ssl',
+                    'smtp_port'   => 465,
+                    'crlf'    => "\r\n",
+                    'newline' => "\r\n"
+                ];
+
+                // Load library email dan konfigurasinya
+                $this->load->library('email', $config);
+                // Email dan nama pengirim
+                $this->email->from('officehourcompany@gmail.com', 'OfficeHour.Company');
+                // Email penerima
+                $this->email->to($email);
+                // Subject
+                $this->email->subject('Sign Up Akun');
+                // Isi
+                $link = "<a href='localhost/OfficeHour/Forget/?key=" . $token . "'>Click and Verify Email</a>";
+                $this->email->message("Halo ntuk melakukan pergantian password klik link berikut . \n" . $link);
+
+                /*        $this->M_Karyawan->insert_record($data, 'karyawan');
+            $hasil['sukses'] = "Behasil tambah karyawan";
+            echo json_encode($hasil); */
+            
+                if ($this->email->send()) {
+                    $hasil['sukses'] = "Email Terkirim";
+                    echo json_encode($hasil);
+                } else {
+                    echo 'Error! email tidak dapat dikirim.';
+                }
+            } else {
+                $hasil['sukses'] = false;
+                $hasil['error_email'] = "Email salah";
+                echo json_encode($hasil);
+            }
+        }
+       
     }
 
     function verifikasi_karyawan()

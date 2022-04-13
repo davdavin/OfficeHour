@@ -11,7 +11,7 @@ class Info_Subscribe extends CI_Controller
             redirect('Login/login_perusahaan');
         }
 
-        $this->load->model(array('M_Perusahaan', 'M_Admin'));
+        $this->load->model(array('M_Admin'));
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
     }
@@ -19,8 +19,13 @@ class Info_Subscribe extends CI_Controller
     public function index()
     {
         $username = $this->session->userdata('username_perusahaan');
-        $data['info_perusahaan'] = $this->M_Perusahaan->informasi_perusahaan($username)->result();
+        $data['info_perusahaan'] = $this->db->query("SELECT id_perusahaan, nama_perusahaan FROM perusahaan WHERE username = '$username'")->result();
         $data['paket'] = $this->M_Admin->tampil_paket()->result();
         $this->load->view('subscribe/v_subscribe.php', $data);
+    }
+
+    public function langganan($id_paket) {
+        $data['paket'] = $this->M_Subscribe->tampilkan_paket_dipilih($id_paket)->result();
+        $this->load->view('subscribe/v_daftar_langganan.php', $data);
     }
 }
