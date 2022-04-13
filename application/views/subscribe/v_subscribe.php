@@ -159,7 +159,7 @@
                                     <h5 class="text-center"><?php echo $list_paket->nama_paket; ?></h5><br>
                                     <h6><?php echo 'Rp ' . number_format($list_paket->harga, '0', ',', '.'); ?> </h6>
                                     <p class="card-text"><?php echo $list_paket->deskripsi ?></p>
-                                    <a href="<?php echo base_url() . 'Subscribe/form_subscribe/' . $list_paket->id_paket ?>" class="btn btn-primary">Langganan Sekarang</a>
+                                    <a href="<?php echo base_url() . 'Info_Subscribe/langganan/' . $list_paket->id_paket ?>" class="btn btn-primary">Langganan Sekarang</a>
                                 </div>
                             </div>
                         <?php } ?>
