@@ -34,6 +34,16 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <style>
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: linear-gradient(to bottom right,
+                    rgba(49, 207, 246, 0.921),
+                    rgba(170, 255, 214, 0.958));
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -94,8 +104,8 @@
                                 <p> Akun </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p> Laporan </p>
                             </a>
@@ -152,7 +162,7 @@
                                 <div class="card-header bg-green">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        Total Waktu Setiap Project Dalam Perjam
+                                        Total Waktu (Jam) Untuk Setiap Project
                                     </h3>
 
                                     <div class="card-tools">

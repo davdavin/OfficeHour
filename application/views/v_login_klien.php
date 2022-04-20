@@ -133,7 +133,6 @@
                     success: function(hasil) {
                         var $obj = $.parseJSON(hasil);
                         if ($obj.sukses == false) {
-
                             if ($obj.error_email) {
                                 $('.error_email').html($obj.error_email);
                                 $('.error_email').css("color", "red");
@@ -142,6 +141,7 @@
                             }
 
                         } else {
+                            $('.error_email').hide();
                             Swal.fire({
                                 title: 'Sukses',
                                 text: $obj.sukses,
