@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2022 at 02:17 PM
+-- Generation Time: Apr 20, 2022 at 05:04 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -63,15 +63,10 @@ CREATE TABLE `aktivitas` (
 --
 
 INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_project`, `tanggal_aktivitas`, `waktu_mulai`, `waktu_selesai`, `hari`, `durasi`, `bukti`) VALUES
-(1, 2, 7, 20, '2022-03-25', '08:28:00', '20:28:00', 'Mon', 4, 'Foto'),
-(2, 4, 7, 25, '2022-03-10', '08:30:00', '17:00:00', 'Tue', 3, 'Foto'),
-(3, 2, 7, 20, '2022-03-02', '13:30:00', '13:30:00', 'Wed', 3, 'Foto'),
-(4, 2, 7, 20, '2022-04-01', '14:21:00', '14:26:00', 'Thu', 2, 'Foto'),
-(15, 1, 1, 37, '2022-03-19', '05:58:00', '06:48:00', 'Sat', 2, 'Foto'),
-(16, 1, 1, 37, '2022-03-23', '18:18:00', '19:20:00', 'Sun', 1, 'Foto'),
-(17, 1, 1, 37, '2022-03-23', '18:24:00', '22:24:00', 'Wed', 5, 'Foto'),
-(32, 1, 1, 37, '2022-03-23', '18:24:00', '22:28:00', 'Fri', 2, 'Foto'),
-(34, 1, 1, 37, '2022-03-23', '18:24:00', '22:25:00', 'Thu', 7, 'Foto');
+(1, 3, 1, 4, '2022-03-07', '10:00:00', '22:00:00', 'Mon', 12, 'Foto'),
+(2, 1, 1, 1, '2022-03-08', '09:12:00', '21:12:00', 'Tue', 12, 'Foto'),
+(3, 3, 3, 5, '2022-04-20', '10:21:00', '23:21:00', 'Wed', 13, 'Foto'),
+(4, 2, 7, 3, '2022-04-20', '09:24:00', '17:20:00', 'Wed', 7, 'Foto');
 
 -- --------------------------------------------------------
 
@@ -110,18 +105,13 @@ CREATE TABLE `anggota_project` (
 --
 
 INSERT INTO `anggota_project` (`id_anggota_project`, `id_project`, `id_karyawan`) VALUES
-(1, 1, 3),
-(2, 1, 1),
-(3, 1, 61),
-(4, 0, 3),
-(5, 3, 3),
-(11, 3, 10),
-(12, 3, 64),
-(16, 1, 2),
-(19, 1, 63),
-(20, 4, 63),
-(21, 4, 3),
-(22, 6, 2);
+(1, 1, 1),
+(2, 1, 62),
+(3, 2, 7),
+(4, 2, 64),
+(5, 3, 1),
+(6, 3, 3),
+(7, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -283,12 +273,9 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id_project`, `id_perusahaan`, `id_client`, `project_manager`, `nama_project`, `deskripsi_project`, `tanggal_mulai_project`, `batas_waktu_project`, `tanggal_selesai_project`, `tanggal_berhenti_project`, `status_project`) VALUES
-(1, 'PRSH5', 1, 7, 'E-commerce', 'website', '2022-03-19', '2022-04-01', NULL, '2022-04-06', 'SEDANG BERJALAN'),
-(2, 'PRSH5', 1, 7, 'E-commerce Photo', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
-(3, 'PRSH5', 1, 7, 'Website Planner', 'Webiste Jual Beli', '2022-03-18', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
-(4, 'PRSH5', 3, 7, 'Planner Website', 'Website untuk menjual buku perencanaan', '2022-03-21', '2022-03-26', NULL, NULL, 'SEDANG BERJALAN'),
-(5, 'PRSH5', 1, 7, 'Lamp Shop', 'Menjual berbagai jenis lampu', '2022-03-21', '2022-04-02', NULL, NULL, 'SEDANG BERJALAN'),
-(6, 'PRSH5', 3, 7, 'Good Shop', 'Mmenjual berbagai jenis peralatan rumah tangga', '2022-03-21', '2022-04-09', NULL, NULL, 'SEDANG BERJALAN');
+(1, 'PRSH5', 1, 7, 'E-commerce', 'Website Penjualan', '2022-03-08', '2022-03-20', NULL, NULL, 'SEDANG BERJALAN'),
+(2, 'PRSH5', 3, 1, 'Birthday Website', 'Website Ulang Tahun', '2022-04-20', '2022-05-20', NULL, NULL, 'SEDANG BERJALAN'),
+(3, 'PRSH5', 1, 7, 'Good Shop', 'Jual peralatan rumah tangga', '2022-02-15', '2022-04-15', NULL, NULL, 'SEDANG BERJALAN');
 
 -- --------------------------------------------------------
 
@@ -339,20 +326,12 @@ CREATE TABLE `tugas_project` (
 --
 
 INSERT INTO `tugas_project` (`id_tugas_project`, `id_anggota_project`, `nama_tugas`, `batas_waktu`, `tanggal_selesai_tugas`, `tanggal_berhenti_tugas`, `status_tugas`) VALUES
-(35, 39, 'Applying', '2022-03-09', NULL, NULL, 'BELUM BERJALAN'),
-(36, 41, 'Memantau', '2022-03-04', NULL, NULL, 'BELUM BERJALAN'),
-(37, 2, 'Membuat Framewrok II', '2022-03-19', NULL, NULL, 'SEDANG BERJALAN'),
-(38, 1, 'Membuat Framewrok III', '2022-04-09', NULL, NULL, 'SEDANG BERJALAN'),
-(39, 3, 'Memantau', '2022-03-03', NULL, NULL, 'BELUM BERJALAN'),
-(40, 4, 'Applying', '2022-03-02', NULL, NULL, 'BELUM BERJALAN'),
-(41, 5, 'Applying', '2022-03-18', NULL, NULL, 'BELUM BERJALAN'),
-(42, 12, 'Membuat Framewrok II', '2022-03-19', NULL, NULL, 'BELUM BERJALAN'),
-(43, 11, 'QA', '2022-03-05', NULL, NULL, 'BELUM BERJALAN'),
-(44, 16, 'QA', '2022-03-17', NULL, NULL, 'BELUM BERJALAN'),
-(45, 18, 'Memantau', '2022-03-05', NULL, NULL, 'BELUM BERJALAN'),
-(46, 21, 'Membuat UI/UX', '2022-03-25', NULL, NULL, 'BELUM BERJALAN'),
-(47, 20, 'Merancang Website', '2022-03-26', NULL, NULL, 'BELUM BERJALAN'),
-(48, 22, 'Membuat UI/UX', '2022-03-10', NULL, NULL, 'BELUM BERJALAN');
+(1, 1, 'Membuat Framewrok ', '2022-03-10', NULL, NULL, 'SEDANG BERJALAN'),
+(2, 2, 'QA', '2022-03-19', NULL, NULL, 'BELUM BERJALAN'),
+(3, 3, 'Membuat UI', '2022-04-22', NULL, NULL, 'SEDANG BERJALAN'),
+(4, 5, 'Membuat UI/UX', '2022-03-25', NULL, NULL, 'SEDANG BERJALAN'),
+(5, 6, 'Membuat Framewrok', '2022-04-14', '2022-04-20', NULL, 'SELESAI'),
+(6, 7, 'Testing', '2022-03-23', NULL, NULL, 'BELUM BERJALAN');
 
 --
 -- Indexes for dumped tables
@@ -445,7 +424,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`
@@ -457,7 +436,7 @@ ALTER TABLE `akun_admin`
 -- AUTO_INCREMENT for table `anggota_project`
 --
 ALTER TABLE `anggota_project`
-  MODIFY `id_anggota_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_anggota_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -487,7 +466,7 @@ ALTER TABLE `paket`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subscribe`
@@ -499,7 +478,7 @@ ALTER TABLE `subscribe`
 -- AUTO_INCREMENT for table `tugas_project`
 --
 ALTER TABLE `tugas_project`
-  MODIFY `id_tugas_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_tugas_project` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
