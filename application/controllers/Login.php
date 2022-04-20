@@ -172,7 +172,7 @@ class Login extends CI_Controller
                 // Subject
                 $this->email->subject('Sign Up Akun');
                 // Isi
-                $link = "<a href='localhost/OfficeHour/Forget/?key=" . $token . "'>Click and Verify Email</a>";
+                $link = "<a href='localhost/OfficeHour/Forget_perusahaan/?key=" . $token . "'>Click and Verify Email</a>";
                 $this->email->message("Halo ntuk melakukan pergantian password klik link berikut . \n" . $link);
 
                 /*        $this->M_Karyawan->insert_record($data, 'karyawan');
@@ -235,7 +235,7 @@ class Login extends CI_Controller
                 // Subject
                 $this->email->subject('Sign Up Akun');
                 // Isi
-                $link = "<a href='localhost/OfficeHour/Forget/?key=" . $token . "'>Click and Verify Email</a>";
+                $link = "<a href='localhost/OfficeHour/Forget_client/?key=" . $token . "'>Click and Verify Email</a>";
                 $this->email->message("Halo ntuk melakukan pergantian password klik link berikut . \n" . $link);
 
                 /*        $this->M_Karyawan->insert_record($data, 'karyawan');
