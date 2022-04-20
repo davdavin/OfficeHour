@@ -297,12 +297,10 @@
                         </div>
 
                     </div>
-
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">List Project</h3>
                         </div>
-
 
                         <div class="card-body">
                             <table id="list_project" class="table table-bordered table-striped">
@@ -312,6 +310,7 @@
                                         <th>Nama Project</th>
                                         <th>Project Manager</th>
                                         <th>Klien</th>
+                                        <th>Progress</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -322,6 +321,21 @@
                                             <td><?php echo $detail->nama_project ?></td>
                                             <td><?php echo $detail->nama_karyawan ?></td>
                                             <td><?php echo $detail->nama_client ?></td>
+                                            <td><?php foreach ($tugas_selesai as $row) {
+                                                    if ($detail->id_project == $row->id_project) {
+
+                                                        foreach ($total as $row_t) {
+                                                            if ($detail->id_project == $row_t->id_project) {
+
+                                                                echo number_format($row->totalSelesai / $row_t->totalTugas * 100, 0) . '%';
+                                                            }
+                                                        }
+                                                    } else {
+                                                        echo '0%';
+                                                    }
+                                                    //    echo $row->totalSelesai;
+                                                }
+                                                ?></td>
                                             <td><?php echo $detail->status_project ?></td>
                                         </tr>
                                     <?php } ?>

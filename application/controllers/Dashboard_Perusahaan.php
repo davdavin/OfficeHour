@@ -85,7 +85,7 @@ class Dashboard_Perusahaan extends CI_Controller
         } else {
             $data = array(
                 'id_perusahaan' => $id_perusahaan, 'nama_karyawan' => $nama_karyawan, 'email_karyawan' => $email_karyawan,
-                'posisi_karyawan' => $posisi_karyawan, 'status_karyawan' => 0, 'token' => $token
+                'posisi_karyawan' => $posisi_karyawan, 'status_karyawan' => 0, 'token' => $token, 'terkirim' => 1
             );
 
             $config = [
