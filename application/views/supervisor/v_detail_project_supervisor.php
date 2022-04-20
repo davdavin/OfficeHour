@@ -65,6 +65,14 @@
             border: solid 3px rgba(1, 1, 1, 0);
             background: white;
         }
+
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: linear-gradient(to bottom right,
+                    rgba(49, 207, 246, 0.921),
+                    rgba(170, 255, 214, 0.958));
+        }
     </style>
 </head>
 
@@ -115,8 +123,8 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Project Manage </p>
                             </a>

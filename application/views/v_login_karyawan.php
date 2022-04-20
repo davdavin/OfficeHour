@@ -143,6 +143,7 @@
                             }
 
                         } else {
+                            $('.error_email').hide();
                             Swal.fire({
                                 title: 'Sukses',
                                 text: $obj.sukses,

@@ -34,6 +34,27 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <style>
+        .border-total {
+            border-left: 5px solid lightblue;
+        }
+
+        .border-sedang-berjalan {
+            border-left: 5px solid royalblue;
+        }
+
+        .border-selesai {
+            border-left: 5px solid green;
+        }
+
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: linear-gradient(to bottom right,
+                    rgba(49, 207, 246, 0.921),
+                    rgba(170, 255, 214, 0.958));
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -82,8 +103,8 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Supervisor' ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p> Project Manage </p>
                             </a>
@@ -137,7 +158,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-white" style="border-radius: 15px;">
+                            <div class="small-box bg-white border-total" style="border-radius: 15px;">
                                 <div class="inner text-center">
                                     <h3>
                                         <?php
@@ -153,7 +174,7 @@
 
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-white" style="border-radius: 15px;">
+                            <div class="small-box bg-white border-sedang-berjalan" style="border-radius: 15px;">
                                 <div class="inner text-center">
                                     <h3><?php echo $status_berjalan['totalStatus']; ?></h3>
                                     <h4>Sedang Berjalan</h4>
@@ -163,7 +184,7 @@
                         <!-- ./col -->
                         <div class="col-lg-4 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-white" style="border-radius: 15px;">
+                            <div class="small-box bg-white border-selesai" style="border-radius: 15px;">
                                 <div class="inner text-center">
                                     <h3><?php echo $status_selesai['totalStatus']; ?></h3>
                                     <h4>Selesai</h4>

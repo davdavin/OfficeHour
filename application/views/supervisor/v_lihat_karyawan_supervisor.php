@@ -34,6 +34,16 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <style>
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: linear-gradient(to bottom right,
+                    rgba(49, 207, 246, 0.921),
+                    rgba(170, 255, 214, 0.958));
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -94,8 +104,8 @@
                                 <p> Akun </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Supervisor/daftar_karyawan' ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p> Laporan </p>
                             </a>
@@ -143,7 +153,7 @@
                                 <div class="card-header bg-gray">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        Durasi Setiap Project Dalam Waktu Jam
+                                        Durasi Setiap Project Dalam Jam
                                     </h3>
 
                                     <div class="card-tools">
@@ -194,7 +204,7 @@
                                 <div class="card-header bg-gray">
                                     <h3 class="card-title">
                                         <i class="far fa-chart-bar"></i>
-                                        Karyawan Paling Sering Telat Selesaikan Tugas
+                                        Karyawan Paling Sering Telat Untuk Menyelesaikan Tugas
                                     </h3>
 
                                     <div class="card-tools">
@@ -214,6 +224,29 @@
                                 <!-- /.card-body-->
                             </div>
 
+                            <div class="card card-outline">
+                                <div class="card-header bg-gray">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i>
+                                        Total Karyawan Aktif & Tidak Aktif
+                                    </h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <canvas id="chart-status-karyawan"></canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body-->
+                            </div>
                         </section>
                     </div>
 
@@ -256,6 +289,40 @@
                                                     Aktivitas
                                                 </a>
                                             </td>
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Project</h3>
+                        </div>
+
+
+                        <div class="card-body">
+                            <table id="list_project" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama Project</th>
+                                        <th>Project Manager</th>
+                                        <th>Klien</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($list_project as $detail) { ?>
+                                        <tr>
+                                            <td><?php echo $detail->id_project ?></td>
+                                            <td><?php echo $detail->nama_project ?></td>
+                                            <td><?php echo $detail->nama_karyawan ?></td>
+                                            <td><?php echo $detail->nama_client ?></td>
+                                            <td><?php echo $detail->status_project ?></td>
                                         </tr>
                                     <?php } ?>
 
@@ -343,7 +410,30 @@
                         "sPrevious": "Sebelumnya"
                     }
                 }
-            })
+            });
+
+            $("#list_project").DataTable({
+                "processing": true,
+                "severside": true,
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "language": {
+                    "sLengthMenu": "Tampil _MENU_ Baris",
+                    "sZeroRecords": "Pencarian tidak ditemukan",
+                    "sEmptyTable": "Data Kosong",
+                    "sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ baris", //"sInfo": "Menampilkan baris _START_ hingga _END_ dari _TOTAL_ entri",
+                    "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 baris",
+                    "sSearch": "Cari:",
+                    "sLoadingRecords": "Sedang memproses",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sLast": "Terakhir",
+                        "sNext": "Selanjutnya",
+                        "sPrevious": "Sebelumnya"
+                    }
+                }
+            });
 
             const sukses = $('.sukses').data('flashdata');
             if (sukses) {
@@ -468,6 +558,28 @@
                     ],
                     borderWidth: 1,
                     data: [<?php echo $selesai['totalSelesai']; ?>, <?php echo $sedang_berjalan['totalSedangBerjalan']; ?>, <?php echo $tidak_selesai['totalTidakSelesai']; ?>],
+                }]
+            },
+        });
+
+        //grafik status karyawan
+        var c = document.getElementById('chart-status-karyawan').getContext('2d');
+        var chart = new Chart(c, {
+            type: 'pie',
+            data: {
+                labels: ['Akitf', 'Tidak Aktif'],
+                datasets: [{
+                    label: 'Total',
+                    backgroundColor: [
+                        'rgba(255, 26, 104, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 26, 104, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: [<?php echo $karyawan_aktif['total_aktif']; ?>, <?php echo $karyawan_tidak_aktif['total_tidak_aktif']; ?>],
                 }]
             },
         });

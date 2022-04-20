@@ -36,6 +36,16 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
+
+    <style>
+        [class*="sidebar-dark-"] .nav-sidebar>.nav-item>.nav-link.active {
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            background: linear-gradient(to bottom right,
+                    rgba(49, 207, 246, 0.921),
+                    rgba(170, 255, 214, 0.958));
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -102,12 +112,21 @@
                             </li>
                         <?php } ?>
 
-                        <li class="nav-item menu-open">
-                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link active">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Akun </p>
                             </a>
                         </li>
+
+                        <?php if ($this->session->userdata('posisi_karyawan') != "Supervisor") { ?>
+                            <li class="nav-item menu-open">
+                                <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> Akun </p>
+                                </a>
+                            </li>
+                        <?php } ?>
 
                         <?php if ($this->session->userdata('posisi_karyawan') != "Supervisor") { ?>
                             <li class="nav-item">
