@@ -146,7 +146,6 @@
                                         <th>Maksimal Orang</th>
                                         <th>Harga</th>
                                         <th>Deskripsi</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,13 +156,6 @@
                                             <td><?php echo $list_paket->maks_orang ?></td>
                                             <td><?php echo 'Rp. ' . number_format($list_paket->harga, '0', ',', '.'); ?></td>
                                             <td><?php echo $list_paket->deskripsi ?></td>
-                                            <td>
-                                                <a class="btn btn-info btn-sm" href="">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                            </td>
                                         </tr>
                                     <?php } ?>
 
