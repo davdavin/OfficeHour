@@ -16,11 +16,12 @@ class Supervisor extends CI_Controller
 
     function index()
     {
+        $modalSupervisor = new M_Supervisor();
         $data['title'] = 'OfficeHour - Karyawan | Supervisor';
-        $data['totalProject'] = $this->M_Supervisor->total_project($this->session->userdata('id_karyawan'))->row_array();
-        $data['status_berjalan'] = $this->M_Supervisor->status_project_berjalan($this->session->userdata('id_karyawan'))->row_array();
-        $data['status_selesai'] = $this->M_Supervisor->status_project_selesai($this->session->userdata('id_karyawan'))->row_array();
-        $data['project'] = $this->M_Supervisor->semua_project($this->session->userdata('id_karyawan'))->result();
+        $data['totalProject'] = $modalSupervisor->total_project($this->session->userdata('id_karyawan'))->row_array();
+        $data['status_berjalan'] = $modalSupervisor->status_project_berjalan($this->session->userdata('id_karyawan'))->row_array();
+        $data['status_selesai'] = $modalSupervisor->status_project_selesai($this->session->userdata('id_karyawan'))->row_array();
+        $data['project'] = $modalSupervisor->semua_project($this->session->userdata('id_karyawan'))->result();
         $this->load->view('supervisor/v_halaman_utama_supervisor.php', $data);
     }
 
@@ -53,11 +54,21 @@ class Supervisor extends CI_Controller
         $data['graph'] = $this->db->query("SELECT nama_project, sum(durasi) as durasi FROM aktivitas JOIN project ON project.id_project = aktivitas.id_project 
                         WHERE id_perusahaan = '$id' AND status_project = 'SEDANG BERJALAN' GROUP BY nama_project")->result();
         $data['overtime'] = $this->db->query("SELECT nama_karyawan, count(nama_tugas) as total FROM tugas_project INNER JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
-                                            INNER JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE tanggal_selesai_tugas > batas_waktu GROUP BY nama_karyawan")->result();
+                                            INNER JOIN karyawan ON karyawan.id_karyawan = anggota_project.id_karyawan WHERE tanggal_selesai_tugas > batas_waktu GROUP BY nama_karyawan LIMIT 10")->result();
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($this->session->userdata('id_perusahaan'))->result();
-        $data['selesai'] = $this->db->query("SELECT count(id_project) as totalSelesai FROM project WHERE status_project = 'SELESAI'")->row_array();
-        $data['sedang_berjalan'] = $this->db->query("SELECT count(id_project) as totalSedangBerjalan FROM project WHERE status_project = 'SEDANG BERJALAN'")->row_array();
-        $data['tidak_selesai'] = $this->db->query("SELECT count(id_project) as totalTidakSelesai FROM project WHERE status_project = 'TIDAK SELESAI'")->row_array();
+        $data['karyawan_aktif'] = $this->db->query("SELECT count(id_karyawan) as total_aktif  FROM karyawan WHERE id_perusahaan = '$id' AND status_karyawan = 1")->row_array();
+        $data['karyawan_tidak_aktif'] = $this->db->query("SELECT count(id_karyawan) as total_tidak_aktif FROM karyawan WHERE id_perusahaan = '$id' AND status_karyawan = 0")->row_array();
+        $data['selesai'] = $this->db->query("SELECT count(id_project) as totalSelesai FROM project WHERE id_perusahaan = '$id' AND status_project = 'SELESAI'")->row_array();
+        $data['sedang_berjalan'] = $this->db->query("SELECT count(id_project) as totalSedangBerjalan FROM project WHERE id_perusahaan = '$id' AND status_project = 'SEDANG BERJALAN'")->row_array();
+        $data['tidak_selesai'] = $this->db->query("SELECT count(id_project) as totalTidakSelesai FROM project WHERE id_perusahaan = '$id' AND status_project = 'TIDAK SELESAI'")->row_array();
+        $data['list_project'] = $this->M_Project->tampil_project($id)->result();
+
+        $data['sedangBerjalan'] = $this->db->query("SELECT project.id_project, count(nama_tugas) as total FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+                                                    JOIN project ON project.id_project = anggota_project.id_project WHERE status_tugas = 'SEDANG BERJALAN' GROUP BY nama_project")->result();
+        $data['tugas_selesai'] = $this->db->query("SELECT project.id_project, count(nama_tugas) as totalSelesai FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+                                            JOIN project ON project.id_project = anggota_project.id_project WHERE status_tugas = 'SELESAI' GROUP BY nama_project")->result();
+        $data['total'] = $this->db->query("SELECT project.id_project, count(nama_tugas) as totalTugas FROM tugas_project JOIN anggota_project ON anggota_project.id_anggota_project = tugas_project.id_anggota_project 
+                                                    JOIN project ON project.id_project = anggota_project.id_project  GROUP BY nama_project")->result();
         $this->load->view('supervisor/v_lihat_karyawan_supervisor.php', $data);
     }
 
