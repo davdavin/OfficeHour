@@ -47,27 +47,27 @@
                                 <label for="nama"><i class="zmdi zmdi-local-store material-icons-name"></i></label>
                                 <input type="text" name="nama" id="name" placeholder="Nama Perusahaan" value="<?= set_value('nama'); ?>" />
                             </div>
-                            <?php echo form_error('nama'); ?>
+                            <p style="color: red;"><?php echo form_error('nama'); ?></p>
                             <div class="form-group">
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="username" id="username" placeholder="Username" value="<?= set_value('username'); ?>" />
                             </div>
-                            <?php echo form_error('username'); ?>
+                            <p style="color: red;"><?php echo form_error('username'); ?></p>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" id="pass" placeholder="Password" value="<?= set_value('password'); ?>" />
                             </div>
-                            <?php echo form_error('password'); ?>
+                            <p style="color: red;"><?php echo form_error('password'); ?></p>
                             <div class="form-group">
                                 <label for="passconf"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="confirm_password" id="passconf" placeholder="Ketik Ulang Password" />
                             </div>
-                            <?php echo form_error('confirm_password'); ?>
+                            <p style="color: red;"><?php echo form_error('confirm_password'); ?></p>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Email" value="<?= set_value('email'); ?>" />
                             </div>
-                            <?php echo form_error('email'); ?>
+                            <p style="color: red"><?php echo form_error('email'); ?></p>
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
                             </div>
