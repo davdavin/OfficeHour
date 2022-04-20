@@ -112,12 +112,14 @@
                             </li>
                         <?php } ?>
 
-                        <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link active">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p> Akun </p>
-                            </a>
-                        </li>
+                        <?php if ($this->session->userdata('posisi_karyawan') == "Supervisor") { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url() . 'Account_Karyawan' ?>" class="nav-link active">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> Akun </p>
+                                </a>
+                            </li>
+                        <?php } ?>
 
                         <?php if ($this->session->userdata('posisi_karyawan') != "Supervisor") { ?>
                             <li class="nav-item menu-open">

@@ -225,28 +225,7 @@
                 </a><br><br>
               <?php } ?>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-
-                <!--    masih belum bisa      <input type="text" id="text-search-project" class="form-control" placeholder="Cari Project"> -->
-              </div>
-            </div>
           </div>
-
-          <div class="row" id="tampil">
-            <div class="card-body col-6" style="margin-left: auto; margin-right: auto">
-              <div class="small-box bg-white" style="border-radius: 15px;">
-                <div class="inner text-center">
-                  <h4 id="nama-project"><strong><?php //echo $list_project->nama_project 
-                                                ?>Tidak ada</strong></h4>
-                  <h5><?php //echo $list_project->status_project 
-                      ?></h5>
-                  <a id="id-project"><button class=" btn btn-primary">Selebihnya</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
           <div class="row" id="list-project">
             <?php foreach ($projectKaryawan as $list_project) { ?>
@@ -310,55 +289,6 @@
   <script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>assets/dist/js/pages/dashboard.js"></script>
-
-  <script>
-    $(document).ready(function() {
-      $('#tampil').hide();
-      $('#text-search-project').autocomplete({
-
-        source: function(request, response) {
-
-          //fetch data
-          $.ajax({
-            url: '<?php echo base_url() . 'ProjectManage/search_project' ?>',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
-              search: request.term
-            },
-            success: function(data) {
-              response(data);
-              $('#list-project').hide();
-            }
-
-          });
-        },
-        select: function(event, ui) {
-          $('#tampil').show();
-          $('#text-search-project').val(ui.item.label);
-          $('#nama-project').html(ui.item.nama);
-
-          // var obj = JSON.parse(id);
-
-          var link = document.getElementById('id-project');
-
-          link.href = "<?php echo base_url() .  'ProjectManage/project_detail/' ?>";
-
-          //masih belum bisa
-          /*   var data = {
-               "link": "<?php echo base_url() .  'ProjectManage' ?>"
-             };
-
-             var obj = JSON.parse(data);
-
-
-             $('#id-project').href = obj.link; */
-
-          return false;
-        }
-      });
-    });
-  </script>
 
 </body>
 

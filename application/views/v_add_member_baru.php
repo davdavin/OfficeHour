@@ -177,7 +177,6 @@
                     </div>
 
                     <!-- close loop -->
-                    <?php echo $idProject; ?>
             </section>
             <!-- /.content -->
         </div>
