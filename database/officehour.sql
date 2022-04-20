@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2022 at 05:04 PM
+-- Generation Time: Apr 20, 2022 at 06:22 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -66,7 +66,8 @@ INSERT INTO `aktivitas` (`id_aktivitas`, `id_project`, `id_karyawan`, `id_tugas_
 (1, 3, 1, 4, '2022-03-07', '10:00:00', '22:00:00', 'Mon', 12, 'Foto'),
 (2, 1, 1, 1, '2022-03-08', '09:12:00', '21:12:00', 'Tue', 12, 'Foto'),
 (3, 3, 3, 5, '2022-04-20', '10:21:00', '23:21:00', 'Wed', 13, 'Foto'),
-(4, 2, 7, 3, '2022-04-20', '09:24:00', '17:20:00', 'Wed', 7, 'Foto');
+(4, 2, 7, 3, '2022-04-20', '09:24:00', '17:20:00', 'Wed', 7, 'Foto'),
+(5, 3, 2, 6, '2022-03-22', '10:12:00', '22:12:00', 'Tue', 12, 'Foto');
 
 -- --------------------------------------------------------
 
@@ -331,7 +332,7 @@ INSERT INTO `tugas_project` (`id_tugas_project`, `id_anggota_project`, `nama_tug
 (3, 3, 'Membuat UI', '2022-04-22', NULL, NULL, 'SEDANG BERJALAN'),
 (4, 5, 'Membuat UI/UX', '2022-03-25', NULL, NULL, 'SEDANG BERJALAN'),
 (5, 6, 'Membuat Framewrok', '2022-04-14', '2022-04-20', NULL, 'SELESAI'),
-(6, 7, 'Testing', '2022-03-23', NULL, NULL, 'BELUM BERJALAN');
+(6, 7, 'Testing', '2022-03-23', NULL, NULL, 'SEDANG BERJALAN');
 
 --
 -- Indexes for dumped tables
@@ -424,7 +425,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `akun_admin`
