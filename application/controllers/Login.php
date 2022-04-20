@@ -40,56 +40,34 @@ class Login extends CI_Controller
         $tanggal = date('Y-m-d');
 
         $cek_login = $this->M_Perusahaan->cek_login('perusahaan', ['username' => $username])->row_array();
-        $cek_langganan = $this->db->query("SELECT tanggal_selesai_langganan FROM subscribe JOIN perusahaan ON perusahaan.id_perusahaan = subscribe.id_perusahaan 
-                                        WHERE username = '$username' AND tanggal_selesai_langganan = '$tanggal'")->result();
-
         if ($cek_login) {
 
-            //cek masa langganan 
-            foreach($cek_langganan as $row) { 
-                if ($row->tanggal_selesai_langganan != date('Y-m-d')) {
-                    //cek status
-                    if ($cek_login['status_perusahaan'] == 1) {
-                        //cek password
-                        if (password_verify($password, $cek_login['password'])) {
-                            $session = array(
-                                'id_perusahaan' => $cek_login['id_perusahaan'],
-                                'username_perusahaan' => $cek_login['username'],
-                                'status_login_perusahaan' => 'login',
-                            );
-
-                            $this->session->set_userdata($session);
-                            redirect('Dashboard_Perusahaan/tampil_menu_utama');
-                        } else {
-                            $this->session->set_flashdata('gagal', 'Password salah');
-                            redirect('Login/login_perusahaan');
-                        }
-                    } else {
-                        $this->session->set_flashdata('gagal', 'Akun belum aktif');
-                        redirect('Login/login_perusahaan');
-                    }
-                } else {
-                    //masih belum
-
-                    $id = $cek_login['id_perusahaan'];
-
-                    $this->db->query("UPDATE subscribe SET status_subscribe = 'Selesai' WHERE id_perusahaan = '$id' AND tanggal_selesai_langganan = '$tanggal'");
-
+            //cek status
+            if ($cek_login['status_perusahaan'] == 1) {
+                //cek password
+                if (password_verify($password, $cek_login['password'])) {
                     $session = array(
                         'id_perusahaan' => $cek_login['id_perusahaan'],
                         'username_perusahaan' => $cek_login['username'],
-                        'status_login_perusahaan' => 'masa_langganan_habis',
+                        'status_login_perusahaan' => 'login',
                     );
 
                     $this->session->set_userdata($session);
-                    redirect('Info_Subscribe');
+                    redirect('Dashboard_Perusahaan/tampil_menu_utama');
+                } else {
+                    $this->session->set_flashdata('gagal', 'Password salah');
+                    redirect('Login/login_perusahaan');
                 }
+            } else {
+                $this->session->set_flashdata('gagal', 'Akun belum aktif');
+                redirect('Login/login_perusahaan');
             }
         } else {
             $this->session->set_flashdata('gagal', 'Username salah');
             redirect('Login/login_perusahaan');
         }
     }
+
     function forgot_password()
     {
         $email = $this->input->post('email');
@@ -152,7 +130,8 @@ class Login extends CI_Controller
         }
     }
 
-    function forgot_password_perusahaan() {
+    function forgot_password_perusahaan()
+    {
 
         $email = $this->input->post('email');
 
@@ -212,10 +191,10 @@ class Login extends CI_Controller
                 echo json_encode($hasil);
             }
         }
-       
     }
 
-    function forgot_password_client() {
+    function forgot_password_client()
+    {
 
         $email = $this->input->post('email');
 
@@ -262,7 +241,7 @@ class Login extends CI_Controller
                 /*        $this->M_Karyawan->insert_record($data, 'karyawan');
             $hasil['sukses'] = "Behasil tambah karyawan";
             echo json_encode($hasil); */
-            
+
                 if ($this->email->send()) {
                     $hasil['sukses'] = "Email Terkirim";
                     echo json_encode($hasil);
@@ -275,7 +254,6 @@ class Login extends CI_Controller
                 echo json_encode($hasil);
             }
         }
-       
     }
 
     function verifikasi_karyawan()
