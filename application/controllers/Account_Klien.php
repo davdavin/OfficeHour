@@ -20,7 +20,7 @@ class Account_Klien extends CI_Controller
     {
         $data['title'] = 'OfficeHour - Klien | Profile';
         $data['profil'] = $this->M_Klien->profile_klien($id_klien)->result();
-        $this->load->view('v_account_klien.php', $data);
+        $this->load->view('klien/v_account_klien.php', $data);
     }
 
     function update_profile()
