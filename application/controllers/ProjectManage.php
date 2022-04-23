@@ -23,7 +23,7 @@ class ProjectManage extends CI_Controller
         $data['status_project_k'] = $this->M_Karyawan->get_status_project_karyawan($id_karyawan)->result();
         $data['status_project_pm'] = $this->M_Karyawan->get_status_project_pm($id_karyawan)->result();
         $data['projectKaryawan'] = $this->M_Karyawan->project_karyawan($id_karyawan)->result();
-        $this->load->view('v_project_manage.php', $data);
+        $this->load->view('project/v_project_manage.php', $data);
     }
 
     function project_detail($id_project)
@@ -35,13 +35,13 @@ class ProjectManage extends CI_Controller
         $data['total_status_berjalan'] = $this->M_Project->get_total_status_berjalan($id_project, $id_perusahaan)->result();
         $data['total_status_selesai'] = $this->M_Project->get_total_status_selesai($id_project, $id_perusahaan)->result();
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
-        $this->load->view('v_detail_project.php', $data);
+        $this->load->view('project/v_detail_project.php', $data);
     }
 
     function detail_tugas($id_tugas_project)
     {
         $data['tugas'] = $this->M_Project->detail_tugas($id_tugas_project)->result();
-        $this->load->view('v_detail_aktivitas.php', $data);
+        $this->load->view('project/v_detail_aktivitas.php', $data);
     }
 
     function tambah_project()
@@ -50,7 +50,7 @@ class ProjectManage extends CI_Controller
         $id_perusahaan = $id['id_perusahaan'];
         $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
         $data['message'] = " ";
-        $this->load->view('v_tambah_project.php', $data);
+        $this->load->view('project/v_tambah_project.php', $data);
     }
 
     function proses_tambah_project()
@@ -81,7 +81,7 @@ class ProjectManage extends CI_Controller
             $id_perusahaan = $id['id_perusahaan'];
             $data['klien'] = $this->M_Perusahaan->lihat_klien($id_perusahaan)->result();
             $data['message'] = "Tanggal yang dipilih harus benar. Batas waktu harus lebih dari tanggal mulai dan tanggal mulai";
-            $this->load->view('v_tambah_project.php', $data);
+            $this->load->view('project/v_tambah_project.php', $data);
         }
     }
 
@@ -90,7 +90,7 @@ class ProjectManage extends CI_Controller
         $id = $this->M_Perusahaan->get_id_perusahaan($this->session->userdata('id_karyawan'))->row_array();
         $id_perusahaan = $id['id_perusahaan'];
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($id_perusahaan)->result();
-        $this->load->view('v_add_member.php', $data);
+        $this->load->view('project/v_add_member.php', $data);
     }
 
     function asign_anggota_project_baru($id_project)
@@ -100,7 +100,7 @@ class ProjectManage extends CI_Controller
         $data['idProject'] = $id_project;
         $data['karyawan'] = $this->M_Perusahaan->lihat_karyawan($id_perusahaan)->result();
         $data['anggota_project'] = $this->M_Project->get_anggota_project($id_project, $id_perusahaan)->result();
-        $this->load->view('v_add_member_baru.php', $data);
+        $this->load->view('project/v_add_member_baru.php', $data);
     }
 
     function proses_tambah_anggota()
@@ -162,14 +162,14 @@ class ProjectManage extends CI_Controller
     {
         $id_project = $this->session->userdata('id_project');
         $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
-        $this->load->view('v_add_task.php', $data);
+        $this->load->view('project/v_add_task.php', $data);
     }
 
     function tambah_task_baru($id_project)
     {
         $data['id_project'] = $id_project;
         $data['anggota_project'] = $this->M_Project->tampil_anggota($id_project)->result();
-        $this->load->view('v_add_task_baru.php', $data);
+        $this->load->view('project/v_add_task_baru.php', $data);
     }
 
     function proses_tambah_task()
